@@ -39,7 +39,8 @@ public class TeleopSwerve extends CommandBase {
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
-            !robotCentricSup.getAsBoolean(), 
+            //!robotCentricSup.getAsBoolean(), //Field oriented by the controller switch
+            false, //this is for now till we understand how to configure button to this
             true
         );
     }
