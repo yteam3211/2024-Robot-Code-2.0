@@ -39,7 +39,7 @@ public class Path {
      */
     public double getAngle(int index) {
         return startAngle + Math.toDegrees(((right[index].pos - left[index].pos) 
-        / Constants.ROBOT_WIDTH));
+        / Constants.Swerve.trackWidth));
         // return angles[index];
     }
 

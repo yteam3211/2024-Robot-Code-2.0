@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Swerve;
 import frc.util.vision.commands.LimelightCameraChangeModeCommand;
 import frc.util.vision.commands.LimelightLEDChangeModeCommand;
 
@@ -289,7 +290,7 @@ public class Limelight extends SubsystemBase {
     putInDashboard("Ta", ta_, 0, 3);
     putInDashboard("Ts", ts_, 1, 1);
 
-    putInDashboard("Angle", getAngleToTarget(RobotContainer.navx.getAngle()), 1, 3);
+    putInDashboard("Angle", getAngleToTarget(Swerve.gyro.getYaw()), 1, 3);
     putInDashboard("Distance", getDistanceToTarget(), 1, 2);
   }
 
