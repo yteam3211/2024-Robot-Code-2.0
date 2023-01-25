@@ -30,20 +30,22 @@ public class SwerveModule {
 
     private CANSparkMax mAngleMotor;
     private TalonFX mDriveMotor;
-    private TalonSRX angleEncoder;
+    // private TalonSRX angleEncoder;
+    private CANCoder angleEncoder;
 
     private RelativeEncoder integratedAngleEncoder;
     private final SparkMaxPIDController angleController;
-    
+    RobotButtons robotButtons;
 
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
-    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
+    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants, RobotButtons robotButtons){
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
+        this.robotButtons = robotButtons;
         
         /* Angle Encoder Config */
-        angleEncoder = new TalonSRX(moduleConstants.cancoderID);
+        angleEncoder = new CANCoder(moduleConstants.cancoderID);
         configAngleEncoder();
 
         /* Angle Motor Config */
@@ -67,13 +69,18 @@ public class SwerveModule {
     }
 
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){
+        double desiredSpeed = desiredState.speedMetersPerSecond;
+        if (robotButtons.halfSpeed.getAsBoolean()) {
+            desiredSpeed /= 2;
+        }
+
         if(isOpenLoop){
-            double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
+            double percentOutput = desiredSpeed / Constants.Swerve.maxSpeed;
             mDriveMotor.set(ControlMode.PercentOutput, percentOutput);
         }
         else {
-            double velocity = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
-            mDriveMotor.set(ControlMode.Velocity, velocity, DemandType.ArbitraryFeedForward, feedforward.calculate(desiredState.speedMetersPerSecond));
+            double velocity = Conversions.MPSToFalcon(desiredSpeed, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
+            mDriveMotor.set(ControlMode.Velocity, velocity, DemandType.ArbitraryFeedForward, feedforward.calculate(desiredSpeed));
         }
     }
 
@@ -93,14 +100,16 @@ public class SwerveModule {
     }
 
     public Rotation2d getCanCoder(){
-        //return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition());
-        return Rotation2d.fromDegrees(angleEncoder.getSelectedSensorPosition() * (360.0 / 4096.0));
+        return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition());
+        // return Rotation2d.fromDegrees(angleEncoder.getSelectedSensorPosition() * (360.0 / 4096.0)); // for a relative Encoder (4096 = CPR of the Encoder)
     }
 
     private void resetToAbsolute(){
-        double absolutePosition = 0;
+        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
+        // double absolutePosition = 0; // for a relative Encoder
         integratedAngleEncoder.setPosition(absolutePosition);
     }
+
 
     private void configAngleEncoder(){        
         angleEncoder.configFactoryDefault();

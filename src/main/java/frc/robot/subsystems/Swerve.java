@@ -3,20 +3,20 @@ package frc.robot.subsystems;
 import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
 import frc.robot.Constants;
-
+import frc.robot.RobotButtons;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
-import com.ctre.phoenix.sensors.Pigeon2;
+// import com.ctre.phoenix.sensors.Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
@@ -24,17 +24,16 @@ import edu.wpi.first.wpilibj.SPI;
 public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public AHRS gyro;
+    public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
-    public Swerve() {
+    public Swerve(RobotButtons robotButtons) {
         super("Swerve");
-        gyro = new AHRS(SPI.Port.kMXP);
         zeroGyro();
         mSwerveMods = new SwerveModule[] {
-            new SwerveModule(0, Constants.Swerve.Mod0.constants),
-            new SwerveModule(1, Constants.Swerve.Mod1.constants),
-            new SwerveModule(2, Constants.Swerve.Mod2.constants),
-            new SwerveModule(3, Constants.Swerve.Mod3.constants)
+            new SwerveModule(0, Constants.Swerve.Mod0.constants, robotButtons),
+            new SwerveModule(1, Constants.Swerve.Mod1.constants, robotButtons),
+            new SwerveModule(2, Constants.Swerve.Mod2.constants, robotButtons),
+            new SwerveModule(3, Constants.Swerve.Mod3.constants, robotButtons)
         };
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
