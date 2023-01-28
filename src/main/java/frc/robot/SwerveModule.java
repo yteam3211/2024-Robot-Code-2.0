@@ -104,7 +104,7 @@ public class SwerveModule {
         // return Rotation2d.fromDegrees(angleEncoder.getSelectedSensorPosition() * (360.0 / 4096.0)); // for a relative Encoder (4096 = CPR of the Encoder)
     }
 
-    private void resetToAbsolute(){
+    public void resetToAbsolute(){
         double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
         // double absolutePosition = 0; // for a relative Encoder
         integratedAngleEncoder.setPosition(absolutePosition);
