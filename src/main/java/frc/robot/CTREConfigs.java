@@ -2,10 +2,10 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-// import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration; |
-// import com.ctre.phoenix.sensors.AbsoluteSensorRange;            | if you use talon SRX mag Encoder
-// import com.ctre.phoenix.sensors.SensorInitializationStrategy;   |
-// import com.ctre.phoenix.sensors.SensorTimeBase;                 |
+// import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;  if you use talon SRX mag Encoder
+import com.ctre.phoenix.sensors.AbsoluteSensorRange;            
+import com.ctre.phoenix.sensors.SensorInitializationStrategy;   
+import com.ctre.phoenix.sensors.SensorTimeBase;                 
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 
 public final class CTREConfigs {
@@ -46,11 +46,11 @@ public final class CTREConfigs {
         swerveDriveFXConfig.openloopRamp = Constants.Swerve.openLoopRamp;
         swerveDriveFXConfig.closedloopRamp = Constants.Swerve.closedLoopRamp;
         
-    //     /* Swerve CANCoder Configuration */
-    //     //swerveCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
-    //     //swerveCanCoderConfig.sensorDirection = Constants.Swerve.canCoderInvert;
-    //     //swerveCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
-    //     //swerveCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
-    // }
+        /* Swerve CANCoder Configuration */
+        swerveCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
+        swerveCanCoderConfig.sensorDirection = Constants.Swerve.canCoderInvert;
+        swerveCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
+        swerveCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
     }
+    
 }
