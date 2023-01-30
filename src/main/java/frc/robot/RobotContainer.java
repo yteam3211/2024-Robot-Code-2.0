@@ -35,6 +35,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve(robotButtons);
+    private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -64,7 +65,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons();
+        robotButtons.loadButtons(m_ShootingSubsystem);
     }
 
     /**
