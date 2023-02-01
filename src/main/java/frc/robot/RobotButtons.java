@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 // Yteam loadButtons
 public class RobotButtons {
-    public final JoystickButton halfSpeed;
 
     public RobotButtons(Joystick driver) {
-        halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
+        Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     }
 
     public void loadButtons() {
