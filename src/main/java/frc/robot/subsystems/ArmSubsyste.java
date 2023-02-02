@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import frc.robot.commands.ShootingLow;
+import frc.robot.commands.ShootingOutput;
 import frc.util.SuperSystem;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperVictorSP;

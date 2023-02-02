@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.ShootingLow;
-import frc.robot.commands.Shootingcommand;
+import frc.robot.commands.ShootingOutput;
 import frc.robot.subsystems.ShootingSubsystem;
 
 
@@ -24,8 +23,8 @@ public class RobotButtons {
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
-        shoot.whileTrue(new ShootingLow(shootingSubsystem, 0.4));
-        Low.whileTrue(new ShootingLow(shootingSubsystem, -0.2));
+        shoot.whileTrue(new ShootingOutput(shootingSubsystem, 1));
+        Low.whileTrue(new ShootingOutput(shootingSubsystem, -0.2));
         // High.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
         // Low.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
         // Middle.onTrue(new Shootingcommand(shootingSubsystem, 0, null));

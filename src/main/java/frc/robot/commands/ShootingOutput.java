@@ -8,17 +8,17 @@ import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShootingDown extends CommandBase {
+public class ShootingOutput extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
   double output;
-  private final int maxHight = 50000;
+  
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootingDown(ShootingSubsystem shootingSubsystem, double output) {
+  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
     this.shootingSubsystem = shootingSubsystem;
     this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -32,7 +32,7 @@ public class ShootingDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        shootingSubsystem.setOutput(-output);
+    shootingSubsystem.setOutput(output);
   }
 
   // Called once the command ends or is interrupted.
@@ -42,11 +42,11 @@ public class ShootingDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shootingSubsystem.ShooingMotor.getPosition() < 50){
-        return true;
-  }
-  else
-      return false;  
-  }
+    if(output>0){
+      return shootingSubsystem.isShootingUp(); 
+    }
+     else{
+      return shootingSubsystem.isShootingDown();
+     } 
 }
-
+}

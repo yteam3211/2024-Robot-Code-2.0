@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class ShootingPosition extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
-  int position;
+  double position;
   
 
   /**
@@ -18,10 +18,10 @@ public class ShootingPosition extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootingPosition(ShootingSubsystem shootingSubsystem, int position) {
+  public ShootingPosition(ShootingSubsystem shootingSubsystem, double position) {
     this.shootingSubsystem = shootingSubsystem;
     this.position = position;
-    
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shootingSubsystem);
   }
@@ -33,6 +33,7 @@ public class ShootingPosition extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    shootingSubsystem.setPosition(position);
   }
 
   // Called once the command ends or is interrupted.
