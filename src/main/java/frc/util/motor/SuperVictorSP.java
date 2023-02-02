@@ -34,7 +34,7 @@ public class SuperVictorSP extends VictorSP implements SuperMotor {
         this.encoder = encoder;
         encoder.setDistancePerPulse(distancePerPulse);
         encoder.setReverseDirection(reverseDirection);
-    }
+    }    
 
     public SuperVictorSP(int channel, DutyCycleEncoder dutyCycleEncoder, double distancePerRotation) {
         super(channel);

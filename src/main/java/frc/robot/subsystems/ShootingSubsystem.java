@@ -4,18 +4,28 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import frc.robot.commands.ShootingLow;
 import frc.util.SuperSystem;
+import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 
 
 // Yteam Example Subsystem
 public class ShootingSubsystem extends SuperSystem {
  public SuperSparkMax ShooingMotor;
+ public Gains shootingGains;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
-    ShooingMotor = new SuperSparkMax(0, null, 0, false, 0, 0, null, null, null, 0, 0, 0);
+    shootingGains = new Gains("_shootingGains",0.01, 0,0);
+    // ShooingMotor = new SuperSparkMax(14,false);
+    ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
     setDefaultCommand(new ShootingLow(this, 0));
   }
 
@@ -26,8 +36,14 @@ public class ShootingSubsystem extends SuperSystem {
     // This method will be called once per scheduler run
   }
 
-  public void setOutput( double output){
-    ShooingMotor.set( output);
+  public void setOutput(double output){
+    ShooingMotor.setMode(ControlMode.PercentOutput);
+    ShooingMotor.set(output);
+  }
+
+  public void setPosition(double position){
+    ShooingMotor.setMode(ControlMode.Position);
+    ShooingMotor.set(position);
   }
 
 }
