@@ -1,15 +1,11 @@
 package frc.robot.commands;
-
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
-
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 
 public class TeleopSwerve extends CommandBase {    
     private Swerve s_Swerve;    
@@ -36,11 +32,12 @@ public class TeleopSwerve extends CommandBase {
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
 
         /* Drive */
+
         s_Swerve.drive(
+            
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
-            //!robotCentricSup.getAsBoolean(), //Field oriented by the controller switch
-            true, //this is for now till we understand how to configure button to this
+            !robotCentricSup.getAsBoolean(), //Field oriented by the controller switch
             true
         );
     }
