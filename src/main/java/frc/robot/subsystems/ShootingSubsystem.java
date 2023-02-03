@@ -26,14 +26,16 @@ public class ShootingSubsystem extends SuperSystem {
  public Gains shootingGains;
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
- public VictorSP shootingSp;
+ public VictorSP firstShootingSp;
+ public VictorSP secondShootingSp;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.01, 0,0);
     upMicroSwitch = new DigitalInput(1);
     downMicroSwitch = new DigitalInput(3);
-    shootingSp = new VictorSP(0);
+    firstShootingSp = new VictorSP(0);
+    secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
     // ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
     setDefaultCommand(new ShootingOutput(this, 0));
@@ -51,14 +53,15 @@ public class ShootingSubsystem extends SuperSystem {
     // ShooingMotor.setMode(ControlMode.PercentOutput);
     // ShooingMotor.set(output);
     if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
-      shootingSp.set(output);
+      firstShootingSp.set(output);
+      secondShootingSp.set(output);
     }
     
   }
 
   public void setPosition(double position){
     // ShooingMotor.setMode(ControlMode.Position);
-    // ShooingMotor.set(position);
+    // ShooingMotor .set(position);
   }
 
   public boolean isShootingUp(){
