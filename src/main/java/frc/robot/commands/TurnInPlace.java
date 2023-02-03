@@ -4,11 +4,17 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.RobotButtons;
+import frc.robot.subsystems.Swerve;
 
 public class TurnInPlace extends CommandBase {
   /** Creates a new TurnZero. */
-  public TurnInPlace() {
+  private Swerve swerve;
+  public TurnInPlace(Swerve swerve) {
+    this.swerve = swerve;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -18,7 +24,16 @@ public class TurnInPlace extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (Math.abs(swerve.getYaw().getDegrees())> 2){
+      swerve.drive(            
+          new Translation2d(0.0, 0.0).times(Constants.Swerve.maxSpeed), 
+          swerve.getYaw().getDegrees() > 0 ? swerve.getYaw().getDegrees() : -swerve.getYaw().getDegrees(), 
+       false, //Field oriented by the controller switch
+       true
+      );
+  }
+}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -27,6 +42,9 @@ public class TurnInPlace extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (RobotButtons.driver.getPOV() == 180 && Math.abs(swerve.getYaw().getDegrees())> 2)
+      return true;
+    else
+      return false;
   }
 }
