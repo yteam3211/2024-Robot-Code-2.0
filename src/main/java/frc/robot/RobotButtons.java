@@ -11,8 +11,8 @@ import frc.robot.subsystems.Swerve;
 
 // Yteam loadButtons
 public class RobotButtons {
-    private static Joystick driver = new Joystick(0);
-    private static Joystick systems = new Joystick(1);
+    public static Joystick driver = new Joystick(0);
+    public static Joystick systems = new Joystick(1);
     public final Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kY.value));
