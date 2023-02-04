@@ -107,7 +107,7 @@ public class SwerveModule {
     public void resetToAbsolute(){
         double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
         // double absolutePosition = 0; // for a relative Encoder
-        integratedAngleEncoder.setPosition(absolutePosition);
+        integratedAngleEncoder.setPosition(getCanCoder().getDegrees() - angleOffset.getDegrees());
     }
 
 
