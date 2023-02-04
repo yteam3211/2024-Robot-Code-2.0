@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
+import frc.robot.commands.ShootingPosition;
 import frc.robot.subsystems.ShootingSubsystem;
 
 
@@ -14,23 +15,25 @@ public class RobotButtons {
     public static Joystick coPilotJoystick = new Joystick(0);
     public final JoystickButton halfSpeed;
 
-    public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 90);
+    public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger Low = new Trigger(() -> coPilotJoystick.getPOV() == 180);
     public Trigger Middle = new Trigger(() -> coPilotJoystick.getPOV() == 270);
-    public Trigger shoot = new Trigger(() -> coPilotJoystick.getPOV() == 0);
+    public Trigger shoot = new Trigger(() -> coPilotJoystick.getRawButton(5));
     public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
+    public Trigger pid = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
+
    
     public RobotButtons(Joystick driver) {
         halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
-        shoot.whileTrue(new ShootingOutput(shootingSubsystem, 1));
-        Low.whileTrue(new ShootingOutput(shootingSubsystem, -0.8));
+        shoot.whileTrue(new ShootingOutput(shootingSubsystem, 0.5));
+        pid.whileTrue(new ShootingOutput(shootingSubsystem, 1));
         reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
-        // High.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
-        // Low.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
-        // Middle.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
+        High.onTrue(new ShootingPosition( shootingSubsystem,0));
+        Low.onTrue(new ShootingPosition( shootingSubsystem,1.5));
+        // Middle.onTrue(new ShootingPosition( shootingSubsystem,1.5));
         // load buttons
     }
 }

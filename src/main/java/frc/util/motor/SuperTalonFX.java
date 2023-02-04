@@ -114,4 +114,8 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
     public void reset(double pos) {
         super.setSelectedSensorPosition(0);
     }
+
+    public SuperSparkMax getEncoder() {
+        return null;
+    }
 }
