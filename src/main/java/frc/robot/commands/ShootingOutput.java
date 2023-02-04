@@ -42,11 +42,12 @@ public class ShootingOutput extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(output>0){
-      return shootingSubsystem.isShootingUp(); 
-    }
-     else{
-      return shootingSubsystem.isShootingDown();
-     } 
+    return false;
+    // if(output>0){
+    //   return shootingSubsystem.isShootingUp(); 
+    // }
+    //  else{
+    //   return shootingSubsystem.isShootingDown();
+    //  } 
 }
 }

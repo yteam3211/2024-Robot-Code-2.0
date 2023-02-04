@@ -34,10 +34,10 @@ public class ShootingSubsystem extends SuperSystem {
     shootingGains = new Gains("_shootingGains",0.01, 0,0);
     upMicroSwitch = new DigitalInput(1);
     downMicroSwitch = new DigitalInput(3);
-    firstShootingSp = new VictorSP(0);
-    secondShootingSp = new VictorSP(1);
+    // firstShootingSp = new VictorSP(0);
+    // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
-    // ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
+    ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
     setDefaultCommand(new ShootingOutput(this, 0));
   }
 
@@ -45,23 +45,27 @@ public class ShootingSubsystem extends SuperSystem {
   
   @Override
   public void periodic() {
-    // getTab().putInDashboard("Position", ShooingMotor.getPosition(), false);
+    getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
     // This method will be called once per scheduler run
   }
 
   public void setOutput(double output){
-    // ShooingMotor.setMode(ControlMode.PercentOutput);
-    // ShooingMotor.set(output);
-    if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
-      firstShootingSp.set(output);
-      secondShootingSp.set(output);
-    }
+    ShooingMotor.setMode(ControlMode.PercentOutput);
+    ShooingMotor.set(output);
+    // neo motor 
+    // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
+    //   firstShootingSp.set(output);
+    //   secondShootingSp.set(output);
+    // }
     
+  }
+  public void resetEncoder(){
+    ShooingMotor.getEncoder().setPosition(0);
   }
 
   public void setPosition(double position){
-    // ShooingMotor.setMode(ControlMode.Position);
-    // ShooingMotor .set(position);
+    ShooingMotor.setMode(ControlMode.Position);
+    ShooingMotor .set(position);
   }
 
   public boolean isShootingUp(){

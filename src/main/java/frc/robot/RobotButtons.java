@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
@@ -17,6 +18,7 @@ public class RobotButtons {
     public Trigger Low = new Trigger(() -> coPilotJoystick.getPOV() == 180);
     public Trigger Middle = new Trigger(() -> coPilotJoystick.getPOV() == 270);
     public Trigger shoot = new Trigger(() -> coPilotJoystick.getPOV() == 0);
+    public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
    
     public RobotButtons(Joystick driver) {
         halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
@@ -24,7 +26,8 @@ public class RobotButtons {
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
         shoot.whileTrue(new ShootingOutput(shootingSubsystem, 1));
-        Low.whileTrue(new ShootingOutput(shootingSubsystem, -0.2));
+        Low.whileTrue(new ShootingOutput(shootingSubsystem, -0.8));
+        reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
         // High.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
         // Low.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
         // Middle.onTrue(new Shootingcommand(shootingSubsystem, 0, null));
