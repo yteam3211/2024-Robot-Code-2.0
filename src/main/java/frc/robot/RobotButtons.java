@@ -21,15 +21,16 @@ public class RobotButtons {
     public Trigger shoot = new Trigger(() -> coPilotJoystick.getRawButton(5));
     public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
     public Trigger pid = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
-
+    public Trigger down = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3); 
    
     public RobotButtons(Joystick driver) {
         halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
-        shoot.whileTrue(new ShootingOutput(shootingSubsystem, 0.5));
-        pid.whileTrue(new ShootingOutput(shootingSubsystem, 1));
+        shoot.whileTrue(new ShootingOutput(shootingSubsystem, -0.1));
+        pid.whileTrue(new ShootingOutput(shootingSubsystem, 0.5));
+        down.whileTrue(new ShootingOutput(shootingSubsystem, 1));
         reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
         High.onTrue(new ShootingPosition( shootingSubsystem,0));
         Low.onTrue(new ShootingPosition( shootingSubsystem,1.5));

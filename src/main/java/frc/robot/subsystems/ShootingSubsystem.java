@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import javax.swing.text.Position;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -30,14 +31,14 @@ public class ShootingSubsystem extends SuperSystem {
 //  public VictorSP firstShootingSp;
 //  public VictorSP secondShootingSp;
 
- public SuperTalonFX ShooingMotor;
+ public SuperTalonFX Shooing;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.4, 0,0);
     upMicroSwitch = new DigitalInput(1);
     downMicroSwitch = new DigitalInput(3);
-    ShooingMotor = new SuperTalonFX(ShooingMotor, 15, 30, false);
+    Shooing = new SuperTalonFX(15, 30, false, false, NeutralMode.Brake, shootingGains, null);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
@@ -56,7 +57,7 @@ public class ShootingSubsystem extends SuperSystem {
 
   public void setOutput(double output){
     // ShooingMotor.setMode(ControlMode.PercentOutput);
-    ShooingMotor.set(ControlMode.PercentOutput, output);
+    Shooing.set(ControlMode.PercentOutput, output);
     // neo motor 
     // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
     //   firstShootingSp.set(output);
