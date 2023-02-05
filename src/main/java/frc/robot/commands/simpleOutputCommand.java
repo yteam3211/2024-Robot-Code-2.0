@@ -8,7 +8,7 @@ import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShootingOutput extends CommandBase {
+public class simpleOutputCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
   double output;
   
@@ -18,7 +18,7 @@ public class ShootingOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
+  public simpleOutputCommand(ShootingSubsystem shootingSubsystem, double output) {
     this.shootingSubsystem = shootingSubsystem;
     this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -42,8 +42,7 @@ public class ShootingOutput extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
- return shootingSubsystem.GetPosition();
-    // return false;
+    return false;
     // if(output>0){
     //   return shootingSubsystem.isShootingUp(); 
     // }

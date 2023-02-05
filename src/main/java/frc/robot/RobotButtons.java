@@ -1,5 +1,7 @@
 package frc.robot;
 
+import javax.swing.GroupLayout.Group;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -7,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.ShootingPosition;
+import frc.robot.commands.shootingCommandGroup;
+import frc.robot.commands.simpleOutputCommand;
 import frc.robot.subsystems.ShootingSubsystem;
 
 
@@ -17,10 +21,10 @@ public class RobotButtons {
 
     public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger Low = new Trigger(() -> coPilotJoystick.getPOV() == 180);
-    public Trigger Middle = new Trigger(() -> coPilotJoystick.getPOV() == 270);
-    public Trigger shoot = new Trigger(() -> coPilotJoystick.getRawButton(5));
+    public Trigger Group = new Trigger(() -> coPilotJoystick.getPOV() == 270);
+    public Trigger back = new Trigger(() -> coPilotJoystick.getRawButton(5));
     public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
-    public Trigger pid = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
+    public Trigger middle = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
     public Trigger down = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3); 
    
     public RobotButtons(Joystick driver) {
@@ -28,13 +32,13 @@ public class RobotButtons {
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
-        shoot.whileTrue(new ShootingOutput(shootingSubsystem, -0.1));
-        pid.whileTrue(new ShootingOutput(shootingSubsystem, 0.5));
-        down.whileTrue(new ShootingOutput(shootingSubsystem, 1));
+        back.whileTrue(new simpleOutputCommand(shootingSubsystem, -0.2));
+        down.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
+        middle.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.6));
         reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
-        High.onTrue(new ShootingPosition( shootingSubsystem,0));
-        Low.onTrue(new ShootingPosition( shootingSubsystem,1.5));
-        // Middle.onTrue(new ShootingPosition( shootingSubsystem,1.5));
+        // High.onTrue(new ShootingPosition( shootingSubsystem,0));
+        // Low.onTrue(new ShootingPosition( shootingSubsystem,1.5));
+        // Group.onTrue(new shootingCommandGroup(shootingSubsystem, 0, 0));
         // load buttons
     }
 }

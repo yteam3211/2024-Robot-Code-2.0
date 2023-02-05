@@ -28,6 +28,7 @@ public class ShootingSubsystem extends SuperSystem {
  public Gains shootingGains;
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
+
 //  public VictorSP firstShootingSp;
 //  public VictorSP secondShootingSp;
 
@@ -51,30 +52,40 @@ public class ShootingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
-    // getTab().putInDashboard("fgr", ShooingMotor.getPosition(), false);
+    getTab().putInDashboard("encoder", Shooing.getPosition(), false);
     // This method will be called once per scheduler run
   }
 
   public void setOutput(double output){
     // ShooingMotor.setMode(ControlMode.PercentOutput);
+     // neo motor 
     Shooing.set(ControlMode.PercentOutput, output);
-    // neo motor 
     // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
     //   firstShootingSp.set(output);
     //   secondShootingSp.set(output);
     // }
-    
+  
   }
   public void resetEncoder(){
     // ShooingMotor.getEncoder().setPosition(0);
   }
 
   public void setPosition(double position){
-
+    Shooing.set(ControlMode.Position, position);
     // ShooingMotor.setMode(ControlMode.Position);
     // ShooingMotor.getPIDController().setReference(position, ControlType.kPosition);
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
 
+  }
+  public boolean GetPosition(){
+   if (Shooing.getPosition()>4000) {
+    return true;
+  }
+  else{
+    return false;
+  }
+
+    
   }
 
   public boolean isShootingUp(){
