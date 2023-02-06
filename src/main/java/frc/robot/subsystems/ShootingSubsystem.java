@@ -8,6 +8,7 @@ import javax.swing.text.Position;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -36,10 +37,10 @@ public class ShootingSubsystem extends SuperSystem {
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
-    shootingGains = new Gains("_shootingGains",0.4, 0,0);
+    shootingGains = new Gains("_shootingGains",0.05, 0,0);
     upMicroSwitch = new DigitalInput(1);
     downMicroSwitch = new DigitalInput(3);
-    Shooing = new SuperTalonFX(15, 30, false, false, NeutralMode.Brake, shootingGains, null);
+    Shooing = new SuperTalonFX(15, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Position);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
@@ -53,6 +54,7 @@ public class ShootingSubsystem extends SuperSystem {
   public void periodic() {
     // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
     getTab().putInDashboard("encoder", Shooing.getPosition(), false);
+    // System.out.println(Shooing.getPosition());
     // This method will be called once per scheduler run
   }
 
@@ -67,7 +69,7 @@ public class ShootingSubsystem extends SuperSystem {
   
   }
   public void resetEncoder(){
-    // ShooingMotor.getEncoder().setPosition(0);
+    Shooing.reset(0);
   }
 
   public void setPosition(double position){
@@ -77,13 +79,9 @@ public class ShootingSubsystem extends SuperSystem {
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
 
   }
-  public boolean GetPosition(){
-   if (Shooing.getPosition()>4000) {
-    return true;
-  }
-  else{
-    return false;
-  }
+  public double GetPosition(){
+   return Shooing.getPosition();
+ 
 
     
   }

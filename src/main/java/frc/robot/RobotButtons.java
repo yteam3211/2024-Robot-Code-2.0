@@ -19,9 +19,9 @@ public class RobotButtons {
     public static Joystick coPilotJoystick = new Joystick(0);
     public final JoystickButton halfSpeed;
 
-    public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 0);
+    public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 270);
     public Trigger Low = new Trigger(() -> coPilotJoystick.getPOV() == 180);
-    public Trigger Group = new Trigger(() -> coPilotJoystick.getPOV() == 270);
+    public Trigger Group = new Trigger(() -> coPilotJoystick.getPOV()== 0);
     public Trigger back = new Trigger(() -> coPilotJoystick.getRawButton(5));
     public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
     public Trigger middle = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
@@ -32,13 +32,22 @@ public class RobotButtons {
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem) {
-        back.whileTrue(new simpleOutputCommand(shootingSubsystem, -0.2));
         down.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
         middle.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.6));
+        back.onTrue(new shootingCommandGroup(shootingSubsystem, 0.2, 0));
         reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
         // High.onTrue(new ShootingPosition( shootingSubsystem,0));
-        // Low.onTrue(new ShootingPosition( shootingSubsystem,1.5));
-        // Group.onTrue(new shootingCommandGroup(shootingSubsystem, 0, 0));
+        // Low.onTrue(new ShootingPosition( shootingSubsystem,5));
         // load buttons
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -8,9 +8,9 @@ import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShootingOutput extends CommandBase {
+public class reSetCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
-  double output;
+  
   
 
   /**
@@ -18,9 +18,8 @@ public class ShootingOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
+  public reSetCommand(ShootingSubsystem shootingSubsystem) {
     this.shootingSubsystem = shootingSubsystem;
-    this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shootingSubsystem);
   }
@@ -32,7 +31,7 @@ public class ShootingOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setOutput(output);
+    shootingSubsystem.resetEncoder();
   }
 
   // Called once the command ends or is interrupted.
@@ -42,19 +41,9 @@ public class ShootingOutput extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shootingSubsystem.GetPosition()>7300 && output>0){
-      return true;
-        }
-        else{
-          return false;
-          
-        }
-    // return false;
-    // if(output>0){
-    //   return shootingSubsystem.isShootingUp(); 
-    // }
-    //  else{
-    //   return shootingSubsystem.isShootingDown();
-    //  } 
+
+  return false;
+
+ 
 }
 }
