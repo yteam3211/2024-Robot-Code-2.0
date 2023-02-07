@@ -12,6 +12,14 @@ import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
+        // SHOOTING AND COLLECT Constants
+        public static final int SHOOTING_MOTOR = 15;
+        public static final int DOWN_MICROSWITCH = 0; 
+        public static final int UP_MICROSWITCH = 0;
+        public static final int LEADER_COLLECT_MOTOR = 0;
+        public static final int COLLECT_MOTOR = 0;
+        public static final int CLOSE_MICROSWITCH = 0;
+
     public static final double stickDeadband = 0.01;
 
     public static final class Swerve {
