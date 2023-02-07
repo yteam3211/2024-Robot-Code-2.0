@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import frc.robot.Constants;
 import frc.robot.commands.ShootingOutput;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
@@ -29,18 +30,14 @@ public class ShootingSubsystem extends SuperSystem {
  public Gains shootingGains;
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
-
-//  public VictorSP firstShootingSp;
-//  public VictorSP secondShootingSp;
-
  public SuperTalonFX Shooing;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.05, 0,0);
-    upMicroSwitch = new DigitalInput(1);
-    downMicroSwitch = new DigitalInput(3);
-    Shooing = new SuperTalonFX(15, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Position);
+    upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
+    downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
+    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Position);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
