@@ -32,7 +32,6 @@ public class CollectSubsyste extends SuperSystem {
     super("collectSubsystem");
     collectGains = new Gains("collectGains",0, 0,0);
     leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 0, 0, collectGains, null);
-    collectMotor = new SuperTalonSRX(leaderCollectMotor, Constants.LEFT_COLLECT_MOTOR , 30, true);
     closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
     setDefaultCommand(new collectCommand(this, 0));
   }
@@ -41,7 +40,6 @@ public class CollectSubsyste extends SuperSystem {
   
   @Override
   public void periodic() {
-    getTab().putInDashboard("collect encoder", collectMotor.getPosition(), false);
     getTab().putInDashboard("leader collect encoder", leaderCollectMotor.getPosition(), false);
     // This method will be called once per scheduler run
   }
