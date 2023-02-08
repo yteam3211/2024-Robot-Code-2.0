@@ -35,8 +35,8 @@ public class ShootingSubsystem extends SuperSystem {
   public ShootingSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.05, 0,0);
-    upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
-    downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
+    // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
+    // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
     Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Position);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);

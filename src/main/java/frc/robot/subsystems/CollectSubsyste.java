@@ -46,9 +46,9 @@ public class CollectSubsyste extends SuperSystem {
 
   public void setPosition( double Position){
     leaderCollectMotor.set(ControlMode.Position, Position);
-    if (isCollectClose() == true) {
-      resetEncoder();
-    };
+    // if (isCollectClose() == true) {
+    //   resetEncoder();
+    // };
   }
   
   public boolean isCollectClose(){
