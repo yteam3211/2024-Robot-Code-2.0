@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.ConeLimelight;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -28,7 +28,7 @@ public class TurnInPlace extends CommandBase {
     if (Math.abs(swerve.getYaw().getDegrees())> 2){
       swerve.drive(            
           new Translation2d(0.0, 0.0).times(Constants.Swerve.maxSpeed), 
-          swerve.getYaw().getDegrees() > 0 ? swerve.getYaw().getDegrees() : -swerve.getYaw().getDegrees(), 
+          swerve.getYaw().getDegrees() > 0 ? 0.1 : -0.1, 
        false, //Field oriented by the controller switch
        true
       );
