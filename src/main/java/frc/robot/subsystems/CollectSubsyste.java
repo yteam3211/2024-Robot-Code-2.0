@@ -40,7 +40,7 @@ public class CollectSubsyste extends SuperSystem {
   
   @Override
   public void periodic() {
-    getTab().putInDashboard("leader collect encoder", leaderCollectMotor.getPosition(), false);
+    getTab().putInDashboard("leader collect encoder", leaderCollectMotor.getPosition(),false);
     // This method will be called once per scheduler run
   }
 
@@ -57,7 +57,7 @@ public class CollectSubsyste extends SuperSystem {
    
   }
 
-  public void resetEncoder(){
+  public void reSetEncoder(){
     leaderCollectMotor.reset(0);
   }
 }

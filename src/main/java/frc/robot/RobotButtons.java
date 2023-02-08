@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.collectCommand;
+import frc.robot.commands.reSetCommand;
 import frc.robot.commands.shootingCommandGroup;
 import frc.robot.commands.simpleOutputCommand;
 import frc.robot.subsystems.CollectSubsyste;
@@ -37,8 +38,8 @@ public class RobotButtons {
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste) {
         down.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
         middle.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.6));
-        back.onTrue(new shootingCommandGroup(shootingSubsystem, 0.2, 0));
-        reset.onTrue(new InstantCommand(() -> shootingSubsystem.resetEncoder()));
+        back.onTrue(new shootingCommandGroup(shootingSubsystem,collectSubsyste, 0.2, 0));
+        reset.onTrue(new reSetCommand(shootingSubsystem,collectSubsyste));
         collectClose.whileTrue(new collectCommand(collectSubsyste, 0));
         // High.onTrue(new ShootingPosition( shootingSubsystem,0));
         // Low.onTrue(new ShootingPosition( shootingSubsystem,5));

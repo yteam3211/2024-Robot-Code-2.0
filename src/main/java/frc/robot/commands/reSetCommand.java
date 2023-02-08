@@ -4,12 +4,15 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.CollectSubsyste;
 import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class reSetCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
+  private final CollectSubsyste collectSubsyste;
+
   
   
 
@@ -18,10 +21,11 @@ public class reSetCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public reSetCommand(ShootingSubsystem shootingSubsystem) {
+  public reSetCommand(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste) {
     this.shootingSubsystem = shootingSubsystem;
+    this.collectSubsyste = collectSubsyste;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shootingSubsystem);
+    addRequirements(shootingSubsystem,collectSubsyste);
   }
 
   // Called when the command is initially scheduled.
@@ -32,6 +36,7 @@ public class reSetCommand extends CommandBase {
   @Override
   public void execute() {
     shootingSubsystem.resetEncoder();
+    collectSubsyste.reSetEncoder();
   }
 
   // Called once the command ends or is interrupted.
