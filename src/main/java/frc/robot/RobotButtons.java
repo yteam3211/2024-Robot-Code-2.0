@@ -21,8 +21,10 @@ public class RobotButtons {
         swerve.setDefaultCommand(
             new TeleopSwerve(
                 swerve, 
-                () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), // up & down
-                () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // left & right 
+                // () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), // up & down
+                () -> driver.getRawAxis(0), // up & down
+                // () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // left & right 
+                () -> driver.getRawAxis(1),  // left & right 
                 () -> driver.getRawAxis(XboxController.Axis.kRightX.value), // rotation
                 () -> robotCentric.getAsBoolean()
             )
