@@ -30,8 +30,8 @@ public class CollectSubsyste extends SuperSystem {
   // Motors, Selenoid and Sensors declaration
   public CollectSubsyste() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",0.01, 0,0);
-    leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
+    collectGains = new Gains("collectGains",0.03, 0,0);
+    leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.PercentOutput);
     closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
     setDefaultCommand(new collectCommand(this, 0));
   }
@@ -59,6 +59,13 @@ public class CollectSubsyste extends SuperSystem {
 
   public void reSetEncoder(){
     leaderCollectMotor.reset(0);
+  }
+
+  public void setOutput(double output){
+ 
+    leaderCollectMotor.set(ControlMode.PercentOutput, output);
+
+  
   }
 }
 
