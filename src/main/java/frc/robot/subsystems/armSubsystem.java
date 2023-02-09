@@ -25,14 +25,17 @@ import frc.util.motor.SuperTalonFX;
 
 // Yteam Example Subsystem
 public class armSubsystem extends SuperSystem {
- public SuperSparkMax ArmgMotor;
+ public static SuperSparkMax ArmgMotor;
  public Gains ArmgGains;
+ public Gains armgGains;
+
 
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
     super("ShootingSubsystem");
-    ArmgGains = new Gains("_shootingGains",0, 0,0,0,0,0,0);
-    ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, ArmgGains, 0, 0, 0);
+    // ArmgGains = new Gains("armGains",0, 0,0,0,0,0,0);
+    armgGains = new Gains("armGains",0,0,0);
+    ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, armgGains, 0, 0, 0);
     // setDefaultCommand(new ShootingOutput(this, 0));
   }
 
@@ -47,10 +50,10 @@ public class armSubsystem extends SuperSystem {
     ArmgMotor.reset(0);
   }
 
-  public void setPosition(double position){
+  public static void setPosition(double position){
 
-    // ShooingMotor.setMode(ControlMode.Position);
-    // ShooingMotor.getPIDController().setReference(position, ControlType.kPosition);
+    ArmgMotor.setMode(ControlMode.Position);
+    ArmgMotor.getPIDController().setReference(position, ControlType.kPosition);
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
 
   }
