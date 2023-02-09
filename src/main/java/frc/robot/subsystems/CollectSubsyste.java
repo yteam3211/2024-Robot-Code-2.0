@@ -31,9 +31,9 @@ public class CollectSubsyste extends SuperSystem {
   public CollectSubsyste() {
     super("collectSubsystem");
     collectGains = new Gains("collectGains",0.03, 0,0);
-    leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.PercentOutput);
-    closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
-    setDefaultCommand(new collectCommand(this, 0));
+    leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
+    // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
+    // setDefaultCommand(new collectCommand(this, 0));
   }
 
   /** Creates a new ExampleSubsystem. */
@@ -51,11 +51,11 @@ public class CollectSubsyste extends SuperSystem {
     // };
   }
   
-  public boolean isCollectClose(){
+  // public boolean isCollectClose(){
     
-    return closeMicroSwitch.get();
+  //   return closeMicroSwitch.get();
    
-  }
+  // }
 
   public void reSetEncoder(){
     leaderCollectMotor.reset(0);
