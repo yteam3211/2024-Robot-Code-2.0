@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /** An example command that uses an example subsystem. */
 public class armPosition extends CommandBase {
-  private final Subsystem[] armPosition;
+  private final armSubsystem armSubsystem;
   double position;
   
 
@@ -19,12 +19,12 @@ public class armPosition extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public armPosition(Subsystem[] armPosition, double position) {
-    this.armPosition = armPosition;
+  public armPosition(armSubsystem armSubsystem, double position) {
+    this.armSubsystem = armSubsystem;
     this.position = position;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armPosition);
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.

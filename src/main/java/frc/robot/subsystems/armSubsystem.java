@@ -17,6 +17,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
+import frc.robot.commands.armPosition;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -25,7 +26,7 @@ import frc.util.motor.SuperTalonFX;
 
 // Yteam Example Subsystem
 public class armSubsystem extends SuperSystem {
- public static SuperSparkMax ArmgMotor;
+ public SuperSparkMax ArmgMotor;
  public Gains ArmgGains;
  public Gains armgGains;
 
@@ -43,6 +44,7 @@ public class armSubsystem extends SuperSystem {
   
   @Override
   public void periodic() {
+    System.out.println(ArmgMotor.getPosition());
     // This method will be called once per scheduler run
   }
 
@@ -50,13 +52,16 @@ public class armSubsystem extends SuperSystem {
     ArmgMotor.reset(0);
   }
 
-  public static void setPosition(double position){
+  public void setPosition(double position){
 
     ArmgMotor.setMode(ControlMode.Position);
     ArmgMotor.getPIDController().setReference(position, ControlType.kPosition);
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
 
   }
+
+public void whileTrue(armPosition armPosition) {
+}
 
 }
 
