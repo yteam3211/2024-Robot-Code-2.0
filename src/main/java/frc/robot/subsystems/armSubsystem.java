@@ -35,7 +35,7 @@ public class armSubsystem extends SuperSystem {
   public armSubsystem() {
     super("ShootingSubsystem");
     // ArmgGains = new Gains("armGains",0, 0,0,0,0,0,0);
-    armgGains = new Gains("armGains",0,0,0);
+    armgGains = new Gains("armGains",0.8,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, armgGains, 0, 0, 0);
     // setDefaultCommand(new ShootingOutput(this, 0));
   }

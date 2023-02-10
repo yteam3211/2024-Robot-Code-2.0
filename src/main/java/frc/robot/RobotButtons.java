@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
+import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 
@@ -19,6 +20,8 @@ public class RobotButtons {
     public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kY.value));
     public Trigger arm = new Trigger(() -> systems.getRawButton(5));
+    public Trigger reset = new Trigger(() -> systems.getRawButton(6));
+
 
 
     public void loadButtons(Swerve swerve, armSubsystem arm ) {
@@ -35,6 +38,7 @@ public class RobotButtons {
         );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        arm.whileTrue(new armPosition(arm, 0));
+        arm.whileTrue(new armPosition(arm, -8));
+        reset.whileTrue(new resetCommand(arm));
     }
 }
