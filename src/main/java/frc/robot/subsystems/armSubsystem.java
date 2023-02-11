@@ -53,10 +53,9 @@ public class armSubsystem extends SuperSystem {
   }
 
   public void setPosition(double position){
-
     ArmgMotor.setMode(ControlMode.Position);
     ArmgMotor.getPIDController().setReference(position, ControlType.kPosition);
-    // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
+    getTab().putInDashboard("encoder_live", ArmgMotor.getPosition(), false);
 
   }
 

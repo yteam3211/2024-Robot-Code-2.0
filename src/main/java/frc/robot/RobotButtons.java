@@ -25,20 +25,20 @@ public class RobotButtons {
 
 
     public void loadButtons(Swerve swerve, armSubsystem arm ) {
-        swerve.setDefaultCommand(
-            new TeleopSwerve(
-                swerve, 
+        // swerve.setDefaultCommand(
+            // new TeleopSwerve(
+                // swerve, 
                 // () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), // up & down
-                () -> driver.getRawAxis(0), // up & down
-                // () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // left & right 
-                () -> driver.getRawAxis(1),  // left & right 
-                () -> driver.getRawAxis(XboxController.Axis.kRightX.value), // rotation
-                () -> robotCentric.getAsBoolean()
-            )
-        );
+                // () -> driver.getRawAxis(0), // up & down
+                // // () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // left & right 
+                // () -> driver.getRawAxis(1),  // left & right 
+                // () -> driver.getRawAxis(XboxController.Axis.kRightX.value), // rotation
+                // () -> robotCentric.getAsBoolean()
+            // )
+        // );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        arm.whileTrue(new armPosition(arm, -50));
+        arm.whileTrue(new armPosition(arm, 500));
         reset.whileTrue(new resetCommand(arm));
     }
 }
