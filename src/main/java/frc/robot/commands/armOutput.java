@@ -4,27 +4,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.subsystems.armSubsystem;
 
-/** An example command that uses an example subsystem. */
-public class armPosition extends CommandBase {
+public class armOutput extends CommandBase {
   private final armSubsystem armSubsystem;
-  private double position;
-  
-
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public armPosition(armSubsystem armSubsystem, double position) {
+  private double output;
+  /** Creates a new armOutput. */
+  public armOutput(armSubsystem armSubsystem, double output) {
     this.armSubsystem = armSubsystem;
-    this.position = position;
-
+     this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -34,7 +24,7 @@ public class armPosition extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.setPosition(position);
+    armSubsystem.setOutput(output);
   }
 
   // Called once the command ends or is interrupted.
@@ -44,7 +34,6 @@ public class armPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      return false;  
-    }
+    return false;
+  }
 }
-
