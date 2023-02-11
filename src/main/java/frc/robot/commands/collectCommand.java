@@ -19,9 +19,8 @@ public class collectCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public collectCommand(CollectSubsyste collectSubsystem, double position) {
+  public collectCommand(CollectSubsyste collectSubsystem) {
     this.collectSubsystem = collectSubsystem;
-    this.position = position;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(collectSubsystem);
@@ -34,7 +33,7 @@ public class collectCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collectSubsystem.setPosition(position);
+    collectSubsystem.setPosition();
   }
 
   // Called once the command ends or is interrupted.
@@ -44,7 +43,6 @@ public class collectCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
     return false;  
     }
 }

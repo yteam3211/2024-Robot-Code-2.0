@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.collectCommand;
@@ -23,32 +24,45 @@ public class CollectSubsyste extends SuperSystem {
   //  public SuperVictorSP armMotor;
   //  private DutyCycleEncoder dutyCycleEncoder = new DutyCycleEncoder(0);
       public SuperTalonSRX leaderCollectMotor;
-      public SuperTalonSRX collectMotor;
       public DigitalInput closeMicroSwitch;
       public Gains collectGains;
+      public VictorSP collectMotor ;
+      public VictorSP motor;
+      int counter = 0;
+      double point = 0;
       
   // Motors, Selenoid and Sensors declaration
+  /**
+   * 
+   */
   public CollectSubsyste() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",0.03, 0,0);
+    collectGains = new Gains("collectGains",0.8, 0,0);
     leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
+    collectMotor = new VictorSP(1);
+    motor = new VictorSP(0);
+    this.reSetEncoder();
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
-    // setDefaultCommand(new collectCommand(this, 0));
+    setDefaultCommand(new collectCommand(this));
   }
 
   /** Creates a new ExampleSubsystem. */
   
   @Override
   public void periodic() {
-    System.out.println(leaderCollectMotor.getPosition());
-    // This method will be called once per scheduler run
+    System.out.println("p" + getPosition());
   }
 
-  public void setPosition( double Position){
-    leaderCollectMotor.set(ControlMode.Position, Position);
+  public void setPosition(){
+    System.out.println("ppp" + this.point);
+    leaderCollectMotor.set(ControlMode.Position, this.point);
     // if (isCollectClose() == true) {
     //   resetEncoder();
     // };
+  }
+
+  public void setPoint(double point){
+    this.point = point;
   }
   
   // public boolean isCollectClose(){
@@ -63,9 +77,15 @@ public class CollectSubsyste extends SuperSystem {
 
   public void setOutput(double output){
  
-    leaderCollectMotor.set(ControlMode.PercentOutput, output);
+    // leaderCollectMotor.set(ControlMode.PercentOutput, output);
+    collectMotor.set(output);
+  }
 
-  
+  public void output(double Output){
+    motor.set(Output);
+  }
+  public double getPosition(){
+    return leaderCollectMotor.getPosition();
   }
 }
 

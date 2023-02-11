@@ -32,7 +32,10 @@ public class ShootingOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setOutput(output);
+   
+      shootingSubsystem.setOutput(output);
+
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -42,13 +45,11 @@ public class ShootingOutput extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shootingSubsystem.GetPosition()>7300 && output>0){
+    if(shootingSubsystem.GetPosition() >= shootingSubsystem.max){
       return true;
-        }
-        else{
-          return false;
-          
-        }
+    }else{
+      return false;
+    }
     // return false;
     // if(output>0){
     //   return shootingSubsystem.isShootingUp(); 

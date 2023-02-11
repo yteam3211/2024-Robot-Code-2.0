@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
 import frc.robot.commands.ShootingOutput;
+import frc.robot.commands.ShootingPosition;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -31,6 +32,8 @@ public class ShootingSubsystem extends SuperSystem {
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
  public SuperTalonFX Shooing;
+ public int max = 7100;
+ public int min = 0;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
@@ -51,7 +54,7 @@ public class ShootingSubsystem extends SuperSystem {
   public void periodic() {
     // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
     getTab().putInDashboard("encoder", Shooing.getPosition(), false);
-    // System.out.println(Shooing.getPosition());
+    // System.out.println("shoot" + Shooing.getPosition());
     // This method will be called once per scheduler run
   }
 

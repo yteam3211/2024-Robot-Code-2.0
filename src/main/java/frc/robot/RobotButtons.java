@@ -12,6 +12,7 @@ import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.collectCommand;
 import frc.robot.commands.collectOutput;
 import frc.robot.commands.reSetCommand;
+import frc.robot.commands.setPoitCollectCommand;
 import frc.robot.commands.shootingCommandGroup;
 import frc.robot.commands.simpleOutputCommand;
 import frc.robot.subsystems.CollectSubsyste;
@@ -31,18 +32,19 @@ public class RobotButtons {
     public Trigger reset = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
     public Trigger middle = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3); 
     public Trigger down = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3); 
+
    
     public RobotButtons(Joystick driver) {
         halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
     }
 
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste) {
-        // down.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
-        // middle.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.6));   
-        back.onTrue(new shootingCommandGroup(shootingSubsystem,collectSubsyste, 0.2, 0));
+        back.whileTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
+        middle.whileTrue(new collectOutput(collectSubsyste, 0.5,0.3));   
+        // collectClose.onTrue(new ShootingOutput(shootingSubsystem, 0.4));
         reset.onTrue(new reSetCommand(shootingSubsystem,collectSubsyste));
-        down.whileTrue(new collectCommand(collectSubsyste, -515));
-        middle.whileTrue(new collectOutput(collectSubsyste, -0.2));
+        collectClose.onFalse(new setPoitCollectCommand(collectSubsyste, 0));
+        collectClose.onTrue(new setPoitCollectCommand(collectSubsyste, -1000));
         // High.onTrue(new ShootingPosition( shootingSubsystem,0));
         // Low.onTrue(new ShootingPosition( shootingSubsystem,5));
         // load buttons

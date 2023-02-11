@@ -10,9 +10,8 @@ public class shootingCommandGroup extends SequentialCommandGroup
     public shootingCommandGroup(ShootingSubsystem subsystem, CollectSubsyste collectSubsyste ,double output, double position)
     {
         addCommands(
-            new ShootingOutput(subsystem, output),
-            new ShootingPosition(subsystem, position),
-            new reSetCommand(subsystem,collectSubsyste)
+            new ShootingOutput(subsystem, output)
+            // new reSetCommand(subsystem,collectSubsyste)
             );
     }
 }
