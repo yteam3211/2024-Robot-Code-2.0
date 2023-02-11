@@ -38,7 +38,7 @@ public class RobotButtons {
         );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        arm.whileTrue(new armPosition(arm, -8));
+        arm.whileTrue(new armPosition(arm, -50));
         reset.whileTrue(new resetCommand(arm));
     }
 }
