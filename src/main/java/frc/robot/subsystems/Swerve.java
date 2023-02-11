@@ -65,6 +65,11 @@ public class Swerve extends SuperSystem {
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
+        // mSwerveMods[0].setDesiredState(swerveModuleStates[0], isOpenLoop); // | if you want a specific module to work.
+        // mSwerveMods[1].setDesiredState(swerveModuleStates[1], isOpenLoop); // | 
+        // mSwerveMods[2].setDesiredState(swerveModuleStates[2], isOpenLoop); // | must put in comment the command in the for loop above (line 67 for now).
+        // mSwerveMods[3].setDesiredState(swerveModuleStates[3], isOpenLoop); // |
+
     }    
 
     /* Used by SwerveControllerCommand in Auto */
