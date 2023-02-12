@@ -4,15 +4,28 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.armSubsystem;
 
-public class resetCommand extends CommandBase {
-  private final armSubsystem armSubsystem;
-  /** Creates a new resetCommand. */
-  public resetCommand(armSubsystem armSubsystem) {
-    this.armSubsystem = armSubsystem;
+/** An example command that uses an example subsystem. */
+public class reSetCommand extends CommandBase {
+  private final ShootingSubsystem shootingSubsystem;
+  private final CollectSubsyste collectSubsyste;
+
+  
+  
+
+  /**
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public reSetCommand(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste) {
+    this.shootingSubsystem = shootingSubsystem;
+    this.collectSubsyste = collectSubsyste;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(shootingSubsystem,collectSubsyste);
   }
 
   // Called when the command is initially scheduled.
@@ -22,7 +35,8 @@ public class resetCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  armSubsystem.resetEncoder();
+    shootingSubsystem.resetEncoder();
+    collectSubsyste.reSetEncoder();
   }
 
   // Called once the command ends or is interrupted.
@@ -32,6 +46,9 @@ public class resetCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
+
+  return false;
+
+ 
+}
 }
