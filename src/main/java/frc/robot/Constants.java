@@ -18,9 +18,11 @@ public final class Constants {
         public static final int UP_MICROSWITCH = 0;
         public static final int RIGHT_LEADER_COLLECT_MOTOR = 16;
         public static final int CLOSE_MICROSWITCH = 0;
+        public static final int ARM_MOTOR = 17;
+        public static final int GRIPPER_MOTOR = 18;
+
 
     public static final double stickDeadband = 0.01;
-    public static final int ARM_MOTOR = 17;
 
     public static final class Swerve {
         public static final int pigeonID = 1;
