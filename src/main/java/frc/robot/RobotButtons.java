@@ -30,6 +30,8 @@ public class RobotButtons {
     public Trigger collectWheels = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3);
     public Trigger shootingVelocityLow = new Trigger(() -> coPilotJoystick.getPOV () == 180);
     public Trigger shootingVelocityHigh = new Trigger(() -> coPilotJoystick.getPOV () == 0);
+    public Trigger shootingVelocityMiddle = new Trigger(() -> coPilotJoystick.getPOV () == 270);
+
 
 
 
@@ -42,7 +44,12 @@ public class RobotButtons {
         OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
         OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
         collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.5));
-        shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 300));
+        shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
+        shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
+        shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
+
+
+        
 
         // load buttons
     }
