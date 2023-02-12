@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.ShootingPosition;
+import frc.robot.commands.armPosition;
 import frc.robot.commands.collectCommand;
 import frc.robot.commands.collectOutput;
 import frc.robot.commands.setPoitCollectCommand;
@@ -31,6 +32,11 @@ public class RobotButtons {
     public Trigger shootingVelocityLow = new Trigger(() -> coPilotJoystick.getPOV () == 180);
     public Trigger shootingVelocityHigh = new Trigger(() -> coPilotJoystick.getPOV () == 0);
     public Trigger shootingVelocityMiddle = new Trigger(() -> coPilotJoystick.getPOV () == 270);
+    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(4)); 
+    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
+    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
+
+
 
 
 
@@ -47,6 +53,10 @@ public class RobotButtons {
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
+        humanArm.onTrue(new armPosition(armSubsystem, 0));
+        lowArm.onTrue(new armPosition(armSubsystem, 0));
+        middleArm.onTrue(new armPosition(armSubsystem, 0));
+
 
 
         
