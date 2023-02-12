@@ -22,7 +22,7 @@ import frc.util.vision.Limelight;
  */
 public class RobotContainer {
     /* Controllers */
-    private final Joystick driver = new Joystick(0);
+    private final Joystick driver = new Joystick(1);
     private RobotButtons robotButtons = 
     new RobotButtons(driver);
 
