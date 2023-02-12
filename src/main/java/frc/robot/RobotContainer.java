@@ -39,6 +39,8 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve(robotButtons);
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
     private final CollectSubsyste m_CollectSubsyste = new CollectSubsyste();
+    private final armSubsystem m_ArmSubsystem = new armSubsystem();
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -68,7 +70,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem,m_CollectSubsyste);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem);
     }
 
     /**
