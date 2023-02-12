@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class simpleOutputCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
-  double output;
+  private double output;
+  private double velocity;
   
 
   /**
@@ -18,9 +19,9 @@ public class simpleOutputCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public simpleOutputCommand(ShootingSubsystem shootingSubsystem, double output) {
+  public simpleOutputCommand(ShootingSubsystem shootingSubsystem, double velocity) {
     this.shootingSubsystem = shootingSubsystem;
-    this.output = output;
+    this.velocity = velocity;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shootingSubsystem);
   }
@@ -32,7 +33,7 @@ public class simpleOutputCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setOutput(output);
+    shootingSubsystem.setOutput(velocity);
   }
 
   // Called once the command ends or is interrupted.
@@ -42,7 +43,12 @@ public class simpleOutputCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(shootingSubsystem.GetPosition() >= shootingSubsystem.max){
+      return true;
+    }else{
+      return false;
+    }
+    // return false;
     // if(output>0){
     //   return shootingSubsystem.isShootingUp(); 
     // }

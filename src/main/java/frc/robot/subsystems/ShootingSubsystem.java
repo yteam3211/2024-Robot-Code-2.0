@@ -37,10 +37,10 @@ public class ShootingSubsystem extends SuperSystem {
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
-    shootingGains = new Gains("_shootingGains",0.05, 0,0);
+    shootingGains = new Gains("_shootingGains",0.04, 0,0);
     // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
     // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
-    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Position);
+    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.Velocity);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
@@ -84,6 +84,14 @@ public class ShootingSubsystem extends SuperSystem {
  
 
     
+  }
+
+  public void setVelocity(double velocity){
+    Shooing.set(ControlMode.Velocity, velocity);
+    // ShooingMotor.setMode(ControlMode.Position);
+    // ShooingMotor.getPIDController().setReference(position, ControlType.kPosition);
+    // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
+
   }
 
   public boolean isShootingUp(){
