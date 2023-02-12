@@ -5,13 +5,14 @@ import javax.swing.GroupLayout.Group;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.collectCommand;
 import frc.robot.commands.collectOutput;
-import frc.robot.commands.reSetCommand;
+import frc.robot.commands.resetCommand;
 import frc.robot.commands.setPoitCollectCommand;
 import frc.robot.commands.shootingCommandGroup;
 import frc.robot.commands.simpleOutputCommand;
@@ -22,6 +23,7 @@ import frc.robot.subsystems.ShootingSubsystem;
 // Yteam loadButtons
 public class RobotButtons {
     public static Joystick coPilotJoystick = new Joystick(0);
+    public static Joystick driver = new Joystick(1);
     public final JoystickButton halfSpeed;
 
     public Trigger High = new Trigger(() -> coPilotJoystick.getPOV() == 270);
