@@ -13,6 +13,7 @@ import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.collectCommand;
 import frc.robot.commands.collectOutput;
+import frc.robot.commands.gtipperCommand;
 import frc.robot.commands.setPoitCollectCommand;
 import frc.robot.commands.shootingCommandGroup;
 import frc.robot.commands.simpleOutputCommand;
@@ -29,19 +30,16 @@ public class RobotButtons {
 
     public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(5)); 
     public Trigger collectWheels = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3);
+    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(8)); 
     public Trigger shootingVelocityLow = new Trigger(() -> coPilotJoystick.getPOV () == 180);
     public Trigger shootingVelocityHigh = new Trigger(() -> coPilotJoystick.getPOV () == 0);
     public Trigger shootingVelocityMiddle = new Trigger(() -> coPilotJoystick.getPOV () == 270);
     public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(4)); 
     public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
     public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
+    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3);
+    public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(6)); 
 
-
-
-
-
-
-   
     public RobotButtons(Joystick driver) {
         halfSpeed = new JoystickButton(driver, XboxController.Button.kX.value);
     }
@@ -50,12 +48,16 @@ public class RobotButtons {
         OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
         OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
         collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.5));
+        collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         humanArm.onTrue(new armPosition(armSubsystem, 0));
         lowArm.onTrue(new armPosition(armSubsystem, 0));
         middleArm.onTrue(new armPosition(armSubsystem, 0));
+        openGripper.onTrue(new gtipperCommand(armSubsystem, 0));
+        closeGripper.onTrue(new gtipperCommand(armSubsystem, 0));
+
 
 
 
