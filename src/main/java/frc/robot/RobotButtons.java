@@ -47,12 +47,12 @@ public class RobotButtons {
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste, armSubsystem armSubsystem) {
         OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
         OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
-        collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.5));
+        collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.5, 0.2));
         collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        humanArm.onTrue(new armPosition(armSubsystem, 0));
+        humanArm.onTrue(new armPosition(armSubsystem, -6));
         lowArm.onTrue(new armPosition(armSubsystem, 0));
         middleArm.onTrue(new armPosition(armSubsystem, 0));
         openGripper.onTrue(new gtipperCommand(armSubsystem, 0));
