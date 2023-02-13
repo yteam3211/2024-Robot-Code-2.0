@@ -24,7 +24,7 @@ public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(1);
     private RobotButtons robotButtons = 
-    new RobotButtons(driver);
+    new RobotButtons();
 
     /* Drive Controls */
     private final int translationAxis = 1;
@@ -44,15 +44,6 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> driver.getRawAxis(translationAxis), 
-                () -> driver.getRawAxis(strafeAxis), 
-                () -> driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
-            )
-        );
 
         // Configure the button bindings
         configureButtonBindings();
@@ -70,7 +61,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem, s_Swerve);
     }
 
     /**
