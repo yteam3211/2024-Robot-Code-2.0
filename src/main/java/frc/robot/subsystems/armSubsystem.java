@@ -63,8 +63,8 @@ public class armSubsystem extends SuperSystem {
   }
 
   public void setGripperPosition(double position){
-    ArmgMotor.setMode(ControlMode.Position);
-    ArmgMotor.getPIDController().setReference(position, ControlType.kPosition);
+    gripperMotor.setMode(ControlMode.Position);
+    gripperMotor.getPIDController().setReference(position, ControlType.kPosition);
 
   }
 

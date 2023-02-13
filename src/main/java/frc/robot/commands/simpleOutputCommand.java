@@ -19,9 +19,9 @@ public class simpleOutputCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public simpleOutputCommand(ShootingSubsystem shootingSubsystem, double velocity) {
+  public simpleOutputCommand(ShootingSubsystem shootingSubsystem, double output) {
     this.shootingSubsystem = shootingSubsystem;
-    this.velocity = velocity;
+    this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shootingSubsystem);
   }
@@ -33,7 +33,7 @@ public class simpleOutputCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setOutput(velocity);
+    shootingSubsystem.setOutput(output);
   }
 
   // Called once the command ends or is interrupted.
