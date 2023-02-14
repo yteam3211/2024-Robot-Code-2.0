@@ -61,7 +61,7 @@ public class RobotButtons {
         );
         OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
         OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
-        collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.5, 0.2));
+        collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.1));
         collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
