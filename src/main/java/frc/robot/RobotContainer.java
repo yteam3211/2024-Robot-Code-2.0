@@ -29,7 +29,7 @@ public class RobotContainer {
     private final int strafeAxis = 0;
     private final int rotationAxis = 4;
     private final TestAuto testAuto = new TestAuto(); 
-    /* Driver Buttons */
+    private final atuo1 atuo = new atuo1();
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
