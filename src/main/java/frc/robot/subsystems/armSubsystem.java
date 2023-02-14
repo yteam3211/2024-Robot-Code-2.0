@@ -43,7 +43,7 @@ public class armSubsystem extends SuperSystem {
     // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, armgGains, 0, 0, 0);
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, grippergGains, 0, 0, 0);
-    setDefaultCommand(new armPosition(this, -4.7));
+    // setDefaultCommand(new armPosition(this, -4.7));
   }
 
   /** Creates a new ExampleSubsystem. */
