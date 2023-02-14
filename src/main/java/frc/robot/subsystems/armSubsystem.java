@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.commands.armPosition;
 import frc.util.SuperSystem;
@@ -36,8 +37,10 @@ public class armSubsystem extends SuperSystem {
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
     super("ShootingSubsystem");
-    grippergGains = new Gains("grippergGains",0, 0,0);
-    armgGains = new Gains("armGains",0.5,0.0001,0);
+    grippergGains = new Gains("grippergGains",0.4, 0,0);
+    // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
+    armgGains = new Gains("armGains",0.053,0,0.026); // second
+    // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, armgGains, 0, 0, 0);
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, grippergGains, 0, 0, 0);
     // setDefaultCommand(new ShootingOutput(this, 0));
@@ -47,7 +50,8 @@ public class armSubsystem extends SuperSystem {
   
   @Override
   public void periodic() {
-    System.out.println(ArmgMotor.getPosition());
+    SmartDashboard.putNumber("arm", ArmgMotor.getPosition());
+    SmartDashboard.putNumber("gripper", gripperMotor.getPosition());
     // This method will be called once per scheduler run
   }
 

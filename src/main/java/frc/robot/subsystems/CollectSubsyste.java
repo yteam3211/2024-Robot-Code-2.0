@@ -50,11 +50,11 @@ public class CollectSubsyste extends SuperSystem {
   
   @Override
   public void periodic() {
-    System.out.println("p" + getPosition());
+    // System.out.println("p" + getPosition());
   }
 
   public void setPosition(){
-    System.out.println("ppp" + this.point);
+    // System.out.println("ppp" + this.point);
     leaderCollectMotor.set(ControlMode.Position, this.point);
     // if (isCollectClose() == true) {
     //   resetEncoder();

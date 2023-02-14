@@ -45,7 +45,7 @@ public class RobotButtons {
     public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
     public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3);
     public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(6)); 
-    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(4)); 
+    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(2)); 
 
 
 
@@ -66,13 +66,13 @@ public class RobotButtons {
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.4));
         shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        humanArm.onTrue(new armPosition(armSubsystem, -6));
-        lowArm.onTrue(new armPosition(armSubsystem, 0));
+        humanArm.onTrue(new armPosition(armSubsystem, -6.6));
+        lowArm.onTrue(new armPosition(armSubsystem, -25.4));
         middleArm.onTrue(new armPosition(armSubsystem, 0));
-        openGripper.onTrue(new gtipperCommand(armSubsystem, 0));
-        closeGripper.onTrue(new gtipperCommand(armSubsystem, 0));
+        openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
+        closeGripper.onTrue(new gtipperCommand(armSubsystem, 0.6));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.whileTrue(new resetCommand(shootingSubsystem, collectSubsyste));
+        resetTrigger.whileTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
 
 
 
