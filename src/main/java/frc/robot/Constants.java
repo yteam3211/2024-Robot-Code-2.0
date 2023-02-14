@@ -12,6 +12,17 @@ import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
+        // motors ID constants
+        public static final int SHOOTING_MOTOR = 15;
+        public static final int DOWN_MICROSWITCH = 0; 
+        public static final int UP_MICROSWITCH = 0;
+        public static final int RIGHT_LEADER_COLLECT_MOTOR = 16;
+        public static final int CLOSE_MICROSWITCH = 0;
+        public static final int ARM_MOTOR = 17;
+        public static final int GRIPPER_MOTOR = 18;
+
+
+
     public static final double stickDeadband = 0.01;
 
     public static final class Swerve {
@@ -84,7 +95,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 7.0; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final IdleMode angleNeutralMode = IdleMode.kBrake;
@@ -96,7 +107,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(100.811);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(102.129-4.64);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

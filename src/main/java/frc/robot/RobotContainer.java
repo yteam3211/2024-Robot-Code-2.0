@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.util.vision.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,8 +22,9 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Controllers */
-    private final Joystick driver = new Joystick(0);
-    private RobotButtons robotButtons = new RobotButtons(driver);
+    private final Joystick driver = new Joystick(1);
+    private RobotButtons robotButtons = 
+    new RobotButtons();
 
     /* Drive Controls */
     private final int translationAxis = 1;
@@ -35,25 +37,20 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve(robotButtons);
+    private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
+    private final CollectSubsyste m_CollectSubsyste = new CollectSubsyste();
+    private final armSubsystem m_ArmSubsystem = new armSubsystem();
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> driver.getRawAxis(translationAxis), 
-                () -> driver.getRawAxis(strafeAxis), 
-                () -> driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
-            )
-        );
 
         // Configure the button bindings
         configureButtonBindings();
     }
 
     private void configureSwerveButtons() {
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        
     }
 
     /**
@@ -64,7 +61,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons();
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem, s_Swerve);
     }
 
     /**
@@ -77,3 +74,4 @@ public class RobotContainer {
         return testAuto.getAutoCommand(s_Swerve);
     }
 }
+ 
