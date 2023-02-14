@@ -63,7 +63,7 @@ public class RobotContainer {
         configureSwerveButtons();
         robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem, s_Swerve);
     }
-
+ 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
@@ -71,7 +71,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return testAuto.getAutoCommand(s_Swerve);
+        return atuo;
     }
 }
  

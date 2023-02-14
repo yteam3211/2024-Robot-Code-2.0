@@ -67,7 +67,7 @@ public class RobotButtons {
         shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
         shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.5));
         shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        humanArm.onTrue(new armPosition(armSubsystem, -6.6));
+        humanArm.onTrue(new armPosition(armSubsystem, -7));
         lowArm.onTrue(new armPosition(armSubsystem, -25.4));
         middleArm.onTrue(new armPosition(armSubsystem, 0));
         openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
