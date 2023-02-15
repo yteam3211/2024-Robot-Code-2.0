@@ -27,26 +27,26 @@ import frc.robot.subsystems.armSubsystem;
 
 // Yteam loadButtons
 public class RobotButtons {
-    public static Joystick coPilotJoystick = new Joystick(0);
-    public static Joystick driver = new Joystick(1);
+    public static Joystick coPilotJoystick = new Joystick(1);
+    public static Joystick driver = new Joystick(0);
 
     
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(5)); 
-    public Trigger collectWheels = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3);
-    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(8)); 
+    public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kLeftBumper.value)); 
+    public Trigger collectWheels = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kLeftTrigger.value)>0.3);
+    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kStart.value)); 
     public Trigger shootingVelocityLow = new Trigger(() -> coPilotJoystick.getPOV () == 180);
     public Trigger shootingVelocityHigh = new Trigger(() -> coPilotJoystick.getPOV () == 0);
     public Trigger shootingVelocityMiddle = new Trigger(() -> coPilotJoystick.getPOV () == 270);
-    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(4)); 
-    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
-    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
+    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kY.value)); 
+    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kX.value)); 
+    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kA.value)); 
     // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
-    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3);
-    public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(6)); 
-    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(2)); 
+    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kRightTrigger.value)>0.3);
+    public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value)); 
+    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value)); 
 
 
 
