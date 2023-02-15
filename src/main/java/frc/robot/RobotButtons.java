@@ -73,7 +73,7 @@ public class RobotButtons {
         openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
         closeGripper.onTrue(new gtipperCommand(armSubsystem, 3.3));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.whileTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+        resetTrigger.onTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
 
 
 
