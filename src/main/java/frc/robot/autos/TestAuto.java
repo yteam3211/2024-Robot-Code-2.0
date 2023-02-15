@@ -19,7 +19,7 @@ import frc.robot.subsystems.Swerve;
 
 public class TestAuto {
     public static Command getAutoCommand(Swerve driveSubsystem) {
-        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Testing", new PathConstraints(4.5, 3));
+        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Testing", new PathConstraints(2, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         // eventMap.put("marker1", new PrintCommand("Passed marker 1"));

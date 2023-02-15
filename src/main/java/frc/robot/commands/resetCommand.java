@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class resetCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
-  private final CollectSubsyste collectSubsyste;
+  private final CollectSubsystem collectSubsyste;
   private final armSubsystem armSubsystem;
 
   
@@ -23,7 +23,7 @@ public class resetCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,  armSubsystem armSubsystem) {
+  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste,  armSubsystem armSubsystem) {
     this.shootingSubsystem = shootingSubsystem;
     this.collectSubsyste = collectSubsyste;
     this.armSubsystem = armSubsystem;

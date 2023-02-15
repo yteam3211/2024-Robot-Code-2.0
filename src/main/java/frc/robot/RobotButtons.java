@@ -19,7 +19,7 @@ import frc.robot.commands.setPoitCollectCommand;
 import frc.robot.commands.shootingCommandGroup;
 import frc.robot.commands.simpleOutputCommand;
 import frc.robot.commands.resetCommand;
-import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
@@ -50,7 +50,7 @@ public class RobotButtons {
 
 
 
-    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste, armSubsystem armSubsystem, Swerve swerve) {
+    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste, armSubsystem armSubsystem, Swerve swerve) {
         swerve.setDefaultCommand(
             new TeleopSwerve(
                 swerve, 

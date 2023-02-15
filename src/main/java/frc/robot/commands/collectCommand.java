@@ -4,13 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class collectCommand extends CommandBase {
-  private final CollectSubsyste collectSubsystem;
+  private final CollectSubsystem collectSubsystem;
   double position;
   
 
@@ -19,7 +19,7 @@ public class collectCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public collectCommand(CollectSubsyste collectSubsystem) {
+  public collectCommand(CollectSubsystem collectSubsystem) {
     this.collectSubsystem = collectSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.

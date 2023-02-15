@@ -5,13 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.subsystems.CollectSubsystem;
 
 public class setPoitCollectCommand extends CommandBase {
-  private final CollectSubsyste collectSubsyste;
+  private final CollectSubsystem collectSubsyste;
   private double point;
   /** Creates a new setPoitCollectCommand. */
-  public setPoitCollectCommand(CollectSubsyste collectSubsyste,double point) {
+  public setPoitCollectCommand(CollectSubsystem collectSubsyste,double point) {
     this.collectSubsyste = collectSubsyste;
     this.point = point;
     // Use addRequirements() here to declare subsystem dependencies.
