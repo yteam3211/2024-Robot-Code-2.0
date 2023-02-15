@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.TeleopSwerve;
+import frc.robot.commands.TurnToZero;
 import frc.robot.subsystems.Swerve;
 
 
@@ -15,7 +16,8 @@ public class RobotButtons {
     public static Joystick systems = new Joystick(1);
     public final Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
-    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    private final Trigger turnToZero = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kY.value));
 
     public void loadButtons(Swerve swerve) {
         swerve.setDefaultCommand(
@@ -29,5 +31,6 @@ public class RobotButtons {
         );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
+        turnToZero.onTrue(new TurnToZero(swerve));
     }
 }
