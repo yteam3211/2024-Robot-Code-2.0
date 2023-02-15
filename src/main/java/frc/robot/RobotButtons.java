@@ -13,8 +13,8 @@ import frc.robot.subsystems.Swerve;
 public class RobotButtons {
     public static Joystick driver = new Joystick(0);
     public static Joystick systems = new Joystick(1);
-    public final Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
+    public final Trigger robotCentric = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
+    public final Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
 
     public void loadButtons(Swerve swerve) {
