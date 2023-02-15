@@ -14,17 +14,15 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
     public static Joystick systems = new Joystick(1);
     public final Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
-    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kY.value));
+    public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
+    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
 
     public void loadButtons(Swerve swerve) {
         swerve.setDefaultCommand(
             new TeleopSwerve(
                 swerve, 
-                // () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), // up & down
-                () -> driver.getRawAxis(0), // up & down
-                // () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // left & right 
-                () -> driver.getRawAxis(1),  // left & right 
+                () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), //  left & right
+                () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),  // up & down   
                 () -> driver.getRawAxis(XboxController.Axis.kRightX.value), // rotation
                 () -> robotCentric.getAsBoolean()
             )
