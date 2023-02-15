@@ -15,7 +15,7 @@ public class RobotButtons {
     public static Joystick systems = new Joystick(1);
     public final Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public final Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
-    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kY.value));
+    private final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
 
     public void loadButtons(Swerve swerve) {
         swerve.setDefaultCommand(
