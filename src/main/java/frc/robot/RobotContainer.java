@@ -25,7 +25,7 @@ public class RobotContainer {
     /* Controllers */
     private RobotButtons robotButtons = new RobotButtons(); 
     public Limelight limelight = new Limelight.Builder().build();
-    private final Swerve s_Swerve = new Swerve(robotButtons);   
+    private final Swerve s_Swerve = new Swerve();   
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -46,7 +46,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(s_Swerve);
+        robotButtons.loadButtons(s_Swerve, limelight);
     }
 
     /**
