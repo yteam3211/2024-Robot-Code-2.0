@@ -23,7 +23,8 @@ public class atuo1 extends SequentialCommandGroup {
   private armSubsystem armSubsystem;
   private armPosition humanArmPosition;
   private armPosition secondArmPosition;
-
+  private collectCommand collectCommand;
+  
   public atuo1(Swerve swerve,TestAuto testAuto,armPosition secondArmPosition,armPosition humanArmPosition,armSubsystem armSubsystem,CollectSubsystem CollectSubsystem,ShootingSubsystem ShootingSubsystem) {
     this.s_Swerve = swerve;
     this.CollectSubsystem = CollectSubsystem;
@@ -34,7 +35,7 @@ public class atuo1 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
-    addCommands(new resetCommand(ShootingSubsystem,  CollectSubsystem, armSubsystem), testAuto.getAutoCommand(s_Swerve), humanArmPosition);
-    addCommands(new resetCommand(ShootingSubsystem,  CollectSubsystem, armSubsystem), testAuto.getAutoCommand(s_Swerve), humanArmPosition);
+  
+    addCommands(new resetCommand(ShootingSubsystem,  CollectSubsystem, armSubsystem), secondArmPosition, testAuto.getAutoCommand(s_Swerve),collectOutput);
   }
 }

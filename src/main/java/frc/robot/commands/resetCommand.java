@@ -24,6 +24,7 @@ public class resetCommand extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste,  armSubsystem armSubsystem) {
+    System.out.println("do somfing");
     this.shootingSubsystem = shootingSubsystem;
     this.collectSubsyste = collectSubsyste;
     this.armSubsystem = armSubsystem;
@@ -51,7 +52,7 @@ public class resetCommand extends CommandBase {
   @Override
   public boolean isFinished() {
 
-  return false;
+  return true;
 
  
 }
