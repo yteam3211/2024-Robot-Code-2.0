@@ -16,8 +16,8 @@ public class SideToSide extends CommandBase {
   /** Creates a new SideToSideApriltag. */
   protected Limelight limelight;
   protected Swerve swerve;
-  protected PIDController pidX = new PIDController();
   protected Gains gainsX = new Gains("gains x", 0, 0, 0);
+  protected PIDController pidX = new PIDController(gainsX);
 
   public SideToSide(Limelight limelight, Swerve swerve) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,7 +35,7 @@ public class SideToSide extends CommandBase {
   @Override
   public void execute() { 
     swerve.drive(
-    new Translation2d(pidX.getOutput(limelight.getX()), 0),
+    new Translation2d(0, pidX.getOutput(limelight.getX())),
     0,
     false, // Field oriented by the controller switch
     true);

@@ -16,8 +16,8 @@ public class ForwardAndBack extends CommandBase {
   /** Creates a new ForwardAndBack. */
   protected Limelight limelight;
   protected Swerve swerve;
-  protected PIDController pidY = new PIDController();
   protected Gains gainsY = new Gains("gains x", 0, 0, 0);
+  protected PIDController pidY = new PIDController(gainsY);
 
   public ForwardAndBack(Limelight limelight, Swerve swerve) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,7 +28,7 @@ public class ForwardAndBack extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pidY.setTargetPosition(0);
+    pidY.setTargetPosition(37.2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,7 +50,7 @@ double angleToGoalRadians = angleToGoalDegrees * (Math.PI / 180.0);
 //calculate distance
 double distanceFromLimelightToGoalCM = (goalHeightCM - limelightLensHeightInches)/Math.tan(angleToGoalRadians);
     swerve.drive(
-    new Translation2d(0, pidY.getOutput(distanceFromLimelightToGoalCM)),
+    new Translation2d(pidY.getOutput(distanceFromLimelightToGoalCM), 0),
     0,
     false, // Field oriented by the controller switch
     true);
