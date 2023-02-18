@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.commands.ShootingOutput;
 import frc.robot.commands.collectCommand;
@@ -37,25 +38,30 @@ public class CollectSubsyste extends SuperSystem {
    */
   public CollectSubsyste() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",0.8, 0,0);
+    collectGains = new Gains("collectGains",4, 0,0);
     leaderCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
     collectMotor = new VictorSP(1);
     motor = new VictorSP(0);
     this.reSetEncoder();
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
-    setDefaultCommand(new collectCommand(this));
+    // setDefaultCommand(new collectCommand(this));
   }
 
   /** Creates a new ExampleSubsystem. */
   
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("position", leaderCollectMotor.getPosition());
+    SmartDashboard.putNumber("output", leaderCollectMotor.getOutput());
+
     // System.out.println("p" + getPosition());
   }
 
-  public void setPosition(){
+  public void setPosition(double position){
     // System.out.println("ppp" + this.point);
-    leaderCollectMotor.set(ControlMode.Position, this.point);
+    SmartDashboard.putNumber("target", position);
+    leaderCollectMotor.set(ControlMode.Position, position);
+
     // if (isCollectClose() == true) {
     //   resetEncoder();
     // };
@@ -76,6 +82,7 @@ public class CollectSubsyste extends SuperSystem {
   }
 
   public void setOutput(double output){
+
  
     // leaderCollectMotor.set(ControlMode.PercentOutput, output);
     collectMotor.set(output);

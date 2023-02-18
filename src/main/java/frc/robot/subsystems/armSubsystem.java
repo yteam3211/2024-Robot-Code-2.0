@@ -24,62 +24,67 @@ import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
 
-
-
 // Yteam Example Subsystem
 public class armSubsystem extends SuperSystem {
- public SuperSparkMax ArmgMotor;
- public SuperSparkMax gripperMotor;
- public Gains grippergGains;
- public Gains armgGains;
-
+  public static SuperSparkMax ArmgMotor;
+  public SuperSparkMax gripperMotor;
+  public Gains grippergGains;
+  public Gains armgGains;
 
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
     super("ShootingSubsystem");
-    grippergGains = new Gains("grippergGains",0.4, 0,0);
+    grippergGains = new Gains("grippergGains", 0.4, 0, 0);
     // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
-    armgGains = new Gains("armGains",0.053,0,0.026); // second
+    armgGains = new Gains("armGains", 0, 0, 0.00034, 0, 0.05, 0.04, 0); // second
     // armgGains = new Gains("armGains",0.22,0,0);
-    ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, armgGains, 0, 0, 0);
-    gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, grippergGains, 0, 0, 0);
-    // setDefaultCommand(new armPosition(this, -4.7));
+    ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
+        ControlType.kSmartMotion, armgGains, 600, 15, 1);
+    gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
+        ControlType.kPosition, grippergGains, 0, 0, 0);
+    // setDefaultCommand(new armPosition(this, 0));
+    this.resetEncoder();
   }
 
   /** Creates a new ExampleSubsystem. */
-  
+
   @Override
   public void periodic() {
     SmartDashboard.putNumber("arm", ArmgMotor.getPosition());
     SmartDashboard.putNumber("gripper", gripperMotor.getPosition());
+    SmartDashboard.putNumber("velocity", ArmgMotor.getVelocity());
+
     // This method will be called once per scheduler run
   }
 
-  public void resetEncoder(){
+  public void resetEncoder() {
     ArmgMotor.reset(0);
   }
 
-  public void setPosition(double position){
+  public void setPosition(double position) {
     ArmgMotor.setMode(ControlMode.Position);
-    ArmgMotor.getPIDController().setReference(position, ControlType.kPosition);
-    getTab().putInDashboard("encoder_live", ArmgMotor.getPosition(), false);
+    ArmgMotor.getPIDController().setReference(position, ControlType.kSmartMotion);
+    SmartDashboard.putNumber("armTarget", position);
 
   }
 
-  public void setGripperPosition(double position){
+  public void setGripperPosition(double position) {
     gripperMotor.setMode(ControlMode.Position);
     gripperMotor.getPIDController().setReference(position, ControlType.kPosition);
 
   }
 
-  public double getPosition(){
+  public double getPosition() {
     return ArmgMotor.getPosition();
   }
-    
-  public void setOutput(double output){
+
+  public void setOutput(double output) {
     ArmgMotor.setMode(ControlMode.PercentOutput);
     ArmgMotor.set(output);
 
   }
-}
 
+  public double velocity() {
+    return ArmgMotor.getVelocity();
+  }
+}

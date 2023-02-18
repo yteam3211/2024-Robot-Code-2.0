@@ -61,15 +61,15 @@ public class RobotButtons {
             )
         );
         OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
-        OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
+        OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, 400));
         collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.1));
         collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
-        shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.5));
-        shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        humanArm.onTrue(new armPosition(armSubsystem, -6.6));
-        lowArm.onTrue(new armPosition(armSubsystem, -25.4));
-        middleArm.onTrue(new armPosition(armSubsystem, 0));
+        shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0.2));
+        shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0.5));
+        shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.6));
+        humanArm.onTrue(new armPosition(armSubsystem, -7));
+        lowArm.onTrue(new armPosition(armSubsystem, -56));
+        // middleArm.onTrue(new armPosition(armSubsystem, 0));
         openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
         closeGripper.onTrue(new gtipperCommand(armSubsystem, 3.3));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
