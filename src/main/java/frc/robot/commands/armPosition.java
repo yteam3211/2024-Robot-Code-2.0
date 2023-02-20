@@ -49,18 +49,7 @@ public class armPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("Entered isFinished");
-    for(int i = 0; i < 50; i++){
-      System.out.println("iii: "+ i);
-      if(armSubsystem.ArmgMotor.getPosition() < -56 && armSubsystem.ArmgMotor.getPosition() > -57){
-        deadBand = true;
-      }
-      else{
-        deadBand = false;
-        break;
-      }
-    }
-      return deadBand;  
+      return false;
     }
 }
 
