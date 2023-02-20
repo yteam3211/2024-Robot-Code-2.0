@@ -9,6 +9,9 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.initShooting;
+import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;
 
 /**
@@ -21,7 +24,7 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
 
   private Command m_autonomousCommand;
-
+  private ShootingSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
 
   /**
@@ -65,8 +68,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
-
+    new initShooting(shootingSubsystem);
+    // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -84,7 +87,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
+    // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
