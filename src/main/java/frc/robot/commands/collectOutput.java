@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class collectOutput extends CommandBase {
   private final CollectSubsyste collectSubsystem;
-  private double output;
-  private double Output;
+  private double WheelsOutput;
+  private double centeringOutput;
 
 
   
@@ -22,10 +22,10 @@ public class collectOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public collectOutput(CollectSubsyste collectSubsystem, double output, double Output) {
+  public collectOutput(CollectSubsyste collectSubsystem, double WheelsOutput, double centeringOutput) {
     this.collectSubsystem = collectSubsystem;
-    this.output = output;
-    this.Output = Output;
+    this.WheelsOutput = WheelsOutput;
+    this.centeringOutput = centeringOutput;
 
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,16 +39,16 @@ public class collectOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collectSubsystem.setOutput(output);
-    collectSubsystem.output(Output);
+    collectSubsystem.WheelsSetOutput(WheelsOutput);
+    collectSubsystem.centeringSetOutput(centeringOutput);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    collectSubsystem.setOutput(0);
-    collectSubsystem.output(0);
+    collectSubsystem.WheelsSetOutput(0);
+    collectSubsystem.centeringSetOutput(0);
   }  
 
   // Returns true when the command should end.
