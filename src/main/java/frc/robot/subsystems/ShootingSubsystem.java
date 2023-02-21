@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import frc.robot.commands.InitShooting;
 import frc.robot.commands.ShootingPosition;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
@@ -33,12 +34,12 @@ public class ShootingSubsystem extends SuperSystem {
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
  public SuperTalonFX Shooing;
- public int max = 7100;
- public int Min = -7090;
+ public int max = 6930;
+ public int Min = -6000;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
-    shootingGains = new Gains("_shootingGains",0.003, 0,0);
+    shootingGains = new Gains("_shootingGains",0.03, 0,0);
     // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
     // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
     Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
@@ -109,5 +110,10 @@ public class ShootingSubsystem extends SuperSystem {
     // return downMicroSwitch.get();
     return false;
   }
+
+public void changeDefault(){
+  // setDefaultCommand(new ShootingPosition(this, 0));
 }
+}
+
 

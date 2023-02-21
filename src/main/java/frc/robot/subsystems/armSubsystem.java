@@ -17,8 +17,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.armPosition;
+import frc.robot.commands.zeroArm;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -36,29 +38,33 @@ public class armSubsystem extends SuperSystem {
     super("ShootingSubsystem");
     grippergGains = new Gains("grippergGains", 0.4, 0, 0);
     // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
-    armgGains = new Gains("armGains", 0, 0, 0.00034, 0, 0.05, 0.04, 0); // second
+    armgGains = new Gains("armGains", 0, 0, 0.000003, 0, 0.06, 0.04, 0); // second
     // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
-        ControlType.kSmartMotion, armgGains, 600, 15, 1);
+        ControlType.kSmartMotion, armgGains, 10, 13, 1);
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, grippergGains, 0, 0, 0);
     // setDefaultCommand(new armPosition(this, 0));
-    this.resetEncoder();
+    this.resetArmEncoder();
   }
 
   /** Creates a new ExampleSubsystem. */
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("arm", ArmgMotor.getPosition());
-    SmartDashboard.putNumber("gripper", gripperMotor.getPosition());
-    SmartDashboard.putNumber("velocity", ArmgMotor.getVelocity());
+    SmartDashboard.putNumber("arm position", ArmgMotor.getPosition());
+    SmartDashboard.putNumber("gripper position", gripperMotor.getPosition());
+    SmartDashboard.putNumber("arm velocity", ArmgMotor.getVelocity());
 
     // This method will be called once per scheduler run
   }
 
-  public void resetEncoder() {
+  public void resetArmEncoder() {
     ArmgMotor.reset(0);
+  }
+
+  public void resetGriperEncoder(){
+    gripperMotor.reset(0);
   }
 
   public void setPosition(double position) {
@@ -78,13 +84,27 @@ public class armSubsystem extends SuperSystem {
     return ArmgMotor.getPosition();
   }
 
-  public void setOutput(double output) {
+  public void setArmOutput(double output) {
     ArmgMotor.setMode(ControlMode.PercentOutput);
     ArmgMotor.set(output);
+  }
 
+  public void setGriperOutput(double output) {
+    gripperMotor.setMode(ControlMode.PercentOutput);
+    gripperMotor.set(output);
   }
 
   public double velocity() {
     return ArmgMotor.getVelocity();
   }
+
+  public void SetDisableDefault(){
+    setDefaultCommand(new zeroArm(this));
+  }
+  
+  public void SetTeleopDefault(){
+    // setDefaultCommand(null);
+  }
 }
+
+

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import frc.robot.commands.setPointCollectCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -36,13 +37,13 @@ public class CollectSubsyste extends SuperSystem {
    */
   public CollectSubsyste() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",4, 0,0);
+    collectGains = new Gains("collectGains",5, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
     collectWheelsMotor = new VictorSP(1);
     centeringMotor = new VictorSP(0);
     this.reSetEncoder();
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
-    // setDefaultCommand(new collectCommand(this));
+    // setDefaultCommand(new setPointCollectCommand(this,0));
   }
 
   /** Creates a new ExampleSubsystem. */

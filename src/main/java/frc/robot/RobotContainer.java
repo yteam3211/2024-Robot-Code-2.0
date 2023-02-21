@@ -73,5 +73,22 @@ public class RobotContainer {
         // An ExampleCommand will run in autonomous
         return new exampleAuto(s_Swerve);
     }
+
+    // gets & sets 
+    public Swerve getS_Swerve() {
+        return s_Swerve;
+    }
+
+    public ShootingSubsystem getM_ShootingSubsystem() {
+        return m_ShootingSubsystem;
+    }
+
+    public CollectSubsyste getM_CollectSubsyste() {
+        return m_CollectSubsyste;
+    }
+
+    public armSubsystem getM_ArmSubsystem() {
+        return m_ArmSubsystem;
+    }
 }
  
