@@ -12,9 +12,10 @@ import frc.robot.commands.ResetCommand;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
-import frc.robot.commands.collectGroupCommand;
+import frc.robot.commands.collectCommand;
+// import frc.robot.commands.collectGroupCommand;
 import frc.robot.commands.collectOutput;
-import frc.robot.commands.gtipperCommand;
+import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.ResetCommand;
@@ -59,18 +60,18 @@ public class RobotButtons {
                         () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
                         () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
                         () -> false));
-        OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste, 0, 0, -30));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste, 0.6, 0.1, 250));
+        // OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste, 0, 0, -30));
+        OpenCollect.whileTrue(new collectCommand(collectSubsyste, 0.6, 0.1, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.3));
-        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.5));
+        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.6));
         shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.96));
-        humanArm.onTrue(new armPosition(armSubsystem, 0));
-        lowArm.onTrue(new armPosition(armSubsystem, 0));  
+        humanArm.onTrue(new armPosition(armSubsystem, -19.5));
+        lowArm.onTrue(new armPosition(armSubsystem, -65));  
         middleArm.onTrue(new armPosition(armSubsystem, 0));
-        openGripper.onTrue(new gtipperCommand(armSubsystem, 0));
+        openGripper.onTrue(new gripperCommand(armSubsystem, -6.5));
         // closeGripper.onTrue(new test(shootingSubsystem));
-        closeGripper.onTrue(new gtipperCommand(armSubsystem, 0));
+        closeGripper.onTrue(new gripperCommand(armSubsystem, 0));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.onTrue(new ResetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
 
