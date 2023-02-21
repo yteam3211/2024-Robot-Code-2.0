@@ -16,6 +16,7 @@ public class setPointCollectCommand extends CommandBase {
     this.collectSubsyste = collectSubsyste;
     this.point = point;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(collectSubsyste);
   }
 
   // Called when the command is initially scheduled.
