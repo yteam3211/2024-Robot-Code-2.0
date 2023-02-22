@@ -26,8 +26,6 @@ public class CollectSubsyste extends SuperSystem {
       public SuperTalonSRX openCollectMotor;
       public DigitalInput closeMicroSwitch;
       public Gains collectGains;
-      public VictorSP collectWheelsMotor ;
-      public VictorSP centeringMotor;
       int counter = 0;
       double point = 0;
       
@@ -37,10 +35,8 @@ public class CollectSubsyste extends SuperSystem {
    */
   public CollectSubsyste() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",5, 0,0);
+    collectGains = new Gains("collectGains",3, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
-    collectWheelsMotor = new VictorSP(1);
-    centeringMotor = new VictorSP(0);
     this.reSetEncoder();
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
     // setDefaultCommand(new setPointCollectCommand(this,0));
@@ -78,17 +74,6 @@ public class CollectSubsyste extends SuperSystem {
 
   public void reSetEncoder(){
     openCollectMotor.reset(0);
-  }
-
-  public void WheelsSetOutput(double output){
-
- 
-    // leaderCollectMotor.set(ControlMode.PercentOutput, output);
-    collectWheelsMotor.set(output);
-  }
-
-  public void centeringSetOutput(double Output){
-    centeringMotor.set(Output);
   }
   public double getPosition(){
     return openCollectMotor.getPosition();
