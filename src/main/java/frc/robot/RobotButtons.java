@@ -12,7 +12,7 @@ import frc.robot.commands.ResetCommand;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
-import frc.robot.commands.collectCommand;
+import frc.robot.commands.collectGroupCommand;
 // import frc.robot.commands.collectGroupCommand;
 import frc.robot.commands.collectOutput;
 import frc.robot.commands.gripperCommand;
@@ -23,6 +23,7 @@ import frc.robot.subsystems.CollectSubsyste;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
+import frc.robot.subsystems.collectWheels;
 
 // Yteam loadButtons
 public class RobotButtons {
@@ -52,7 +53,7 @@ public class RobotButtons {
      * @param swerve
      */
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,
-            armSubsystem armSubsystem, Swerve swerve) {
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels) {
         swerve.setDefaultCommand(
                 new TeleopSwerve(
                         swerve,
@@ -60,21 +61,21 @@ public class RobotButtons {
                         () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
                         () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
                         () -> false));
-        // OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste, 0, 0, -30));
-        OpenCollect.whileTrue(new collectCommand(collectSubsyste, 0.6, 0.1, 250));
-        collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
+        OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste,collectWheels, 0, 0, 0));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste,collectWheels, 0.6, 0.3, 250));
+        collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.3));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.6));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.96));
-        humanArm.onTrue(new armPosition(armSubsystem, -19.5));
-        lowArm.onTrue(new armPosition(armSubsystem, -65));  
+        // shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.96));
+        humanArm.onTrue(new armPosition(armSubsystem, -19));
+        lowArm.onTrue(new armPosition(armSubsystem, -63.5));  
         middleArm.onTrue(new armPosition(armSubsystem, 0));
-        openGripper.onTrue(new gripperCommand(armSubsystem, -6.5));
-        // closeGripper.onTrue(new test(shootingSubsystem));
-        closeGripper.onTrue(new gripperCommand(armSubsystem, 0));
+        // openGripper.whileTrue(new gripperCommand(armSubsystem, -6.5));
+        closeGripper.whileTrue(new gripperCommand(armSubsystem, -12.1));
+        closeGripper.whileFalse(new gripperCommand(armSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.onTrue(new ResetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
 
-        // load buttons$
+        // load buttons
     }
 }
