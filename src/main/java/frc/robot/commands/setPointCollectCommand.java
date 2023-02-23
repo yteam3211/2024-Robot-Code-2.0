@@ -4,27 +4,32 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.armSubsystem;
+import frc.robot.subsystems.CollectSubsyste;
 
-public class armOutput extends CommandBase {
-  private final armSubsystem armSubsystem;
-  private double output;
-  /** Creates a new armOutput. */
-  public armOutput(armSubsystem armSubsystem, double output) {
-    this.armSubsystem = armSubsystem;
-     this.output = output;
+public class setPointCollectCommand extends CommandBase {
+  private final CollectSubsyste collectSubsyste;
+  private double point;
+  /** Creates a new setPoitCollectCommand. */
+  public setPointCollectCommand(CollectSubsyste collectSubsyste,double point) {
+    this.collectSubsyste = collectSubsyste;
+    this.point = point;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(collectSubsyste);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    collectSubsyste.setPosition(point);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.setOutput(output);
+    SmartDashboard.putNumber("123456789", point);
+    collectSubsyste.setPosition(point);
   }
 
   // Called once the command ends or is interrupted.

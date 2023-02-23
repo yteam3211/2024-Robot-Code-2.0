@@ -16,13 +16,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.commands.ShootingOutput;
+import frc.robot.commands.InitShooting;
 import frc.robot.commands.ShootingPosition;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
+import pabeles.concurrency.IntOperatorTask.Min;
 
 
 // Yteam Example Subsystem
@@ -32,20 +34,20 @@ public class ShootingSubsystem extends SuperSystem {
  public DigitalInput upMicroSwitch;
  public DigitalInput downMicroSwitch;
  public SuperTalonFX Shooing;
- public int max = 7100;
- public int min = 0;
+ public int max = 6930;
+ public int Min = -6000;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
-    shootingGains = new Gains("_shootingGains",0.04, 0,0);
+    shootingGains = new Gains("_shootingGains",0.03, 0,0);
     // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
     // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
-    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Brake, shootingGains, TalonFXControlMode.PercentOutput);
+    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
     // ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
-    setDefaultCommand(new ShootingOutput(this, 0));
+    setDefaultCommand(new ShootingPosition(this, 0));
   }
 
   /** Creates a new ExampleSubsystem. */
@@ -53,7 +55,9 @@ public class ShootingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
-    getTab().putInDashboard("encoder", Shooing.getPosition(), false);
+    SmartDashboard.putNumber("Shootingoutput", Shooing.getOutput());
+    SmartDashboard.putNumber("ShootingAmper", Shooing.getAmper());
+    SmartDashboard.putNumber("ShootingPosition", Shooing.getPosition());
     // System.out.println("shoot" + Shooing.getPosition());
     // This method will be called once per scheduler run
   }
@@ -62,6 +66,7 @@ public class ShootingSubsystem extends SuperSystem {
     // ShooingMotor.setMode(ControlMode.PercentOutput);
      // neo motor 
     Shooing.set(ControlMode.PercentOutput, output);
+    SmartDashboard.putNumber("Shootingtarget", output);
     // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
     //   firstShootingSp.set(output);
     //   secondShootingSp.set(output);
@@ -105,5 +110,10 @@ public class ShootingSubsystem extends SuperSystem {
     // return downMicroSwitch.get();
     return false;
   }
+
+public void changeDefault(){
+  // setDefaultCommand(new ShootingPosition(this, 0));
 }
+}
+
 

@@ -40,9 +40,9 @@ public class RobotContainer {
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
     private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(0.5,0.5,m_CollectSubsystem,10);
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
+    private final collectWheels m_CollectWheels = new collectWheels();
+
     private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
-    private armPosition humanArmPosition = new armPosition(m_ArmSubsystem, -7);
-    private armPosition secondArmPosition = new armPosition(m_ArmSubsystem, -25.4);
     private final atuo1 atuo = new atuo1(s_Swerve,testAuto,secondArmPosition,humanArmPosition,m_ArmSubsystem, m_CollectSubsystem,ShootingSubsystem);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -63,7 +63,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve,m_CollectWheels);
     }
  
     /**
@@ -74,6 +74,40 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return collectAtuoCommand;
+    }
+
+    // gets & sets 
+    public Swerve getS_Swerve() {
+        return s_Swerve;
+    }
+
+    public ShootingSubsystem getM_ShootingSubsystem() {
+        return m_ShootingSubsystem;
+    }
+
+    public CollectSubsyste getM_CollectSubsyste() {
+        return m_CollectSubsyste;
+    }
+
+    public armSubsystem getM_ArmSubsystem() {
+        return m_ArmSubsystem;
+    }
+
+    // gets & sets 
+    public Swerve getS_Swerve() {
+        return s_Swerve;
+    }
+
+    public ShootingSubsystem getM_ShootingSubsystem() {
+        return m_ShootingSubsystem;
+    }
+
+    public CollectSubsyste getM_CollectSubsyste() {
+        return m_CollectSubsyste;
+    }
+
+    public armSubsystem getM_ArmSubsystem() {
+        return m_ArmSubsystem;
     }
 }
  

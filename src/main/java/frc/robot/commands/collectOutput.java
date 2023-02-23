@@ -6,13 +6,14 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.collectWheels;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class collectOutput extends CommandBase {
-  private final CollectSubsystem collectSubsystem;
-  private double output;
-  private double Output;
+  private final collectWheels collectWheels;
+  private double WheelsOutput;
+  private double centeringOutput;
 
 
   
@@ -22,14 +23,14 @@ public class collectOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public collectOutput(CollectSubsystem collectSubsystem, double output, double Output) {
-    this.collectSubsystem = collectSubsystem;
-    this.output = output;
-    this.Output = Output;
+  public collectOutput(collectWheels collectWheels, double WheelsOutput, double centeringOutput) {
+    this.collectWheels = collectWheels;
+    this.WheelsOutput = WheelsOutput;
+    this.centeringOutput = centeringOutput;
 
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(collectSubsystem);
+    addRequirements(collectWheels);
   }
 
   // Called when the command is initially scheduled.
@@ -39,16 +40,16 @@ public class collectOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collectSubsystem.setOutput(output);
-    collectSubsystem.output(Output);
+    collectWheels.WheelsSetOutput(WheelsOutput);
+    collectWheels.centeringSetOutput(centeringOutput);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    collectSubsystem.setOutput(0);
-    collectSubsystem.output(0);
+    collectWheels.WheelsSetOutput(0);
+    collectWheels.centeringSetOutput(0);
   }  
 
   // Returns true when the command should end.

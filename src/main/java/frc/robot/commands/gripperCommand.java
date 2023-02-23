@@ -4,13 +4,14 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /** An example command that uses an example subsystem. */
-public class ShootingOutput extends CommandBase {
-  private final ShootingSubsystem shootingSubsystem;
-  double output;
+public class gripperCommand extends CommandBase {
+  private final armSubsystem armSubsystem;
+  private double position;
   
 
   /**
@@ -18,11 +19,12 @@ public class ShootingOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
-    this.shootingSubsystem = shootingSubsystem;
-    this.output = output;
+  public gripperCommand(armSubsystem armSubsystem, double position) {
+    this.armSubsystem = armSubsystem;
+    this.position = position;
+
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shootingSubsystem);
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -32,10 +34,7 @@ public class ShootingOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
-      shootingSubsystem.setOutput(output);
-
-    
+    armSubsystem.setGripperPosition(position);
   }
 
   // Called once the command ends or is interrupted.
@@ -45,17 +44,7 @@ public class ShootingOutput extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shootingSubsystem.GetPosition() >= shootingSubsystem.max){
-      return true;
-    }else{
-      return false;
+      return false;  
     }
-    // return false;
-    // if(output>0){
-    //   return shootingSubsystem.isShootingUp(); 
-    // }
-    //  else{
-    //   return shootingSubsystem.isShootingDown();
-    //  } 
 }
-}
+

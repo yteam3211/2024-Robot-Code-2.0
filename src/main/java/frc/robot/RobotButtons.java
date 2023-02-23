@@ -8,85 +8,77 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.ShootingOutput;
+import frc.robot.commands.ResetCommand;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
-import frc.robot.commands.collectCommand;
+import frc.robot.commands.collectGroupCommand;
+// import frc.robot.commands.collectGroupCommand;
 import frc.robot.commands.collectOutput;
-import frc.robot.commands.gtipperCommand;
-import frc.robot.commands.setPoitCollectCommand;
-import frc.robot.commands.shootingCommandGroup;
-import frc.robot.commands.simpleOutputCommand;
-import frc.robot.commands.resetCommand;
+import frc.robot.commands.gripperCommand;
+import frc.robot.commands.setPointCollectCommand;
+import frc.robot.commands.shootingOutputCommand;
+import frc.robot.commands.ResetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.commands.TurnToZero;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
-
+import frc.robot.subsystems.collectWheels;
 
 // Yteam loadButtons
 public class RobotButtons {
-    public static Joystick coPilotJoystick = new Joystick(0);
-    public static Joystick driver = new Joystick(1);
+    public static Joystick coPilotJoystick = new Joystick(1);
+    public static Joystick driver = new Joystick(0);
     private final Trigger turnToZero = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
  
 
-    
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
-    public Trigger robotCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(5)); 
-    public Trigger collectWheels = new Trigger(() -> coPilotJoystick.getRawAxis(2)>0.3);
-    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(8)); 
-    public Trigger shootingVelocityLow = new Trigger(() -> coPilotJoystick.getPOV () == 180);
-    public Trigger shootingVelocityHigh = new Trigger(() -> coPilotJoystick.getPOV () == 0);
-    public Trigger shootingVelocityMiddle = new Trigger(() -> coPilotJoystick.getPOV () == 270);
-    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(4)); 
-    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(3)); 
-    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
-    // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1)); 
-    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(3)>0.3);
-    public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(6)); 
-    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(2)); 
+    public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kLeftBumper.value));
+    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kStart.value));
+    public Trigger shootingLow = new Trigger(() -> coPilotJoystick.getPOV() == 180);
+    public Trigger shootingHigh = new Trigger(() -> coPilotJoystick.getPOV() == 0);
+    public Trigger shootingMiddle = new Trigger(() -> coPilotJoystick.getPOV() == 270);
+    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kY.value));
+    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kX.value));
+    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kA.value));
+    // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
+    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
+    public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
+    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value));
 
-
-
-    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste, armSubsystem armSubsystem, Swerve swerve) {
+    /**
+     * @param shootingSubsystem
+     * @param collectSubsyste
+     * @param armSubsystem
+     * @param swerve
+     */
+    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels) {
         swerve.setDefaultCommand(
-            new TeleopSwerve(
-                swerve, 
-                () -> driver.getRawAxis(XboxController.Axis.kLeftY.value), 
-                () -> driver.getRawAxis(XboxController.Axis.kLeftX.value), 
-                () -> driver.getRawAxis(XboxController.Axis.kRightX.value), 
-                () -> false
-            )
-        );
-        OpenCollect.whileFalse(new setPoitCollectCommand(collectSubsyste, 0));
-        OpenCollect.whileTrue(new setPoitCollectCommand(collectSubsyste, -1000));
-        collectWheels.whileTrue(new collectOutput(collectSubsyste, 0.6, 0.1));
-        collectWheelsBack.whileTrue(new collectOutput(collectSubsyste, -0.6, -0.5));
-        shootingVelocityLow.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        shootingVelocityHigh.onTrue(new simpleOutputCommand(shootingSubsystem, 0.5));
-        shootingVelocityMiddle.onTrue(new simpleOutputCommand(shootingSubsystem, 0));
-        humanArm.onTrue(new armPosition(armSubsystem, -7));
-        lowArm.onTrue(new armPosition(armSubsystem, -25.4));
+                new TeleopSwerve(
+                        swerve,
+                        () -> driver.getRawAxis(XboxController.Axis.kLeftY.value),
+                        () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
+                        () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
+                        () -> false));
+        OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste,collectWheels, 0, 0, 0));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste,collectWheels, 0.6, 0.3, 250));
+        collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
+        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.3));
+        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.6));
+        // shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.96));
+        humanArm.onTrue(new armPosition(armSubsystem, -19));
+        lowArm.onTrue(new armPosition(armSubsystem, -63.5));  
         middleArm.onTrue(new armPosition(armSubsystem, 0));
-        openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
-        closeGripper.onTrue(new gtipperCommand(armSubsystem, 3.3));
+        // openGripper.whileTrue(new gripperCommand(armSubsystem, -6.5));
+        closeGripper.whileTrue(new gripperCommand(armSubsystem, -12.1));
+        closeGripper.whileFalse(new gripperCommand(armSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.whileTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
-        turnToZero.onTrue(new TurnToZero(swerve));
+        resetTrigger.onTrue(new ResetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+
+        // load buttons
     }
 }
-
-
-
-
-
-
-
-
-
-
