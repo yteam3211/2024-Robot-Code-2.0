@@ -6,13 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.CollectOutoSubsystem;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.collectWheels;
 
 public class collectAtuoCommand extends CommandBase {
-    private final CollectSubsystem collectSubsystem;
-    private double output;
-    private double Output;
+    private final collectWheels collectWheels;
+    private double wheelsOutput;
+    private double centeringOutput;
     private Timer timer = new Timer();
     private int timeOfFunctioning;
     
@@ -22,10 +22,10 @@ public class collectAtuoCommand extends CommandBase {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public collectAtuoCommand(double Output, double output, CollectSubsystem collectSubsystem, int timeOfFunctioning) {
-      this.collectSubsystem = collectSubsystem; 
-      this.output = output;
-      this.Output = Output;
+    public collectAtuoCommand(double centeringOutput, double WheelsOutput, collectWheels collectWheels, int timeOfFunctioning) {
+      this.collectWheels = collectWheels; 
+      this.wheelsOutput = WheelsOutput;
+      this.centeringOutput = centeringOutput;
       this.timeOfFunctioning = timeOfFunctioning;
 
 
@@ -49,15 +49,15 @@ public class collectAtuoCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() { 
-        collectSubsystem.setOutput(output);
-        collectSubsystem.output(Output);
+        collectWheels.WheelsSetOutput(wheelsOutput);
+        collectWheels.centeringSetOutput(centeringOutput);
     }
   
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-      collectSubsystem.setOutput(0);
-      collectSubsystem.output(0);
+      collectWheels.WheelsSetOutput(0);
+      collectWheels.centeringSetOutput(0);
     }  
   
     // Returns true when the command should end.
