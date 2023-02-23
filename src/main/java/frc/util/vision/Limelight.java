@@ -80,8 +80,7 @@ public class Limelight extends SubsystemBase {
     CommandBase vision = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kVision);
     // CommandBase USB = new LimelightCameraChangeModeCommand(this,
     // limelightCameraMode.kUSB);
-    setStreamMode(limelightStreamMode.kPiPSecondary);
-
+    setStreamMode(limelightStreamMode.kStandard);
 
     ledOff.setName("Set");
     ledOn.setName("Set");
