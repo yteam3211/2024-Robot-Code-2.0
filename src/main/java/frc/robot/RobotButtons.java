@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.ResetCommand;
+import frc.robot.commands.resetCommand;
 import frc.robot.commands.ShootingPosition;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
@@ -18,16 +18,16 @@ import frc.robot.commands.collectOutput;
 import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
-import frc.robot.commands.ResetCommand;
+import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
-import frc.robot.commands.TurnToZero;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 
 // Yteam loadButtons
 public class RobotButtons {
+
     public static Joystick coPilotJoystick = new Joystick(1);
     public static Joystick driver = new Joystick(0);
     private final Trigger turnToZero = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
@@ -55,7 +55,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,
+    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste,
             armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels) {
         swerve.setDefaultCommand(
                 new TeleopSwerve(
@@ -77,7 +77,7 @@ public class RobotButtons {
         closeGripper.whileTrue(new gripperCommand(armSubsystem, -12.1));
         closeGripper.whileFalse(new gripperCommand(armSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.onTrue(new ResetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+        resetTrigger.onTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
 
         // load buttons
     }
