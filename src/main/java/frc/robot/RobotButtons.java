@@ -21,6 +21,7 @@ import frc.robot.commands.simpleOutputCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.commands.TurnToZero;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 
@@ -29,6 +30,8 @@ import frc.robot.subsystems.armSubsystem;
 public class RobotButtons {
     public static Joystick coPilotJoystick = new Joystick(0);
     public static Joystick driver = new Joystick(1);
+    private final Trigger turnToZero = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+ 
 
     
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
@@ -73,14 +76,8 @@ public class RobotButtons {
         openGripper.onTrue(new gtipperCommand(armSubsystem, -5));
         closeGripper.onTrue(new gtipperCommand(armSubsystem, 3.3));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.onTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
-
-
-
-
-        
-
-        // load buttons
+        resetTrigger.whileTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+        turnToZero.onTrue(new TurnToZero(swerve));
     }
 }
 
