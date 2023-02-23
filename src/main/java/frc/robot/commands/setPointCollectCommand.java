@@ -10,7 +10,6 @@ import frc.robot.subsystems.CollectSubsystem;
 
 public class setPointCollectCommand extends CommandBase {
   private final CollectSubsystem collectSubsystem;
-  private final CollectSubsystem collectSubsystem;
   private double point;
   /** Creates a new setPoitCollectCommand. */
   public setPointCollectCommand(CollectSubsystem collectSubsyste,double point) {
