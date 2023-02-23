@@ -15,12 +15,12 @@ import frc.robot.subsystems.armSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class resetCommand extends InstantCommand {
   private final ShootingSubsystem shootingSubsystem;
-  private final CollectSubsystem collectSubsyste;
+  private final CollectSubsystem collectSubsystem;
   private final armSubsystem armSubsystem;
 
-  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsyste,  armSubsystem armSubsystem) {
+  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,  armSubsystem armSubsystem) {
     this.shootingSubsystem = shootingSubsystem;
-    this.collectSubsyste = collectSubsyste;
+    this.collectSubsystem = collectSubsystem;
     this.armSubsystem = armSubsystem;
 
   }
@@ -29,7 +29,7 @@ public class resetCommand extends InstantCommand {
   @Override
   public void initialize() {
     shootingSubsystem.resetEncoder();
-    collectSubsyste.reSetEncoder();
+    collectSubsystem.reSetEncoder();
     armSubsystem.resetArmEncoder();
     armSubsystem.resetGriperEncoder();
   }

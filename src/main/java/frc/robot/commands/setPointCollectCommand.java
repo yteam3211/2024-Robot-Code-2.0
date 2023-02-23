@@ -10,18 +10,20 @@ import frc.robot.subsystems.CollectSubsystem;
 
 public class setPointCollectCommand extends CommandBase {
   private final CollectSubsystem collectSubsystem;
+  private final CollectSubsystem collectSubsystem;
   private double point;
   /** Creates a new setPoitCollectCommand. */
   public setPointCollectCommand(CollectSubsystem collectSubsyste,double point) {
     this.collectSubsystem = collectSubsyste;
     this.point = point;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(collectSubsyste);
+    addRequirements(collectSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    collectSubsystem.setPosition(point);
     collectSubsystem.setPosition(point);
   }
 
@@ -29,6 +31,7 @@ public class setPointCollectCommand extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putNumber("123456789", point);
+    collectSubsystem.setPosition(point);
     collectSubsystem.setPosition(point);
   }
 
