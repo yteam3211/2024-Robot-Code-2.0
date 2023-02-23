@@ -15,12 +15,12 @@ public class DriveToTarget extends CommandBase {
   /** Creates a new DriveToTarget. */
   protected Limelight limelight;
   protected Swerve swerve;
-  protected PIDController pidX = new PIDController();
-  protected PIDController pidY = new PIDController();
-  protected PIDController pidR = new PIDController();
   protected Gains gainsX = new Gains("vision x", 0, 0, 0);
   protected Gains gainsY = new Gains("vision y", 0, 0, 0);
   protected Gains gainsR = new Gains("vision r", 0, 0, 0);
+  protected PIDController pidX = new PIDController(gainsX);
+  protected PIDController pidY = new PIDController(gainsY);
+  protected PIDController pidR = new PIDController(gainsR);
 
   // protected Gains
   public DriveToTarget(Limelight limelight, Swerve swerve) {
