@@ -34,7 +34,7 @@ public class TeleopSwerve extends CommandBase {
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
 
         /* Drive */
-        if (RobotButtons.driver.getPOV() == 180 && Math.abs(s_Swerve.getYaw().getDegrees())> 3){
+        if (RobotButtons.driver.getPOV() == 0 && Math.abs(s_Swerve.getYaw().getDegrees())> 3){
             s_Swerve.drive(            
                 new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
                 s_Swerve.getYaw().getDegrees() > 0 ? s_Swerve.getYaw().getDegrees() : -s_Swerve.getYaw().getDegrees(), 

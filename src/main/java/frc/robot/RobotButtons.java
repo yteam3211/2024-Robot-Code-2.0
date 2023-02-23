@@ -34,7 +34,7 @@ public class RobotButtons {
         );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        SideToSideByLimelight.onTrue(new SideToSide(limelight, swerve));
+        SideToSideByLimelight.whileTrue(new SideToSide(limelight, swerve));
         BackAndForwardByLimelight.onTrue(new ForwardAndBack(limelight, swerve));
     }
 }
