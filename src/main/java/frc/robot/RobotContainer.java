@@ -38,6 +38,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve(robotButtons);
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
+    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(0.5,0.5,m_CollectSubsystem,10);
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
     private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
     private armPosition humanArmPosition = new armPosition(m_ArmSubsystem, -7);
@@ -72,7 +73,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return atuo;
+        return collectAtuoCommand;
     }
 }
  

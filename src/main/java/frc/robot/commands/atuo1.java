@@ -36,6 +36,6 @@ public class atuo1 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new resetCommand(ShootingSubsystem,  CollectSubsystem, armSubsystem), secondArmPosition, testAuto.getAutoCommand(s_Swerve),collectOutput);
+    addCommands(new resetCommand(ShootingSubsystem,  CollectSubsystem, armSubsystem), secondArmPosition, testAuto.getAutoCommand(s_Swerve));
   }
 }

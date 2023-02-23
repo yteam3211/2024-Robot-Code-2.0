@@ -4,7 +4,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.ShootingOutput;
-import frc.robot.commands.collectAtuoCommand;
 import frc.robot.commands.collectCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;

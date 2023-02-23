@@ -24,7 +24,7 @@ public class collectCommand extends CommandBase {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(collectSubsystem);
-  }
+  } 
 
   // Called when the command is initially scheduled.
   @Override
