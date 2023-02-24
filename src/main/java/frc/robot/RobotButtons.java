@@ -19,7 +19,7 @@ public class RobotButtons {
     public final Trigger robotCentric = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
     public static final Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public final Trigger zeroGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public final Trigger SideToSideByLimelight = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
+    public final Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
     public final Trigger BackAndForwardByLimelight = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
 
     public void loadButtons(Swerve swerve, Limelight limelight) {
@@ -34,7 +34,7 @@ public class RobotButtons {
         );
 
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        SideToSideByLimelight.whileTrue(new SideToSide(limelight, swerve));
+        LimelightAprilTag.whileTrue(new SideToSide(limelight, swerve, true));
         BackAndForwardByLimelight.onTrue(new ForwardAndBack(limelight, swerve));
     }
 }
