@@ -8,17 +8,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.ResetCommand;
-import frc.robot.commands.ShootingPosition;
+import frc.robot.commands.resetCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.collectGroupCommand;
-// import frc.robot.commands.collectGroupCommand;
 import frc.robot.commands.collectOutput;
 import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
-import frc.robot.commands.ResetCommand;
 import frc.robot.subsystems.CollectSubsyste;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
@@ -45,6 +42,7 @@ public class RobotButtons {
     public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value));
+    public Trigger SeconderyResetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kBack.value));
 
     /**
      * @param shootingSubsystem
@@ -62,10 +60,10 @@ public class RobotButtons {
                         () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
                         () -> false));
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste,collectWheels, 0, 0, 0));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste,collectWheels, 0.6, 0.3, 250));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste,collectWheels, 0.8, 0.3, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
-        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.3));
-        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.6));
+        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45));
+        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.7));
         // shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.96));
         humanArm.onTrue(new armPosition(armSubsystem, -19));
         lowArm.onTrue(new armPosition(armSubsystem, -63.5));  
@@ -74,10 +72,7 @@ public class RobotButtons {
         closeGripper.whileTrue(new gripperCommand(armSubsystem, -12.1));
         closeGripper.whileFalse(new gripperCommand(armSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.onTrue(new ResetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
-
-        // load buttons
-        zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        turnToZero.onTrue(new TurnToZero(swerve));
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+        resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
     }
 }

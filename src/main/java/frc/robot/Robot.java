@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.InitShooting;
 import frc.robot.commands.armPosition;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;

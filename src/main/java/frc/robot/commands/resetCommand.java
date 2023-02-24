@@ -13,12 +13,12 @@ import frc.robot.subsystems.armSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ResetCommand extends InstantCommand {
+public class resetCommand extends InstantCommand {
   private final ShootingSubsystem shootingSubsystem;
   private final CollectSubsyste collectSubsyste;
   private final armSubsystem armSubsystem;
 
-  public ResetCommand(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,  armSubsystem armSubsystem) {
+  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,  armSubsystem armSubsystem) {
     this.shootingSubsystem = shootingSubsystem;
     this.collectSubsyste = collectSubsyste;
     this.armSubsystem = armSubsystem;

@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.commands.InitShooting;
-import frc.robot.commands.ShootingPosition;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -47,7 +45,6 @@ public class ShootingSubsystem extends SuperSystem {
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
     // ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
-    setDefaultCommand(new ShootingPosition(this, 0));
   }
 
   /** Creates a new ExampleSubsystem. */
