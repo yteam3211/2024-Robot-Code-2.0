@@ -16,7 +16,8 @@ import frc.robot.commands.collectOutput;
 import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
-import frc.robot.subsystems.CollectSubsyste;
+import frc.robot.commands.resetCommand;
+import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
@@ -50,7 +51,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsyste collectSubsyste,
+    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
             armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels) {
         swerve.setDefaultCommand(
                 new TeleopSwerve(
@@ -59,8 +60,8 @@ public class RobotButtons {
                         () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
                         () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
                         () -> false));
-        OpenCollect.whileFalse(new collectGroupCommand(collectSubsyste,collectWheels, 0, 0, 0));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsyste,collectWheels, 0.8, 0.3, 250));
+        OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem,collectWheels, 0.8, 0.3, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.7));
@@ -72,7 +73,7 @@ public class RobotButtons {
         closeGripper.whileTrue(new gripperCommand(armSubsystem, -12.1));
         closeGripper.whileFalse(new gripperCommand(armSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsyste, armSubsystem));
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
     }
 }

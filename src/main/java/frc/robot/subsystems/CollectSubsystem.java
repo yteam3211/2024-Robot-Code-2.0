@@ -20,7 +20,7 @@ import frc.util.motor.SuperVictorSP;
 
 
 // Yteam Example Subsystem
-public class CollectSubsyste extends SuperSystem {
+public class CollectSubsystem extends SuperSystem {
   //  public SuperVictorSP armMotor;
   //  private DutyCycleEncoder dutyCycleEncoder = new DutyCycleEncoder(0);
       public SuperTalonSRX openCollectMotor;
@@ -33,7 +33,7 @@ public class CollectSubsyste extends SuperSystem {
   /**
    * 
    */
-  public CollectSubsyste() {
+  public CollectSubsystem() {
     super("collectSubsystem");
     collectGains = new Gains("collectGains",3, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);

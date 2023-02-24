@@ -30,20 +30,20 @@ public class RobotContainer {
     private final int translationAxis = 1;
     private final int strafeAxis = 0;
     private final int rotationAxis = 4;
-
-    /* Driver Buttons */
+    private final TestAuto testAuto = new TestAuto(); 
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve(robotButtons);
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
-    private final CollectSubsyste m_CollectSubsyste = new CollectSubsyste();
+    private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
+    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(0.5,0.5,m_CollectSubsystem,10);
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
     private final collectWheels m_CollectWheels = new collectWheels();
 
-
-
+    private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
+    private final atuo1 atuo = new atuo1(s_Swerve,testAuto,secondArmPosition,humanArmPosition,m_ArmSubsystem, m_CollectSubsystem,ShootingSubsystem);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
 
@@ -63,9 +63,9 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem, s_Swerve,m_CollectWheels);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve,m_CollectWheels);
     }
-
+ 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
@@ -73,7 +73,24 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new exampleAuto(s_Swerve);
+        return collectAtuoCommand;
+    }
+
+    // gets & sets 
+    public Swerve getS_Swerve() {
+        return s_Swerve;
+    }
+
+    public ShootingSubsystem getM_ShootingSubsystem() {
+        return m_ShootingSubsystem;
+    }
+
+    public CollectSubsyste getM_CollectSubsyste() {
+        return m_CollectSubsyste;
+    }
+
+    public armSubsystem getM_ArmSubsystem() {
+        return m_ArmSubsystem;
     }
 
     // gets & sets 

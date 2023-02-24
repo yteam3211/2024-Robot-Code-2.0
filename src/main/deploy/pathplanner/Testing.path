@@ -1,0 +1,74 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.0,
+        "y": 3.0
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.0,
+        "y": 2.9779989947507346
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": 2.0,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "shoot.java",
+          "fsdfh",
+          "fhxdfh",
+          "sdgxdfhg"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 3.0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.0,
+        "y": 3.0
+      },
+      "prevControl": {
+        "x": 4.0,
+        "y": 2.9898012009764483
+      },
+      "nextControl": null,
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "markers": [
+    {
+      "position": 0.9939393939393701,
+      "names": [
+        "event",
+        "shoting"
+      ]
+    },
+    {
+      "position": 0.9939393939393659,
+      "names": [
+        "inon"
+      ]
+    },
+    {
+      "position": 0.9939393939394328,
+      "names": [
+        "event"
+      ]
+    }
+  ]
+}

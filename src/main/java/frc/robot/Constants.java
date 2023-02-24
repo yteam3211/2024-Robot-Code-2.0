@@ -2,7 +2,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax.IdleMode;
-
+import java.util.Date;
+import javax.xml.crypto.Data;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -19,7 +20,8 @@ public final class Constants {
         public static final int RIGHT_LEADER_COLLECT_MOTOR = 16;
         public static final int CLOSE_MICROSWITCH = 0;
         public static final int ARM_MOTOR = 17;
-        public static final int GRIPPER_MOTOR = 18;
+        public static final int GRIPPER_MOTOR = 18; 
+
 
 
 
