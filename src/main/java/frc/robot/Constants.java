@@ -22,7 +22,7 @@ public final class Constants {
         public static final int ARM_MOTOR = 17;
         public static final int GRIPPER_MOTOR = 18; 
 
-
+        
 
 
     public static final double stickDeadband = 0.01;

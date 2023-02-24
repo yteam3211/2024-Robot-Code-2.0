@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.timercommand.TimerArmPosition;
+import frc.robot.commands.timercommand.TimerGripperCommand;
+import frc.robot.commands.timercommand.collectAtuoCommand;
+import frc.robot.commands.timercommand.openInParallel;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 
@@ -38,13 +42,20 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve(robotButtons);
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
-    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(0.5,0.5,m_CollectSubsystem,10);
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
+    private final TimerArmPosition timerArmPosition = new TimerArmPosition(m_ArmSubsystem,
+     3000, 0.8,8);
     private final collectWheels m_CollectWheels = new collectWheels();
-
+    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(
+        m_CollectWheels,0.5,0.5,10);
     private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
-    private final atuo1 atuo = new atuo1(s_Swerve,testAuto,secondArmPosition,humanArmPosition,m_ArmSubsystem, m_CollectSubsystem,ShootingSubsystem);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
+    private final openInParallel openInParallel = new openInParallel(collectAtuoCommand,
+     m_ArmSubsystem, timerArmPosition, null, m_CollectSubsystem);
+    private final centerToRampa centerToRampa = new centerToRampa();
+    private final TimerGripperCommand timerGripperCommand = new TimerGripperCommand(m_ArmSubsystem, 3000);
+    private final atuo1 atuo = new atuo1(s_Swerve, openInParallel, centerToRampa,
+      m_ArmSubsystem, timerGripperCommand, m_CollectSubsystem, ShootingSubsystem);
     public RobotContainer() {
 
         // Configure the button bindings
@@ -73,7 +84,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return collectAtuoCommand;
+        return atuo;
     }
 
     // gets & sets 
@@ -85,25 +96,8 @@ public class RobotContainer {
         return m_ShootingSubsystem;
     }
 
-    public CollectSubsyste getM_CollectSubsyste() {
-        return m_CollectSubsyste;
-    }
-
-    public armSubsystem getM_ArmSubsystem() {
-        return m_ArmSubsystem;
-    }
-
-    // gets & sets 
-    public Swerve getS_Swerve() {
-        return s_Swerve;
-    }
-
-    public ShootingSubsystem getM_ShootingSubsystem() {
-        return m_ShootingSubsystem;
-    }
-
-    public CollectSubsyste getM_CollectSubsyste() {
-        return m_CollectSubsyste;
+    public CollectSubsystem getM_CollectSubsyste() {
+        return m_CollectSubsystem;
     }
 
     public armSubsystem getM_ArmSubsystem() {

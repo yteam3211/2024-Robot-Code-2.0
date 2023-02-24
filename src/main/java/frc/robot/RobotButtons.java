@@ -25,6 +25,7 @@ import frc.robot.subsystems.collectWheels;
 
 // Yteam loadButtons
 public class RobotButtons {
+
     public static Joystick coPilotJoystick = new Joystick(1);
     public static Joystick driver = new Joystick(0);
 
