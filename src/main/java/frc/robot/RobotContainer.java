@@ -22,12 +22,31 @@ import frc.util.vision.Limelight;
  */
 public class RobotContainer {
     /* Controllers */
-    private RobotButtons robotButtons = new RobotButtons(); 
-    public Limelight limelight = new Limelight.Builder().build();
-    private final Swerve s_Swerve = new Swerve(robotButtons);   
+    private final Joystick driver = new Joystick(1);
+    private RobotButtons robotButtons = 
+    new RobotButtons();
+
+    /* Drive Controls */
+    private final int translationAxis = 1;
+    private final int strafeAxis = 0;
+    private final int rotationAxis = 4;
+
+    /* Driver Buttons */
+    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+    /* Subsystems */
+    private final Swerve s_Swerve = new Swerve(robotButtons);
+    private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
+    private final CollectSubsyste m_CollectSubsyste = new CollectSubsyste();
+    private final armSubsystem m_ArmSubsystem = new armSubsystem();
+    private final collectWheels m_CollectWheels = new collectWheels();
+
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -44,7 +63,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(s_Swerve);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsyste, m_ArmSubsystem, s_Swerve,m_CollectWheels);
     }
 
     /**
@@ -56,4 +75,22 @@ public class RobotContainer {
         // An ExampleCommand will run in autonomous
         return new exampleAuto(s_Swerve);
     }
+
+    // gets & sets 
+    public Swerve getS_Swerve() {
+        return s_Swerve;
+    }
+
+    public ShootingSubsystem getM_ShootingSubsystem() {
+        return m_ShootingSubsystem;
+    }
+
+    public CollectSubsyste getM_CollectSubsyste() {
+        return m_CollectSubsyste;
+    }
+
+    public armSubsystem getM_ArmSubsystem() {
+        return m_ArmSubsystem;
+    }
 }
+ 

@@ -4,9 +4,16 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.InitShooting;
+import frc.robot.commands.armPosition;
+import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.armSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -16,9 +23,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
-
+  public armSubsystem armsubsystem;
   private Command m_autonomousCommand;
-
+  private ShootingSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
 
   /**
@@ -31,6 +38,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    armsubsystem = m_robotContainer.getM_ArmSubsystem();
   }
 
   /**
@@ -51,15 +59,21 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    armSubsystem.ArmgMotor.setIdleMode(IdleMode.kCoast);
+    armsubsystem.SetDisableDefault();
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -73,10 +87,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    armsubsystem.SetTeleopDefault();
+   
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
