@@ -44,7 +44,7 @@ public class armSubsystem extends SuperSystem {
         ControlType.kSmartMotion, armgGains, 7, 10, 1);
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, grippergGains, 0, 0, 0);
-    // setDefaultCommand(new armPosition(this, 0));
+    setDefaultCommand(new armPosition(this, -10));
     this.resetArmEncoder();
   }
 

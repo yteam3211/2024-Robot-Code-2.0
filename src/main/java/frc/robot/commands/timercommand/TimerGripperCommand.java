@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 public class TimerGripperCommand extends CommandBase {
   private final armSubsystem armSubsystem;
   private double position;
+  private double seconds;
   private Timer timer = new Timer();
   
 
@@ -21,9 +22,10 @@ public class TimerGripperCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TimerGripperCommand(armSubsystem armSubsystem, double position) {
+  public TimerGripperCommand(armSubsystem armSubsystem, double position, double seconds) {
     this.armSubsystem = armSubsystem;
     this.position = position;
+    this.seconds = seconds;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armSubsystem);
@@ -49,7 +51,7 @@ public class TimerGripperCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      return timer.hasElapsed(0.5);  
+      return timer.hasElapsed(seconds);  
     }
 }
 

@@ -13,8 +13,8 @@ import frc.util.PID.PIDController;
 
 public class Balance extends CommandBase {
   /** Creates a new balance. */
-  protected Gains gainsTIP = new Gains("gains turn in place", 0, 0, 0);
-  protected Gains gainsBAL = new Gains("gains balance", 0, 0, 0);
+  protected Gains gainsTIP = new Gains("gains turn in place", 0.3, 0, 0);
+  protected Gains gainsBAL = new Gains("gains balance", 0., 0, 0);
   protected PIDController pidTIP = new PIDController(gainsTIP);
   protected PIDController pidBAL = new PIDController(gainsBAL);
   protected Swerve swerve;
@@ -28,14 +28,15 @@ public class Balance extends CommandBase {
   public void initialize() {
     pidTIP.setTargetPosition(0);
     pidBAL.setTargetPosition(0);
-
+    pidBAL.setMaxOutput(Constants.Swerve.maxSpeed * 0.1);
+    pidTIP.setMaxOutput(Constants.Swerve.maxAngularVelocity * 0.6);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
       swerve.drive(            
-                  new Translation2d(pidBAL.getOutput(Swerve.gyro.getPitch()), 0), 
+                  new Translation2d(0, pidBAL.getOutput(Swerve.gyro.getPitch())), 
                   pidBAL.getOutput(Swerve.gyro.getYaw()), 
                   false, //Field oriented by the controller switch
               true

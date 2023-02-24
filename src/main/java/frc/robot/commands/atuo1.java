@@ -30,14 +30,10 @@ public class atuo1 extends SequentialCommandGroup {
   private collectGroupCommand collectGroupCommand;
   private timeSetPointCollectCommand timeSetPointCollectCommand;
   private TimerArmPosition TimerArmPosition;
-  private openInParallel openInParallel;
-  private TimerGripperCommand timerGripperCommand;
 
   
-  public atuo1(Swerve swerve,openInParallel openInParallel,
-  centerToRampa centerToRampa,
+  public atuo1(Swerve swerve,
   armSubsystem armSubsystem,
-  TimerGripperCommand timerGripperCommand,
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem
 ) {
@@ -45,16 +41,16 @@ public class atuo1 extends SequentialCommandGroup {
     this.collectSubsystem = collectSubsystem;
     this.ShootingSubsystem = ShootingSubsystem;
     this.armSubsystem = armSubsystem;
-    this.openInParallel = openInParallel;
-    this.timerGripperCommand = timerGripperCommand;
+    
   
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem),
-    openInParallel,
-    timerGripperCommand,
+    new openInParallel(armSubsystem, collectSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
+    new TimerGripperCommand(armSubsystem, -12.5, 0.5),
+    new openInParallel(armSubsystem, collectSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
     centerToRampa.getAutoCommand(s_Swerve));
   }
 }

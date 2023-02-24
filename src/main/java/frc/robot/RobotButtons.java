@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
+import frc.robot.commands.Balance;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.collectGroupCommand;
@@ -48,7 +49,9 @@ public class RobotButtons {
     public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value));
     public Trigger SeconderyResetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kBack.value));
+    public Trigger balance = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public final Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
+
 
     /**
      * @param shootingSubsystem
@@ -81,5 +84,6 @@ public class RobotButtons {
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         LimelightAprilTag.whileTrue(new SideToSide(limelight, swerve, true));
+        balance.whileTrue(new Balance(swerve));
     }
 }

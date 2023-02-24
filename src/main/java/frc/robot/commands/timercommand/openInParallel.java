@@ -12,24 +12,33 @@ import frc.robot.subsystems.armSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class openInParallel extends ParallelCommandGroup {
-  collectAtuoCommand collectAtuoCommand;
-  collectWheels collectWheels;
-  timeSetPointCollectCommand timeSetPointCollectCommand;
   CollectSubsystem collectSubsystem;
-  TimerArmPosition timerArmPosition;
   armSubsystem armSubsystem;
+  double delayForTheArm;
+  double positionForArm;
+  double positionForGripper;
+  double stop;
+  double point;
+  double secends;
 
 
   /** Creates a new collectInParallel. */
-  public openInParallel(collectAtuoCommand collectAtuoCommand, armSubsystem armSubsystem, TimerArmPosition timerArmPosition, timeSetPointCollectCommand timeSetPointCollectCommand,CollectSubsystem collectSubsystem) {
+  public openInParallel(armSubsystem armSubsystem, CollectSubsystem collectSubsystem,
+   double delayForTheArm,double positionForArm, double stop, double point, double collectSeconds, double secends,double positionForGripper) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     this.collectSubsystem = collectSubsystem;
-    this.timerArmPosition = timerArmPosition;
     this.armSubsystem = armSubsystem;
+    this.delayForTheArm = delayForTheArm;
+    this.positionForArm = positionForArm;
+    this.positionForGripper = positionForGripper;
+    this.stop = stop;
+    this.point = point;
+    this.secends = secends;
 
 
-    addCommands(new TimerArmPosition(armSubsystem, -63.5,0.8,4),
-    new timeSetPointCollectCommand(collectSubsystem ,3000));
+
+    addCommands(new TimerArmPosition(armSubsystem, positionForArm, delayForTheArm, stop),
+    new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds), new TimerGripperCommand(armSubsystem, positionForGripper,secends));
   }
 }

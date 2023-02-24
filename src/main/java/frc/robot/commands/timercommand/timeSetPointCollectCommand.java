@@ -12,9 +12,9 @@ public class timeSetPointCollectCommand extends CommandBase {
   private  CollectSubsystem collectSubsystem;
   private double point;
   private Timer timer = new Timer();
-  private int timeOfFunctioning;
+  private double timeOfFunctioning;
   /** Creates a new setPoitCollectCommand. */
-  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem,double point) {
+  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem,double point, double timeOfFunctioning) {
     this.collectSubsystem = collectSubsystem;
     this.point = point;
     this.timeOfFunctioning = timeOfFunctioning;
