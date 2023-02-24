@@ -27,9 +27,8 @@ import frc.util.vision.Limelight.limelightStreamMode;
  */
 public class RobotContainer {
     /* Controllers */
-    private RobotButtons robotButtons = 
-    new RobotButtons();
-
+    private RobotButtons robotButtons = new RobotButtons();
+    public Limelight limelight = new Limelight.Builder().build();
     /* Drive Controls */
     private final TestAuto testAuto = new TestAuto(); 
 

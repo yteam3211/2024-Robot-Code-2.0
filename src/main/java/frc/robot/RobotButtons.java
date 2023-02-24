@@ -33,7 +33,7 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
 
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
+    public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kStart.value));
