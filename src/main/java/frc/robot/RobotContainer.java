@@ -17,6 +17,7 @@ import frc.robot.commands.timercommand.collectAtuoCommand;
 import frc.robot.commands.timercommand.openInParallel;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
+import frc.util.vision.Limelight.limelightStreamMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,28 +27,21 @@ import frc.util.vision.Limelight;
  */
 public class RobotContainer {
     /* Controllers */
-    private final Joystick driver = new Joystick(1);
     private RobotButtons robotButtons = 
     new RobotButtons();
 
     /* Drive Controls */
-    private final int translationAxis = 1;
-    private final int strafeAxis = 0;
-    private final int rotationAxis = 4;
     private final TestAuto testAuto = new TestAuto(); 
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
 
     /* Subsystems */
-    private final Swerve s_Swerve = new Swerve(robotButtons);
+    private final Swerve s_Swerve = new Swerve();
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
-    private final TimerArmPosition timerArmPosition = new TimerArmPosition(m_ArmSubsystem,
-     3000, 0.8,8);
+    private final TimerArmPosition timerArmPosition = new TimerArmPosition(m_ArmSubsystem, 3000, 0.8,8);
     private final collectWheels m_CollectWheels = new collectWheels();
-    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(
-        m_CollectWheels,0.5,0.5,10);
+    private final collectAtuoCommand collectAtuoCommand = new collectAtuoCommand(m_CollectWheels,0.5,0.5,10);
     private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     private final openInParallel openInParallel = new openInParallel(collectAtuoCommand,
@@ -60,6 +54,7 @@ public class RobotContainer {
 
         // Configure the button bindings
         configureButtonBindings();
+        
     }
 
     private void configureSwerveButtons() {
@@ -74,7 +69,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve,m_CollectWheels);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve,m_CollectWheels, limelight);
     }
  
     /**

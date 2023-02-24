@@ -40,8 +40,10 @@ public class Limelight extends SubsystemBase {
   protected NetworkTableEntry LEDMode;
   protected NetworkTableEntry cameraMode;
   protected NetworkTableEntry streamMode;
+  protected NetworkTableEntry pipeline;
 
   protected double tx_ = 0, ty_ = 0, ta_ = 0, ts_ = 0;
+  protected double pipeline_ = 0;
   protected double lastTx_ = 0, lastTy_ = 0, lastTa_ = 0, lastTs = 0;
   protected boolean isValueChange = true;
 
@@ -54,6 +56,7 @@ public class Limelight extends SubsystemBase {
   private Limelight(Builder builder) {
     this.limelightTable = NetworkTableInstance.getDefault().getTable(builder.table);
     table = builder.table;
+    pipeline = this.limelightTable.getEntry("pipeline");
     tx = this.limelightTable.getEntry("tx");
     ty = this.limelightTable.getEntry("ty");
     ta = this.limelightTable.getEntry("ta");
@@ -77,8 +80,7 @@ public class Limelight extends SubsystemBase {
     CommandBase vision = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kVision);
     // CommandBase USB = new LimelightCameraChangeModeCommand(this,
     // limelightCameraMode.kUSB);
-    setStreamMode(limelightStreamMode.kPiPSecondary);
-
+    setStreamMode(limelightStreamMode.kStandard);
 
     ledOff.setName("Set");
     ledOn.setName("Set");
@@ -121,6 +123,7 @@ public class Limelight extends SubsystemBase {
    * @param pipeline pipeline number to use.
    */
   public void setPipeline(int pipeline) {
+    this.pipeline.setNumber(pipeline);
   }
 
   /**

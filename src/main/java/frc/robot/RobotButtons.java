@@ -19,9 +19,12 @@ import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.commands.LimelightPID.ForwardAndBack;
+import frc.robot.commands.LimelightPID.SideToSide;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheels;import frc.util.vision.Limelight;
+
 
 // Yteam loadButtons
 public class RobotButtons {
@@ -45,6 +48,7 @@ public class RobotButtons {
     public Trigger closeGripper = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value));
     public Trigger SeconderyResetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kBack.value));
+    public final Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
 
     /**
      * @param shootingSubsystem
@@ -53,7 +57,7 @@ public class RobotButtons {
      * @param swerve
      */
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
-            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels) {
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight) {
         swerve.setDefaultCommand(
                 new TeleopSwerve(
                         swerve,
@@ -76,5 +80,6 @@ public class RobotButtons {
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
+        LimelightAprilTag.whileTrue(new SideToSide(limelight, swerve, true));
     }
 }

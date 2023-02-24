@@ -14,13 +14,10 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
 public class SwerveModule {
@@ -35,14 +32,14 @@ public class SwerveModule {
 
     private RelativeEncoder integratedAngleEncoder;
     private final SparkMaxPIDController angleController;
-    RobotButtons robotButtons;
+    
 
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
-    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants, RobotButtons robotButtons){
+    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
-        this.robotButtons = robotButtons;
+        
         
         /* Angle Encoder Config */
         angleEncoder = new CANCoder(moduleConstants.cancoderID);
@@ -70,7 +67,7 @@ public class SwerveModule {
 
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){
         double desiredSpeed = desiredState.speedMetersPerSecond;
-        if (robotButtons.halfSpeed.getAsBoolean()) {
+        if (RobotButtons.halfSpeed.getAsBoolean()) {
             desiredSpeed /= 2;
         }
 
@@ -105,7 +102,7 @@ public class SwerveModule {
     }
 
     public void resetToAbsolute(){
-        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
+        // double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
         // double absolutePosition = 0; // for a relative Encoder
         integratedAngleEncoder.setPosition(getCanCoder().getDegrees() - angleOffset.getDegrees());
     }
