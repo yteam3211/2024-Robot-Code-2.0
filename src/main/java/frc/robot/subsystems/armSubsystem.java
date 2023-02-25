@@ -34,23 +34,24 @@ import frc.robot.RobotButtons;
 // Yteam Example Subsystem
 public class armSubsystem extends SuperSystem {
   public static SuperSparkMax ArmgMotor;
-  public SuperSparkMax gripperMotor;
-  public Gains grippergGains;
   public Gains armgGains;
 
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
     super("ShootingSubsystem");
-    grippergGains = new Gains("grippergGains", 1.5, 0, 0);
     // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
     armgGains = new Gains("armGains", 0, 0, 0.000003, 0, 0.6, 0.04, 0); // second
     // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kSmartMotion, armgGains, 7, 10, 1);
+<<<<<<< HEAD
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, grippergGains, 0, 0, 0);
         
     // setDefaultCommand(new ArmOutputCommand(this, () -> RobotButtons.coPilotJoystick.getRawAxis(XboxController.Axis.kLeftY.value)));
+=======
+    setDefaultCommand(new armPosition(this, -10));
+>>>>>>> 6ff88e57fa41173e7880e2f507c6fa996fe24513
     this.resetArmEncoder();
   }
 
@@ -59,7 +60,6 @@ public class armSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("arm position", ArmgMotor.getPosition());
-    SmartDashboard.putNumber("gripper position", gripperMotor.getPosition());
     SmartDashboard.putNumber("arm velocity", ArmgMotor.getVelocity());
 
     // This method will be called once per scheduler run
@@ -69,9 +69,6 @@ public class armSubsystem extends SuperSystem {
     ArmgMotor.reset(0);
   }
 
-  public void resetGriperEncoder(){
-    gripperMotor.reset(0);
-  }
 
   public void setPosition(double position) {
     ArmgMotor.setMode(ControlMode.Position);
@@ -80,13 +77,6 @@ public class armSubsystem extends SuperSystem {
 
   }
 
-  public void setGripperPosition(double position) {
-    gripperMotor.setMode(ControlMode.Position);
-    gripperMotor.getPIDController().setReference(position, ControlType.kPosition);
-    SmartDashboard.putNumber("gripper target", position);
-
-
-  }
 
   public double getPosition() {
     return ArmgMotor.getPosition();
@@ -97,10 +87,7 @@ public class armSubsystem extends SuperSystem {
     ArmgMotor.set(output);
   }
 
-  public void setGriperOutput(double output) {
-    gripperMotor.setMode(ControlMode.PercentOutput);
-    gripperMotor.set(output);
-  }
+
 
   public double velocity() {
     return ArmgMotor.getVelocity();
