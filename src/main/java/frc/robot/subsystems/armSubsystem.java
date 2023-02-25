@@ -15,16 +15,21 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.commands.ArmOutputCommand;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.zeroArm;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
+import frc.robot.RobotButtons;
+
 
 // Yteam Example Subsystem
 public class armSubsystem extends SuperSystem {
@@ -44,7 +49,8 @@ public class armSubsystem extends SuperSystem {
         ControlType.kSmartMotion, armgGains, 7, 10, 1);
     gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, grippergGains, 0, 0, 0);
-    setDefaultCommand(new armPosition(this, -10));
+        
+    // setDefaultCommand(new ArmOutputCommand(this, () -> RobotButtons.coPilotJoystick.getRawAxis(XboxController.Axis.kLeftY.value)));
     this.resetArmEncoder();
   }
 

@@ -41,7 +41,7 @@ public class RobotContainer {
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
     private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    private final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, ShootingSubsystem);
+    // private final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, ShootingSubsystem);
     public RobotContainer() {
 
         // Configure the button bindings
@@ -71,7 +71,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return atuo;
+        return null; // atuo;
     }
 
     // gets & sets 
