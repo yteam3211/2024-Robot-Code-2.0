@@ -48,6 +48,6 @@ public class moveInParallel extends ParallelCommandGroup {
 
     addCommands(new TimerArmPosition(armSubsystem, positionForArm, delayForTheArm, stop),
     new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds),
-     new TimerGripperCommand(gripperSubsystem,positionForGripper,secends), next2human.getAutoCommand(s_Swerve));
+     new TimerGripperCommand(positionForGripper,secends, gripperSubsystem), next2human.getAutoCommand(s_Swerve));
   }
 }

@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /** An example command that uses an example subsystem. */
 public class TimerGripperCommand extends CommandBase {
-  private final armSubsystem armSubsystem;
   private final GripperSubsystem gripperSubsystem;
   private double position;
   private double seconds;
@@ -25,8 +24,7 @@ public class TimerGripperCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TimerGripperCommand(armSubsystem armSubsystem, double position, double seconds, GripperSubsystem gripperSubsystem) {
-    this.armSubsystem = armSubsystem;
+  public TimerGripperCommand(double position, double seconds, GripperSubsystem gripperSubsystem) {
     this.gripperSubsystem = gripperSubsystem;
     this.position = position;
     this.seconds = seconds;
