@@ -5,7 +5,9 @@
 package frc.robot.commands.timercommand;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.gripperCommand;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.armSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -14,6 +16,7 @@ import frc.robot.subsystems.armSubsystem;
 public class openInParallel extends ParallelCommandGroup {
   CollectSubsystem collectSubsystem;
   armSubsystem armSubsystem;
+  GripperSubsystem gripperSubsystem;
   double delayForTheArm;
   double positionForArm;
   double positionForGripper;
@@ -24,21 +27,26 @@ public class openInParallel extends ParallelCommandGroup {
 
   /** Creates a new collectInParallel. */
   public openInParallel(armSubsystem armSubsystem, CollectSubsystem collectSubsystem,
-   double delayForTheArm,double positionForArm, double stop, double point, double collectSeconds, double secends,double positionForGripper) {
+  GripperSubsystem gripperSubsystem,
+   double delayForTheArm,double positionForArm,
+    double stop, double point, double collectSeconds,
+     double secends,double positionForGripper) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     this.collectSubsystem = collectSubsystem;
     this.armSubsystem = armSubsystem;
+    this.gripperSubsystem = gripperSubsystem;
     this.delayForTheArm = delayForTheArm;
     this.positionForArm = positionForArm;
     this.positionForGripper = positionForGripper;
     this.stop = stop;
     this.point = point;
     this.secends = secends;
-
+    this.gripperSubsystem = gripperSubsystem;
 
 
     addCommands(new TimerArmPosition(armSubsystem, positionForArm, delayForTheArm, stop),
-    new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds), new TimerGripperCommand(armSubsystem, positionForGripper,secends));
+    new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds),
+     new TimerGripperCommand(positionForGripper, secends, gripperSubsystem));
   }
 }

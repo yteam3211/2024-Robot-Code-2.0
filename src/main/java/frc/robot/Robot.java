@@ -10,6 +10,8 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,6 +31,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private ShootingSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,9 +45,13 @@ public class Robot extends TimedRobot {
     ctreConfigs = new CTREConfigs();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
     CameraServer.startAutomaticCapture();
+
   }
 
   /**
@@ -53,6 +63,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    m_autoSelected = m_chooser.getSelected();
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -74,6 +85,14 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_autoSelected = m_chooser.getSelected();
+    switch (m_autoSelected) {
+      case kCustomAuto:
+      m_autonomousCommand = m_robotContainer.geAtuo1();
+      case kDefaultAuto:
+      default:
+      m_autonomousCommand = m_robotContainer.gAtuo2();
+    }
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
