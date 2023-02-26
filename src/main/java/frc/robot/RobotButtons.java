@@ -39,7 +39,8 @@ public class RobotButtons {
     public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
     public Trigger LimelightRetroReflectiveMid = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     public Trigger LimelightRetroReflectiveFloor = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
-    public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
+    // public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
+    public static Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
     // systems jpoystick buttons
     public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
@@ -72,19 +73,21 @@ public class RobotButtons {
                     () -> driver.getRawAxis(XboxController.Axis.kLeftY.value),
                     () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
                     () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
-                    () -> false));
+                    () -> false,
+                    0));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, 0));
         LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
-        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 11.2));
+        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 14.3));
         // systems joystick commands
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem,collectWheels, -0.8, 0.3, 250));
-        collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, -0.5));
-        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.7));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels, -0.5, -0.15, 250));
+        collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, 0.5));
+        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45, 6850));
+        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.55, 6850));
+        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
         humanArm.onTrue(new armPosition(armSubsystem, -18));
-        midArm.onTrue(new armPosition(armSubsystem, -64));  
+        midArm.onTrue(new armPosition(armSubsystem, -63));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.475));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));

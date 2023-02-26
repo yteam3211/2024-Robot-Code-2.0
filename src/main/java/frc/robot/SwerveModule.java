@@ -68,7 +68,7 @@ public class SwerveModule {
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){
         double desiredSpeed = desiredState.speedMetersPerSecond;
         if (RobotButtons.halfSpeed.getAsBoolean()) {
-            desiredSpeed /= 2;
+            desiredSpeed /= 2.3;
         }
 
         if(isOpenLoop){

@@ -38,13 +38,18 @@ public class ArmOutputCommand extends CommandBase {
   @Override
   public void execute() {
     // armSubsystem.setArmOutput(output.getAsDouble() / 3);
+    
     armSubsystem.setArmOutput(output);
+    System.out.println();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armSubsystem.setPosition(armSubsystem.getPosition());
+    armSubsystem.ToString();
+    // armSubsystem.setPosition(armSubsystem.getPosition());
+    System.out.println("ffff finish");
+
   }
 
   // Returns true when the command should end.
