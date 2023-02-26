@@ -43,7 +43,9 @@ public class RobotContainer {
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem, m_GripperSubsystem);
+    public final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
+    public final rightAtuo1 rightAtuo = new rightAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
+    public final leftAtuo1 leftAtuo = new leftAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem, limelight);
      
@@ -56,6 +58,12 @@ public class RobotContainer {
     }
     public atuo1 geAtuo1(){
         return atuo;
+    }
+    public leftAtuo1 gLeftAtuo1(){
+        return leftAtuo;
+    }
+    public rightAtuo1 gRightAtuo1(){
+        return rightAtuo;
     }
     public atuo2 gAtuo2(){
         return atuo2;
