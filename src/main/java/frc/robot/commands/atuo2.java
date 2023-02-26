@@ -1,4 +1,3 @@
-
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -13,14 +12,16 @@ import frc.robot.autos.centerToRampa;
 import frc.robot.autos.next2human;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;
+import frc.util.vision.Limelight;
+import frc.robot.commands.LimelightPID.SideToSide;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.TimerGripperCommand;
-import frc.robot.commands.timercommand.collectAtuoCommand;
+import frc.robot.commands.timercommand.TimerSideToSide;
 import frc.robot.commands.timercommand.moveInParallel;
 import frc.robot.commands.timercommand.openInParallel;
-import frc.robot.subsystems.collectWheels;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -32,46 +33,38 @@ public class atuo2 extends SequentialCommandGroup {
   private ShootingSubsystem ShootingSubsystem;
   private CollectSubsystem collectSubsystem;
   private armSubsystem armSubsystem;
-  private openInParallel openInParallel;
-  private TimerGripperCommand timerGripperCommand;
-  private moveInParallel moveInParallel;
-  private collectAtuoCommand collectAtuoCommand;
-  private collectWheels collectWheels;
-  private TimerArmPosition timerArmPosition;
-  private timeSetPointCollectCommand timeSetPointCollectCommand;
+  private GripperSubsystem gripperSubsystem;
+  private Limelight limelight;
 
   
-  public atuo2(Swerve swerve,openInParallel openInParallel,
-  timeSetPointCollectCommand timeSetPointCollectCommand,
-  TimerArmPosition timerArmPosition,
-  collectWheels collectWheels,
-  collectAtuoCommand collectAtuoCommand,
-  next2human next2human,
+  public atuo2(Swerve s_Swerve2,
   armSubsystem armSubsystem,
-  TimerGripperCommand timerGripperCommand,
   CollectSubsystem collectSubsystem,
-  moveInParallel moveInParallel,
-  ShootingSubsystem ShootingSubsystem
+  ShootingSubsystem ShootingSubsystem,
+  GripperSubsystem gripperSubsystem,
+  Limelight limelight
 ) {
-    this.s_Swerve = swerve;
-    this.timeSetPointCollectCommand = timeSetPointCollectCommand; 
-    this.timerArmPosition = timerArmPosition;
-    this.collectAtuoCommand = collectAtuoCommand;
+    this.s_Swerve = s_Swerve2;
+    this.armSubsystem = armSubsystem;
     this.collectSubsystem = collectSubsystem;
     this.ShootingSubsystem = ShootingSubsystem;
-    this.armSubsystem = armSubsystem;
-    this.openInParallel = openInParallel;
-    this.moveInParallel = moveInParallel;
-    this.timerGripperCommand = timerGripperCommand;
-    this.collectWheels = collectWheels;
+    this.gripperSubsystem = gripperSubsystem;
+    this.limelight = limelight;
+    
+    
   
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem),
-    openInParallel,
-    timerGripperCommand,
-    moveInParallel);
+    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
+    new TimerGripperCommand(gripperSubsystem, -12.5, 0.5),
+    new moveInParallel(s_Swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
+    next2human.getAutoCommand(s_Swerve),
+    new TimerSideToSide(limelight, s_Swerve, isFinished(),2),
+    new shootingOutputCommand(ShootingSubsystem, 0.7)
+    );
+
   }
 }

@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,25 +29,36 @@ import frc.util.vision.Limelight.limelightStreamMode;
 public class RobotContainer {
     /* Controllers */
     private RobotButtons robotButtons = new RobotButtons();
-    public Limelight limelight = new Limelight.Builder().build();
+    public static final Limelight limelight = new Limelight.Builder().build();
     /* Drive Controls */
     private final TestAuto testAuto = new TestAuto(); 
 
 
     /* Subsystems */
-    private final Swerve s_Swerve = new Swerve();
-    private final collectWheels m_CollectWheels = new collectWheels();
-    private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
-    private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
-    private final armSubsystem m_ArmSubsystem = new armSubsystem();
-    private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
+    public static final Swerve s_Swerve = new Swerve();
+    public static final collectWheels m_CollectWheels = new collectWheels();
+    public static final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
+    public static final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
+    public static final armSubsystem m_ArmSubsystem = new armSubsystem();
+    public static final GripperSubsystem gripperSubsystem = new GripperSubsystem();
+    public static final ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    private final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, ShootingSubsystem);
+    public final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, ShootingSubsystem,gripperSubsystem);
+    public static final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, ShootingSubsystem,
+     gripperSubsystem, limelight);
+     
+     
     public RobotContainer() {
 
         // Configure the button bindings
         configureButtonBindings();
         
+    }
+    public atuo1 geAtuo1(){
+        return atuo;
+    }
+    public atuo2 gAtuo2(){
+        return atuo2;
     }
 
     private void configureSwerveButtons() {

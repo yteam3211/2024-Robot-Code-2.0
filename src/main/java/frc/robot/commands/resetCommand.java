@@ -31,6 +31,5 @@ public class resetCommand extends InstantCommand {
     shootingSubsystem.resetEncoder();
     collectSubsystem.reSetEncoder();
     armSubsystem.resetArmEncoder();
-    armSubsystem.resetGriperEncoder();
   }
 }
