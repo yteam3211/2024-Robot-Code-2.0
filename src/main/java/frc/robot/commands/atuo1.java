@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
@@ -52,6 +53,7 @@ public class atuo1 extends SequentialCommandGroup {
     
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
+    new InstantCommand(() -> swerve.zeroGyro()),
     new openInParallel(armSubsystem, collectSubsystem,  gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
     new TimerGripperCommand(-12.5, 0.5, gripperSubsystem),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem,0.4, -10, 4.4, 0, 1.5, 1, 0),
