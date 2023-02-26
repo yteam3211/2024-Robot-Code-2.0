@@ -38,8 +38,9 @@ public class RobotContainer {
     private final collectWheels m_CollectWheels = new collectWheels();
     private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
+    private final GripperSubsystem m_GripperSubsystem = new GripperSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
-    private ShootingSubsystem ShootingSubsystem = new ShootingSubsystem();
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     // private final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, ShootingSubsystem);
     public RobotContainer() {
@@ -61,7 +62,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight,  m_GripperSubsystem);
     }
  
     /**

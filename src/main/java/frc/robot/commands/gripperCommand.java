@@ -4,13 +4,14 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /** An example command that uses an example subsystem. */
 public class gripperCommand extends CommandBase {
-  private final armSubsystem armSubsystem;
+  private final GripperSubsystem gripperSubsystem;
   private double position;
   
 
@@ -19,12 +20,12 @@ public class gripperCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public gripperCommand(armSubsystem armSubsystem, double position) {
-    this.armSubsystem = armSubsystem;
+  public gripperCommand(GripperSubsystem gripperSubsystem, double position) {
+    this.gripperSubsystem = gripperSubsystem;
     this.position = position;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(gripperSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -34,7 +35,7 @@ public class gripperCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.setGripperPosition(position);
+    gripperSubsystem.setGripperPosition(position);
   }
 
   // Called once the command ends or is interrupted.

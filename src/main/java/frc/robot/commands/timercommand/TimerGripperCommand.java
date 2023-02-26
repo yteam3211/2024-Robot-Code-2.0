@@ -4,6 +4,7 @@
 
 package frc.robot.commands.timercommand;
 
+import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 /** An example command that uses an example subsystem. */
 public class TimerGripperCommand extends CommandBase {
   private final armSubsystem armSubsystem;
+  private final GripperSubsystem gripperSubsystem;
   private double position;
   private double seconds;
   private Timer timer = new Timer();
@@ -22,8 +24,9 @@ public class TimerGripperCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TimerGripperCommand(armSubsystem armSubsystem, double position, double seconds) {
+  public TimerGripperCommand(armSubsystem armSubsystem, double position, double seconds, GripperSubsystem gripperSubsystem) {
     this.armSubsystem = armSubsystem;
+    this.gripperSubsystem = gripperSubsystem;
     this.position = position;
     this.seconds = seconds;
 
@@ -41,7 +44,7 @@ public class TimerGripperCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.setGripperPosition(position);
+    gripperSubsystem.setGripperPosition(position);
   }
 
   // Called once the command ends or is interrupted.

@@ -11,6 +11,7 @@ import frc.robot.autos.TestAuto;
 import frc.robot.autos.centerToRampa;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.commands.timercommand.TimerArmPosition;
@@ -26,16 +27,19 @@ public class atuo1 extends SequentialCommandGroup {
   private final Swerve s_Swerve;
   private ShootingSubsystem ShootingSubsystem;
   private CollectSubsystem collectSubsystem;
+  private GripperSubsystem gripperSubsystem;
   private armSubsystem armSubsystem;
   private collectGroupCommand collectGroupCommand;
   private timeSetPointCollectCommand timeSetPointCollectCommand;
   private TimerArmPosition TimerArmPosition;
+  
 
   
   public atuo1(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
-  ShootingSubsystem ShootingSubsystem
+  ShootingSubsystem ShootingSubsystem,
+  GripperSubsystem gripperSubsystem
 ) {
     this.s_Swerve = swerve;
     this.collectSubsystem = collectSubsystem;
@@ -47,10 +51,10 @@ public class atuo1 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem),
-    new openInParallel(armSubsystem, collectSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
-    new TimerGripperCommand(armSubsystem, -12.5, 0.5),
-    new openInParallel(armSubsystem, collectSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
+    addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
+    new openInParallel(armSubsystem, collectSubsystem,  gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
+    new TimerGripperCommand(armSubsystem, -12.5, 0.5, gripperSubsystem),
+    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem,0.4, -10, 4.4, 0, 1.5, 1, 0),
     centerToRampa.getAutoCommand(s_Swerve));
   }
 }

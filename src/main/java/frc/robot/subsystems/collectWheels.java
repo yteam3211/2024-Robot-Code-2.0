@@ -13,7 +13,7 @@ public class collectWheels extends SubsystemBase {
   /** Creates a new collectWheels. */
   public collectWheels() {
     collectWheelsMotor = new VictorSP(1);
-    centeringMotor = new VictorSP(0);
+    centeringMotor = new VictorSP(2);
   }
 
   @Override

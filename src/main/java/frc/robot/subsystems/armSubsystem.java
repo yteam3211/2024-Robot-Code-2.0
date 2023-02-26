@@ -44,14 +44,7 @@ public class armSubsystem extends SuperSystem {
     // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kSmartMotion, armgGains, 7, 10, 1);
-<<<<<<< HEAD
-    gripperMotor = new SuperSparkMax(Constants.GRIPPER_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
-        ControlType.kPosition, grippergGains, 0, 0, 0);
-        
     // setDefaultCommand(new ArmOutputCommand(this, () -> RobotButtons.coPilotJoystick.getRawAxis(XboxController.Axis.kLeftY.value)));
-=======
-    setDefaultCommand(new armPosition(this, -10));
->>>>>>> 6ff88e57fa41173e7880e2f507c6fa996fe24513
     this.resetArmEncoder();
   }
 

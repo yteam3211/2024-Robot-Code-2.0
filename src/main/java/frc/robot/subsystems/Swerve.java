@@ -121,14 +121,14 @@ public class Swerve extends SuperSystem {
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("yaw", gyro.getYaw());
-        SmartDashboard.putNumber("roll", gyro.getRoll());
-        SmartDashboard.putNumber("pitch", gyro.getPitch());
-        swerveOdometry.update(getYaw(), getModulePositions());  
-        for(SwerveModule mod : mSwerveMods){
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        }
+        // SmartDashboard.putNumber("yaw", gyro.getYaw());
+        // SmartDashboard.putNumber("roll", gyro.getRoll());
+        // SmartDashboard.putNumber("pitch", gyro.getPitch());
+        // swerveOdometry.update(getYaw(), getModulePositions());  
+        // for(SwerveModule mod : mSwerveMods){
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        // }
     }
 }
