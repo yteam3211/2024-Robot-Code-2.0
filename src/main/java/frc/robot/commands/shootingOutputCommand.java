@@ -12,6 +12,7 @@ public class shootingOutputCommand extends CommandBase {
   private final ShootingSubsystem shootingSubsystem;
   private double output;
   private double velocity;
+  private double max;
   
 
   /**
@@ -19,9 +20,10 @@ public class shootingOutputCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public shootingOutputCommand(ShootingSubsystem shootingSubsystem, double output) {
+  public shootingOutputCommand(ShootingSubsystem shootingSubsystem, double output, double max) {
     this.shootingSubsystem = shootingSubsystem;
     this.output = output;
+    this.max = max;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shootingSubsystem);
   }
@@ -49,7 +51,7 @@ public class shootingOutputCommand extends CommandBase {
     // output += 0.001;
     // if (output == 0.95)
     //   return true; 
-    if(shootingSubsystem.GetPosition() >= shootingSubsystem.max){
+    if(shootingSubsystem.GetPosition() >= max){
       return true;
     }else{
       return false;
