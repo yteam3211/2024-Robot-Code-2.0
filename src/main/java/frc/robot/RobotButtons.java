@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
 import frc.robot.commands.ArmOutputCommand;
+import frc.robot.commands.ArmTriggerCommand;
+import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.collectGroupCommand;
@@ -21,37 +23,39 @@ import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
-import frc.robot.commands.LimelightPID.ForwardAndBack;
-import frc.robot.commands.LimelightPID.SideToSide;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
-import frc.robot.subsystems.collectWheels;import frc.util.vision.Limelight;
+import frc.robot.subsystems.collectWheels;
+import frc.util.vision.Limelight;
 
 
 // Yteam loadButtons
 public class RobotButtons {
 
-    public static Joystick coPilotJoystick = new Joystick(1);
+    public static Joystick systems = new Joystick(1);
     public static Joystick driver = new Joystick(0);
-
+    // driver jpoystick buttons
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
+    public Trigger LimelightRetroReflectiveMid = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
+    public Trigger LimelightRetroReflectiveFloor = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
     public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public Trigger OpenCollect = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
-    public Trigger collectWheelsBack = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kStart.value));
-    public Trigger shootingLow = new Trigger(() -> coPilotJoystick.getPOV() == 180);
-    public Trigger shootingHigh = new Trigger(() -> coPilotJoystick.getPOV() == 0);
-    public Trigger shootingMiddle = new Trigger(() -> coPilotJoystick.getPOV() == 270);
-    public Trigger humanArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kY.value));
-    public Trigger middleArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kX.value));
-    public Trigger lowArm = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kA.value));
+    // systems jpoystick buttons
+    public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
+    public Trigger collectWheelsBack = new Trigger(() -> systems.getRawButton(XboxController.Button.kStart.value));
+    public Trigger shootingLow = new Trigger(() -> systems.getPOV() == 180);
+    public Trigger shootingHigh = new Trigger(() -> systems.getPOV() == 0);
+    public Trigger shootingMiddle = new Trigger(() -> systems.getPOV() == 270);
+    public Trigger humanArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
+    public Trigger floorArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
+    public Trigger midArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
     // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
-    public Trigger openGripper = new Trigger(() -> coPilotJoystick.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
-    public Trigger armUpTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
-    public Trigger armDowmTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kRightBumper.value));
-    public Trigger resetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kB.value));
-    public Trigger SeconderyResetTrigger = new Trigger(() -> coPilotJoystick.getRawButton(XboxController.Button.kBack.value));
-    public final Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
+    public Trigger openGripper = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
+    public Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
+    public Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
+    public Trigger resetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kB.value));
+    public Trigger SeconderyResetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kBack.value));
 
     /**
      * @param shootingSubsystem
@@ -61,29 +65,32 @@ public class RobotButtons {
      */
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
             armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem) {
+        // driver joystick commands
         swerve.setDefaultCommand(
-                new TeleopSwerve(
-                        swerve,
-                        () -> driver.getRawAxis(XboxController.Axis.kLeftY.value),
-                        () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
-                        () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
-                        () -> false));
+            new TeleopSwerve(
+                    swerve,
+                    () -> driver.getRawAxis(XboxController.Axis.kLeftY.value),
+                    () -> driver.getRawAxis(XboxController.Axis.kLeftX.value),
+                    () -> driver.getRawAxis(XboxController.Axis.kRightX.value),
+                    () -> false));
+        resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
+        LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, 0));
+        LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
+        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 12));
+        // systems joystick commands
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
         OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem,collectWheels, 0.8, 0.3, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45));
         shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.7));
         humanArm.onTrue(new armPosition(armSubsystem, -19));
-        lowArm.onTrue(new armPosition(armSubsystem, -63.5));  
-        middleArm.onTrue(new armPosition(armSubsystem, 0));
+        midArm.onTrue(new armPosition(armSubsystem, -63.5));  
+        floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -12.1));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
-        armUpTrigger.whileTrue(new ArmOutputCommand(armSubsystem, 0.3));
-        armDowmTrigger.whileTrue(new ArmOutputCommand(armSubsystem, -0.3));
+        // armBackTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, 1.5));
+        // armForwardTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, -0.5));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
-        resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        LimelightAprilTag.whileTrue(new SideToSide(limelight, swerve, true));
-        
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));      
     }
 }
