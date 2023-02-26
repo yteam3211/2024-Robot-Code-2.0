@@ -76,21 +76,24 @@ public class RobotButtons {
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, 0));
         LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
-        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 12));
+        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 11.2));
         // systems joystick commands
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem,collectWheels, 0.8, 0.3, 250));
-        collectWheelsBack.whileTrue(new collectOutput(collectWheels, -0.6, -0.5));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem,collectWheels, -0.8, 0.3, 250));
+        collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, -0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45));
         shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.7));
-        humanArm.onTrue(new armPosition(armSubsystem, -19));
-        midArm.onTrue(new armPosition(armSubsystem, -63.5));  
+        humanArm.onTrue(new armPosition(armSubsystem, -18));
+        midArm.onTrue(new armPosition(armSubsystem, -64));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.475));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         // armBackTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, 1.5));
-        // armForwardTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, -0.5));
+        armBackTrigger.whileTrue(new ArmOutputCommand(armSubsystem, 0.1));
+        armForwardTrigger.whileTrue(new ArmOutputCommand(armSubsystem, -0.05));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));      
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
+        resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
+      
     }
 }
