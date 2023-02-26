@@ -4,6 +4,7 @@
 
 package frc.robot.commands.timercommand;
 
+import frc.robot.commands.gripperCommand;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import edu.wpi.first.wpilibj.Timer;
@@ -31,7 +32,7 @@ public class TimerGripperCommand extends CommandBase {
     this.seconds = seconds;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(gripperSubsystem);
   }
 
   // Called when the command is initially scheduled.
