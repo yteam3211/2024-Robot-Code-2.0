@@ -2,6 +2,9 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
+import frc.util.PID.Gains;
+import frc.util.PID.PIDController;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
@@ -15,8 +18,11 @@ public class TeleopSwerve extends CommandBase {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
+    protected double turnAngle;
+    protected Gains turnGains = new Gains("Turn Gains",0,0,0);
+    protected PIDController turnPid = new PIDController(turnGains);
+    
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, double turnAngle) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -24,6 +30,8 @@ public class TeleopSwerve extends CommandBase {
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
+        this.turnAngle = turnAngle;
+        turnPid.setTargetPosition(turnAngle);
     }
 
     @Override
