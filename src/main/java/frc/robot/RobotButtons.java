@@ -53,8 +53,8 @@ public class RobotButtons {
     public Trigger midArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
     // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
     public Trigger openGripper = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
-    public Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
-    public Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
+    public static Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
+    public static Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger resetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kB.value));
     public Trigger SeconderyResetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kBack.value));
 
@@ -91,9 +91,6 @@ public class RobotButtons {
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.475));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
-        // armBackTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, 1.5));
-        armBackTrigger.whileTrue(new ArmOutputCommand(armSubsystem, 0.1));
-        armForwardTrigger.whileTrue(new ArmOutputCommand(armSubsystem, -0.05));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
