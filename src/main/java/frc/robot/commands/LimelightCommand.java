@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.LimelightPID;
+package frc.robot.commands;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -13,37 +13,42 @@ import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
 import frc.util.vision.Limelight;
 
-public class SideToSide extends CommandBase {
+public class LimelightCommand extends CommandBase {
   /** Creates a new SideToSideApriltag. */
   protected Limelight limelight;
   protected Swerve swerve;
   protected boolean AprilTag;
+  protected double yPos;
   protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
-  protected Gains gainsY = new Gains("gains y", 0.45, 0, 0.045);
+  protected Gains RRgainsY = new Gains("gains y", 0.17, 0, 0.045);
   protected Gains gainsR = new Gains("gains r", 0.05, 0, 0);
+  // protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
+  protected Gains gainsY = new Gains("gains y", 0.45, 0, 0.045);
+  // protected Gains gainsR = new Gains("gains r", 0.05, 0, 0);
   protected PIDController pidX = new PIDController(gainsX);
   protected PIDController pidY = new PIDController(gainsY);
   protected PIDController pidR = new PIDController(gainsR);
 
-  public SideToSide(Limelight limelight, Swerve swerve, boolean AprilTag) {
+  public LimelightCommand(Limelight limelight, Swerve swerve, boolean AprilTag, double yPos) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limelight = limelight;
     this.swerve = swerve;
     this.AprilTag = AprilTag;
+    this.yPos = yPos;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (AprilTag){
-      pidY.setTargetPosition(0);
+    if (AprilTag){                            
       limelight.setPipeline(0);
     }
     else{
-      pidY.setTargetPosition(5);
       limelight.setPipeline(1);
+      pidY.setGains(RRgainsY);
     }
     pidX.setTargetPosition(0);
+    pidY.setTargetPosition(yPos);
     pidR.setTargetPosition(0);
     pidX.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
     pidY.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
