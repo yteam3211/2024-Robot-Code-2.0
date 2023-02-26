@@ -36,11 +36,17 @@ public class Balance extends CommandBase {
   @Override
   public void execute() {
       swerve.drive(            
-                  new Translation2d(0, pidBAL.getOutput(Swerve.gyro.getPitch())), 
-                  pidBAL.getOutput(Swerve.gyro.getYaw()), 
+                  new Translation2d(0, 0.05 * Math.signum(Swerve.gyro.getPitch())).times(Constants.Swerve.maxSpeed), 
+                  0,
                   false, //Field oriented by the controller switch
               true
               );
+      // swerve.drive(            
+      //             new Translation2d(0, pidBAL.getOutput(Swerve.gyro.getPitch())), 
+      //             pidBAL.getOutput(Swerve.gyro.getYaw()), 
+      //             false, //Field oriented by the controller switch
+      //         true
+      //         );
     }
   
 

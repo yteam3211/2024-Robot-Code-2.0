@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
@@ -28,7 +29,7 @@ import frc.robot.commands.timercommand.openInParallel;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class atuo2 extends SequentialCommandGroup {
   /** Creates a new atuo1. */
-  private final Swerve s_Swerve;
+  private final Swerve swerve;
   private ShootingSubsystem ShootingSubsystem;
   private CollectSubsystem collectSubsystem;
   private armSubsystem armSubsystem;
@@ -36,14 +37,14 @@ public class atuo2 extends SequentialCommandGroup {
   private Limelight limelight;
 
   
-  public atuo2(Swerve s_Swerve2,
+  public atuo2(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem,
   GripperSubsystem gripperSubsystem,
   Limelight limelight
 ) {
-    this.s_Swerve = s_Swerve2;
+    this.swerve = swerve;
     this.armSubsystem = armSubsystem;
     this.collectSubsystem = collectSubsystem;
     this.ShootingSubsystem = ShootingSubsystem;
@@ -57,12 +58,13 @@ public class atuo2 extends SequentialCommandGroup {
     
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
+    new InstantCommand(() -> swerve.zeroGyro()),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
     new TimerGripperCommand(-12.5, 0.5, gripperSubsystem),
-    new moveInParallel(s_Swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
-    next2human.getAutoCommand(s_Swerve),
-    new TimerSideToSide(limelight, s_Swerve, isFinished(),2),
-    new shootingOutputCommand(ShootingSubsystem, 0.7)
+    new moveInParallel(swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
+    next2human.getAutoCommand(swerve),
+    new TimerSideToSide(limelight, swerve, isFinished(),2),
+    new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)
     );
 
   }

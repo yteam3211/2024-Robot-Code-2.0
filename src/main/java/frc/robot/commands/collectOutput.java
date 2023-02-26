@@ -23,7 +23,8 @@ public class collectOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public collectOutput(collectWheels collectWheels, double WheelsOutput, double centeringOutput) {
+  public 
+  collectOutput(collectWheels collectWheels, double WheelsOutput, double centeringOutput) {
     this.collectWheels = collectWheels;
     this.WheelsOutput = WheelsOutput;
     this.centeringOutput = centeringOutput;

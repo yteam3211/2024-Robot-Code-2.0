@@ -93,6 +93,9 @@ public class armSubsystem extends SuperSystem {
   public void SetTeleopDefault(){
     // setDefaultCommand(null);
   }
+  public void ToString(){
+    System.out.println("works!");
+  }
 }
 
 
