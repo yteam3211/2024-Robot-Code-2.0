@@ -86,7 +86,7 @@ public class RobotButtons {
         humanArm.onTrue(new armPosition(armSubsystem, -19));
         midArm.onTrue(new armPosition(armSubsystem, -63.5));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        openGripper.whileTrue(new gripperCommand(gripperSubsystem, -12.1));
+        openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.475));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         // armBackTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, 1.5));
         // armForwardTrigger.whileTrue(new ArmTriggerCommand(armSubsystem, -0.5));
