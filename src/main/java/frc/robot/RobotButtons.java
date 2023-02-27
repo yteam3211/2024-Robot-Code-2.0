@@ -85,10 +85,10 @@ public class RobotButtons {
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
         OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels, -0.5, -0.15, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, 0.5));
-        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.45, 6850));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.55, 6850));
+        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.37, 6850));
+        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.5, 6850));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
-        humanArm.onTrue(new armPosition(armSubsystem, -18));
+        humanArm.onTrue(new armPosition(armSubsystem, -20.7));
         midArm.onTrue(new armPosition(armSubsystem, -63));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
