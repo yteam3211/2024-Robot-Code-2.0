@@ -59,12 +59,12 @@ public class atuo2 extends SequentialCommandGroup {
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
     new InstantCommand(() -> swerve.zeroGyro()),
-    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
-    new TimerGripperCommand(-12.5, 0.5, gripperSubsystem),
-    new moveInParallel(swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
-    next2human.getAutoCommand(swerve),
-    new TimerSideToSide(limelight, swerve, isFinished(),2),
-    new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)
+    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.7, -60, 6, 290, 2, 0, 0),
+    new TimerGripperCommand(-12.5, 1, gripperSubsystem),
+    new moveInParallel(swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0, -10, 4.4, 0, 1.5, 1, 0)
+    //next2human.getAutoCommand(swerve),
+    //new TimerSideToSide(limelight, swerve, isFinished(),2),
+    //new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)
     );
 
   }
