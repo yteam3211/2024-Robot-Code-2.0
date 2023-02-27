@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
-import frc.robot.autos.TestAuto;
 import frc.robot.autos.centerToRampa;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
@@ -54,9 +53,11 @@ public class atuo1 extends SequentialCommandGroup {
   
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
     new InstantCommand(() -> swerve.zeroGyro()),
-    new openInParallel(armSubsystem, collectSubsystem,  gripperSubsystem, 0.65, -63.5, 4.4, 290, 1, 0, 0),
-    new TimerGripperCommand(-12.5, 1.5, gripperSubsystem),
-    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem,0.4, -10, 4.4, 0, 1.5, 1, 0),
+    new openInParallel(armSubsystem, collectSubsystem,  gripperSubsystem, 0.7,
+     -63, 7.5, 290, 1, 0, 0),
+    new TimerGripperCommand(-30, 1.5, gripperSubsystem),
+    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem,0, -10,
+     4.4, 0, 0, 1, 0),
     centerToRampa.getAutoCommand(s_Swerve));
   }
 }

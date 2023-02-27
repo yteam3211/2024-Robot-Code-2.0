@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
-import frc.robot.autos.TestAuto;
 import frc.robot.autos.centerToRampa;
 import frc.robot.autos.next2human;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;

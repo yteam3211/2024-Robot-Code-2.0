@@ -91,7 +91,7 @@ public class RobotButtons {
         humanArm.onTrue(new armPosition(armSubsystem, -18));
         midArm.onTrue(new armPosition(armSubsystem, -63));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.475));
+        openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));

@@ -31,7 +31,6 @@ public class RobotContainer {
     private RobotButtons robotButtons = new RobotButtons();
     public static final Limelight limelight = new Limelight.Builder().build();
     /* Drive Controls */
-    private final TestAuto testAuto = new TestAuto(); 
 
 
     /* Subsystems */
@@ -44,11 +43,9 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
-    public final rightAtuo1 rightAtuo = new rightAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
-    public final leftAtuo1 leftAtuo = new leftAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem,m_CollectWheels, limelight);
-     public final rampaAtuo rampaAtuo = new rampaAtuo(s_Swerve, m_ArmSubsystem,
+    public final rampaAtuo rampaAtuo = new rampaAtuo(s_Swerve, m_ArmSubsystem,
       m_CollectSubsystem, m_ShootingSubsystem, m_GripperSubsystem, m_CollectWheels, limelight);
      
      
@@ -63,12 +60,6 @@ public class RobotContainer {
     }
     public rampaAtuo gRampaAtuo(){
         return rampaAtuo;
-    }
-    public leftAtuo1 gLeftAtuo1(){
-        return leftAtuo;
-    }
-    public rightAtuo1 gRightAtuo1(){
-        return rightAtuo;
     }
     public atuo2 gAtuo2(){
         return atuo2;
