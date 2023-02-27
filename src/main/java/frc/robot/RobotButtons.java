@@ -27,6 +27,7 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.util.vision.Limelight;
+// import frc.robot.commands.Balance;
 
 
 // Yteam loadButtons
@@ -36,6 +37,7 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
     // driver jpoystick buttons
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    public Trigger Balance = new Trigger(() -> driver.getRawButton(XboxController.Button.kStart.value)); 
     public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
     public Trigger LimelightRetroReflectiveMid = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     public Trigger LimelightRetroReflectiveFloor = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
@@ -94,6 +96,7 @@ public class RobotButtons {
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
+
       
     }
 }

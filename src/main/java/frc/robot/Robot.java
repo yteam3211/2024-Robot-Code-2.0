@@ -31,8 +31,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private ShootingSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  private static final String centerToRampaAuto = "center To Rampa";
+  private static final String kCustomAuto = "next to human & 1 cube";
+  private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -45,8 +46,9 @@ public class Robot extends TimedRobot {
     ctreConfigs = new CTREConfigs();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+    //m_chooser.setDefaultOption("", centerToRampaAuto);
+    m_chooser.addOption("do nofing", kCustomAuto);
+    m_chooser.addOption("Center To Rampa", rAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
@@ -87,13 +89,13 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     switch (m_autoSelected) {
-      case kCustomAuto:
+      case centerToRampaAuto:
       m_autonomousCommand = m_robotContainer.geAtuo1();
-      case kDefaultAuto:
-      default:
+      case kCustomAuto:
       m_autonomousCommand = m_robotContainer.gAtuo2();
+      
     }
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
 

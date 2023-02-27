@@ -16,11 +16,13 @@ import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.armSubsystem;
+import frc.robot.subsystems.collectWheels;
 import frc.util.vision.Limelight;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.TimerGripperCommand;
 import frc.robot.commands.timercommand.TimerSideToSide;
 import frc.robot.commands.timercommand.moveInParallel;
+
 import frc.robot.commands.timercommand.openInParallel;
 
 
@@ -34,6 +36,7 @@ public class atuo2 extends SequentialCommandGroup {
   private CollectSubsystem collectSubsystem;
   private armSubsystem armSubsystem;
   private GripperSubsystem gripperSubsystem;
+  private collectWheels collectWheels;
   private Limelight limelight;
 
   
@@ -42,6 +45,7 @@ public class atuo2 extends SequentialCommandGroup {
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem,
   GripperSubsystem gripperSubsystem,
+  collectWheels collectWheels,
   Limelight limelight
 ) {
     this.swerve = swerve;
@@ -49,6 +53,7 @@ public class atuo2 extends SequentialCommandGroup {
     this.collectSubsystem = collectSubsystem;
     this.ShootingSubsystem = ShootingSubsystem;
     this.gripperSubsystem = gripperSubsystem;
+    this.collectWheels = collectWheels;
     this.limelight = limelight;
     
     
@@ -60,8 +65,9 @@ public class atuo2 extends SequentialCommandGroup {
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
     new InstantCommand(() -> swerve.zeroGyro()),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.7, -60, 6, 290, 2, 0, 0),
-    new TimerGripperCommand(-12.5, 1, gripperSubsystem),
-    new moveInParallel(swerve, armSubsystem, collectSubsystem, gripperSubsystem, 0, -10, 4.4, 0, 1.5, 1, 0)
+    new TimerGripperCommand(-30, 1, gripperSubsystem),
+    new moveInParallel(swerve, armSubsystem, collectSubsystem, collectWheels, gripperSubsystem, 0,
+     -10, 4.4, 0, 1.5, 1,0,0)
     //next2human.getAutoCommand(swerve),
     //new TimerSideToSide(limelight, swerve, isFinished(),2),
     //new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)

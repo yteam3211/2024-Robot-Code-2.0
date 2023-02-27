@@ -47,7 +47,9 @@ public class RobotContainer {
     public final rightAtuo1 rightAtuo = new rightAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final leftAtuo1 leftAtuo = new leftAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
-     m_GripperSubsystem, limelight);
+     m_GripperSubsystem,m_CollectWheels, limelight);
+     public final rampaAtuo rampaAtuo = new rampaAtuo(s_Swerve, m_ArmSubsystem,
+      m_CollectSubsystem, m_ShootingSubsystem, m_GripperSubsystem, m_CollectWheels, limelight);
      
      
     public RobotContainer() {
@@ -58,6 +60,9 @@ public class RobotContainer {
     }
     public atuo1 geAtuo1(){
         return atuo;
+    }
+    public rampaAtuo gRampaAtuo(){
+        return rampaAtuo;
     }
     public leftAtuo1 gLeftAtuo1(){
         return leftAtuo;

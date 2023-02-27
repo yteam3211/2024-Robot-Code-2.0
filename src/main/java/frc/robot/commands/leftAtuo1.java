@@ -54,7 +54,7 @@ public class leftAtuo1 extends SequentialCommandGroup {
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem,gripperSubsystem),
     new openInParallel(armSubsystem, collectSubsystem,gripperSubsystem, 0.65, -63.5, 4.4, 290, 2, 0, 0),
     new TimerGripperCommand(-12.5, 0.5,gripperSubsystem),
-    new moveInParallel(s_Swerve,armSubsystem, collectSubsystem,gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0),
+    //new moveInParallel(s_Swerve,armSubsystem, collectSubsystem,gripperSubsystem, 0.4, -10, 4.4, 0, 1.5, 1, 0,2),
     centerToRampa.getAutoCommand(s_Swerve));
   }
 }
