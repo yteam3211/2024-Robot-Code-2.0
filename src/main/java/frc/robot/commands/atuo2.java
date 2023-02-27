@@ -66,7 +66,7 @@ public class atuo2 extends SequentialCommandGroup {
     new InstantCommand(() -> swerve.zeroGyro()),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.7,
      -63.5, 4.4, 290, 1.5, 0, 0),
-    new TimerGripperCommand(-25, 0.5, gripperSubsystem),
+    new TimerGripperCommand(-25, 1, gripperSubsystem),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0,
     -12.5, 4, 0, 0, 0, 0),
     new moveInParallel(swerve, armSubsystem, collectSubsystem, collectWheels ,gripperSubsystem,
