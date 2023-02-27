@@ -47,7 +47,7 @@ public class RobotContainer {
     public final rightAtuo1 rightAtuo = new rightAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final leftAtuo1 leftAtuo = new leftAtuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
     public final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
-     m_GripperSubsystem, limelight);
+     m_GripperSubsystem,m_CollectWheels, limelight);
      
      
     public RobotContainer() {

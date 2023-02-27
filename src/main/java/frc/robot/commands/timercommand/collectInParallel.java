@@ -27,6 +27,7 @@ public class collectInParallel extends ParallelCommandGroup {
     this.timeSetPointCollectCommand = timeSetPointCollectCommand;
 
 
-    addCommands(new collectAtuoCommand(collectWheels,0.5,0.5,10),new timeSetPointCollectCommand(collectSubsystem ,3000, 7));
+    addCommands(new collectAtuoCommand(collectWheels,0.5,0.5,10),
+    new timeSetPointCollectCommand(collectSubsystem ,3000, 7));
   }
 }
