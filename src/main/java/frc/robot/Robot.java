@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private static final String centerToRampaAuto = "center To Rampa";
   private static final String kCustomAuto = "next to human & 1 cube";
+  private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -45,8 +46,9 @@ public class Robot extends TimedRobot {
     ctreConfigs = new CTREConfigs();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_chooser.setDefaultOption("Center To Rampa", centerToRampaAuto);
-    m_chooser.addOption("Next to human & 1 cube", kCustomAuto);
+    //m_chooser.setDefaultOption("", centerToRampaAuto);
+    m_chooser.addOption("do nofing", kCustomAuto);
+    m_chooser.addOption("Center To Rampa", rAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();

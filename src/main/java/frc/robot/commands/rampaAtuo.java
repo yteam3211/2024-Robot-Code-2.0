@@ -29,7 +29,7 @@ import frc.robot.commands.timercommand.openInParallel;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class atuo2 extends SequentialCommandGroup {
+public class rampaAtuo extends SequentialCommandGroup {
   /** Creates a new atuo1. */
   private final Swerve swerve;
   private ShootingSubsystem ShootingSubsystem;
@@ -40,7 +40,7 @@ public class atuo2 extends SequentialCommandGroup {
   private Limelight limelight;
 
   
-  public atuo2(Swerve swerve,
+  public rampaAtuo(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem,
@@ -65,9 +65,11 @@ public class atuo2 extends SequentialCommandGroup {
     addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
     new InstantCommand(() -> swerve.zeroGyro()),
     new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.7, -60, 6, 290, 2, 0, 0),
-    new TimerGripperCommand(-30, 1, gripperSubsystem),
+    new TimerGripperCommand(-12.5, 1, gripperSubsystem),
     new moveInParallel(swerve, armSubsystem, collectSubsystem, collectWheels, gripperSubsystem, 0,
-     -10, 4.4, 0, 1.5, 1,0,0)
+     -10, 4.4, 0, 0, 1,
+     0,0),centerToRampa.getAutoCommand(swerve)
+    
     //next2human.getAutoCommand(swerve),
     //new TimerSideToSide(limelight, swerve, isFinished(),2),
     //new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)
