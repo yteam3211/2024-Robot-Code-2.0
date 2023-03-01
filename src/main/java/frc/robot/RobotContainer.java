@@ -42,11 +42,12 @@ public class RobotContainer {
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public final atuo1 atuo = new atuo1(s_Swerve, m_ArmSubsystem,  m_CollectSubsystem, m_ShootingSubsystem,m_GripperSubsystem);
-    public final atuo2 atuo2 = new atuo2(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
+    public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
+     m_GripperSubsystem, m_CollectWheels);
+    public final jastShoot jastShootAtuo = new jastShoot(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem,m_CollectWheels, limelight);
-    public final rampaAtuo rampaAtuo = new rampaAtuo(s_Swerve, m_ArmSubsystem,
-      m_CollectSubsystem, m_ShootingSubsystem, m_GripperSubsystem, m_CollectWheels, limelight);
+    public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
+     m_ShootingSubsystem, m_GripperSubsystem);
      
      
     public RobotContainer() {
@@ -55,14 +56,14 @@ public class RobotContainer {
         configureButtonBindings();
         
     }
-    public atuo1 geAtuo1(){
-        return atuo;
+    public ballanceRampaAtuo getBallanceRampaAtuo(){
+        return ballanceRampaAtuo;
     }
-    public rampaAtuo gRampaAtuo(){
-        return rampaAtuo;
+    public center getCenterAtuo(){
+        return centerAtuo;
     }
-    public atuo2 gAtuo2(){
-        return atuo2;
+    public jastShoot getJastShootAtuo(){
+        return jastShootAtuo;
     }
 
     private void configureSwerveButtons() {

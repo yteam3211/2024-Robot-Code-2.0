@@ -37,19 +37,22 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
     // driver jpoystick buttons
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public Trigger Balance = new Trigger(() -> driver.getRawButton(XboxController.Button.kStart.value)); 
+    public static Trigger Balance = new Trigger(() -> driver.getRawButton(XboxController.Button.kStart.value)); 
     public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
     public Trigger LimelightRetroReflectiveMid = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     public Trigger LimelightRetroReflectiveFloor = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
     // public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
     public static Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
+    
+    
     // systems jpoystick buttons
     public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
     public Trigger collectWheelsBack = new Trigger(() -> systems.getRawButton(XboxController.Button.kStart.value));
     public Trigger shootingLow = new Trigger(() -> systems.getPOV() == 180);
     public Trigger shootingHigh = new Trigger(() -> systems.getPOV() == 0);
     public Trigger shootingMiddle = new Trigger(() -> systems.getPOV() == 270);
+    public Trigger shootinghTrigger = new Trigger(() -> systems.getPOV() == 90);
     public Trigger humanArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
     public Trigger floorArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
     public Trigger midArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
@@ -78,18 +81,19 @@ public class RobotButtons {
                     () -> false,
                     0));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, 0));
-        LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
+        LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, -1));
+        // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
         LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5));
         // systems joystick commands
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
         OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels, -0.5, -0.15, 250));
         collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, 0.5));
-        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.37, 6850));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.5, 6850));
+        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.29, 6930));
+        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.48, 6930));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
+        shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
         humanArm.onTrue(new armPosition(armSubsystem, -20.7));
-        midArm.onTrue(new armPosition(armSubsystem, -63));  
+        midArm.onTrue(new armPosition(armSubsystem, -65));  
         floorArm.onTrue(new armPosition(armSubsystem, -70.7));
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));

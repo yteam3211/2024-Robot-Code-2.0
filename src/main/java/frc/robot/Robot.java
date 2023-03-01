@@ -31,9 +31,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private ShootingSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
-  private static final String centerToRampaAuto = "center To Rampa";
-  private static final String doNofingAuto = "do nofing";
-  private static final String rAuto = "next to human & 1 cube";
+  private static final String centerAuto = "center";
+  private static final String ballanceRampaAtuo = "ballance Rampa";
+  private static final String jastShootAtuo = "do nofing";
+  //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -47,8 +48,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     //m_chooser.setDefaultOption("", centerToRampaAuto);
-    m_chooser.addOption("do nofing", doNofingAuto);
-    m_chooser.addOption("Center To Rampa", rAuto);
+    m_chooser.setDefaultOption("jast shoot", jastShootAtuo);
+    m_chooser.addOption("Center", centerAuto);
+    m_chooser.addOption("ballance Rampa", ballanceRampaAtuo);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
@@ -87,14 +89,13 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    switch (m_autoSelected) {
-      case centerToRampaAuto:
-      m_autonomousCommand = m_robotContainer.geAtuo1();
-      case doNofingAuto:
-      m_autonomousCommand = m_robotContainer.gAtuo2();
+    m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
+    if (m_chooser.getSelected().equals(ballanceRampaAtuo)) m_autonomousCommand = m_robotContainer.getBallanceRampaAtuo();
+    else if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    else m_autonomousCommand = m_robotContainer.getJastShootAtuo();
       
-    }
+      
+    
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
@@ -122,7 +123,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-  }
+  } 
 
   /** This function is called periodically during operator control. */
   @Override

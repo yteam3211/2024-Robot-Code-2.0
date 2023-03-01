@@ -38,7 +38,7 @@ public class armSubsystem extends SuperSystem {
 
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
-    super("ShootingSubsystem");
+    super("armSubsystem");
     // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
     armgGains = new Gains("armGains", 0, 0, 0.000003, 0, 0.6, 0.04, 0); // second
     // armgGains = new Gains("armGains",0.22,0,0);
