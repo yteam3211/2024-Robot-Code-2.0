@@ -28,7 +28,7 @@ import frc.robot.commands.timercommand.openInParallel;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class rampaAtuo extends SequentialCommandGroup {
+public class jastShoot extends SequentialCommandGroup {
   /** Creates a new atuo1. */
   private final Swerve swerve;
   private ShootingSubsystem ShootingSubsystem;
@@ -39,7 +39,7 @@ public class rampaAtuo extends SequentialCommandGroup {
   private Limelight limelight;
 
   
-  public rampaAtuo(Swerve swerve,
+  public jastShoot(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem,
@@ -61,18 +61,10 @@ public class rampaAtuo extends SequentialCommandGroup {
 //     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new resetCommand(ShootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem),
-    new InstantCommand(() -> swerve.zeroGyro()),
-    new openInParallel(armSubsystem, collectSubsystem, gripperSubsystem, 0.7, -60, 6, 290, 2, 0, 0),
-    new TimerGripperCommand(-12.5, 1, gripperSubsystem),
-    new moveInParallel(swerve, armSubsystem, collectSubsystem, collectWheels, gripperSubsystem, 0,
-     -10, 4.4, 0, 0, 1,
-     0,0),centerToRampa.getAutoCommand(swerve)
-    
-    //next2human.getAutoCommand(swerve),
+    addCommands(
+    //next2human.getAutoCommand(swerve)
     //new TimerSideToSide(limelight, swerve, isFinished(),2),
-    //new shootingOutputCommand(ShootingSubsystem, 0.7, 6930)
-    );
+    new shootingOutputCommand(ShootingSubsystem, 0.5, 6930));
 
   }
 }
