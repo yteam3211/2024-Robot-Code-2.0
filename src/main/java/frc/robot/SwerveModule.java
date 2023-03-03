@@ -92,6 +92,10 @@ public class SwerveModule {
         lastAngle = angle;
     }
 
+    public void forceSetAngle(Rotation2d angle){
+        angleController.setReference(angle.getDegrees(), ControlType.kPosition);
+    }
+
     private Rotation2d getAngle(){
         return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
     }

@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
+import frc.util.PID.Gains;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -26,6 +27,7 @@ public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
+    public Gains balanceGains = new Gains("balance gains", 0.035, 0.0001, 0.035);
 
     public Swerve() {
         super("Swerve");
@@ -62,15 +64,22 @@ public class Swerve extends SuperSystem {
                                 );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
-        // for(SwerveModule mod : mSwerveMods){
-        //     mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
-        // }
-        mSwerveMods[0].setDesiredState(swerveModuleStates[0], isOpenLoop); // | if you want a specific module to work.
-        mSwerveMods[1].setDesiredState(swerveModuleStates[1], isOpenLoop); // | 
-        mSwerveMods[2].setDesiredState(swerveModuleStates[2], isOpenLoop); // | must put in comment the command in the for loop above (line 67 for now).
-        mSwerveMods[3].setDesiredState(swerveModuleStates[3], isOpenLoop); // |
+        for(SwerveModule mod : mSwerveMods){
+            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
+        }
+        // mSwerveMods[0].setDesiredState(swerveModuleStates[0], isOpenLoop); // | if you want a specific module to work.
+        // mSwerveMods[1].setDesiredState(swerveModuleStates[1], isOpenLoop); // | 
+        // mSwerveMods[2].setDesiredState(swerveModuleStates[2], isOpenLoop); // | must put in comment the command in the for loop above (line 67 for now).
+        // mSwerveMods[3].setDesiredState(swerveModuleStates[3], isOpenLoop); // |
 
     }    
+
+    public void setStop(){
+        mSwerveMods[0].forceSetAngle(Rotation2d.fromDegrees(45));
+        mSwerveMods[1].forceSetAngle(Rotation2d.fromDegrees(-45));
+        mSwerveMods[2].forceSetAngle(Rotation2d.fromDegrees(-45));
+        mSwerveMods[3].forceSetAngle(Rotation2d.fromDegrees(45));
+    }
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -125,11 +134,11 @@ public class Swerve extends SuperSystem {
         SmartDashboard.putNumber("yaw", gyro.getYaw());
         SmartDashboard.putNumber("roll", gyro.getRoll());
         SmartDashboard.putNumber("pitch", gyro.getPitch());
-        // swerveOdometry.update(getYaw(), getModulePositions());  
-        // for(SwerveModule mod : mSwerveMods){
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        // }
+        swerveOdometry.update(getYaw(), getModulePositions());  
+        for(SwerveModule mod : mSwerveMods){
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        }
     }
 }

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
 import frc.robot.commands.ArmOutputCommand;
 import frc.robot.commands.ArmTriggerCommand;
+import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.armPosition;
@@ -37,14 +38,16 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
     // driver jpoystick buttons
     public Trigger resetGyro = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    public static Trigger Balance = new Trigger(() -> driver.getRawButton(XboxController.Button.kStart.value)); 
+    public static Trigger Balance = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
+    public Trigger stop = new Trigger(() -> driver.getRawButton(XboxController.Button.kBack.value));
     public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
     public Trigger LimelightRetroReflectiveMid = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     public Trigger LimelightRetroReflectiveFloor = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
-    // public static Trigger halfSpeed = new Trigger(() -> driver.getRawButton(XboxController.Button.kRightBumper.value));
     public static Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
-    
+    public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
+    public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
+    public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     
     // systems jpoystick buttons
     public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
@@ -81,9 +84,11 @@ public class RobotButtons {
                     () -> false,
                     0));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
+        
         LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, -1));
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
         LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5));
+        Balance.onTrue(new BalanceCommand(swerve));
         // systems joystick commands
         OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
         OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels, -0.5, -0.15, 250));
