@@ -25,11 +25,12 @@ public class moveInParallel extends ParallelCommandGroup {
   double point;
   double delayForTheCollect;
   double collectSeconds;
+  double collectDelay;
 
   /** Creates a new collectInParallel. */
   public moveInParallel(Swerve s_Swerve, CollectSubsystem collectSubsystem,
   collectWheels collectWheels,
-   double point, double collectSeconds) {
+   double point, double collectSeconds, double collectDelay) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     this.s_Swerve = s_Swerve;
@@ -37,11 +38,12 @@ public class moveInParallel extends ParallelCommandGroup {
     this.collectWheels = collectWheels;
     this.point = point;
     this.collectSeconds = collectSeconds;
+    this.collectDelay = collectDelay;
 
     
 
     addCommands(
-    new timeSetPointCollectCommand(collectSubsystem, point, collectSeconds),
+    new timeSetPointCollectCommand(collectSubsystem, point, collectSeconds, collectDelay),
     new collectOutput(collectWheels, 0.5, 0.5),
     centerToRampa.getAutoCommand(s_Swerve)
     );

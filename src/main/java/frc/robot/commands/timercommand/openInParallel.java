@@ -46,7 +46,7 @@ public class openInParallel extends ParallelCommandGroup {
 
 
     addCommands(new TimerArmPosition(armSubsystem, positionForArm, delayForTheArm, stop),
-    new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds),
+    new timeSetPointCollectCommand(collectSubsystem ,point, collectSeconds, 0),
      new TimerGripperCommand(positionForGripper, secends, gripperSubsystem));
   }
 }

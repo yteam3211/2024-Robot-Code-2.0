@@ -28,6 +28,6 @@ public class collectInParallel extends ParallelCommandGroup {
 
 
     addCommands(new collectAtuoCommand(collectWheels,0.5,0.5,10),
-    new timeSetPointCollectCommand(collectSubsystem ,3000, 7));
+    new timeSetPointCollectCommand(collectSubsystem ,3000, 7, 0));
   }
 }

@@ -57,8 +57,10 @@ public class center extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new shootingOutputCommand(ShootingSubsystem, 0.5, 6930),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, 290, 4)
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()) ,new shootingOutputCommand(ShootingSubsystem, 0.5, 6930),
+    // new moveInParallel(swerve, collectSubsystem, collectWheels, 290, 3, 4),
+    centerToRampa.getAutoCommand(s_Swerve),
+    new BalanceCommand(swerve)
     );  
   }
 }

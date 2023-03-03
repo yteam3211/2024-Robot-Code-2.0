@@ -13,11 +13,13 @@ public class timeSetPointCollectCommand extends CommandBase {
   private double point;
   private Timer timer = new Timer();
   private double timeOfFunctioning;
+  private double delay;
   /** Creates a new setPoitCollectCommand. */
-  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem,double point, double timeOfFunctioning) {
+  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem,double point, double timeOfFunctioning, double delay) {
     this.collectSubsystem = collectSubsystem;
     this.point = point;
     this.timeOfFunctioning = timeOfFunctioning;
+    this.delay = delay;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(collectSubsystem);
   }
@@ -27,13 +29,14 @@ public class timeSetPointCollectCommand extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    timer.delay(delay);
     collectSubsystem.setPosition(point);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("123456789", point);
+    // SmartDashboard.putNumber("123456789", point);
     collectSubsystem.setPosition(point);
   }
 

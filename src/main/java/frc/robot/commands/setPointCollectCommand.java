@@ -29,7 +29,7 @@ public class setPointCollectCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("123456789", point);
+    // SmartDashboard.putNumber("123456789", point);
     collectSubsystem.setPosition(point);
     collectSubsystem.setPosition(point);
   }
