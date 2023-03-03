@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.armPosition;
 import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 
 /**
@@ -33,7 +34,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private static final String centerAuto = "center";
   private static final String ballanceRampaAtuo = "ballance Rampa";
-  private static final String jastShootAtuo = "do nofing";
+  private static final String justShootAtuo = "do nofing";
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -48,7 +49,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     //m_chooser.setDefaultOption("", centerToRampaAuto);
-    m_chooser.setDefaultOption("jast shoot", jastShootAtuo);
+    m_chooser.setDefaultOption("just shoot", justShootAtuo);
     m_chooser.addOption("Center", centerAuto);
     m_chooser.addOption("ballance Rampa", ballanceRampaAtuo);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -113,6 +114,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     armsubsystem.SetTeleopDefault();
+    m_robotContainer.getS_Swerve().zeroGyro();
    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

@@ -52,9 +52,9 @@ public class ShootingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
-    SmartDashboard.putNumber("Shootingoutput", Shooing.getOutput());
-    SmartDashboard.putNumber("ShootingAmper", Shooing.getAmper());
-    SmartDashboard.putNumber("ShootingPosition", Shooing.getPosition());
+    // SmartDashboard.putNumber("Shootingoutput", Shooing.getOutput());
+    // SmartDashboard.putNumber("ShootingAmper", Shooing.getAmper());
+    // SmartDashboard.putNumber("ShootingPosition", Shooing.getPosition());
     // System.out.println("shoot" + Shooing.getPosition());
     // This method will be called once per scheduler run
   }
@@ -63,7 +63,7 @@ public class ShootingSubsystem extends SuperSystem {
     // ShooingMotor.setMode(ControlMode.PercentOutput);
      // neo motor 
     Shooing.set(ControlMode.PercentOutput, output);
-    SmartDashboard.putNumber("Shootingtarget", output);
+    // SmartDashboard.putNumber("Shootingtarget", output);
     // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
     //   firstShootingSp.set(output);
     //   secondShootingSp.set(output);

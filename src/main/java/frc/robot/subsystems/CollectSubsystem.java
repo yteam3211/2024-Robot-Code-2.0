@@ -10,10 +10,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
+import frc.robot.commands.resetCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
+import frc.util.dashboard.SuperShuffleBoardTab;
+import frc.util.dashboard.SuperSubSystemTab;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonSRX;
 import frc.util.motor.SuperVictorSP;
@@ -26,6 +30,8 @@ public class CollectSubsystem extends SuperSystem {
       public SuperTalonSRX openCollectMotor;
       public DigitalInput closeMicroSwitch;
       public Gains collectGains;
+      private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("collectSubsystem", this);
+
       int counter = 0;
       double point = 0;
       
@@ -37,7 +43,8 @@ public class CollectSubsystem extends SuperSystem {
     super("collectSubsystem");
     collectGains = new Gains("collectGains",3, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
-    this.reSetEncoder();
+    this.resetEncoder();
+    shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetEncoder()));
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
     // setDefaultCommand(new setPointCollectCommand(this,0));
   }
@@ -46,15 +53,14 @@ public class CollectSubsystem extends SuperSystem {
   
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("collect position", openCollectMotor.getPosition());
-    SmartDashboard.putNumber("collect output", openCollectMotor.getOutput());
-
+    shuffleBoardTab.putInDashboard("collect position", openCollectMotor.getPosition(), false);
+    shuffleBoardTab.putInDashboard("collect output", openCollectMotor.getOutput(), false);
     // System.out.println("p" + getPosition());
   }
 
   public void setPosition(double position){
     // System.out.println("ppp" + this.point);
-    SmartDashboard.putNumber("target", position);
+    // SmartDashboard.putNumber("target", position);
     openCollectMotor.set(ControlMode.Position, position);
 
     // if (isCollectClose() == true) {
@@ -72,7 +78,7 @@ public class CollectSubsystem extends SuperSystem {
    
   // }
 
-  public void reSetEncoder(){
+  public void resetEncoder(){
     openCollectMotor.reset(0);
   }
   public double getPosition(){

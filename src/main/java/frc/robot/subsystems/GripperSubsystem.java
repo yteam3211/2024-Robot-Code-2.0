@@ -47,7 +47,7 @@ public class GripperSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Gripper Position", gripperMotor.getPosition());
+    // SmartDashboard.putNumber("Gripper Position", gripperMotor.getPosition());
   }
 
 
@@ -60,7 +60,7 @@ public class GripperSubsystem extends SuperSystem {
   public  void setGripperPosition(double position) {
     gripperMotor.setMode(ControlMode.Position);
     gripperMotor.getPIDController().setReference(position, ControlType.kPosition);
-    SmartDashboard.putNumber("gripper target", position);
+    // SmartDashboard.putNumber("gripper target", position);
 
 
   }

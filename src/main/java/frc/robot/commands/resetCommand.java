@@ -33,7 +33,7 @@ public class resetCommand extends InstantCommand {
   @Override
   public void initialize() {
     shootingSubsystem.resetEncoder();
-    collectSubsystem.reSetEncoder();
+    collectSubsystem.resetEncoder();
     armSubsystem.resetArmEncoder();
     gripperSubsystem.resetGriperEncoder();
   }

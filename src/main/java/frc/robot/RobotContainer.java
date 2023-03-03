@@ -44,7 +44,7 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem, m_CollectWheels);
-    public final jastShoot jastShootAtuo = new jastShoot(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
+    public final justShoot jastShootAtuo = new justShoot(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem,m_CollectWheels, limelight);
     public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
      m_ShootingSubsystem, m_GripperSubsystem);
@@ -62,7 +62,7 @@ public class RobotContainer {
     public center getCenterAtuo(){
         return centerAtuo;
     }
-    public jastShoot getJastShootAtuo(){
+    public justShoot getJastShootAtuo(){
         return jastShootAtuo;
     }
 

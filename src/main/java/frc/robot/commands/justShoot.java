@@ -28,7 +28,7 @@ import frc.robot.commands.timercommand.openInParallel;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class jastShoot extends SequentialCommandGroup {
+public class justShoot extends SequentialCommandGroup {
   /** Creates a new atuo1. */
   private final Swerve swerve;
   private ShootingSubsystem ShootingSubsystem;
@@ -39,7 +39,7 @@ public class jastShoot extends SequentialCommandGroup {
   private Limelight limelight;
 
   
-  public jastShoot(Swerve swerve,
+  public justShoot(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   ShootingSubsystem ShootingSubsystem,

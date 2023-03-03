@@ -26,6 +26,8 @@ import frc.robot.commands.armPosition;
 import frc.robot.commands.zeroArm;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
+import frc.util.dashboard.SuperShuffleBoardTab;
+import frc.util.dashboard.SuperSubSystemTab;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
 import frc.robot.RobotButtons;
@@ -35,25 +37,23 @@ import frc.robot.RobotButtons;
 public class armSubsystem extends SuperSystem {
   public static SuperSparkMax ArmgMotor;
   public Gains armgGains;
+  private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("armSubsystem", this);
 
   // Motors, Selenoid and Sensors declaration
   public armSubsystem() {
     super("armSubsystem");
-    // armgGains = new Gains("armGains",0.04,0.0001,0.2); // human
     armgGains = new Gains("armGains", 0, 0, 0.000003, 0, 0.6, 0.04, 0); // second
-    // armgGains = new Gains("armGains",0.22,0,0);
     ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kSmartMotion, armgGains, 7, 10, 1);
-    // setDefaultCommand(new ArmOutputCommand(this, () -> RobotButtons.coPilotJoystick.getRawAxis(XboxController.Axis.kLeftY.value)));
     this.resetArmEncoder();
+    
   }
 
   /** Creates a new ExampleSubsystem. */
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("arm position", ArmgMotor.getPosition());
-    SmartDashboard.putNumber("arm velocity", ArmgMotor.getVelocity());
+    // SmartDashboard.putNumber("arm position", ArmgMotor.getPosition());
 
     // This method will be called once per scheduler run
   }
@@ -66,7 +66,7 @@ public class armSubsystem extends SuperSystem {
   public void setPosition(double position) {
     ArmgMotor.setMode(ControlMode.Position);
     ArmgMotor.getPIDController().setReference(position, ControlType.kSmartMotion);
-    SmartDashboard.putNumber("armTarget", position);
+    // SmartDashboard.putNumber("armTarget", position);
 
   }
 

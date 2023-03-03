@@ -44,13 +44,11 @@ public class armPosition extends CommandBase {
     if(RobotButtons.armBackTrigger.getAsBoolean()){
       position += 0.15;
       armSubsystem.setPosition(position);
-      System.out.println("Arm back: " + position);
     }
 
     if(RobotButtons.armForwardTrigger.getAsBoolean()){
       position -= 0.15;
       armSubsystem.setPosition(position);
-      System.out.println("Arm forward: " + position);
     }
   }
 
