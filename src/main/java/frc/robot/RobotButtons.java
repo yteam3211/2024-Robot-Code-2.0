@@ -1,22 +1,28 @@
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
 import javax.swing.GroupLayout.Group;
+
+import com.fasterxml.jackson.databind.ser.std.BooleanSerializer;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
+import frc.robot.commands.rightGRIDmovmentCommand;
+import frc.robot.commands.ArmCollectCommand;
 import frc.robot.commands.ArmOutputCommand;
 import frc.robot.commands.ArmTriggerCommand;
 import frc.robot.commands.BalanceCommand;
+import frc.robot.commands.LeftGRIDmovmentCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.TeleopSwerve;
+import frc.robot.commands.TurnToZeroCommand;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.collectGroupCommand;
-import frc.robot.commands.collectOutput;
+import frc.robot.commands.collectWheelsCommand;
 import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
@@ -25,6 +31,7 @@ import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.util.vision.Limelight;
@@ -33,6 +40,7 @@ import frc.util.vision.Limelight;
 
 // Yteam loadButtons
 public class RobotButtons {
+    public static BooleanSupplier GRIDmovmentHelper = (() -> true);
 
     public static Joystick systems = new Joystick(1);
     public static Joystick driver = new Joystick(0);
@@ -48,7 +56,9 @@ public class RobotButtons {
     public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
     public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
     public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
-    
+    public static Trigger rightGRIDmovment = new Trigger(() -> driver.getPOV() == 90);
+    public static Trigger leftGRIDmovment = new Trigger(() -> driver.getPOV() == 270);
+
     // systems jpoystick buttons
     public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
     public Trigger collectWheelsBack = new Trigger(() -> systems.getRawButton(XboxController.Button.kStart.value));
@@ -56,9 +66,9 @@ public class RobotButtons {
     public Trigger shootingHigh = new Trigger(() -> systems.getPOV() == 0);
     public Trigger shootingMiddle = new Trigger(() -> systems.getPOV() == 270);
     public Trigger shootinghTrigger = new Trigger(() -> systems.getPOV() == 90);
-    public Trigger humanArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
-    public Trigger floorArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
-    public Trigger midArm = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
+    public Trigger ArmCollect1 = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
+    public Trigger ArmCollect2 = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
+    public Trigger ArmCollect3 = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
     // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
     public Trigger openGripper = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public static Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
@@ -73,7 +83,7 @@ public class RobotButtons {
      * @param swerve
      */
     public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
-            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem) {
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem, armCollectSubsystem armCollect) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -89,23 +99,29 @@ public class RobotButtons {
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
         LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5));
         Balance.onTrue(new BalanceCommand(swerve));
+        rightGRIDmovment.and(GRIDmovmentHelper).onTrue(new rightGRIDmovmentCommand(swerve));
+        leftGRIDmovment.and(GRIDmovmentHelper).onTrue(new LeftGRIDmovmentCommand(swerve));
+
         // systems joystick commands
-        OpenCollect.whileFalse(new collectGroupCommand(collectSubsystem,collectWheels, 0, 0, 0));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels, -0.5, -0.15, 250));
-        collectWheelsBack.whileTrue(new collectOutput(collectWheels, 0.6, 0.5));
+        // OpenCollect.whileFalse(new setPointCollectCommand(collectSubsystem,0,armCollect));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels,armCollect, -0.5, -0.15, 300,6.11));
+        collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.29, 6930));
         shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.48, 6930));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
         shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
-        humanArm.onTrue(new armPosition(armSubsystem, -20.7));
-        midArm.onTrue(new armPosition(armSubsystem, -65));  
-        floorArm.onTrue(new armPosition(armSubsystem, -70.7));
+        // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
+        // midArm.onTrue(new armPosition(armSubsystem, -65));  
+        // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
+        ArmCollect1.onTrue(new ArmCollectCommand(armCollect, 10.8, 200));
+        ArmCollect2.onTrue(new ArmCollectCommand(armCollect, 0, 200));
+        // ArmCollect3.
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
-
+        
       
     }
 }

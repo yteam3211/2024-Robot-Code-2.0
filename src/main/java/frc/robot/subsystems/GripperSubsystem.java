@@ -74,11 +74,11 @@ public class GripperSubsystem extends SuperSystem {
 
 
 
+
   
   public void SetTeleopDefault(){
     // setDefaultCommand(null);
   }
 }
-
 
 

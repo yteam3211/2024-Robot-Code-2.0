@@ -4,17 +4,14 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.armCollectSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class collectOutput extends CommandBase {
-  private final collectWheels collectWheels;
-  private double WheelsOutput;
-  private double centeringOutput;
-
+public class armCollectOutput extends CommandBase {
+  private final armCollectSubsystem armCollect;
+  private double output;
 
   
 
@@ -23,15 +20,11 @@ public class collectOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public 
-  collectOutput(collectWheels collectWheels, double WheelsOutput, double centeringOutput) {
-    this.collectWheels = collectWheels;
-    this.WheelsOutput = WheelsOutput;
-    this.centeringOutput = centeringOutput;
-
-
+  public armCollectOutput(armCollectSubsystem armCollect, double output) {
+    this.armCollect = armCollect;
+    this.output = output;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(collectWheels);
+    addRequirements(armCollect);
   }
 
   // Called when the command is initially scheduled.
@@ -41,23 +34,28 @@ public class collectOutput extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collectWheels.WheelsSetOutput(WheelsOutput);
-    collectWheels.centeringSetOutput(centeringOutput);
-
+    if (armCollect.isShootingDown()){ 
+      armCollect.resetArmCollectEncoder();
+    }
+    armCollect.setArmCollectOutput(output);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    collectWheels.WheelsSetOutput(0);
-    collectWheels.centeringSetOutput(0);
-  }  
+    armCollect.setArmCollectOutput(0);
+    
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
-    return false;  
-    }
+
+    return false;
+    // if(output>0){
+    //   return armCollect.isShootingDown();
+    //  } 
 }
+}
+
 

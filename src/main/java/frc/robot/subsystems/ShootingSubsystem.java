@@ -22,25 +22,29 @@ import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
+import frc.util.motor.SuperTalonSRX;
+import frc.util.motor.SuperVictorSP;
 import pabeles.concurrency.IntOperatorTask.Min;
 
 
 // Yteam Example Subsystem
 public class ShootingSubsystem extends SuperSystem {
 //  public SuperSparkMax ShooingMotor;
- public Gains shootingGains;
- public DigitalInput upMicroSwitch;
- public DigitalInput downMicroSwitch;
- public SuperTalonFX Shooing;
- public int max = 6930;
- public int Min = -6000;
+private Gains shootingGains;
+ private DigitalInput upMicroSwitch;
+ private DigitalInput downMicroSwitch;
+ private SuperTalonFX Shooting;
+ private SuperTalonSRX shootingWheels;
+ private int max = 6930;
+ private int Min = -6000;
   // Motors, Selenoid and Sensors declaration
   public ShootingSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.03, 0,0);
     // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
     // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
-    Shooing = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
+    shootingWheels = new SuperTalonSRX(21, 40, false, false, 0, 1, 1, shootingGains, ControlMode.Velocity);
+    Shooting = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
     // firstShootingSp = new VictorSP(0);
     // secondShootingSp = new VictorSP(1);
     // ShooingMotor = new SuperSparkMax(14,false);
@@ -62,7 +66,7 @@ public class ShootingSubsystem extends SuperSystem {
   public void setOutput(double output){
     // ShooingMotor.setMode(ControlMode.PercentOutput);
      // neo motor 
-    Shooing.set(ControlMode.PercentOutput, output);
+    Shooting.set(ControlMode.PercentOutput, output);
     // SmartDashboard.putNumber("Shootingtarget", output);
     // if ((output > 0 && !isShootingUp()) || (output <0 && !isShootingDown())) {
     //   firstShootingSp.set(output);
@@ -71,25 +75,25 @@ public class ShootingSubsystem extends SuperSystem {
   
   }
   public void resetEncoder(){
-    Shooing.reset(0);
+    Shooting.reset(0);
   }
 
   public void setPosition(double position){
-    Shooing.set(ControlMode.Position, position);
+    Shooting.set(ControlMode.Position, position);
     // ShooingMotor.setMode(ControlMode.Position);
     // ShooingMotor.getPIDController().setReference(position, ControlType.kPosition);
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);
 
   }
   public double GetPosition(){
-   return Shooing.getPosition();
+   return Shooting.getPosition();
  
 
     
   }
 
   public void setVelocity(double velocity){
-    Shooing.set(ControlMode.Velocity, velocity);
+    Shooting.set(ControlMode.Velocity, velocity);
     // ShooingMotor.setMode(ControlMode.Position);
     // ShooingMotor.getPIDController().setReference(position, ControlType.kPosition);
     // getTab().putInDashboard("encoder_live", ShooingMotor.getPosition(), false);

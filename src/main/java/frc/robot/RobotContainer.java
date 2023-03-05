@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
+import frc.robot.autos.GRIDmovement.Right1GRID;
 import frc.robot.commands.*;
+import frc.robot.commands.autoCommands.ballanceRampaAtuo;
+import frc.robot.commands.autoCommands.center;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.TimerGripperCommand;
 import frc.robot.commands.timercommand.collectAtuoCommand;
@@ -40,12 +43,12 @@ public class RobotContainer {
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
     private final GripperSubsystem m_GripperSubsystem = new GripperSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
+    private final armCollectSubsystem m_armCollect = new armCollectSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
      m_GripperSubsystem, m_CollectWheels);
-    public final justShoot jastShootAtuo = new justShoot(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
-     m_GripperSubsystem,m_CollectWheels, limelight);
+    public final shootingOutputCommand justShoot = new shootingOutputCommand(m_ShootingSubsystem, 0.5, 6930);
     public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
      m_ShootingSubsystem, m_GripperSubsystem);
      
@@ -62,8 +65,8 @@ public class RobotContainer {
     public center getCenterAtuo(){
         return centerAtuo;
     }
-    public justShoot getJastShootAtuo(){
-        return jastShootAtuo;
+    public shootingOutputCommand getJastShootAtuo(){
+        return justShoot;
     }
 
     private void configureSwerveButtons() {
@@ -78,7 +81,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight,  m_GripperSubsystem);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight,  m_GripperSubsystem, m_armCollect);
     }
  
     /**

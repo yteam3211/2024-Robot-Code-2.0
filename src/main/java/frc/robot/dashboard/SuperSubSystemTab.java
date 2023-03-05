@@ -11,11 +11,12 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.dashboard.SuperSystem;
+import frc.robot.subsystems.armCollectSubsystem;
 
 public class SuperSubSystemTab extends SuperShuffleBoardTab {
     private final ShuffleboardLayout commandList;
 
-    public SuperSubSystemTab(String name, SuperSystem system) {
+    public SuperSubSystemTab(String name, SuperSystem superSystem) {
         super(name);
         commandList = tab.getLayout("commands", BuiltInLayouts.kList).withPosition(0, 0).withSize(2, 6);
         // .withPosition(RobotConstants.Dashboard.MAX_WIDTH_GRID - 2, 0).withSize(2,
