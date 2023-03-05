@@ -7,14 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.armCollectSubsystem;
 
 public class setPointCollectCommand extends CommandBase {
   private final CollectSubsystem collectSubsystem;
+  // private final armCollect armCollect;
   private double point;
   /** Creates a new setPoitCollectCommand. */
-  public setPointCollectCommand(CollectSubsystem collectSubsyste,double point) {
+  public setPointCollectCommand(CollectSubsystem collectSubsyste, double point) {
     this.collectSubsystem = collectSubsyste;
     this.point = point;
+    // this.armCollect = armCollect;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(collectSubsystem);
   }
@@ -36,7 +39,9 @@ public class setPointCollectCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    collectSubsystem.setPosition(0);
+  }
 
   // Returns true when the command should end.
   @Override

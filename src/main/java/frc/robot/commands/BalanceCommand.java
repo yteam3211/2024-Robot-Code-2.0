@@ -31,7 +31,7 @@ public class BalanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(swerve.gyro.getRoll()) > 2){
+    if (Math.abs(swerve.gyro.getRoll()) > 2.5){
       swerve.drive(            
       new Translation2d(balancePID.getOutput(swerve.gyro.getRoll()), 0).times(Constants.Swerve.maxSpeed * 0.3), 
         0, 
@@ -42,7 +42,6 @@ public class BalanceCommand extends CommandBase {
     else{
       swerve.setStop();
     }
-
   }
 
   // Called once the command ends or is interrupted.

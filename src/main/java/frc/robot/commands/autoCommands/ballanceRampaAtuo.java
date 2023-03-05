@@ -54,7 +54,7 @@ public class ballanceRampaAtuo extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new shootingOutputCommand(ShootingSubsystem, 0.5, 6930),rampa.getAutoCommand(s_Swerve),
+    addCommands(new shootingOutputCommand(ShootingSubsystem, 0.5, 6930),  rampa.getAutoCommand(s_Swerve),
     new TeleopSwerve(swerve, () -> 0, () -> 0, () -> 0, () -> false,0.7));   
   
   }
