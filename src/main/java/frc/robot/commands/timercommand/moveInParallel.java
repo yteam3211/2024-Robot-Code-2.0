@@ -9,12 +9,13 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.autos.centerToRampa;
 import frc.robot.autos.next2human;
 import frc.robot.autos.rampa;
-import frc.robot.commands.collectOutput;
+import frc.robot.commands.collectWheelsCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.armSubsystem;
+import frc.robot.commands.timercommand.TimerCollectWheels;;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -39,15 +40,14 @@ public class moveInParallel extends ParallelCommandGroup {
     this.point = point;
     this.collectSeconds = collectSeconds;
     this.collectDelay = collectDelay;
-
     
 
     addCommands(
+    centerToRampa.getAutoCommand(s_Swerve),
     new timeSetPointCollectCommand(collectSubsystem, point, collectSeconds, collectDelay),
-    new collectOutput(collectWheels, 0.5, 0.5),
-    centerToRampa.getAutoCommand(s_Swerve)
-    );
+    new TimerCollectWheels(collectWheels, -0.5, -0.15, collectSeconds + 1, collectDelay)
     
+    );
   }
 }
 

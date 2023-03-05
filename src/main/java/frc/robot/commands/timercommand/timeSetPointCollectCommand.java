@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.timercommand;
+import javax.swing.text.Position;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -29,15 +31,18 @@ public class timeSetPointCollectCommand extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
-    timer.delay(delay);
-    collectSubsystem.setPosition(point);
+    // collectSubsystem.setPosition(point);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // SmartDashboard.putNumber("123456789", point);
-    collectSubsystem.setPosition(point);
+    if(timer.hasElapsed(delay)){
+      System.out.println("collect pass - " + timer.get());
+      System.out.println("position: " + collectSubsystem.getPosition());
+      collectSubsystem.setPosition(point);
+    }
   }
 
   // Called once the command ends or is interrupted.
