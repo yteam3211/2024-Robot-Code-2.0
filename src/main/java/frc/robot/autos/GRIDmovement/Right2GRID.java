@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 
-public class Right1GRID {
+public class Right2GRID {
     public static Command getAutoCommand(Swerve driveSubsystem) {
-        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("1 right GRID", new PathConstraints(1.3, 3));
+        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("2 right GRID", new PathConstraints(1.6, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         // eventMap.put("marker1", new PrintCommand("Passed marker 1"));
@@ -30,7 +30,7 @@ public class Right1GRID {
             driveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
             Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
             new PIDConstants(0.0, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
-            new PIDConstants(0.01, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
+            new PIDConstants(0.0, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
             driveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
             eventMap,
             true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
