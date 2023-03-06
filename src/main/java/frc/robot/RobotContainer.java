@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.autos.GRIDmovement.Right1GRID;
 import frc.robot.commands.*;
+import frc.robot.commands.autoCommands.Next2HumanCommand;
 import frc.robot.commands.autoCommands.ballanceRampaAtuo;
 import frc.robot.commands.autoCommands.center;
 import frc.robot.commands.timercommand.TimerArmPosition;
@@ -39,7 +40,7 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final collectWheels m_CollectWheels = new collectWheels();
-    private final ShootingSubsystem  m_ShootingSubsystem = new ShootingSubsystem();
+    private final CartridgeSubsystem  m_ShootingSubsystem = new CartridgeSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
     private final GripperSubsystem m_GripperSubsystem = new GripperSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
@@ -51,8 +52,11 @@ public class RobotContainer {
     public final shootingOutputCommand justShoot = new shootingOutputCommand(m_ShootingSubsystem, 0.5, 6930);
     public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
      m_ShootingSubsystem, m_GripperSubsystem);
+    public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_ShootingSubsystem,
+    m_GripperSubsystem, m_CollectWheels, limelight);
+    
      
-     
+
     public RobotContainer() {
 
         // Configure the button bindings
@@ -68,7 +72,10 @@ public class RobotContainer {
     public shootingOutputCommand getJastShootAtuo(){
         return justShoot;
     }
-
+    public Next2HumanCommand getNext2Human() {
+        return next2Human;
+    }
+    
     private void configureSwerveButtons() {
         
     }
@@ -99,7 +106,7 @@ public class RobotContainer {
         return s_Swerve;
     }
 
-    public ShootingSubsystem getM_ShootingSubsystem() {
+    public CartridgeSubsystem getM_ShootingSubsystem() {
         return m_ShootingSubsystem;
     }
 

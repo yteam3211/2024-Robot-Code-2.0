@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.armPosition;
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.commands.autoCommands.Next2HumanCommand;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armSubsystem;
 
@@ -30,11 +31,12 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   public armSubsystem armsubsystem;
   private Command m_autonomousCommand;
-  private ShootingSubsystem shootingSubsystem;
+  private CartridgeSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
   private static final String centerAuto = "center";
   private static final String ballanceRampaAtuo = "ballance Rampa";
   private static final String justShootAtuo = "do nofing";
+  private static final String Next2Human = "NextToHoman";
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -52,6 +54,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("just shoot", justShootAtuo);
     m_chooser.addOption("Center", centerAuto);
     m_chooser.addOption("ballance Rampa", ballanceRampaAtuo);
+    m_chooser.addOption("Next to Human", Next2Human);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
@@ -93,6 +96,7 @@ public class Robot extends TimedRobot {
     m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
     if (m_chooser.getSelected().equals(ballanceRampaAtuo)) m_autonomousCommand = m_robotContainer.getBallanceRampaAtuo();
     else if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
     else m_autonomousCommand = m_robotContainer.getJastShootAtuo();
       
       

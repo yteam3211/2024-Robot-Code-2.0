@@ -4,6 +4,7 @@
 
 package frc.robot.commands.timercommand;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.Swerve;
 import frc.robot.autos.centerToRampa;
@@ -20,20 +21,22 @@ import frc.robot.commands.timercommand.TimerCollectWheels;;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class moveInParallel extends ParallelCommandGroup {
-  Swerve s_Swerve;
-  CollectSubsystem collectSubsystem;
-  collectWheels collectWheels;
-  double point;
-  double delayForTheCollect;
-  double collectSeconds;
-  double collectDelay;
+  private Swerve s_Swerve;
+  private CollectSubsystem collectSubsystem;
+  private collectWheels collectWheels;
+  private double point;
+  private double delayForTheCollect;
+  private double collectSeconds;
+  private double collectDelay;
+  private Command movment;
 
   /** Creates a new collectInParallel. */
   public moveInParallel(Swerve s_Swerve, CollectSubsystem collectSubsystem,
-  collectWheels collectWheels,
+  collectWheels collectWheels, Command movment,
    double point, double collectSeconds, double collectDelay) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    this.movment = movment;
     this.s_Swerve = s_Swerve;
     this.collectSubsystem = collectSubsystem;
     this.collectWheels = collectWheels;
@@ -43,7 +46,7 @@ public class moveInParallel extends ParallelCommandGroup {
     
 
     addCommands(
-    centerToRampa.getAutoCommand(s_Swerve),
+    movment,
     new timeSetPointCollectCommand(collectSubsystem, point, collectSeconds, collectDelay),
     new TimerCollectWheels(collectWheels, -0.5, -0.15, collectSeconds + 1, collectDelay)
     
