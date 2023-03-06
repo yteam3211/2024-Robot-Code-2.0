@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -18,7 +19,9 @@ public class LimelightCommand extends CommandBase {
   protected Limelight limelight;
   protected Swerve swerve;
   protected boolean AprilTag;
+  protected boolean count = false;
   protected double yPos;
+  protected Timer timer = new Timer();
   protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
   protected Gains RRgainsY = new Gains("gains y", 0.17, 0, 0.045);
   protected Gains gainsR = new Gains("gains r", 0.05, 0, 0);
@@ -53,6 +56,7 @@ public class LimelightCommand extends CommandBase {
     pidX.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
     pidY.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
     pidR.setMaxOutput(Constants.Swerve.maxAngularVelocity * 0.6);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -65,9 +69,16 @@ public class LimelightCommand extends CommandBase {
     xOutput += 0.02 * Constants.Swerve.maxSpeed * Math.signum(xOutput);
     yOutput += 0.02 * Constants.Swerve.maxSpeed * Math.signum(yOutput);
     rOutput += 0.02 * Constants.Swerve.maxAngularVelocity * Math.signum(rOutput);
-
+  if(Math.abs(limelight.getY()) > Math.abs(yPos) + 0.3 || Math.abs(limelight.getX()) > 0.3 || Math.abs(Swerve.gyro.getYaw()) > 1.5){
+    count = true;
     swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
   }
+  else if(count){
+    count = false;
+    timer.reset();
+    timer.start();
+  }
+}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -77,6 +88,6 @@ public class LimelightCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.hasElapsed(0.7);
   }
 }

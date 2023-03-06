@@ -12,7 +12,7 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.collectGroupCommand;
@@ -28,7 +28,7 @@ import frc.robot.commands.timercommand.openInParallel;
 public class ballanceRampaAtuo extends SequentialCommandGroup {
   /** Creates a new atuo1. */
   private final Swerve s_Swerve;
-  private ShootingSubsystem ShootingSubsystem;
+  private CartridgeSubsystem ShootingSubsystem;
   private CollectSubsystem collectSubsystem;
   private GripperSubsystem gripperSubsystem;
   private armSubsystem armSubsystem;
@@ -41,7 +41,7 @@ public class ballanceRampaAtuo extends SequentialCommandGroup {
   public ballanceRampaAtuo(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
-  ShootingSubsystem ShootingSubsystem,
+  CartridgeSubsystem ShootingSubsystem,
   GripperSubsystem gripperSubsystem
 ) {
     this.s_Swerve = swerve;

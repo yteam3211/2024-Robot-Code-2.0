@@ -4,12 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.CartridgeSubsystem;
+import frc.robot.subsystems.shootingSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class shootingOutputCommand extends CommandBase {
-  private final ShootingSubsystem shootingSubsystem;
+  private final CartridgeSubsystem cartridgeSubsystem;
   private double output;
   private double velocity;
   private double max;
@@ -20,12 +21,12 @@ public class shootingOutputCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public shootingOutputCommand(ShootingSubsystem shootingSubsystem, double output, double max) {
-    this.shootingSubsystem = shootingSubsystem;
+  public shootingOutputCommand(CartridgeSubsystem cartridgeSubsystem, double output, double max) {
+    this.cartridgeSubsystem = cartridgeSubsystem;
     this.output = output;
     this.max = max;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shootingSubsystem);
+    addRequirements(cartridgeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -35,13 +36,14 @@ public class shootingOutputCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setOutput(output);
+    System.out.println(cartridgeSubsystem.GetOutput());
+    cartridgeSubsystem.setOutput(output);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shootingSubsystem.setOutput(0);
+    cartridgeSubsystem.setOutput(0);
     
   }
 
@@ -51,7 +53,7 @@ public class shootingOutputCommand extends CommandBase {
     // output += 0.001;
     // if (output == 0.95)
     //   return true; 
-    if(shootingSubsystem.GetPosition() >= max){
+    if(cartridgeSubsystem.GetPosition() >= max){
       return true;
     }else{
       return false;

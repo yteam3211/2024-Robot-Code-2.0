@@ -7,7 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armSubsystem;
 
 
@@ -15,13 +15,13 @@ import frc.robot.subsystems.armSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class resetCommand extends InstantCommand {
-  private final ShootingSubsystem shootingSubsystem;
+  private final CartridgeSubsystem shootingSubsystem;
   private final CollectSubsystem collectSubsystem;
   private final armSubsystem armSubsystem;
   private final GripperSubsystem gripperSubsystem;
 
 
-  public resetCommand(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,  armSubsystem armSubsystem, GripperSubsystem gripperSubsystem) {
+  public resetCommand(CartridgeSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,  armSubsystem armSubsystem, GripperSubsystem gripperSubsystem) {
     this.shootingSubsystem = shootingSubsystem;
     this.collectSubsystem = collectSubsystem;
     this.armSubsystem = armSubsystem;

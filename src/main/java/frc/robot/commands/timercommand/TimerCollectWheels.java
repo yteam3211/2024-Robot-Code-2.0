@@ -5,7 +5,7 @@
 package frc.robot.commands.timercommand;
 
 import frc.robot.subsystems.CollectSubsystem;
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.collectWheels;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
