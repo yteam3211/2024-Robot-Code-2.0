@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.zeroArm;
-import frc.robot.dashboard.SuperSubSystemTab;
+import frc.util.dashboard.SuperSubSystemTab;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -35,10 +35,11 @@ import frc.util.motor.SuperTalonFX;
 // Yteam Example Subsystem
 public class armCollectSubsystem extends SuperSystem {
   public SuperSparkMax armCollectMotor;
+  public CollectSubsystem collectSubsystem;
   public Gains armCollectgGains;
   public DigitalInput downMicroSwitch;
 
-  // private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("armCollect", this );
+  private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("armCollect", this);
 
 
 
@@ -49,7 +50,7 @@ public class armCollectSubsystem extends SuperSystem {
 
      armCollectMotor = new SuperSparkMax(Constants.ARM_COLLECT_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, armCollectgGains, 0, 0, 0);
-        // shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
+        shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
     // setDefaultCommand();
     this.resetArmCollectEncoder();
   }
@@ -58,8 +59,8 @@ public class armCollectSubsystem extends SuperSystem {
 
   @Override
   public void periodic() {
-    // shuffleBoardTab.putInDashboard("collect position", armCollectMotor.getPosition(), false);
-    // shuffleBoardTab.putInDashboard("collect output", armCollectMotor.getOutput(), false);
+    shuffleBoardTab.putInDashboard("collect position", armCollectMotor.getPosition(), false);
+    shuffleBoardTab.putInDashboard("collect output", armCollectMotor.getOutput(), false);
     // System.out.println("collect position" + armCollectMotor.getPosition());
     // This method will be called once per scheduler run
     // SmartDashboard.putNumber("Gripper Position", gripperMotor.getPosition());

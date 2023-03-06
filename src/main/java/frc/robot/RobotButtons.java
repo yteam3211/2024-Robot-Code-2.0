@@ -29,7 +29,7 @@ import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
-import frc.robot.subsystems.ShootingSubsystem;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.armSubsystem;
@@ -82,7 +82,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(ShootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
+    public void loadButtons(CartridgeSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
             armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem, armCollectSubsystem armCollect) {
         // driver joystick commands
         swerve.setDefaultCommand(
@@ -107,13 +107,13 @@ public class RobotButtons {
         OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels,armCollect, -0.5, -0.15, 300,6.11));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.29, 6930));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.48, 6930));
+        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.49, 6930));
         shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
         shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
         // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
         // midArm.onTrue(new armPosition(armSubsystem, -65));  
         // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        ArmCollect1.onTrue(new ArmCollectCommand(armCollect, 10.8, 200));
+        ArmCollect1.onTrue(new ArmCollectCommand(armCollect, 5.2, 200));
         ArmCollect2.onTrue(new ArmCollectCommand(armCollect, 0, 200));
         // ArmCollect3.
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
