@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
@@ -16,9 +17,11 @@ import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.util.vision.Limelight;
+import frc.robot.commands.ArmCollectCommand;
 import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.collectGroupCommand;
+import frc.robot.commands.resetCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.TimerGripperCommand;
@@ -39,24 +42,26 @@ public class Next2HumanCommand extends SequentialCommandGroup {
   private timeSetPointCollectCommand timeSetPointCollectCommand;
   private TimerArmPosition TimerArmPosition;
   private collectWheels collectWheels;
+  private armCollectSubsystem armCollectSubsystem;
   private Limelight limelight;
 
   public Next2HumanCommand(Swerve swerve,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem ShootingSubsystem,
   GripperSubsystem gripperSubsystem,
-  collectWheels collectWheels, Limelight limelight) {
+  collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight) {
     // Add your commands in the addCommands() call, e.g.
     this.s_Swerve = swerve;
     this.collectSubsystem = collectSubsystem;
     this.ShootingSubsystem = ShootingSubsystem;
     this.collectWheels = collectWheels;
     this.limelight = limelight;
+    this.armCollectSubsystem = armCollectSubsystem;
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), 
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(ShootingSubsystem, collectSubsystem, armCollectSubsystem, gripperSubsystem),
     new shootingOutputCommand(ShootingSubsystem, 0.5, 6930),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, next2human.getAutoCommand(swerve), 250, 5, 1),
-    new LimelightCommand(limelight, swerve, true, 0),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, next2human.getAutoCommand(swerve), 290, 5, 1),
+    new LimelightCommand(limelight, swerve, true, -1, 0),
     new shootingOutputCommand(ShootingSubsystem, 0.5, 6930)
     );
   }

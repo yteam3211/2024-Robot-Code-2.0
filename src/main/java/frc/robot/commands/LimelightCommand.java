@@ -21,6 +21,7 @@ public class LimelightCommand extends CommandBase {
   protected boolean AprilTag;
   protected boolean count = false;
   protected double yPos;
+  protected double xPos;
   protected Timer timer = new Timer();
   protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
   protected Gains RRgainsY = new Gains("gains y", 0.17, 0, 0.045);
@@ -32,17 +33,19 @@ public class LimelightCommand extends CommandBase {
   protected PIDController pidY = new PIDController(gainsY);
   protected PIDController pidR = new PIDController(gainsR);
 
-  public LimelightCommand(Limelight limelight, Swerve swerve, boolean AprilTag, double yPos) {
+  public LimelightCommand(Limelight limelight, Swerve swerve, boolean AprilTag, double yPos, double xPos) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limelight = limelight;
     this.swerve = swerve;
     this.AprilTag = AprilTag;
     this.yPos = yPos;
+    this.xPos = xPos;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
     if (AprilTag){                            
       limelight.setPipeline(0);
     }
@@ -62,6 +65,7 @@ public class LimelightCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
     double xOutput = pidX.getOutput(limelight.getX());
     double yOutput = pidY.getOutput(limelight.getY());
     double rOutput = pidR.getOutput(Swerve.gyro.getYaw());
@@ -69,14 +73,18 @@ public class LimelightCommand extends CommandBase {
     xOutput += 0.02 * Constants.Swerve.maxSpeed * Math.signum(xOutput);
     yOutput += 0.02 * Constants.Swerve.maxSpeed * Math.signum(yOutput);
     rOutput += 0.02 * Constants.Swerve.maxAngularVelocity * Math.signum(rOutput);
-  if(Math.abs(limelight.getY()) > Math.abs(yPos) + 0.3 || Math.abs(limelight.getX()) > 0.3 || Math.abs(Swerve.gyro.getYaw()) > 1.5){
-    count = true;
-    swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
-  }
-  else if(count){
-    count = false;
-    timer.reset();
-    timer.start();
+
+    System.out.println("x output: " + xOutput);
+    // System.out.println("y output: " + yOutput);
+    // if(Math.abs(limelight.getY()) > Math.abs(yPos) + 0.3 || Math.abs(limelight.getX()) > 0.3 || Math.abs(Swerve.gyro.getYaw()) > 1.5){
+    if(Math.abs(limelight.getY()) < Math.abs(yPos) + 0.4 && Math.abs(limelight.getX()) > 1.3 && Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
+      count = false;
+      timer.reset();
+      timer.start();
+    }
+    else{
+      count = true;
+      swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
   }
 }
 
@@ -88,6 +96,6 @@ public class LimelightCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(0.7);
+    return timer.hasElapsed(1.5);
   }
 }

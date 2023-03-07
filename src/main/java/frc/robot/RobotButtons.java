@@ -58,6 +58,7 @@ public class RobotButtons {
     public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     public static Trigger rightGRIDmovment = new Trigger(() -> driver.getPOV() == 90);
     public static Trigger leftGRIDmovment = new Trigger(() -> driver.getPOV() == 270);
+    public Trigger TurnToZero = new Trigger(() -> driver.getPOV() == 0);
 
     // systems jpoystick buttons
     public Trigger OpenCollect = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
@@ -83,7 +84,7 @@ public class RobotButtons {
      * @param swerve
      */
     public void loadButtons(CartridgeSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
-            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem, armCollectSubsystem armCollect) {
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem, armCollectSubsystem armCollectSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -95,16 +96,17 @@ public class RobotButtons {
                     0));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         
-        LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, -1));
+        LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, -1, 0));
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
-        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5));
+        LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5, 0));
         Balance.onTrue(new BalanceCommand(swerve));
         rightGRIDmovment.and(GRIDmovmentHelper).onTrue(new rightGRIDmovmentCommand(swerve));
         leftGRIDmovment.and(GRIDmovmentHelper).onTrue(new LeftGRIDmovmentCommand(swerve));
+        TurnToZero.whileTrue(new TurnToZeroCommand(swerve));
 
         // systems joystick commands
         // OpenCollect.whileFalse(new setPointCollectCommand(collectSubsystem,0,armCollect));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels,armCollect, -0.5, -0.15, 300,6.11));
+        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels,armCollectSubsystem, -0.5, -0.15, 300,6.11));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
         shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.29, 6930));
         shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.49, 6930));
@@ -113,13 +115,13 @@ public class RobotButtons {
         // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
         // midArm.onTrue(new armPosition(armSubsystem, -65));  
         // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        ArmCollect1.onTrue(new ArmCollectCommand(armCollect, 5.2, 200));
-        ArmCollect2.onTrue(new ArmCollectCommand(armCollect, 0, 200));
+        ArmCollect1.onTrue(new ArmCollectCommand(armCollectSubsystem, 5.2, 200));
+        ArmCollect2.onTrue(new ArmCollectCommand(armCollectSubsystem, 0, 200));
         // ArmCollect3.
         openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
         openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armSubsystem, gripperSubsystem));
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, gripperSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
         
       
