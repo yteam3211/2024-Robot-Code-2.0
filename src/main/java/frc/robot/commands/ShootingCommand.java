@@ -14,13 +14,15 @@ public class ShootingCommand extends CommandBase {
   private final CartridgeSubsystem cartridgeSubsystem;
   private double velocity;
   private double RPM;
+  private double CartridgeOutput;
   private Timer timer = new Timer();
   /** Creates a new ShootingCommand. */
-  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, double velocity, double RPM) {
+  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, double velocity, double RPM, double CartridgeOutput) {
   this.shootingSubsystem = shootingSubsystem;
   this.cartridgeSubsystem = cartridgeSubsystem;
   this.velocity = velocity;
   this.RPM = RPM;
+  this.CartridgeOutput = CartridgeOutput;
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -36,14 +38,17 @@ public class ShootingCommand extends CommandBase {
   @Override
   public void execute() {
     shootingSubsystem.setVelocity(velocity);
-    if (shootingSubsystem.GetVelocity() >= RPM) {
-      cartridgeSubsystem.setOutput(velocity);
+    if (shootingSubsystem.GetVelocity() >= velocity) {
+      cartridgeSubsystem.setOutput(CartridgeOutput);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    cartridgeSubsystem.setOutput(0);
+    shootingSubsystem.setVelocity(0);
+  }
 
   // Returns true when the command should end.
   @Override

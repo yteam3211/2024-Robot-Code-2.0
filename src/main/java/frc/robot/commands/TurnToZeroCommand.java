@@ -18,7 +18,7 @@ public class TurnToZeroCommand extends CommandBase {
   private Swerve swerve;
   private boolean count = true;
   private Timer timer = new Timer();
-  protected Gains gains = new Gains("gains r", 0.01, 0, 0);
+  protected Gains gains = new Gains("gains r", 0.05, 0, 0);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -42,15 +42,9 @@ public class TurnToZeroCommand extends CommandBase {
     System.out.println("inside " + Swerve.gyro.getYaw());
     double Output = pid.getOutput(Swerve.gyro.getYaw());
     Output += 0.1 * Constants.Swerve.maxAngularVelocity * Math.signum(Output);
-    if(Math.abs(Swerve.gyro.getYaw()) > 1){
-      count = true; 
-      swerve.drive(new Translation2d(0, 0), Output, false, true);
-  }
-    else if(count){
-      count = false;
-      timer.reset();
-      timer.start();
-    }
+
+    swerve.drive(new Translation2d(0.07, 0.07), Output, false, true);
+  
   }
 
   // Called once the command ends or is interrupted.
@@ -60,6 +54,6 @@ public class TurnToZeroCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(2);
+    return false;
   }
 }

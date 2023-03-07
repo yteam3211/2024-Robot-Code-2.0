@@ -53,7 +53,7 @@ public class RobotContainer {
     public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
      m_ShootingSubsystem, m_GripperSubsystem);
     public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_ShootingSubsystem,
-    m_GripperSubsystem, m_CollectWheels, limelight);
+    m_GripperSubsystem, m_CollectWheels, m_armCollect, limelight);
     
      
 
