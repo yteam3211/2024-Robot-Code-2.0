@@ -47,7 +47,7 @@ public class setPointCollectCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     collectSubsystem.setPosition(0);
-    new ArmCollectCommand(armCollectSubsystem, 6.11, 0.6).schedule();
+    // new ArmCollectCommand(armCollectSubsystem, 6.11, 0.6).schedule();
   }
 
   // Returns true when the command should end.
