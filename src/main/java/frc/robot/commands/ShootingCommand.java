@@ -13,11 +13,12 @@ public class ShootingCommand extends CommandBase {
   private final shootingSubsystem shootingSubsystem;
   private final CartridgeSubsystem cartridgeSubsystem;
   private double velocity;
+  private boolean isShootingUp = false;
   private double RPM;
   private double CartridgeOutput;
   private Timer timer = new Timer();
   /** Creates a new ShootingCommand. */
-  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, double velocity, double RPM, double CartridgeOutput) {
+  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, double velocity, double CartridgeOutput) {
   this.shootingSubsystem = shootingSubsystem;
   this.cartridgeSubsystem = cartridgeSubsystem;
   this.velocity = velocity;
@@ -30,16 +31,23 @@ public class ShootingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    isShootingUp = false;
     timer.reset();
     timer.start();
-  }
+    }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     shootingSubsystem.setVelocity(velocity);
-    if (shootingSubsystem.GetVelocity() >= velocity) {
+    if ((shootingSubsystem.GetRightShootingWheelsVelocity() <= velocity) || (shootingSubsystem.getLeftShootingWheelsVelocity() >= velocity)) {
+      if(cartridgeSubsystem.GetPosition() >= cartridgeSubsystem.max){
+      cartridgeSubsystem.setOutput(0);
+      isShootingUp = true;
+    }else if(!isShootingUp){
       cartridgeSubsystem.setOutput(CartridgeOutput);
+
+    }
     }
   }
 
@@ -47,12 +55,16 @@ public class ShootingCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     cartridgeSubsystem.setOutput(0);
+    // timer.delay(1.3);
     shootingSubsystem.setVelocity(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.hasElapsed(1.6);
+    // return cartridgeSubsystem.GetPosition() >= cartridgeSubsystem.max;
+
+    
   }
 }

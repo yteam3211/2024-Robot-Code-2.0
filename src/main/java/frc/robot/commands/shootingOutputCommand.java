@@ -58,8 +58,6 @@ public class shootingOutputCommand extends CommandBase {
     }else{
       return false;
     }
-
-
     // return false;
     // if(output>0){
     //   return shootingSubsystem.isShootingUp(); 

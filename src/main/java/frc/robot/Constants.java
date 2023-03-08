@@ -22,6 +22,8 @@ public final class Constants {
         public static final int ARM_MOTOR = 17;
         public static final int ARM_COLLECT_MOTOR = 20;
         public static final int GRIPPER_MOTOR = 18; 
+        public static final int RIGHT_SHOOTING_M0TOR = 21; 
+        public static final int LEFT_SHOOTIN_MOTOR = 22; 
 
         
 

@@ -7,35 +7,53 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.dashboard.SuperSubSystemTab;
 import frc.robot.dashboard.SuperSystem;
+import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonSRX;
 
 public class shootingSubsystem extends SuperSystem {
- private SuperTalonSRX shootingWheels;
- private SuperTalonSRX shootingWheelsMaster;
+  private SuperTalonSRX leftShootingWheels;
+  private SuperTalonSRX rightShootingWheels;
+  private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("ShootingSubsystem", null);
+  private Gains shootingGains = new Gains("shooting gains", 0.2, 0, 0);
   /** Creates a new shootingSubsystem. */
   public shootingSubsystem() {
     super("shootingSubsystem");
-    shootingWheelsMaster = new SuperTalonSRX(21, 40, false, false, 0, 1, 1, null, ControlMode.Velocity);
-    shootingWheels = new SuperTalonSRX(shootingWheelsMaster, 22, 40, true);
+    rightShootingWheels = new SuperTalonSRX(Constants.RIGHT_SHOOTING_M0TOR, 40, false, false, 0, 1, 1, shootingGains, ControlMode.Velocity);
+    leftShootingWheels = new SuperTalonSRX(Constants.LEFT_SHOOTIN_MOTOR, 40, false, false, 0, 1, 1, shootingGains, ControlMode.Velocity);
     // setDefaultCommand();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    System.out.println(rightShootingWheels.getVelocity());
+    shuffleBoardTab.putInDashboard("Right motor velocity", rightShootingWheels.getVelocity(), false);
+    shuffleBoardTab.putInDashboard("Left motor velocity", leftShootingWheels.getVelocity(), false);
+
   }
   
   public void setVelocity(double Velocity){
-    shootingWheelsMaster.set(ControlMode.Velocity, Velocity);
+    rightShootingWheels.set(ControlMode.Velocity, Velocity*-1);
+    leftShootingWheels.set(ControlMode.Velocity, Velocity);
   }
 
-  public double GetVelocity(){
-    return shootingWheelsMaster.getVelocity();
-    }
+  public double GetRightShootingWheelsVelocity(){
+    return rightShootingWheels.getVelocity();
+    } 
+
+  public double getLeftShootingWheelsVelocity(){
+    return leftShootingWheels.getVelocity();
+
+  }
+
+
 
   public void resetEncoder(){
-    shootingWheelsMaster.reset(0);
+    rightShootingWheels.reset(0);
+    leftShootingWheels.reset(0);
   }
 
 
