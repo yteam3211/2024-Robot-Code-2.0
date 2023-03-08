@@ -73,7 +73,7 @@ public class armCollectSubsystem extends SuperSystem {
   }
 
 
-  public  void setArmCollectosition(double position) {
+  public  void setArmCollectPosition(double position) {
     armCollectMotor.setMode(ControlMode.Position);
     armCollectMotor.getPIDController().setReference(position, ControlType.kPosition);
     // SmartDashboard.putNumber("gripper target", position);

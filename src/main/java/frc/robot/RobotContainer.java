@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.autos.GRIDmovement.Right1GRID;
 import frc.robot.commands.*;
+import frc.robot.commands.autoCommands.FarFromHumanRampa;
 import frc.robot.commands.autoCommands.Next2HumanCommand;
-import frc.robot.commands.autoCommands.ballanceRampaAtuo;
 import frc.robot.commands.autoCommands.center;
 import frc.robot.commands.timercommand.TimerArmPosition;
-import frc.robot.commands.timercommand.TimerGripperCommand;
 import frc.robot.commands.timercommand.collectAtuoCommand;
-import frc.robot.commands.timercommand.openInParallel;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightStreamMode;
@@ -40,20 +38,20 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final collectWheels m_CollectWheels = new collectWheels();
-    private final CartridgeSubsystem  m_ShootingSubsystem = new CartridgeSubsystem();
+    private final shootingSubsystem  m_ShootingSubsystem = new shootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
-    private final GripperSubsystem m_GripperSubsystem = new GripperSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
     private final armCollectSubsystem m_armCollect = new armCollectSubsystem();
+    private final CartridgeSubsystem m_cartridgeSubsystem = new CartridgeSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_ShootingSubsystem,
-     m_GripperSubsystem, m_CollectWheels);
-    public final shootingOutputCommand justShoot = new shootingOutputCommand(m_ShootingSubsystem, 0.5, 6930);
-    public final ballanceRampaAtuo ballanceRampaAtuo = new ballanceRampaAtuo(s_Swerve, m_ArmSubsystem, m_CollectSubsystem,
-     m_ShootingSubsystem, m_GripperSubsystem);
-    public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_ShootingSubsystem,
-    m_GripperSubsystem, m_CollectWheels, m_armCollect, limelight);
+    public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
+     m_CollectWheels, m_ShootingSubsystem);
+    public final shootingOutputCommand justShoot = new shootingOutputCommand(m_cartridgeSubsystem, 0.5, 6930);
+    public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
+        m_CollectWheels, m_armCollect, limelight, m_ShootingSubsystem);
+    public final FarFromHumanRampa farFromHuman = new FarFromHumanRampa(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
+        m_CollectWheels, m_armCollect, limelight, m_ShootingSubsystem);
     
      
 
@@ -63,19 +61,18 @@ public class RobotContainer {
         configureButtonBindings();
         
     }
-    public ballanceRampaAtuo getBallanceRampaAtuo(){
-        return ballanceRampaAtuo;
-    }
     public center getCenterAtuo(){
         return centerAtuo;
     }
-    public shootingOutputCommand getJastShootAtuo(){
+    public shootingOutputCommand getJustShootAtuo(){
         return justShoot;
     }
     public Next2HumanCommand getNext2Human() {
         return next2Human;
     }
-    
+    public FarFromHumanRampa getFarFromHumanRampa(){
+        return farFromHuman;
+    }
     private void configureSwerveButtons() {
         
     }
@@ -88,7 +85,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight,  m_GripperSubsystem, m_armCollect);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight, m_armCollect, m_cartridgeSubsystem);
     }
  
     /**
@@ -106,7 +103,7 @@ public class RobotContainer {
         return s_Swerve;
     }
 
-    public CartridgeSubsystem getM_ShootingSubsystem() {
+    public shootingSubsystem getM_ShootingSubsystem() {
         return m_ShootingSubsystem;
     }
 
@@ -116,6 +113,9 @@ public class RobotContainer {
 
     public armSubsystem getM_ArmSubsystem() {
         return m_ArmSubsystem;
+    }
+    public CartridgeSubsystem getM_CartridgeSubsystem(){
+        return m_cartridgeSubsystem;
     }
 }
  

@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.commands.ArmOutputCommand;
 import frc.robot.commands.armPosition;
 import frc.robot.commands.zeroArm;
 import frc.util.SuperSystem;
@@ -43,8 +42,8 @@ public class armSubsystem extends SuperSystem {
   public armSubsystem() {
     super("armSubsystem");
     armgGains = new Gains("armGains", 0, 0, 0.000003, 0, 0.6, 0.04, 0); // second
-    ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
-        ControlType.kSmartMotion, armgGains, 7, 10, 1);
+    // ArmgMotor = new SuperSparkMax(Constants.ARM_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
+        // ControlType.kSmartMotion, armgGains, 7, 10, 1);
     this.resetArmEncoder();
     
   }
@@ -59,31 +58,33 @@ public class armSubsystem extends SuperSystem {
   }
 
   public void resetArmEncoder() {
-    ArmgMotor.reset(0);
+    // ArmgMotor.reset(0);
   }
 
 
   public void setPosition(double position) {
-    ArmgMotor.setMode(ControlMode.Position);
-    ArmgMotor.getPIDController().setReference(position, ControlType.kSmartMotion);
+    // ArmgMotor.setMode(ControlMode.Position);
+    // ArmgMotor.getPIDController().setReference(position, ControlType.kSmartMotion);
     // SmartDashboard.putNumber("armTarget", position);
 
   }
 
 
   public double getPosition() {
-    return ArmgMotor.getPosition();
+    // return ArmgMotor.getPosition();
+    return 0;
   }
 
   public void setArmOutput(double output) {
-    ArmgMotor.setMode(ControlMode.PercentOutput);
-    ArmgMotor.set(output);
+    // ArmgMotor.setMode(ControlMode.PercentOutput);
+    // ArmgMotor.set(output);
   }
 
 
 
   public double velocity() {
-    return ArmgMotor.getVelocity();
+    // return ArmgMotor.getVelocity();
+    return 0;
   }
 
   public void SetDisableDefault(){

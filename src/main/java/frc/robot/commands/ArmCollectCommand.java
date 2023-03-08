@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.armSubsystem;
 
@@ -44,20 +43,21 @@ public class ArmCollectCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armCollect.setArmCollectosition(position);
+    armCollect.setArmCollectPosition(position);
   }
 
   // Called once the command ends or is interrupted.
   @Override
+
   public void end(boolean interrupted) {
-    timer.delay(1);
-    armCollect.setArmCollectosition(0);
+    // timer.delay(1);
+    armCollect.setArmCollectPosition(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      return false;
+      return timer.hasElapsed(seconds);
     }
 }
 

@@ -6,9 +6,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.CollectSubsystem;
-import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armSubsystem;
+import frc.robot.subsystems.shootingSubsystem;
 import frc.robot.subsystems.armCollectSubsystem;
 
 
@@ -16,25 +16,24 @@ import frc.robot.subsystems.armCollectSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class resetCommand extends InstantCommand {
-  private final CartridgeSubsystem CartridgeSubsystem;
+  private final shootingSubsystem shootingSubsystem;
   private final CollectSubsystem collectSubsystem;
   private final armCollectSubsystem armCollectSubsystem;
-  private final GripperSubsystem gripperSubsystem;
+  private final CartridgeSubsystem cartridgeSubsystem;
 
 
-  public resetCommand(CartridgeSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,  armCollectSubsystem armCollectSubsystem, GripperSubsystem gripperSubsystem) {
-    this.CartridgeSubsystem = shootingSubsystem;
+  public resetCommand(shootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,  armCollectSubsystem armCollectSubsystem, CartridgeSubsystem cartridgeSubsystem) {
+    this.shootingSubsystem = shootingSubsystem;
     this.collectSubsystem = collectSubsystem;
     this.armCollectSubsystem = armCollectSubsystem;
-    this.gripperSubsystem = gripperSubsystem;
+    this.cartridgeSubsystem = cartridgeSubsystem;
   }
-
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    CartridgeSubsystem.resetEncoder();
+  public void initialize(){
+    shootingSubsystem.resetEncoder();
     collectSubsystem.resetEncoder();
     armCollectSubsystem.resetArmCollectEncoder();
-    gripperSubsystem.resetGriperEncoder();
-  }
+    cartridgeSubsystem.resetEncoder();    
+}
 }

@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
+import frc.util.dashboard.SuperSubSystemTab;
 import frc.util.motor.SuperSparkMax;
 import frc.util.motor.SuperTalonFX;
 import frc.util.motor.SuperTalonSRX;
@@ -33,10 +34,12 @@ public class CartridgeSubsystem extends SuperSystem {
 private Gains shootingGains;
  private DigitalInput upMicroSwitch;
  private DigitalInput downMicroSwitch;
- private SuperTalonFX Shooting;
+ public static SuperTalonFX Shooting;
  private SuperTalonSRX shootingWheels;
- private int max = 6930;
+ private SuperSubSystemTab shuffleboardTab = new SuperSubSystemTab("Cartridge Subsystem", this);
+ public int max = 5950;
  private int Min = -6000;
+
   // Motors, Selenoid and Sensors declaration
   public CartridgeSubsystem() {
     super("ShootingSubsystem");
@@ -54,10 +57,12 @@ private Gains shootingGains;
   
   @Override
   public void periodic() {
-    // getTab().putInDashboard("Position", ShooingMotor.getEncoder().getPosition(), false);
-    // SmartDashboard.putNumber("Shootingoutput", Shooing.getOutput());
+    // shuffleboardTab.putInDashboard("position", Shooting.getEncoder(), false);
+    // System.out.println("position: " + Shooting.getPosition());
+    // getTab().putInDashboard("Shooting Position", Shooting.getEncoder().getPosition(), false);
+    // SmartDashboard.putNumber("Shootingoutput", Shooting.getOutput());
     // SmartDashboard.putNumber("ShootingAmper", Shooing.getAmper());
-    // SmartDashboard.putNumber("ShootingPosition", Shooing.getPosition());
+    SmartDashboard.putNumber("ShootingPosition", Shooting.getPosition());
     // System.out.println("shoot" + Shooing.getPosition());
     // This method will be called once per scheduler run
   }

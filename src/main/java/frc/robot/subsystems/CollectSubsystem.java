@@ -55,6 +55,7 @@ public class CollectSubsystem extends SuperSystem {
   public void periodic() {
     shuffleBoardTab.putInDashboard("collect position", openCollectMotor.getPosition(), false);
     shuffleBoardTab.putInDashboard("collect output", openCollectMotor.getOutput(), false);
+    shuffleBoardTab.putInDashboard("shooting position", openCollectMotor.getVelocity(), false);
     // System.out.println("p" + getPosition());
   }
 

@@ -13,7 +13,6 @@ import frc.robot.autos.rampa;
 import frc.robot.commands.collectWheelsCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
-import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.commands.timercommand.TimerCollectWheels;;

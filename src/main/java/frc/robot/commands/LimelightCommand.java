@@ -53,7 +53,7 @@ public class LimelightCommand extends CommandBase {
       limelight.setPipeline(1);
       pidY.setGains(RRgainsY);
     }
-    pidX.setTargetPosition(0);
+    pidX.setTargetPosition(xPos);
     pidY.setTargetPosition(yPos);
     pidR.setTargetPosition(0);
     pidX.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
