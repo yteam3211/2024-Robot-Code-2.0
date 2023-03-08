@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   private static final String ballanceRampaAtuo = "ballance Rampa";
   private static final String justShootAtuo = "do nofing";
   private static final String Next2Human = "NextToHoman";
+  private static final String FarFromHumanRampa = "Far from human + rampe";
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -55,6 +56,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Center", centerAuto);
     m_chooser.addOption("ballance Rampa", ballanceRampaAtuo);
     m_chooser.addOption("Next to Human", Next2Human);
+    m_chooser.addOption("Far from human + rampe", FarFromHumanRampa);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
@@ -82,8 +84,6 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    armSubsystem.ArmgMotor.setIdleMode(IdleMode.kCoast);
-    armsubsystem.SetDisableDefault();
   }
 
   @Override
@@ -94,12 +94,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
-    if (m_chooser.getSelected().equals(ballanceRampaAtuo)) m_autonomousCommand = m_robotContainer.getBallanceRampaAtuo();
-    else if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
     else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
-    else m_autonomousCommand = m_robotContainer.getJastShootAtuo();
-      
-      
+    else if (m_chooser.getSelected().equals(FarFromHumanRampa)) m_autonomousCommand = m_robotContainer.getFarFromHumanRampa();
+    else m_autonomousCommand = m_robotContainer.getJustShootAtuo();
     
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -117,7 +115,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    armsubsystem.SetTeleopDefault();
     m_robotContainer.getS_Swerve().zeroGyro();
    
     // This makes sure that the autonomous stops running when

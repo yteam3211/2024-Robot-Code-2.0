@@ -9,31 +9,32 @@ import com.fasterxml.jackson.databind.ser.std.BooleanSerializer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
 import frc.robot.commands.rightGRIDmovmentCommand;
 import frc.robot.commands.ArmCollectCommand;
-import frc.robot.commands.ArmOutputCommand;
-import frc.robot.commands.ArmTriggerCommand;
 import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.LeftGRIDmovmentCommand;
 import frc.robot.commands.LimelightCommand;
+import frc.robot.commands.OpenIntakeAndArm;
+import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.TurnToZeroCommand;
 import frc.robot.commands.armPosition;
-import frc.robot.commands.collectGroupCommand;
+// import frc.robot.commands.ClosingCollectGroupCommand;
+// import frc.robot.commands.IntakeAndArm;
 import frc.robot.commands.collectWheelsCommand;
-import frc.robot.commands.gripperCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.subsystems.CollectSubsystem;
-import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.shootingSubsystem;
 import frc.util.vision.Limelight;
 // import frc.robot.commands.Balance;
 
@@ -71,7 +72,6 @@ public class RobotButtons {
     public Trigger ArmCollect2 = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
     public Trigger ArmCollect3 = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
     // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
-    public Trigger openGripper = new Trigger(() -> systems.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public static Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
     public static Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger resetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kB.value));
@@ -83,8 +83,8 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(CartridgeSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
-            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, GripperSubsystem gripperSubsystem, armCollectSubsystem armCollectSubsystem) {
+    public void loadButtons(shootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
+            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, armCollectSubsystem armCollectSubsystem,CartridgeSubsystem cartridgeSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -105,23 +105,23 @@ public class RobotButtons {
         TurnToZero.whileTrue(new TurnToZeroCommand(swerve));
 
         // systems joystick commands
-        // OpenCollect.whileFalse(new setPointCollectCommand(collectSubsystem,0,armCollect));
-        OpenCollect.whileTrue(new collectGroupCommand(collectSubsystem, collectWheels,armCollectSubsystem, -0.5, -0.15, 300,6.11));
+        OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, -0.5, -0.15, 300, 6.11));
+        // OpenCollect.whileFalse(new IntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, 0, 0, 0, 0));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
-        shootingLow.onTrue(new shootingOutputCommand(shootingSubsystem, 0.29, 6930));
-        shootingHigh.onTrue(new shootingOutputCommand(shootingSubsystem, 0.49, 6930));
-        shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
-        shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
+        shootingLow.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,1850, 0.19));
+        shootingHigh.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,6000, 0.4));
+        shootinghTrigger.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,3000, 0.4));
+        shootingMiddle.onTrue(new shootingOutputCommand( cartridgeSubsystem,0.2, 1000));
+        // shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
+        // shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
         // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
         // midArm.onTrue(new armPosition(armSubsystem, -65));  
         // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        ArmCollect1.onTrue(new ArmCollectCommand(armCollectSubsystem, 5.2, 200));
-        ArmCollect2.onTrue(new ArmCollectCommand(armCollectSubsystem, 0, 200));
+        ArmCollect1.onTrue(new ArmCollectCommand(armCollectSubsystem, 5.2, 1000));
+        ArmCollect2.onTrue(new ArmCollectCommand(armCollectSubsystem, 0, 1000));
         // ArmCollect3.
-        openGripper.whileTrue(new gripperCommand(gripperSubsystem, -43.485));
-        openGripper.whileFalse(new gripperCommand(gripperSubsystem, 0.333));
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
-        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, gripperSubsystem));
+        resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
         
       
