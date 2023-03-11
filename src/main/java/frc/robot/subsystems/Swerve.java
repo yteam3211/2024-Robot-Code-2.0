@@ -27,7 +27,7 @@ public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-    public Gains balanceGains = new Gains("balance gains", 0.035, 0.0001, 0.035);
+    public Gains balanceGains = new Gains("balance gains", 0.02, 0.0001, 0.03);
 
     public Swerve() {
         super("Swerve");
@@ -131,6 +131,8 @@ public class Swerve extends SuperSystem {
 
     @Override
     public void periodic(){
+        getTab().putInDashboard("pose y", getPose().getX(), false);
+        getTab().putInDashboard("pose x", getPose().getY(), false);
         SmartDashboard.putNumber("yaw", gyro.getYaw());
         SmartDashboard.putNumber("roll", gyro.getRoll());
         SmartDashboard.putNumber("pitch", gyro.getPitch());

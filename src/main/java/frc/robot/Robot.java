@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   private CartridgeSubsystem shootingSubsystem;
   private RobotContainer m_robotContainer;
   private static final String centerAuto = "center";
+  private static final String test = "test";
   private static final String ballanceRampaAtuo = "ballance Rampa";
   private static final String justShootAtuo = "do nofing";
   private static final String Next2Human = "NextToHoman";
@@ -54,9 +55,9 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("", centerToRampaAuto);
     m_chooser.setDefaultOption("just shoot", justShootAtuo);
     m_chooser.addOption("Center", centerAuto);
-    m_chooser.addOption("ballance Rampa", ballanceRampaAtuo);
     m_chooser.addOption("Next to Human", Next2Human);
     m_chooser.addOption("Far from human + rampe", FarFromHumanRampa);
+    m_chooser.addOption("test", test);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
@@ -96,8 +97,9 @@ public class Robot extends TimedRobot {
     m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
     if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
     else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
+    else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
     else if (m_chooser.getSelected().equals(FarFromHumanRampa)) m_autonomousCommand = m_robotContainer.getFarFromHumanRampa();
-    else m_autonomousCommand = m_robotContainer.getJustShootAtuo();
+    else m_autonomousCommand = m_robotContainer.getTest();
     
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 

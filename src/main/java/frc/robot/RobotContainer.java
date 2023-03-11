@@ -41,17 +41,17 @@ public class RobotContainer {
     private final shootingSubsystem  m_ShootingSubsystem = new shootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
     private final armSubsystem m_ArmSubsystem = new armSubsystem();
-    private final armCollectSubsystem m_armCollect = new armCollectSubsystem();
+    private final armCollectSubsystem m_armCollectSubsystem = new armCollectSubsystem();
     private final CartridgeSubsystem m_cartridgeSubsystem = new CartridgeSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
-     m_CollectWheels, m_ShootingSubsystem);
+     m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
     public final shootingOutputCommand justShoot = new shootingOutputCommand(m_cartridgeSubsystem, 0.5, 6930);
     public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
-        m_CollectWheels, m_armCollect, limelight, m_ShootingSubsystem);
+        m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     public final FarFromHumanRampa farFromHuman = new FarFromHumanRampa(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
-        m_CollectWheels, m_armCollect, limelight, m_ShootingSubsystem);
+        m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     
      
 
@@ -73,6 +73,9 @@ public class RobotContainer {
     public FarFromHumanRampa getFarFromHumanRampa(){
         return farFromHuman;
     }
+    public Command getTest(){
+       return test.getAutoCommand(s_Swerve);
+    }
     private void configureSwerveButtons() {
         
     }
@@ -85,7 +88,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight, m_armCollect, m_cartridgeSubsystem);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight, m_armCollectSubsystem, m_cartridgeSubsystem);
     }
  
     /**
