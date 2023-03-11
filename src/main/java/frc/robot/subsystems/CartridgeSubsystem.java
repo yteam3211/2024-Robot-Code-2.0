@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import frc.robot.commands.shootingOutputCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.dashboard.SuperSubSystemTab;
@@ -38,19 +39,13 @@ private Gains shootingGains;
  private SuperTalonSRX shootingWheels;
  private SuperSubSystemTab shuffleboardTab = new SuperSubSystemTab("Cartridge Subsystem", this);
  public int max = 5950;
- private int Min = -6000;
+
 
   // Motors, Selenoid and Sensors declaration
   public CartridgeSubsystem() {
     super("ShootingSubsystem");
     shootingGains = new Gains("_shootingGains",0.03, 0,0);
     Shooting = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
-     // upMicroSwitch = new DigitalInput(Constants.UP_MICROSWITCH);
-    // downMicroSwitch = new DigitalInput(Constants.DOWN_MICROSWITCH);
-    // firstShootingSp = new VictorSP(0);
-    // secondShootingSp = new VictorSP(1);
-    // ShooingMotor = new SuperSparkMax(14,false);
-    // ShooingMotor = new SuperSparkMax(14, MotorType.kBrushless, 30, false, 1 ,1 , IdleMode.kBrake, ControlType.kPosition, shootingGains, 0, 0, 0);
   }
 
   /** Creates a new ExampleSubsystem. */

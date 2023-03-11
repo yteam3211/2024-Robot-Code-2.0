@@ -6,21 +6,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.CartridgeSubsystem;
+import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
 
 public class ShootingCommand extends CommandBase {
   private final shootingSubsystem shootingSubsystem;
   private final CartridgeSubsystem cartridgeSubsystem;
+  private final armCollectSubsystem armCollectSubsystem;
   private double velocity;
   private boolean isShootingUp = false;
   private double RPM;
   private double CartridgeOutput;
   private Timer timer = new Timer();
   /** Creates a new ShootingCommand. */
-  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, double velocity, double CartridgeOutput) {
+  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, armCollectSubsystem armCollectSubsystem, double velocity, double CartridgeOutput) {
   this.shootingSubsystem = shootingSubsystem;
   this.cartridgeSubsystem = cartridgeSubsystem;
+  this.armCollectSubsystem = armCollectSubsystem;
   this.velocity = velocity;
   this.RPM = RPM;
   this.CartridgeOutput = CartridgeOutput;
@@ -31,6 +36,8 @@ public class ShootingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(5)).schedule();
+    // new WaitCommand(10).schedule();
     isShootingUp = false;
     timer.reset();
     timer.start();
@@ -56,13 +63,13 @@ public class ShootingCommand extends CommandBase {
   public void end(boolean interrupted) {
     cartridgeSubsystem.setOutput(0);
     // timer.delay(1.3);
-    shootingSubsystem.setVelocity(0);
+    shootingSubsystem.setShootingOutput(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(1.6);
+    return timer.hasElapsed(1);
     // return cartridgeSubsystem.GetPosition() >= cartridgeSubsystem.max;
 
     

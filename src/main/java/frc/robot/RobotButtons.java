@@ -19,12 +19,14 @@ import frc.robot.commands.LeftGRIDmovmentCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.OpenIntakeAndArm;
 import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.ShootingGroupCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.TurnToZeroCommand;
 import frc.robot.commands.armPosition;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 // import frc.robot.commands.IntakeAndArm;
 import frc.robot.commands.collectWheelsCommand;
+import frc.robot.commands.openArmwithDelaty;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.resetCommand;
@@ -68,10 +70,8 @@ public class RobotButtons {
     public Trigger shootingHigh = new Trigger(() -> systems.getPOV() == 0);
     public Trigger shootingMiddle = new Trigger(() -> systems.getPOV() == 270);
     public Trigger shootinghTrigger = new Trigger(() -> systems.getPOV() == 90);
-    public Trigger ArmCollect1 = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
-    public Trigger ArmCollect2 = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
-    public Trigger ArmCollect3 = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
-    // public Trigger driveArm = new Trigger(() -> coPilotJoystick.getRawButton(1));
+    public Trigger openArmCollect = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
+    public Trigger closeArmCollect = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
     public static Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
     public static Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger resetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kB.value));
@@ -97,33 +97,37 @@ public class RobotButtons {
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         
         LimelightAprilTag.whileTrue(new LimelightCommand(limelight, swerve, true, -1, 0));
-        // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
         LimelightRetroReflectiveMid.whileTrue(new LimelightCommand(limelight, swerve, false, 16.5, 0));
         Balance.onTrue(new BalanceCommand(swerve));
         rightGRIDmovment.and(GRIDmovmentHelper).onTrue(new rightGRIDmovmentCommand(swerve));
         leftGRIDmovment.and(GRIDmovmentHelper).onTrue(new LeftGRIDmovmentCommand(swerve));
         TurnToZero.whileTrue(new TurnToZeroCommand(swerve));
+        // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
 
         // systems joystick commands
         OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, -0.5, -0.15, 300, 6.11));
-        // OpenCollect.whileFalse(new IntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, 0, 0, 0, 0));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
-        shootingLow.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,1850, 0.19));
-        shootingHigh.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,6000, 0.4));
-        shootinghTrigger.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem,3000, 0.4));
-        shootingMiddle.onTrue(new shootingOutputCommand( cartridgeSubsystem,0.2, 1000));
-        // shootingMiddle.onTrue(new shootingOutputCommand(shootingSubsystem, 0.2, 1000));
-        // shootinghTrigger.onTrue(new shootingOutputCommand(shootingSubsystem, 0.8, 6930));
-        // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
-        // midArm.onTrue(new armPosition(armSubsystem, -65));  
-        // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
-        ArmCollect1.onTrue(new ArmCollectCommand(armCollectSubsystem, 5.2, 1000));
-        ArmCollect2.onTrue(new ArmCollectCommand(armCollectSubsystem, 0, 1000));
-        // ArmCollect3.
+        
+        shootingLow.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
+        shootingHigh.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
+        shootinghTrigger.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
+        shootingMiddle.onTrue(new shootingOutputCommand(cartridgeSubsystem,0.3, 1000));
+        
+        openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(6)));
+        closeArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(0)));
+        
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem));
         resetTrigger.onTrue(new armPosition(armSubsystem, 0));   
         
-      
+        // OpenCollect.whileFalse(new IntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, 0, 0, 0, 0));
+        
+        // shootingLow.onTrue(new ShootingGroupCommand(cartridgeSubsystem, shootingSubsystem,1850, 0.19, -0.1 , 3000 ));
+        // shootingHigh.onTrue(new ShootingGroupCommand(cartridgeSubsystem, shootingSubsystem, 6000, 0.4, -0.1,3000));
+        // shootinghTrigger.onTrue(new ShootingGroupCommand(cartridgeSubsystem ,shootingSubsystem,3000, 0.4, -0.1 ,300));
+
+        // humanArm.onTrue(new armPosition(armSubsystem, -20.7));
+        // midArm.onTrue(new armPosition(armSubsystem, -65));  
+        // floorArm.onTrue(new armPosition(armSubsystem, -70.7));
     }
 }

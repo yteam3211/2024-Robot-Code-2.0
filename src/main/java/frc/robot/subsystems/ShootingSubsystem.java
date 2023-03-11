@@ -17,7 +17,7 @@ public class shootingSubsystem extends SuperSystem {
   private SuperTalonSRX leftShootingWheels;
   private SuperTalonSRX rightShootingWheels;
   private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("ShootingSubsystem", null);
-  private Gains shootingGains = new Gains("shooting gains", 0.2, 0, 0);
+  private Gains shootingGains = new Gains("shooting gains", 0.25, 0, 0);
   /** Creates a new shootingSubsystem. */
   public shootingSubsystem() {
     super("shootingSubsystem");
@@ -29,7 +29,7 @@ public class shootingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    System.out.println(rightShootingWheels.getVelocity());
+    // System.out.println(rightShootingWheels.getVelocity());
     shuffleBoardTab.putInDashboard("Right motor velocity", rightShootingWheels.getVelocity(), false);
     shuffleBoardTab.putInDashboard("Left motor velocity", leftShootingWheels.getVelocity(), false);
 
@@ -40,6 +40,11 @@ public class shootingSubsystem extends SuperSystem {
     leftShootingWheels.set(ControlMode.Velocity, Velocity);
   }
 
+  public void setShootingOutput(double output){
+    rightShootingWheels.set(ControlMode.PercentOutput,output);
+    leftShootingWheels.set(ControlMode.PercentOutput,output);
+  
+  }
   public double GetRightShootingWheelsVelocity(){
     return rightShootingWheels.getVelocity();
     } 

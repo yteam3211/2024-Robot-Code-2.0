@@ -37,6 +37,7 @@ public class shootingOutputCommand extends CommandBase {
   @Override
   public void execute() {
     System.out.println(cartridgeSubsystem.GetOutput());
+    
     cartridgeSubsystem.setOutput(output);
   }
 

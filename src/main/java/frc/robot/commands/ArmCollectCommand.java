@@ -51,13 +51,15 @@ public class ArmCollectCommand extends CommandBase {
 
   public void end(boolean interrupted) {
     // timer.delay(1);
-    armCollect.setArmCollectPosition(0);
+    // armCollect.setArmCollectPosition(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (seconds == 0)
+      return false;
+    else
       return timer.hasElapsed(seconds);
-    }
+  }
 }
-
