@@ -58,10 +58,10 @@ public class Next2HumanCommand extends SequentialCommandGroup {
     this.ShootingSubsystem = shootingSubsystem;
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(ShootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, 6000, 0.4),
+    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4),
     new moveInParallel(swerve, collectSubsystem, collectWheels, next2human.getAutoCommand(swerve), 290, 5, 1),
     new LimelightCommand(limelight, swerve, true, -1, 0),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, 6000, 0.4)
-    );
+    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4)
+    ); 
   }
 }

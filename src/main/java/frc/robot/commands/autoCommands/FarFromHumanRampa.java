@@ -53,7 +53,7 @@ public class FarFromHumanRampa extends SequentialCommandGroup {
     this.shootingSubsystem = shootingSubsystem;
     this.armCollectSubsystem = armCollectSubsystem;
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, 6000, 0.4),
+    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4),
     new moveInParallel(swerve, collectSubsystem, collectWheels, FarFromHumanAndRamp.getAutoCommand(swerve), 290, 5, 1),
     new BalanceCommand(swerve)
     );

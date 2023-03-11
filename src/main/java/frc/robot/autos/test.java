@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 
-public class next2human {
+public class test {
     public static Command getAutoCommand(Swerve driveSubsystem) {
-        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("next 2 human & 1 cube", new PathConstraints(4.4, 3));
+        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("test", new PathConstraints(4.4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         // eventMap.put("marker1", new PrintCommand("Passed marker 1"));
@@ -29,8 +29,8 @@ public class next2human {
             driveSubsystem::getPose, // TODO ckack if it work 
             driveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
             Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
-            new PIDConstants(0, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
-            new PIDConstants(0.01, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
+            new PIDConstants(10, 0.0, 0.4), // PID constants to correct for translation error (used to create the X and Y PID controllers)
+            new PIDConstants(0.06, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
             driveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
             eventMap,
             true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true

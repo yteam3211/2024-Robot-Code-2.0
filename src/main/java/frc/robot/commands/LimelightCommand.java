@@ -23,7 +23,7 @@ public class LimelightCommand extends CommandBase {
   protected double yPos;
   protected double xPos;
   protected Timer timer = new Timer();
-  protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
+  protected Gains gainsX = new Gains("gains x", 0.04, 0, 0);
   protected Gains RRgainsY = new Gains("gains y", 0.17, 0, 0.045);
   protected Gains gainsR = new Gains("gains r", 0.05, 0, 0);
   // protected Gains gainsX = new Gains("gains x", 0.03, 0, 0);
@@ -65,7 +65,6 @@ public class LimelightCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     double xOutput = pidX.getOutput(limelight.getX());
     double yOutput = pidY.getOutput(limelight.getY());
     double rOutput = pidR.getOutput(Swerve.gyro.getYaw());
@@ -83,6 +82,7 @@ public class LimelightCommand extends CommandBase {
       timer.start();
     }
     else{
+      timer.reset();
       count = true;
       swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
   }
@@ -96,6 +96,6 @@ public class LimelightCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(1.5);
+    return timer.hasElapsed(9);
   }
 }

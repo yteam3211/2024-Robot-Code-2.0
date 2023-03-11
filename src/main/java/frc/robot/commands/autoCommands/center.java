@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
 import frc.robot.autos.centerToRampa;
 import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
@@ -28,36 +29,21 @@ import frc.robot.commands.timercommand.moveInParallel;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class center extends SequentialCommandGroup {
   /** Creates a new atuo1. */
-  private Swerve s_Swerve;
-  private shootingSubsystem ShootingSubsystem;
-  private CartridgeSubsystem cartridgeSubsystem;
-  private CollectSubsystem collectSubsystem;
-  // private ClosingCollectGroupCommand collectGroupCommand;
-  private timeSetPointCollectCommand timeSetPointCollectCommand;
-  private TimerArmPosition TimerArmPosition;
-  private collectWheels collectWheels;
-  
-
-  
   public center(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
-  collectWheels collectWheels, shootingSubsystem shootingSubsystem
+  collectWheels collectWheels, shootingSubsystem shootingSubsystem, armCollectSubsystem armCollectSubsystem
 ) {
-    this.s_Swerve = swerve;
-    this.collectSubsystem = collectSubsystem;
-    this.cartridgeSubsystem = cartridgeSubsystem;
-    this.collectWheels = collectWheels;
-    this.ShootingSubsystem = shootingSubsystem;
+
     
   
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, 6000, 0.4),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, centerToRampa.getAutoCommand(s_Swerve), 290, 7, 2),
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, centerToRampa.getAutoCommand(swerve), 290, 7, 2),
     // centerToRampa.getAutoCommand(s_Swerve),
     new BalanceCommand(swerve)
     );  
