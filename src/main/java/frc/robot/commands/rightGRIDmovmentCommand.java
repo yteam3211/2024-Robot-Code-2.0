@@ -15,6 +15,7 @@ public class rightGRIDmovmentCommand extends CommandBase {
   /** Creates a new rightGRIDmovmentCommand. */
   private Swerve swerve;
   private int presses = 0;
+  private String name;
   private boolean pressed = false;
   private Timer pressesTimer = new Timer();
   private Timer finishTimer = new Timer();
@@ -55,17 +56,18 @@ public class rightGRIDmovmentCommand extends CommandBase {
     switch(presses){
     case 1:
       System.out.println("chosen: 1");
-      AutoCommand.getAutoCommand(swerve, "1 right GRID").schedule();
+      name = "1 right GRID";
       break;
     case 2:
       System.out.println("chosen: 2");
-      AutoCommand.getAutoCommand(swerve, "2 right GRID").schedule();
+      name = "2 right GRID";
       break;
     case 3:
       System.out.println("chosen: 3");
-      AutoCommand.getAutoCommand(swerve, "3 right GRID").schedule();
+      name = "3 right GRID";
       break;
   }
+  new GRIDmovmentGroupCommand(swerve, name).schedule();
 }
 
   // Returns true when the command should end.

@@ -26,7 +26,7 @@ public class moveInParallel extends ParallelCommandGroup {
   /** Creates a new collectInParallel. */
   public moveInParallel(Swerve s_Swerve, CollectSubsystem collectSubsystem,
   collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, CartridgeSubsystem cartridgeSubsystem, Command movment,
-   double collectPoint, double armCollectPoint, double collectSeconds, double collectDelay, double armCollectOutput, double armCollectDelay) {
+   double collectPoint, double armCollectPoint, double collectSeconds, double collectDelay) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(

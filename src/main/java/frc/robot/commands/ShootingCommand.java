@@ -46,7 +46,8 @@ public class ShootingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("output" + shootingSubsystem.GetRightShootingWheelsOutput());
+    System.out.println("right output" + shootingSubsystem.GetRightShootingWheelsOutput());
+    System.out.println("left output" + shootingSubsystem.getLeftShootingWheelsOutput());
     shootingSubsystem.setShootingOutput(ShootingOutput);
     if ((shootingSubsystem.GetRightShootingWheelsOutput() >= (ShootingOutput * -1) + 0.02) && (shootingSubsystem.getLeftShootingWheelsOutput() >= ShootingOutput - 0.02)) {
       if(cartridgeSubsystem.GetPosition() >= cartridgeSubsystem.max){
@@ -54,7 +55,6 @@ public class ShootingCommand extends CommandBase {
         isShootingUp = true;
       }else if(!isShootingUp){
         cartridgeSubsystem.setOutput(CartridgeOutput);
-  
       }
     }
 

@@ -35,7 +35,7 @@ public class TurnToZeroCommand extends CommandBase {
     rightPosition = true;
     timer.reset();
     pid.setTargetPosition(0);
-    pid.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
+    pid.setMaxOutput(Constants.SwerveConst.maxSpeed * 0.6);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,7 +43,7 @@ public class TurnToZeroCommand extends CommandBase {
   public void execute() {
     System.out.println("inside " + Swerve.gyro.getYaw());
     double Output = pid.getOutput(Swerve.gyro.getYaw());
-    Output += 0.1 * Constants.Swerve.maxAngularVelocity * Math.signum(Output);
+    Output += 0.1 * Constants.SwerveConst.maxAngularVelocity * Math.signum(Output);
     if(Math.abs(Swerve.gyro.getYaw()) > 1.5){
       swerve.drive(new Translation2d(0.07, 0.07), Output, false, true);
       timer.reset();

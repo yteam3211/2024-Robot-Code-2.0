@@ -28,7 +28,7 @@ public class AutoCommand {
         SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             driveSubsystem::getPose, // TODO ckack if it work 
             driveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
-            Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
+            Constants.SwerveConst.swerveKinematics, // SwerveDriveKinematics
             new PIDConstants(10, 0.0, 1), // PID constants to correct for translation error (used to create the X and Y PID controllers)
             new PIDConstants(0.01, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
             driveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem

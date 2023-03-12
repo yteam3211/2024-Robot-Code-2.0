@@ -16,7 +16,6 @@ import frc.util.motor.SuperTalonSRX;
 public class shootingSubsystem extends SuperSystem {
   private SuperTalonSRX leftShootingWheels;
   private SuperTalonSRX rightShootingWheels;
-  private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("ShootingSubsystem", null);
   private Gains shootingGains = new Gains("shooting gains", 0.25, 0, 0);
   /** Creates a new shootingSubsystem. */
   public shootingSubsystem() {
@@ -30,8 +29,12 @@ public class shootingSubsystem extends SuperSystem {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(rightShootingWheels.getVelocity());
-    shuffleBoardTab.putInDashboard("Right motor velocity", rightShootingWheels.getVelocity(), false);
-    shuffleBoardTab.putInDashboard("Left motor velocity", leftShootingWheels.getVelocity(), false);
+    getTab().putInDashboard("Right motor velocity", rightShootingWheels.getVelocity(), false);
+    getTab().putInDashboard("Left motor velocity", leftShootingWheels.getVelocity(), false);
+    getTab().putInDashboard("Right motor Output", rightShootingWheels.getOutput(), false);
+    getTab().putInDashboard("Left motor Output", leftShootingWheels.getOutput(), false);
+    getTab().putInDashboard("Right motor Amper", rightShootingWheels.getOutput(), false);
+    getTab().putInDashboard("Left motor Amper", leftShootingWheels.getOutput(), false);
   }
   
   public void setVelocity(double Velocity){
@@ -42,8 +45,8 @@ public class shootingSubsystem extends SuperSystem {
 
   public void setShootingOutput(double ShootingOutput){
 
-    rightShootingWheels.set(ControlMode.PercentOutput,ShootingOutput);
-    leftShootingWheels.set(ControlMode.PercentOutput,ShootingOutput);
+    rightShootingWheels.set(ControlMode.PercentOutput, ShootingOutput * -1);
+    leftShootingWheels.set(ControlMode.PercentOutput, ShootingOutput);
   
   }
   public double GetRightShootingWheelsVelocity(){

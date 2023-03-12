@@ -33,7 +33,7 @@ public class BalanceCommand extends CommandBase {
   public void execute() {
     if (Math.abs(swerve.gyro.getRoll()) > 2.5){
       swerve.drive(            
-      new Translation2d(balancePID.getOutput(swerve.gyro.getRoll()), 0).times(Constants.Swerve.maxSpeed * 0.3), 
+      new Translation2d(balancePID.getOutput(swerve.gyro.getRoll()), 0).times(Constants.SwerveConst.maxSpeed * 0.3), 
         0, 
         false, //Field oriented by the controller switch
       true

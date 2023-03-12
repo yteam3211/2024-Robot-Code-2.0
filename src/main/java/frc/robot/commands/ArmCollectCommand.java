@@ -64,7 +64,7 @@ public class ArmCollectCommand extends CommandBase {
       isFinished = true;
     }
     else if(timer.hasElapsed(seconds)){
-      System.out.println("rrrrrrrrrrrrrrrr entered! " + position);
+      // System.out.println("rrrrrrrrrrrrrrrr entered! " + position);
       isFinished = true;
     }
     return isFinished;

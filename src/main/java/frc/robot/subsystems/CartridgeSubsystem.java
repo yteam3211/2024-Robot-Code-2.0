@@ -37,7 +37,7 @@ private Gains shootingGains;
  private DigitalInput downMicroSwitch;
  public static SuperTalonFX Shooting;
  private SuperTalonSRX shootingWheels;
- public int max = 5970;
+ public int max = 6120;
 
 
   // Motors, Selenoid and Sensors declaration
