@@ -13,8 +13,6 @@ import frc.util.PID.PIDController;
 
 public class BalanceCommand extends CommandBase {
   protected Swerve swerve;
-  private double maxSpeed;
-  private boolean isUp = false;
   protected PIDController balancePID = new PIDController();
   /** Creates a new BalanceCommand. */
   public BalanceCommand(Swerve swerve) {
@@ -26,7 +24,6 @@ public class BalanceCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    maxSpeed = Constants.Swerve.maxSpeed * 0.3;
     balancePID.setGains(swerve.balanceGains);
     balancePID.setTargetPosition(0);
   }
@@ -34,19 +31,9 @@ public class BalanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Math.abs(swerve.gyro.getRoll()) < 15 && isUp){
-      maxSpeed = Constants.Swerve.maxSpeed * 0.2;
-    }
-    else if(Math.abs(swerve.gyro.getRoll()) > 15){
-      isUp = true;
-      maxSpeed = Constants.Swerve.maxSpeed * 0.3;
-    }
-    else{
-      maxSpeed = Constants.Swerve.maxSpeed * 0.3;
-    }
     if (Math.abs(swerve.gyro.getRoll()) > 2.5){
       swerve.drive(            
-      new Translation2d(balancePID.getOutput(swerve.gyro.getRoll()), 0).times(maxSpeed), 
+      new Translation2d(balancePID.getOutput(swerve.gyro.getRoll()), 0).times(Constants.Swerve.maxSpeed * 0.3), 
         0, 
         false, //Field oriented by the controller switch
       true

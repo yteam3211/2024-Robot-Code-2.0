@@ -7,9 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotButtons;
-import frc.robot.autos.GRIDmovement.Right1GRID;
-import frc.robot.autos.GRIDmovement.Right2GRID;
-import frc.robot.autos.GRIDmovement.Right3GRID;
+import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.collectWheels;
 
@@ -57,15 +55,15 @@ public class rightGRIDmovmentCommand extends CommandBase {
     switch(presses){
     case 1:
       System.out.println("chosen: 1");
-      Right1GRID.getAutoCommand(swerve).schedule();
+      AutoCommand.getAutoCommand(swerve, "1 right GRID").schedule();
       break;
     case 2:
       System.out.println("chosen: 2");
-      Right2GRID.getAutoCommand(swerve).schedule();
+      AutoCommand.getAutoCommand(swerve, "2 right GRID").schedule();
       break;
     case 3:
       System.out.println("chosen: 3");
-      Right3GRID.getAutoCommand(swerve).schedule();
+      AutoCommand.getAutoCommand(swerve, "3 right GRID").schedule();
       break;
   }
 }

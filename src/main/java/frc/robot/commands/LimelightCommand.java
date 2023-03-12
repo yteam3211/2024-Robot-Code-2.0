@@ -73,16 +73,19 @@ public class LimelightCommand extends CommandBase {
     yOutput += 0.02 * Constants.Swerve.maxSpeed * Math.signum(yOutput);
     rOutput += 0.02 * Constants.Swerve.maxAngularVelocity * Math.signum(rOutput);
 
-    System.out.println("x output: " + xOutput);
+    // System.out.println("x output: " + xOutput);
     // System.out.println("y output: " + yOutput);
     // if(Math.abs(limelight.getY()) > Math.abs(yPos) + 0.3 || Math.abs(limelight.getX()) > 0.3 || Math.abs(Swerve.gyro.getYaw()) > 1.5){
-    if(Math.abs(limelight.getY()) < Math.abs(yPos) + 0.4 && Math.abs(limelight.getX()) > 1.3 && Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
+    if(Math.abs(Math.abs(yPos) - Math.abs(limelight.getY())) < 0.4 && Math.abs(limelight.getX()) < 3 && Math.abs(Swerve.gyro.getYaw()) < 0.5 && count){
       count = false;
-      timer.reset();
       timer.start();
+      // System.out.println("timer started! ");
+      swerve.drive(new Translation2d(0, 0), 0, false, true);
     }
-    else{
+    else if(Math.abs(Math.abs(yPos) - Math.abs(limelight.getY())) > 0.4 || Math.abs(limelight.getX()) > 3 || Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
+      timer.stop();
       timer.reset();
+      // System.out.println("timer reset! ");
       count = true;
       swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
   }
@@ -91,11 +94,13 @@ public class LimelightCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    swerve.drive(new Translation2d(0, 0), 0, false, true);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(9);
+    // System.out.println("Timer: " + timer.get());
+    return timer.hasElapsed(1);
   }
 }

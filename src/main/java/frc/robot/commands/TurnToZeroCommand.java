@@ -16,9 +16,9 @@ import frc.util.PID.PIDController;
 
 public class TurnToZeroCommand extends CommandBase {
   private Swerve swerve;
-  private boolean count = true;
+  private boolean rightPosition;
   private Timer timer = new Timer();
-  protected Gains gains = new Gains("gains r", 0.05, 0, 0);
+  protected Gains gains = new Gains("gains r", 0.06, 0, 0.3);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -32,6 +32,8 @@ public class TurnToZeroCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    rightPosition = true;
+    timer.reset();
     pid.setTargetPosition(0);
     pid.setMaxOutput(Constants.Swerve.maxSpeed * 0.6);
   }
@@ -42,18 +44,27 @@ public class TurnToZeroCommand extends CommandBase {
     System.out.println("inside " + Swerve.gyro.getYaw());
     double Output = pid.getOutput(Swerve.gyro.getYaw());
     Output += 0.1 * Constants.Swerve.maxAngularVelocity * Math.signum(Output);
-
-    swerve.drive(new Translation2d(0.07, 0.07), Output, false, true);
-  
+    if(Math.abs(Swerve.gyro.getYaw()) > 1.5){
+      swerve.drive(new Translation2d(0.07, 0.07), Output, false, true);
+      timer.reset();
+      rightPosition = true;
+    }
+    else if(Math.abs(Swerve.gyro.getYaw()) < 1.5 && rightPosition){
+      System.out.println("timer started!! ");
+      timer.start();
+      rightPosition = false;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    swerve.drive(new Translation2d(0.0, 0.0), 0, false, true);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.hasElapsed(0.3);
   }
 }

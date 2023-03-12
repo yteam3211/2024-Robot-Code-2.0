@@ -7,7 +7,7 @@ package frc.robot.commands.autoCommands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
-import frc.robot.autos.centerToRampa;
+import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
@@ -18,6 +18,8 @@ import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.shootingSubsystem;
 import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.StartAuto;
+import frc.robot.commands.TurnToZeroCommand;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
@@ -42,9 +44,10 @@ public class center extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, centerToRampa.getAutoCommand(swerve), 290, 7, 2),
-    // centerToRampa.getAutoCommand(s_Swerve),
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.5, 0.4),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start"), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "centerToRampa"), 290, 5.2, 2, 0.5, -0.3, 0.2),
+    // AutoCommand.getAutoCommand(s_Swerve),
     new BalanceCommand(swerve)
     );  
   }
