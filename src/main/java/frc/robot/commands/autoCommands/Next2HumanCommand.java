@@ -4,7 +4,7 @@
 
 package frc.robot.commands.autoCommands;
 
-import frc.robot.autos.next2human;
+import frc.robot.autos.AutoCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
@@ -21,6 +21,10 @@ import frc.robot.commands.ArmCollectCommand;
 import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.ShootingGroupCommand;
+import frc.robot.commands.StartAuto;
+import frc.robot.commands.TurnToZeroCommand;
+import frc.robot.commands.armCollectOutput;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.commands.shootingOutputCommand;
@@ -58,10 +62,11 @@ public class Next2HumanCommand extends SequentialCommandGroup {
     this.ShootingSubsystem = shootingSubsystem;
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(ShootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, next2human.getAutoCommand(swerve), 290, 5, 1),
-    new LimelightCommand(limelight, swerve, true, -1, 0),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 6000, 0.4)
+    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.5, 0.4),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start"), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube"), 290, 5.2, 2, 0.2, -0.3, 0.2),
+    new LimelightCommand(limelight, swerve, true, -0.2, 0),
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.3, 0.5)
     ); 
   }
 }

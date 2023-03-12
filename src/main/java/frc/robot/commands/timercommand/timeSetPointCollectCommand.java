@@ -9,17 +9,22 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.armCollectSubsystem;
 
 public class timeSetPointCollectCommand extends CommandBase {
   private  CollectSubsystem collectSubsystem;
-  private double point;
+  private armCollectSubsystem armCollectSubsystem;
+  private double collectPoint;
   private Timer timer = new Timer();
   private double timeOfFunctioning;
   private double delay;
+  private double armCollectPoint;
   /** Creates a new setPoitCollectCommand. */
-  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem,double point, double timeOfFunctioning, double delay) {
+  public timeSetPointCollectCommand(CollectSubsystem collectSubsystem, armCollectSubsystem armCollectSubsystem, double collectPoint, double armCollectPoint, double timeOfFunctioning, double delay) {
     this.collectSubsystem = collectSubsystem;
-    this.point = point;
+    this.armCollectSubsystem = armCollectSubsystem;
+    this.collectPoint = collectPoint;
+    this.armCollectPoint = armCollectPoint;
     this.timeOfFunctioning = timeOfFunctioning;
     this.delay = delay;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,6 +36,8 @@ public class timeSetPointCollectCommand extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    collectSubsystem.setPosition(collectPoint);
+    armCollectSubsystem.setArmCollectPosition(armCollectPoint);
     // collectSubsystem.setPosition(point);
   }
 
@@ -39,9 +46,11 @@ public class timeSetPointCollectCommand extends CommandBase {
   public void execute() {
     // SmartDashboard.putNumber("123456789", point);
     if(timer.hasElapsed(delay)){
-      System.out.println("collect pass - " + timer.get());
-      System.out.println("position: " + collectSubsystem.getPosition());
-      collectSubsystem.setPosition(point);
+      // System.out.println("collect pass - " + timer.get());
+      // System.out.println("position: " + collectSubsystem.getPosition());
+      collectSubsystem.setPosition(collectPoint);
+      armCollectSubsystem.setArmCollectPosition(armCollectPoint);
+
     }
   }
 
@@ -49,6 +58,8 @@ public class timeSetPointCollectCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     collectSubsystem.setPosition(0);
+    armCollectSubsystem.setArmCollectPosition(0.3);
+
   }
 
   // Returns true when the command should end.

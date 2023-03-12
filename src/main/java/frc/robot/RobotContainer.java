@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
-import frc.robot.autos.GRIDmovement.Right1GRID;
 import frc.robot.commands.*;
-import frc.robot.commands.autoCommands.FarFromHumanRampa;
+import frc.robot.commands.autoCommands.FarFromHumanCube;
 import frc.robot.commands.autoCommands.Next2HumanCommand;
 import frc.robot.commands.autoCommands.center;
 import frc.robot.commands.timercommand.TimerArmPosition;
@@ -50,7 +49,7 @@ public class RobotContainer {
     public final shootingOutputCommand justShoot = new shootingOutputCommand(m_cartridgeSubsystem, 0.5, 6930);
     public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
         m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
-    public final FarFromHumanRampa farFromHuman = new FarFromHumanRampa(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
+    public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
         m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     
      
@@ -70,11 +69,11 @@ public class RobotContainer {
     public Next2HumanCommand getNext2Human() {
         return next2Human;
     }
-    public FarFromHumanRampa getFarFromHumanRampa(){
-        return farFromHuman;
+    public FarFromHumanCube getFarFromHumanCube(){
+        return farFromHumanCube;
     }
     public Command getTest(){
-       return test.getAutoCommand(s_Swerve);
+       return AutoCommand.getAutoCommand(s_Swerve, "test");
     }
     private void configureSwerveButtons() {
         

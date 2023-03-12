@@ -7,11 +7,14 @@ package frc.robot.commands.timercommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.Swerve;
-import frc.robot.autos.centerToRampa;
-import frc.robot.autos.next2human;
-import frc.robot.autos.rampa;
+import frc.robot.subsystems.armCollectSubsystem;
+import frc.robot.autos.AutoCommand;
+import frc.robot.commands.ArmCollectCommand;
+import frc.robot.commands.armCollectOutput;
 import frc.robot.commands.collectWheelsCommand;
 import frc.robot.commands.setPointCollectCommand;
+import frc.robot.commands.shootingOutputCommand;
+import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.armSubsystem;
@@ -20,34 +23,19 @@ import frc.robot.commands.timercommand.TimerCollectWheels;;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class moveInParallel extends ParallelCommandGroup {
-  private Swerve s_Swerve;
-  private CollectSubsystem collectSubsystem;
-  private collectWheels collectWheels;
-  private double point;
-  private double delayForTheCollect;
-  private double collectSeconds;
-  private double collectDelay;
-  private Command movment;
-
   /** Creates a new collectInParallel. */
   public moveInParallel(Swerve s_Swerve, CollectSubsystem collectSubsystem,
-  collectWheels collectWheels, Command movment,
-   double point, double collectSeconds, double collectDelay) {
+  collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, CartridgeSubsystem cartridgeSubsystem, Command movment,
+   double collectPoint, double armCollectPoint, double collectSeconds, double collectDelay, double armCollectOutput, double armCollectDelay) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    this.movment = movment;
-    this.s_Swerve = s_Swerve;
-    this.collectSubsystem = collectSubsystem;
-    this.collectWheels = collectWheels;
-    this.point = point;
-    this.collectSeconds = collectSeconds;
-    this.collectDelay = collectDelay;
-    
-
     addCommands(
     movment,
-    new timeSetPointCollectCommand(collectSubsystem, point, collectSeconds, collectDelay),
+    new shootingOutputCommand(cartridgeSubsystem, 0.2, 10),
+    new timeSetPointCollectCommand(collectSubsystem, armCollectSubsystem, collectPoint, armCollectPoint, collectSeconds, collectDelay),
     new TimerCollectWheels(collectWheels, -0.5, -0.15, collectSeconds + 1, collectDelay)
+    // new ArmCollectCommand(armCollectSubsystem, 0.3 , collectSeconds - 0.4)
+
     
     );
   }
