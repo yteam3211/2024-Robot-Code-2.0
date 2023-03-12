@@ -44,7 +44,7 @@ public class center extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.5, 0.4),
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start"), armCollectSubsystem, swerve),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "centerToRampa"), 290, 5.2, 2, 0.5),
     // AutoCommand.getAutoCommand(s_Swerve),
