@@ -26,7 +26,7 @@ public class shootingOutputCommand extends CommandBase {
     this.output = output;
     this.max = max;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(cartridgeSubsystem);
+    // addRequirements(cartridgeSubsystem);
   }
 
   // Called when the command is initially scheduled.

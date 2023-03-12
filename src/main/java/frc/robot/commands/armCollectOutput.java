@@ -6,12 +6,15 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armCollectSubsystem;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class armCollectOutput extends CommandBase {
   private final armCollectSubsystem armCollect;
   private double output;
+  private double timerSeconds = 0;
+  private Timer timer = new Timer();
 
   
 
@@ -20,29 +23,36 @@ public class armCollectOutput extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public armCollectOutput(armCollectSubsystem armCollect, double output) {
+  public armCollectOutput(armCollectSubsystem armCollect, double output, double timerSeconds) {
     this.armCollect = armCollect;
     this.output = output;
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armCollect);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (armCollect.isShootingDown()){ 
-      armCollect.resetArmCollectEncoder();
-    }
-    armCollect.setArmCollectOutput(output);
+    // if (armCollect.isShootingDown()){ 
+    //   armCollect.resetArmCollectEncoder();
+    // }
+    if(timer.hasElapsed(timerSeconds)){
+      armCollect.setArmCollectOutput(output);
   }
+}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    armCollect.resetArmCollectEncoder();
     armCollect.setArmCollectOutput(0);
     
   }
@@ -51,10 +61,13 @@ public class armCollectOutput extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return false;
+    // return false;
     // if(output>0){
-    //   return armCollect.isShootingDown();
+    return armCollect.isShootingDown();
     //  } 
+    // else{
+    //   return false;
+    // }
 }
 }
 

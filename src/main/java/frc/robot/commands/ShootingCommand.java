@@ -16,17 +16,17 @@ public class ShootingCommand extends CommandBase {
   private final shootingSubsystem shootingSubsystem;
   private final CartridgeSubsystem cartridgeSubsystem;
   private final armCollectSubsystem armCollectSubsystem;
-  private double velocity;
+  private double ShootingOutput;
   private boolean isShootingUp = false;
   private double RPM;
   private double CartridgeOutput;
   private Timer timer = new Timer();
   /** Creates a new ShootingCommand. */
-  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, armCollectSubsystem armCollectSubsystem, double velocity, double CartridgeOutput) {
+  public ShootingCommand(shootingSubsystem shootingSubsystem, CartridgeSubsystem cartridgeSubsystem, armCollectSubsystem armCollectSubsystem, double ShootingOutput, double CartridgeOutput) {
   this.shootingSubsystem = shootingSubsystem;
   this.cartridgeSubsystem = cartridgeSubsystem;
   this.armCollectSubsystem = armCollectSubsystem;
-  this.velocity = velocity;
+  this.ShootingOutput = ShootingOutput;
   this.RPM = RPM;
   this.CartridgeOutput = CartridgeOutput;
 
@@ -46,17 +46,20 @@ public class ShootingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setVelocity(velocity);
-    if ((shootingSubsystem.GetRightShootingWheelsVelocity() <= velocity) || (shootingSubsystem.getLeftShootingWheelsVelocity() >= velocity)) {
+    System.out.println("output" + shootingSubsystem.GetRightShootingWheelsOutput());
+    shootingSubsystem.setShootingOutput(ShootingOutput);
+    if ((shootingSubsystem.GetRightShootingWheelsOutput() >= (ShootingOutput * -1) + 0.02) && (shootingSubsystem.getLeftShootingWheelsOutput() >= ShootingOutput - 0.02)) {
       if(cartridgeSubsystem.GetPosition() >= cartridgeSubsystem.max){
-      cartridgeSubsystem.setOutput(0);
-      isShootingUp = true;
-    }else if(!isShootingUp){
-      cartridgeSubsystem.setOutput(CartridgeOutput);
+        cartridgeSubsystem.setOutput(0);
+        isShootingUp = true;
+      }else if(!isShootingUp){
+        cartridgeSubsystem.setOutput(CartridgeOutput);
+  
+      }
+    }
 
     }
-    }
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override
@@ -75,3 +78,4 @@ public class ShootingCommand extends CommandBase {
     
   }
 }
+

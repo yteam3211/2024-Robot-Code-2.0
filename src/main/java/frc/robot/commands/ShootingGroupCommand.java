@@ -4,7 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
@@ -12,14 +16,17 @@ import frc.robot.subsystems.shootingSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ShootingGroupCommand extends SequentialCommandGroup {
-  /** Creates a new ShootingGroupCommand. */
-  public ShootingGroupCommand(CartridgeSubsystem cartridgeSubsystem, shootingSubsystem shootingSubsystem, armCollectSubsystem armCollectSubsystem,  double velocity, double CartridgeOutput, double output, double max) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, velocity, CartridgeOutput),
-      new shootingOutputCommand(cartridgeSubsystem, output, max)
+public class ShootingGroupCommand extends ParallelDeadlineGroup {
+
+  public ShootingGroupCommand(shootingSubsystem shootingSubsystem, armCollectSubsystem armCollectSubsystem,
+      CartridgeSubsystem cartridgeSubsystem, double ArmPosition, double ArmSeconds, double CartridgeOutput, double ShootingOutput) {
+    super(
+        new WaitCommand(1.5),
+        new ArmCollectCommand(armCollectSubsystem, ArmPosition, ArmSeconds),
+        new SequentialCommandGroup(
+            new WaitCommand(0.2),
+            new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, ShootingOutput, CartridgeOutput)
+        )
     );
   }
 }

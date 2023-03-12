@@ -19,14 +19,15 @@ import frc.robot.commands.LeftGRIDmovmentCommand;
 import frc.robot.commands.LimelightCommand;
 import frc.robot.commands.OpenIntakeAndArm;
 import frc.robot.commands.ShootingCommand;
-import frc.robot.commands.ShootingGroupCommand;
+import frc.robot.commands.ShootingDownGroupCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.TurnToZeroCommand;
+import frc.robot.commands.armCollectOutput;
 import frc.robot.commands.armPosition;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 // import frc.robot.commands.IntakeAndArm;
 import frc.robot.commands.collectWheelsCommand;
-import frc.robot.commands.openArmwithDelaty;
+import frc.robot.commands.ShootingGroupCommand;
 import frc.robot.commands.setPointCollectCommand;
 import frc.robot.commands.shootingOutputCommand;
 import frc.robot.commands.resetCommand;
@@ -44,6 +45,7 @@ import frc.util.vision.Limelight;
 // Yteam loadButtons
 public class RobotButtons {
     public static BooleanSupplier GRIDmovmentHelper = (() -> true);
+    
 
     public static Joystick systems = new Joystick(1);
     public static Joystick driver = new Joystick(0);
@@ -72,6 +74,7 @@ public class RobotButtons {
     public Trigger shootinghTrigger = new Trigger(() -> systems.getPOV() == 90);
     public Trigger openArmCollect = new Trigger(() -> systems.getRawButton(XboxController.Button.kY.value));
     public Trigger closeArmCollect = new Trigger(() -> systems.getRawButton(XboxController.Button.kX.value));
+    public Trigger testTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kA.value));
     public static Trigger armBackTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kRightBumper.value));
     public static Trigger armForwardTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kLeftBumper.value));
     public Trigger resetTrigger = new Trigger(() -> systems.getRawButton(XboxController.Button.kB.value));
@@ -105,16 +108,19 @@ public class RobotButtons {
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
 
         // systems joystick commands
-        OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, -0.5, -0.15, 300, 6.11));
+        OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, -0.5, -0.15, 300, 5.2));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
         
-        shootingLow.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
-        shootingHigh.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
-        shootinghTrigger.onTrue(new openArmwithDelaty(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5, 0 , 0.4, 1650));
+        testTrigger.onTrue(new armCollectOutput(armCollectSubsystem, -0.2, 0));
+
+        shootingLow.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.3));
+        shootingHigh.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.3, 0.5));
+        shootinghTrigger.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.37));
         shootingMiddle.onTrue(new shootingOutputCommand(cartridgeSubsystem,0.3, 1000));
         
-        openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(6)));
+        openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(5.2)));
         closeArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(0)));
+
         
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem));

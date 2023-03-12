@@ -32,17 +32,18 @@ public class shootingSubsystem extends SuperSystem {
     // System.out.println(rightShootingWheels.getVelocity());
     shuffleBoardTab.putInDashboard("Right motor velocity", rightShootingWheels.getVelocity(), false);
     shuffleBoardTab.putInDashboard("Left motor velocity", leftShootingWheels.getVelocity(), false);
-
   }
   
   public void setVelocity(double Velocity){
-    rightShootingWheels.set(ControlMode.Velocity, Velocity*-1);
+    rightShootingWheels.set(ControlMode.Velocity, Velocity * -1);
     leftShootingWheels.set(ControlMode.Velocity, Velocity);
+    // System.out.println("left velocity: " + leftShootingWheels.getVelocity());
   }
 
-  public void setShootingOutput(double output){
-    rightShootingWheels.set(ControlMode.PercentOutput,output);
-    leftShootingWheels.set(ControlMode.PercentOutput,output);
+  public void setShootingOutput(double ShootingOutput){
+
+    rightShootingWheels.set(ControlMode.PercentOutput,ShootingOutput);
+    leftShootingWheels.set(ControlMode.PercentOutput,ShootingOutput);
   
   }
   public double GetRightShootingWheelsVelocity(){
@@ -51,6 +52,14 @@ public class shootingSubsystem extends SuperSystem {
 
   public double getLeftShootingWheelsVelocity(){
     return leftShootingWheels.getVelocity();
+
+  }
+  public double GetRightShootingWheelsOutput(){
+    return rightShootingWheels.getOutput();
+    } 
+
+  public double getLeftShootingWheelsOutput(){
+    return leftShootingWheels.getOutput();
 
   }
 

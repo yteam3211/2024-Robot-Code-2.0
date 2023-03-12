@@ -17,6 +17,7 @@ public class ArmCollectCommand extends CommandBase {
   private final armCollectSubsystem armCollect;
   private double position;
   private double seconds;
+  private boolean isFinished;
   private Timer timer = new Timer();
 
   /**
@@ -38,12 +39,12 @@ public class ArmCollectCommand extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    isFinished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    armCollect.setArmCollectPosition(position);
+  public void execute() { 
   }
 
   // Called once the command ends or is interrupted.
@@ -52,14 +53,20 @@ public class ArmCollectCommand extends CommandBase {
   public void end(boolean interrupted) {
     // timer.delay(1);
     // armCollect.setArmCollectPosition(0);
+    armCollect.setArmCollectPosition(position);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (seconds == 0)
-      return false;
-    else
-      return timer.hasElapsed(seconds);
+    if (seconds == 0){
+      isFinished = true;
+    }
+    else if(timer.hasElapsed(seconds)){
+      System.out.println("rrrrrrrrrrrrrrrr entered! " + position);
+      isFinished = true;
+    }
+    return isFinished;
   }
 }

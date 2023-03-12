@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.armPosition;
-import frc.robot.commands.zeroArm;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.dashboard.SuperShuffleBoardTab;
@@ -85,10 +84,6 @@ public class armSubsystem extends SuperSystem {
   public double velocity() {
     // return ArmgMotor.getVelocity();
     return 0;
-  }
-
-  public void SetDisableDefault(){
-    setDefaultCommand(new zeroArm(this));
   }
   
   public void SetTeleopDefault(){

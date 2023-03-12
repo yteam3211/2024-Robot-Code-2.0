@@ -37,8 +37,7 @@ private Gains shootingGains;
  private DigitalInput downMicroSwitch;
  public static SuperTalonFX Shooting;
  private SuperTalonSRX shootingWheels;
- private SuperSubSystemTab shuffleboardTab = new SuperSubSystemTab("Cartridge Subsystem", this);
- public int max = 5950;
+ public int max = 5970;
 
 
   // Motors, Selenoid and Sensors declaration
@@ -57,7 +56,7 @@ private Gains shootingGains;
     // getTab().putInDashboard("Shooting Position", Shooting.getEncoder().getPosition(), false);
     // SmartDashboard.putNumber("Shootingoutput", Shooting.getOutput());
     // SmartDashboard.putNumber("ShootingAmper", Shooing.getAmper());
-    SmartDashboard.putNumber("ShootingPosition", Shooting.getPosition());
+    getTab().putInDashboard("ShootingPosition", Shooting.getPosition(), false);
     // System.out.println("shoot" + Shooing.getPosition());
     // This method will be called once per scheduler run
   }
