@@ -26,6 +26,7 @@ public class armCollectOutput extends CommandBase {
   public armCollectOutput(armCollectSubsystem armCollect, double output, double timerSeconds) {
     this.armCollect = armCollect;
     this.output = output;
+    this.timerSeconds = timerSeconds;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armCollect);

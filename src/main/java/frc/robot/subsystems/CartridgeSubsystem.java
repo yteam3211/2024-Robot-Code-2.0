@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.commands.shootingOutputCommand;
+import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.dashboard.SuperSubSystemTab;

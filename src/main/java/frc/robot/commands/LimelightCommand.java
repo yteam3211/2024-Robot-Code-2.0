@@ -82,7 +82,7 @@ public class LimelightCommand extends CommandBase {
       // System.out.println("timer started! ");
       swerve.drive(new Translation2d(0, 0), 0, false, true);
     }
-    else if(Math.abs(Math.abs(yPos) - Math.abs(limelight.getY())) > 0.4 || Math.abs(limelight.getX()) > 3 || Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
+    else if(Math.abs(Math.abs(yPos) - Math.abs(limelight.getY())) > 0.4 || Math.abs(Math.abs(xPos) - Math.abs(limelight.getX())) > 3 || Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
       timer.stop();
       timer.reset();
       // System.out.println("timer reset! ");
@@ -101,6 +101,6 @@ public class LimelightCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     // System.out.println("Timer: " + timer.get());
-    return timer.hasElapsed(1);
+    return timer.hasElapsed(0.7);
   }
 }

@@ -17,11 +17,11 @@ import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.shootingSubsystem;
 import frc.robot.commands.BalanceCommand;
-import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.ShootingCommnads.ShootingCommand;
 import frc.robot.commands.StartAuto;
 import frc.robot.commands.TurnToZeroCommand;
 // import frc.robot.commands.ClosingCollectGroupCommand;
-import frc.robot.commands.shootingOutputCommand;
+import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.moveInParallel;
 

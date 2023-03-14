@@ -27,7 +27,7 @@ public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-    public Gains balanceGains = new Gains("balance gains", 0.02, 0.0001, 0.03);
+    public Gains balanceGains = new Gains("balance gains", 0.02, 0.0001, 0.6);
 
     public Swerve() {
         super("Swerve");

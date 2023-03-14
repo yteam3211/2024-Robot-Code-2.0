@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
+import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.autoCommands.FarFromHumanCube;
 import frc.robot.commands.autoCommands.Next2HumanCommand;
 import frc.robot.commands.autoCommands.center;
@@ -46,7 +48,7 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final center centerAtuo = new center(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
-    public final shootingOutputCommand justShoot = new shootingOutputCommand(m_cartridgeSubsystem, 0.5, 6930);
+    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , 5.2, 0 , 0.3, 0.75);
     public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
         m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
@@ -63,7 +65,7 @@ public class RobotContainer {
     public center getCenterAtuo(){
         return centerAtuo;
     }
-    public shootingOutputCommand getJustShootAtuo(){
+    public ShootingGroupCommand getJustShootAtuo(){
         return justShoot;
     }
     public Next2HumanCommand getNext2Human() {

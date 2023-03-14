@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("just shoot", justShootAtuo);
     m_chooser.addOption("Center", centerAuto);
     m_chooser.addOption("Next to Human", Next2Human);
-    m_chooser.addOption("Far from human + rampe", FarFromHumanCube);
+    m_chooser.addOption("Far from human + cube", FarFromHumanCube);
     m_chooser.addOption("test", test);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
@@ -98,6 +98,7 @@ public class Robot extends TimedRobot {
     if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
     else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
     else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
+    else if (m_chooser.getSelected().equals(justShootAtuo)) m_autonomousCommand = m_robotContainer.getJustShootAtuo();
     else if (m_chooser.getSelected().equals(FarFromHumanCube)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
     else m_autonomousCommand = m_robotContainer.getCenterAtuo();
     

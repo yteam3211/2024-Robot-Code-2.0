@@ -13,7 +13,7 @@ import frc.robot.commands.ArmCollectCommand;
 import frc.robot.commands.armCollectOutput;
 import frc.robot.commands.collectWheelsCommand;
 import frc.robot.commands.setPointCollectCommand;
-import frc.robot.commands.shootingOutputCommand;
+import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.collectWheels;
@@ -31,10 +31,10 @@ public class moveInParallel extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
     movment,
-    new shootingOutputCommand(cartridgeSubsystem, 0.2, 10),
+    new CartridgeOutputCommand(cartridgeSubsystem, 0.2, 10),
     new timeSetPointCollectCommand(collectSubsystem, armCollectSubsystem, collectPoint, armCollectPoint, collectSeconds, collectDelay),
-    new TimerCollectWheels(collectWheels, -0.5, -0.15, collectSeconds + 1, collectDelay)
-    // new ArmCollectCommand(armCollectSubsystem, 0.3 , collectSeconds - 0.4)
+    new TimerCollectWheels(collectWheels, -0.5, -0.15, collectSeconds + 1, collectDelay),
+    new ArmCollectCommand(armCollectSubsystem, 0.3 , collectSeconds + 1.5)
 
     
     );

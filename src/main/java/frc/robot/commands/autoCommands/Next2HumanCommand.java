@@ -20,14 +20,14 @@ import frc.util.vision.Limelight;
 import frc.robot.commands.ArmCollectCommand;
 import frc.robot.commands.BalanceCommand;
 import frc.robot.commands.LimelightCommand;
-import frc.robot.commands.ShootingCommand;
-import frc.robot.commands.ShootingGroupCommand;
+import frc.robot.commands.ShootingCommnads.ShootingCommand;
+import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.StartAuto;
 import frc.robot.commands.TurnToZeroCommand;
 import frc.robot.commands.armCollectOutput;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.resetCommand;
-import frc.robot.commands.shootingOutputCommand;
+import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.moveInParallel;
 
@@ -37,31 +37,15 @@ import frc.robot.commands.timercommand.moveInParallel;
 public class Next2HumanCommand extends SequentialCommandGroup {
   /** Creates a new Next2Human. */
   // private final Swerve s_Swerve;
-  private Swerve s_Swerve;
-  private shootingSubsystem ShootingSubsystem;
-  private CartridgeSubsystem cartridgeSubsystem;
-  private CollectSubsystem collectSubsystem;
-  // private ClosingCollectGroupCommand collectGroupCommand;
-  private timeSetPointCollectCommand timeSetPointCollectCommand;
-  private TimerArmPosition TimerArmPosition;
-  private collectWheels collectWheels;
-  private armCollectSubsystem armCollectSubsystem;
-  private Limelight limelight;
 
   public Next2HumanCommand(Swerve swerve,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
   collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight, shootingSubsystem shootingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
-    this.s_Swerve = swerve;
-    this.collectSubsystem = collectSubsystem;
-    this.cartridgeSubsystem = cartridgeSubsystem;
-    this.collectWheels = collectWheels;
-    this.limelight = limelight;
-    this.armCollectSubsystem = armCollectSubsystem;
-    this.ShootingSubsystem = shootingSubsystem;
+
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(ShootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
     new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start"), armCollectSubsystem, swerve),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube"), 290, 5.2, 2, 0.2),

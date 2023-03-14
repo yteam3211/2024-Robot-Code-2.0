@@ -50,7 +50,10 @@ public class timeSetPointCollectCommand extends CommandBase {
       // System.out.println("position: " + collectSubsystem.getPosition());
       collectSubsystem.setPosition(collectPoint);
       armCollectSubsystem.setArmCollectPosition(armCollectPoint);
+    // if (timer.hasElapsed(timeOfFunctioning - 0.7)){
+    //   armCollectSubsystem.setArmCollectPosition(0.3);
 
+    //   }
     }
   }
 
@@ -58,7 +61,7 @@ public class timeSetPointCollectCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     collectSubsystem.setPosition(0);
-    armCollectSubsystem.setArmCollectPosition(0.3);
+    
 
   }
 

@@ -21,7 +21,7 @@ public class StartAuto extends SequentialCommandGroup {
     addCommands(
     new ParallelCommandGroup(
       movment,
-      new armCollectOutput(armCollectSubsystem, -0.2, 0.7)
+      new armCollectOutput(armCollectSubsystem, -0.2, 1.3)
     ),
     new TurnToZeroCommand(swerve)
     );

@@ -41,10 +41,12 @@ public class armPosition extends CommandBase {
   @Override
   public void execute() {
     // armSubsystem.setPosition(position);
-    if(RobotButtons.armBackTrigger.getAsBoolean()){
-      position += 0.15;
-      armSubsystem.setPosition(position);
-    }
+
+    // TODO
+    // if(RobotButtons.reverseShooterTrigger.getAsBoolean()){
+    //   position += 0.15;
+    //   armSubsystem.setPosition(position);
+    // }
 
     if(RobotButtons.armForwardTrigger.getAsBoolean()){
       position -= 0.15;
