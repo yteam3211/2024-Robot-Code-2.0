@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.SwereCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,15 +11,15 @@ import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.collectWheels;
 
-public class rightGRIDmovmentCommand extends CommandBase {
+public class LeftGRIDmovmentCommand extends CommandBase {
   /** Creates a new rightGRIDmovmentCommand. */
   private Swerve swerve;
-  private int presses = 0;
   private String name;
+  private int presses = 0;
   private boolean pressed = false;
   private Timer pressesTimer = new Timer();
   private Timer finishTimer = new Timer();
-  public rightGRIDmovmentCommand(Swerve swerve) {
+  public LeftGRIDmovmentCommand(Swerve swerve) {
     this.swerve = swerve;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerve);
@@ -39,40 +39,40 @@ public class rightGRIDmovmentCommand extends CommandBase {
   @Override
   public void execute() {
     System.out.println("presses: " + presses + "time: " + pressesTimer.get());
-    if(!pressesTimer.hasElapsed(0.25) && RobotButtons.rightGRIDmovment.getAsBoolean() && !pressed){
+    if(!pressesTimer.hasElapsed(0.2) && RobotButtons.leftGRIDmovment.getAsBoolean() && !pressed){
       presses++;
       pressed = true;
     }
-    else if(!RobotButtons.rightGRIDmovment.getAsBoolean() && pressed){
+    else if(!RobotButtons.leftGRIDmovment.getAsBoolean() && pressed){
       pressesTimer.reset();
       pressed = false;
     }
   }
 
-  // Called o nce the command ends or is interrupted.
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotButtons.GRIDmovmentHelper = (() -> true);
     switch(presses){
     case 1:
       System.out.println("chosen: 1");
-      name = "1 right GRID";
+      name = "1 left GRID";
       break;
     case 2:
       System.out.println("chosen: 2");
-      name = "2 right GRID";
+      name = "2 left GRID";
       break;
     case 3:
       System.out.println("chosen: 3");
-      name = "3 right GRID";
+      name = "3 left GRID";
       break;
-  }
-  new GRIDmovmentGroupCommand(swerve, name).schedule();
+    }
+    new GRIDmovmentGroupCommand(swerve, name).schedule();
 }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return pressesTimer.hasElapsed(0.3);
+    return pressesTimer.hasElapsed(0.25);
   }
 }

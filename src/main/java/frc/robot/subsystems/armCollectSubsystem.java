@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
-import frc.robot.commands.armPosition;
+import frc.robot.commands.ArmCommands.ResetArmCommand;
 import frc.util.dashboard.SuperSubSystemTab;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
@@ -50,8 +50,9 @@ public class armCollectSubsystem extends SuperSystem {
      armCollectMotor = new SuperSparkMax(Constants.ARM_COLLECT_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, armCollectgGains, 0, 0, 0);
         shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
-    // setDefaultCommand();
     this.resetArmCollectEncoder();
+    setDefaultCommand(new ResetArmCommand(this));
+
   }
 
   /** Creates a new ExampleSubsystem. */

@@ -13,24 +13,21 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.resetCommand;
-import frc.robot.commands.rightGRIDmovmentCommand;
-import frc.robot.commands.ArmCollectCommand;
-import frc.robot.commands.BalanceCommand;
-import frc.robot.commands.LeftGRIDmovmentCommand;
-import frc.robot.commands.LimelightCommand;
-import frc.robot.commands.OpenIntakeAndArm;
 import frc.robot.commands.ShootingCommnads.ShootingCommand;
 import frc.robot.commands.ShootingCommnads.ShootingDownGroupCommand;
-import frc.robot.commands.TeleopSwerve;
-import frc.robot.commands.TurnToZeroCommand;
-import frc.robot.commands.armCollectOutput;
-import frc.robot.commands.armPosition;
-// import frc.robot.commands.ClosingCollectGroupCommand;
-// import frc.robot.commands.IntakeAndArm;
-import frc.robot.commands.collectWheelsCommand;
-import frc.robot.commands.lockWheelsCommnad;
 import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
-import frc.robot.commands.setPointCollectCommand;
+import frc.robot.commands.SwereCommands.BalanceCommand;
+import frc.robot.commands.SwereCommands.LeftGRIDmovmentCommand;
+import frc.robot.commands.SwereCommands.LimelightCommand;
+import frc.robot.commands.SwereCommands.TeleopSwerve;
+import frc.robot.commands.SwereCommands.TurnToZeroCommand;
+import frc.robot.commands.SwereCommands.lockWheelsCommnad;
+import frc.robot.commands.SwereCommands.rightGRIDmovmentCommand;
+import frc.robot.commands.ArmCommands.ArmCollectCommand;
+import frc.robot.commands.ArmCommands.armCollectOutput;
+import frc.robot.commands.IntakeCommands.OpenIntakeAndArm;
+import frc.robot.commands.IntakeCommands.collectWheelsCommand;
+import frc.robot.commands.IntakeCommands.setPointCollectCommand;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.ShootingCommnads.CubeFixtureGroupCommand;
 import frc.robot.commands.resetCommand;
@@ -57,6 +54,7 @@ public class RobotButtons {
     public static Trigger Balance = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.3);
     public Trigger stop = new Trigger(() -> driver.getRawButton(XboxController.Button.kBack.value));
     public Trigger LimelightAprilTag = new Trigger(() -> driver.getRawButton(XboxController.Button.kB.value));
+    public Trigger TurnToZero = new Trigger(() -> driver.getRawButton(XboxController.Button.kA.value));
     public Trigger LimelightRetroReflective = new Trigger(() -> driver.getRawButton(XboxController.Button.kX.value));
     public static Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     public Trigger robotFCentric = new Trigger(() -> driver.getRawButton(XboxController.Button.kLeftBumper.value));
@@ -65,7 +63,8 @@ public class RobotButtons {
     public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     public static Trigger rightGRIDmovment = new Trigger(() -> driver.getPOV() == 90);
     public static Trigger leftGRIDmovment = new Trigger(() -> driver.getPOV() == 270);
-    public Trigger TurnToZero = new Trigger(() -> driver.getPOV() == 0);
+    public Trigger testShooting = new Trigger(() -> driver.getPOV() == 0);
+
     public Trigger WheelsLock = new Trigger(() -> driver.getRawButton(XboxController.Button.kStart.value));
 
     // systems joystick buttons
@@ -109,6 +108,8 @@ public class RobotButtons {
         leftGRIDmovment.and(GRIDmovmentHelper).onTrue(new LeftGRIDmovmentCommand(swerve));
         TurnToZero.whileTrue(new TurnToZeroCommand(swerve));
         WheelsLock.onTrue(new lockWheelsCommnad(swerve));
+        TurnToZero.onTrue(new TurnToZeroCommand(swerve));
+        testShooting.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.7, 0.9));
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
 
         // systems joystick commands
@@ -120,13 +121,13 @@ public class RobotButtons {
         shootingHigh.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.3, 0.75));
         shootinghMid.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51));
         shootingLow.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.29));
-        shootingFixture.onTrue(new CubeFixtureGroupCommand(cartridgeSubsystem, 0.3, 700, -0.2, 20));
+        shootingFixture.onTrue(new CubeFixtureGroupCommand(cartridgeSubsystem, 0.15, 700, -0.2, 20));
         reverseShooterTrigger.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem,-0.3, 0));
 
 
         openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(5.2)));
         closeArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(0)));
-
+        
         
         resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
         resetTrigger.and(SeconderyResetTrigger).onTrue(new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem));

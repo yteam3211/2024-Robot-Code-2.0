@@ -4,10 +4,10 @@
 
 package frc.robot.commands.autoCommands;
 
-import frc.robot.autos.AutoCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotButtons;
+import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
@@ -16,40 +16,38 @@ import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.collectWheels;
 import frc.robot.subsystems.shootingSubsystem;
-import frc.util.vision.Limelight;
 import frc.robot.commands.ShootingCommnads.ShootingCommand;
-import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.SwereCommands.BalanceCommand;
-import frc.robot.commands.SwereCommands.LimelightCommand;
 import frc.robot.commands.SwereCommands.TurnToZeroCommand;
 // import frc.robot.commands.ClosingCollectGroupCommand;
-import frc.robot.commands.resetCommand;
-import frc.robot.commands.ArmCommands.ArmCollectCommand;
-import frc.robot.commands.ArmCommands.armCollectOutput;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.moveInParallel;
 
+
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Next2HumanCommand extends SequentialCommandGroup {
-  /** Creates a new Next2Human. */
-  // private final Swerve s_Swerve;
-
-  public Next2HumanCommand(Swerve swerve,
+public class CenterFinales extends SequentialCommandGroup {
+  /** Creates a new atuo1. */
+  public CenterFinales(Swerve swerve,
+  armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
-  collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight, shootingSubsystem shootingSubsystem) {
-    // Add your commands in the addCommands() call, e.g.
+  collectWheels collectWheels, shootingSubsystem shootingSubsystem, armCollectSubsystem armCollectSubsystem
+) {
 
+    
+  
+    // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
-    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
-    new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start"), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube"), 290, 5.2, 2, 0.2),
-    new LimelightCommand(limelight, swerve, true, -0.2, 0),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51)
-    ); 
+    
+  
+    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "centerToRampa - start Finals"), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "centerToRampa - finales"), 290, 5.2, 2, 0.5),
+    // AutoCommand.getAutoCommand(s_Swerve),
+    new BalanceCommand(swerve)
+    );  
   }
 }

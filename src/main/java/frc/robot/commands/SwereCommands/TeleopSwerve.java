@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.SwereCommands;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;

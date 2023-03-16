@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 import frc.robot.commands.resetCommand;
-import frc.robot.commands.setPointCollectCommand;
+import frc.robot.commands.IntakeCommands.setPointCollectCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.dashboard.SuperShuffleBoardTab;

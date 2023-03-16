@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.SwereCommands;
 
 import java.sql.Time;
 
@@ -18,7 +18,7 @@ public class TurnToZeroCommand extends CommandBase {
   private Swerve swerve;
   private boolean rightPosition;
   private Timer timer = new Timer();
-  protected Gains gains = new Gains("gains r", 0.06, 0, 0.3);
+  protected Gains gains = new Gains("gains r", 0.1, 0, 0.3);
 
   protected PIDController pid = new PIDController(gains);
 
