@@ -28,9 +28,9 @@ import frc.robot.commands.timercommand.moveInParallel;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class center extends SequentialCommandGroup {
+public class CenterCloseToHumanCube extends SequentialCommandGroup {
   /** Creates a new atuo1. */
-  public center(Swerve swerve,
+  public CenterCloseToHumanCube(Swerve swerve,
   armSubsystem armSubsystem,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
@@ -44,9 +44,8 @@ public class center extends SequentialCommandGroup {
     
   
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
-    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start"), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "centerToRampa"), 290, 5.2, 2, 0.5),
-    // AutoCommand.getAutoCommand(s_Swerve),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start Close To Human Cube"), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - Close To Human Cube"), 250, 5.2, 2, 0.5),
     new BalanceCommand(swerve)
     );  
   }
