@@ -6,6 +6,7 @@ package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
@@ -41,12 +42,12 @@ public class Center3Cubes extends SequentialCommandGroup {
     new InstantCommand(() -> swerve.zeroGyro()), 
     new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
     new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
-    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start Close To Human Cube"), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect second cube"), 250, 5.2, 2, 0.5),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect third cube"), 250, 5.2, 2, 0.5),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start Close To Human Cube", 3), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect second cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5),
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.4, 0.51),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect third cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5),
     new BalanceCommand(swerve),
     new TurnToZeroCommand(swerve),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.7, 0.9)    );
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.7, 0.9)    );
   }
 }

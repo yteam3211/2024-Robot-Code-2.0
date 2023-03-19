@@ -46,9 +46,9 @@ public class TimerSideToSide extends CommandBase {
     }
     pidX.setTargetPosition(0);
     pidR.setTargetPosition(0);
-    pidX.setMaxOutput(Constants.SwerveConst.maxSpeed * 0.6);
-    pidY.setMaxOutput(Constants.SwerveConst.maxSpeed * 0.6);
-    pidR.setMaxOutput(Constants.SwerveConst.maxAngularVelocity * 0.6);
+    pidX.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
+    pidY.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
+    pidR.setMaxOutput(Constants.SwerveConstant.maxAngularVelocity * 0.6);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -58,9 +58,9 @@ public class TimerSideToSide extends CommandBase {
     double yOutput = pidY.getOutput(limelight.getY());
     double rOutput = pidR.getOutput(Swerve.gyro.getYaw());
 
-    xOutput += 0.02 * Constants.SwerveConst.maxSpeed * Math.signum(xOutput);
-    yOutput += 0.02 * Constants.SwerveConst.maxSpeed * Math.signum(yOutput);
-    rOutput += 0.02 * Constants.SwerveConst.maxAngularVelocity * Math.signum(rOutput);
+    xOutput += 0.02 * Constants.SwerveConstant.maxSpeed * Math.signum(xOutput);
+    yOutput += 0.02 * Constants.SwerveConstant.maxSpeed * Math.signum(yOutput);
+    rOutput += 0.02 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(rOutput);
 
     swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
   }

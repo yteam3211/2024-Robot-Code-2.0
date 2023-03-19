@@ -31,8 +31,9 @@ public class Robot extends TimedRobot {
   public armSubsystem armsubsystem;
   private Command m_autonomousCommand;
   private CartridgeSubsystem shootingSubsystem;
-  private RobotContainer m_robotContainer;
-  private static final String centerAuto = "center";
+  private static RobotContainer m_robotContainer;
+  private static final String centerFarFromHumanCubeAuto = "Center far from human cube";
+  private static final String centerCloseToHumanCubeAuto = "Center close to human cube";
   private static final String test = "test";
   private static final String ballanceRampaAtuo = "ballance Rampa";
   private static final String justShootAtuo = "do nothing";
@@ -55,9 +56,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     //m_chooser.setDefaultOption("", centerToRampaAuto);
     m_chooser.setDefaultOption("just shoot", justShootAtuo);
-    m_chooser.addOption("Center", centerAuto);
-    m_chooser.addOption("Next to Human", Next2Human);
-    m_chooser.addOption("Far from human + cube", FarFromHumanCube);
+    m_chooser.addOption("Center far from human cube", centerFarFromHumanCubeAuto);
+    m_chooser.addOption("Center close to human cube", centerCloseToHumanCubeAuto);
+    // m_chooser.addOption("Next to Human", Next2Human);
+    m_chooser.addOption("Far from human", FarFromHumanCube);
     m_chooser.addOption("test", test);
     m_chooser.addOption("Next to Human 3 Cubes", Next2Human3Cubes);
     m_chooser.addOption("Center 3 Cubes", Center3Cubes);
@@ -97,31 +99,41 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
-    // if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
-    // else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
-    // else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
-    // else if (m_chooser.getSelected().equals(justShootAtuo)) m_autonomousCommand = m_robotContainer.getJustShootAtuo();
-    // else if (m_chooser.getSelected().equals(FarFromHumanCube)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
-    // else if (m_chooser.getSelected().equals(Center3Cubes)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
-    // else m_autonomousCommand = m_robotContainer.getCenterAtuo();
-    switch(m_chooser.getSelected()){
-      case centerAuto:
-        m_autonomousCommand = m_robotContainer.getCenterAtuo();
-      case Next2Human:
-        m_autonomousCommand = m_robotContainer.getNext2Human();
-      case test:
-        m_autonomousCommand = m_robotContainer.getTest();
-      case justShootAtuo:
-        m_autonomousCommand = m_robotContainer.getJustShoot();
-      case FarFromHumanCube:
-        m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
-      case Center3Cubes:
-        m_autonomousCommand = m_robotContainer.getCenter3Cubes();
-      case Next2Human3Cubes:
-        m_autonomousCommand = m_robotContainer.getNext2Human3Cubes();
-      default:
-        // m_autonomousCommand = m_robotContainer.getJustShoot();
-    }
+    if (m_chooser.getSelected().equals(centerFarFromHumanCubeAuto)) m_autonomousCommand = m_robotContainer.getCenterFarFromHumanCube();
+    else if (m_chooser.getSelected().equals(centerCloseToHumanCubeAuto)) m_autonomousCommand = m_robotContainer.getCenterCloseToHumanCube();
+    else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
+    else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
+    else if (m_chooser.getSelected().equals(justShootAtuo)) m_autonomousCommand = m_robotContainer.getJustShootAtuo();
+    else if (m_chooser.getSelected().equals(FarFromHumanCube)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+    else if (m_chooser.getSelected().equals(Center3Cubes)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+    else if (m_chooser.getSelected().equals(Next2Human3Cubes)) m_autonomousCommand = m_robotContainer.getNext2Human3Cubes();
+    else m_autonomousCommand = m_robotContainer.getCenterFarFromHumanCube();
+    // switch(m_chooser.getSelected()){
+    //   case centerAuto:
+    //     m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    //     break;
+    //   case Next2Human:
+    //     m_autonomousCommand = m_robotContainer.getNext2Human();
+    //     break;
+    //   case test:
+    //     m_autonomousCommand = m_robotContainer.getTest();
+    //     break;
+    //   case justShootAtuo:
+    //     m_autonomousCommand = m_robotContainer.getJustShoot();
+    //     break;
+    //   case FarFromHumanCube:
+    //     m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+    //     break;
+    //   case Center3Cubes:
+    //     m_autonomousCommand = m_robotContainer.getCenter3Cubes();
+    //     break;
+    //   case Next2Human3Cubes:
+    //     m_autonomousCommand = m_robotContainer.getNext2Human3Cubes();
+    //     break;
+    //   default:
+    //     m_autonomousCommand = m_robotContainer.getJustShoot();
+    //     break;
+    // }
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

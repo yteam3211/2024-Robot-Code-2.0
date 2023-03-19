@@ -18,7 +18,7 @@ public class GRIDmovmentGroupCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      AutoCommand.getAutoCommand(swerve, movmentName),
+      AutoCommand.getAutoCommand(swerve, movmentName, 3),
       new TurnToZeroCommand(swerve)
     );
   }

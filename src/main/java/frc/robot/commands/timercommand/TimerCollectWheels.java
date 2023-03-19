@@ -33,7 +33,7 @@ public class TimerCollectWheels extends CommandBase {
     this.WheelsOutput = WheelsOutput;
     this.centeringOutput = centeringOutput;
     this.seconds = seconds;
-    this.delay= delay;
+    this.delay = delay;
 
 
     // Use addRequirements() here to declare subsystem dependencies.

@@ -6,6 +6,7 @@ package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
@@ -43,8 +44,8 @@ public class CenterFarFromHumanCube extends SequentialCommandGroup {
     
   
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
-    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start far from human cube"), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - start far from human cube"), 250, 5.2, 2, 0.5),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start far from human cube", 3), armCollectSubsystem, swerve),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - start far from human cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5),
     // AutoCommand.getAutoCommand(s_Swerve),
     new BalanceCommand(swerve)
     );  

@@ -49,7 +49,7 @@ public class RobotContainer {
     private final CartridgeSubsystem m_cartridgeSubsystem = new CartridgeSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public final CenterFarFromHumanCube centerAtuo = new CenterFarFromHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
+    public final CenterFarFromHumanCube CenterFarFromHumanCube = new CenterFarFromHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
     public final CenterCloseToHumanCube centerCloseToHumanCube = new CenterCloseToHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
     public final Center3Cubes center3Cubes = new Center3Cubes(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
@@ -61,7 +61,7 @@ public class RobotContainer {
     public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     
-    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , 5.2, 0 , 0.3, 0.75);
+    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.3, 0.75);
      
     public RobotContainer() {
 
@@ -147,8 +147,8 @@ public class RobotContainer {
     public ShootingGroupCommand getJustShoot() {
         return justShoot;
     }
-    public CenterFarFromHumanCube getCenterAtuo(){
-        return centerAtuo;
+    public CenterFarFromHumanCube getCenterFarFromHumanCube(){
+        return CenterFarFromHumanCube;
     }
     public ShootingGroupCommand getJustShootAtuo(){
         return justShoot;
@@ -160,7 +160,7 @@ public class RobotContainer {
         return farFromHumanCube;
     }
     public Command getTest(){
-       return AutoCommand.getAutoCommand(s_Swerve, "test");
+       return AutoCommand.getAutoCommand(s_Swerve, "test", 3);
     }
 }
  
