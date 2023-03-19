@@ -26,7 +26,6 @@ import frc.robot.commands.resetCommand;
 import frc.robot.commands.ArmCommands.ArmCollectCommand;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
-import frc.robot.commands.timercommand.moveInParallel;
 
     // addCommands(new FooCommand(), new BarCommand());
 public class FarFromHumanCube extends SequentialCommandGroup {

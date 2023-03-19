@@ -121,7 +121,7 @@ public class RobotButtons {
         shootingHigh.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.3, 0.75));
         shootinghMid.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51));
         shootingLow.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.29));
-        shootingFixture.onTrue(new CubeFixtureGroupCommand(cartridgeSubsystem, 0.15, 700, -0.2, 20));
+        shootingFixture.onTrue(new CubeFixtureGroupCommand(cartridgeSubsystem, 0, 0.15, 1400, -0.2, 20));
         reverseShooterTrigger.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem,-0.3, 0));
 
 

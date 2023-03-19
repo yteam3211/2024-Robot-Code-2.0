@@ -35,9 +35,11 @@ public class Robot extends TimedRobot {
   private static final String centerAuto = "center";
   private static final String test = "test";
   private static final String ballanceRampaAtuo = "ballance Rampa";
-  private static final String justShootAtuo = "do nofing";
-  private static final String Next2Human = "NextToHoman";
+  private static final String justShootAtuo = "do nothing";
+  private static final String Next2Human = "Next To Human";
   private static final String FarFromHumanCube = "Far from human + cube";
+  private static final String Center3Cubes = "Center 3 Cubes";
+  private static final String Next2Human3Cubes = "Next to Human 3 Cubes";
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -57,11 +59,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Next to Human", Next2Human);
     m_chooser.addOption("Far from human + cube", FarFromHumanCube);
     m_chooser.addOption("test", test);
+    m_chooser.addOption("Next to Human 3 Cubes", Next2Human3Cubes);
+    m_chooser.addOption("Center 3 Cubes", Center3Cubes);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
     armsubsystem = m_robotContainer.getM_ArmSubsystem();
     CameraServer.startAutomaticCapture();
-
   }
 
   /**
@@ -94,17 +97,32 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
-    if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
-    else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
-    else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
-    else if (m_chooser.getSelected().equals(justShootAtuo)) m_autonomousCommand = m_robotContainer.getJustShootAtuo();
-    else if (m_chooser.getSelected().equals(FarFromHumanCube)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
-    else m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    // if (m_chooser.getSelected().equals(centerAuto)) m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    // else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
+    // else if (m_chooser.getSelected().equals(test)) m_autonomousCommand = m_robotContainer.getTest();
+    // else if (m_chooser.getSelected().equals(justShootAtuo)) m_autonomousCommand = m_robotContainer.getJustShootAtuo();
+    // else if (m_chooser.getSelected().equals(FarFromHumanCube)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+    // else if (m_chooser.getSelected().equals(Center3Cubes)) m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+    // else m_autonomousCommand = m_robotContainer.getCenterAtuo();
+    switch(m_chooser.getSelected()){
+      case centerAuto:
+        m_autonomousCommand = m_robotContainer.getCenterAtuo();
+      case Next2Human:
+        m_autonomousCommand = m_robotContainer.getNext2Human();
+      case test:
+        m_autonomousCommand = m_robotContainer.getTest();
+      case justShootAtuo:
+        m_autonomousCommand = m_robotContainer.getJustShoot();
+      case FarFromHumanCube:
+        m_autonomousCommand = m_robotContainer.getFarFromHumanCube();
+      case Center3Cubes:
+        m_autonomousCommand = m_robotContainer.getCenter3Cubes();
+      case Next2Human3Cubes:
+        m_autonomousCommand = m_robotContainer.getNext2Human3Cubes();
+      default:
+        // m_autonomousCommand = m_robotContainer.getJustShoot();
+    }
     
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // armSubsystem.ArmgMotor.setIdleMode(IdleMode.kBrake);
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

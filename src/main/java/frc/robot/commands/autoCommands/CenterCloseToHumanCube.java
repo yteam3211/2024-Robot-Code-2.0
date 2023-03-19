@@ -22,7 +22,6 @@ import frc.robot.commands.SwereCommands.TurnToZeroCommand;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
-import frc.robot.commands.timercommand.moveInParallel;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

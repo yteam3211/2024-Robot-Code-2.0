@@ -10,7 +10,6 @@ import frc.robot.autos.AutoCommand;
 import frc.robot.commands.resetCommand;
 import frc.robot.commands.ShootingCommnads.ShootingCommand;
 import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
-import frc.robot.commands.timercommand.moveInParallel;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.Swerve;

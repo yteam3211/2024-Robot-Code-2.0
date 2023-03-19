@@ -28,7 +28,6 @@ import frc.robot.commands.ArmCommands.ArmCollectCommand;
 import frc.robot.commands.ArmCommands.armCollectOutput;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
-import frc.robot.commands.timercommand.moveInParallel;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

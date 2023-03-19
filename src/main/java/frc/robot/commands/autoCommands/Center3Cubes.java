@@ -20,10 +20,10 @@ import frc.robot.commands.ShootingCommnads.ShootingCommand;
 import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.SwereCommands.BalanceCommand;
 import frc.robot.commands.SwereCommands.TurnToZeroCommand;
+import frc.robot.commands.resetCommand;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.timercommand.TimerArmPosition;
-import frc.robot.commands.timercommand.moveInParallel;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -37,12 +37,16 @@ public class Center3Cubes extends SequentialCommandGroup {
 ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
+    addCommands(
+    new InstantCommand(() -> swerve.zeroGyro()), 
+    new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
+    new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start Close To Human Cube"), armCollectSubsystem, swerve),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect second cube"), 250, 5.2, 2, 0.5),
     new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - 3 cubes - collect third cube"), 250, 5.2, 2, 0.5),
-    new BalanceCommand(swerve)
-    );
+    new BalanceCommand(swerve),
+    new TurnToZeroCommand(swerve),
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.7, 0.9)    );
   }
 }

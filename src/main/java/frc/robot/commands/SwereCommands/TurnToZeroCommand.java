@@ -18,7 +18,7 @@ public class TurnToZeroCommand extends CommandBase {
   private Swerve swerve;
   private boolean rightPosition;
   private Timer timer = new Timer();
-  protected Gains gains = new Gains("gains r", 0.1, 0, 0.3);
+  protected Gains gains = new Gains("gains r", 0.08, 0, 0.4);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -45,7 +45,7 @@ public class TurnToZeroCommand extends CommandBase {
     double Output = pid.getOutput(Swerve.gyro.getYaw());
     Output += 0.1 * Constants.SwerveConst.maxAngularVelocity * Math.signum(Output);
     if(Math.abs(Swerve.gyro.getYaw()) > 1.5){
-      swerve.drive(new Translation2d(0.07, 0.07), Output, false, true);
+      swerve.drive(new Translation2d(0.046, 0.046), Output, false, true);
       timer.reset();
       rightPosition = true;
     }

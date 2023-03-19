@@ -15,7 +15,10 @@ import frc.robot.commands.*;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.autoCommands.FarFromHumanCube;
+import frc.robot.commands.autoCommands.Next2Human3Cubes;
 import frc.robot.commands.autoCommands.Next2HumanCommand;
+import frc.robot.commands.autoCommands.Center3Cubes;
+import frc.robot.commands.autoCommands.CenterCloseToHumanCube;
 import frc.robot.commands.autoCommands.CenterFarFromHumanCube;
 import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.collectAtuoCommand;
@@ -48,35 +51,25 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public final CenterFarFromHumanCube centerAtuo = new CenterFarFromHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
-    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , 5.2, 0 , 0.3, 0.75);
-    public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
-        m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
-    public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
-        m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
+    public final CenterCloseToHumanCube centerCloseToHumanCube = new CenterCloseToHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
+    public final Center3Cubes center3Cubes = new Center3Cubes(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
     
+    public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
+     m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
+    public final Next2Human3Cubes next2Human3Cubes = new Next2Human3Cubes(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_armCollectSubsystem, m_ShootingSubsystem);
      
-
+    public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
+     m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
+    
+    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , 5.2, 0 , 0.3, 0.75);
+     
     public RobotContainer() {
 
         // Configure the button bindings
         configureButtonBindings();
         
     }
-    public CenterFarFromHumanCube getCenterAtuo(){
-        return centerAtuo;
-    }
-    public ShootingGroupCommand getJustShootAtuo(){
-        return justShoot;
-    }
-    public Next2HumanCommand getNext2Human() {
-        return next2Human;
-    }
-    public FarFromHumanCube getFarFromHumanCube(){
-        return farFromHumanCube;
-    }
-    public Command getTest(){
-       return AutoCommand.getAutoCommand(s_Swerve, "test");
-    }
+    
     private void configureSwerveButtons() {
         
     }
@@ -120,6 +113,54 @@ public class RobotContainer {
     }
     public CartridgeSubsystem getM_CartridgeSubsystem(){
         return m_cartridgeSubsystem;
+    }
+    public RobotButtons getRobotButtons() {
+        return robotButtons;
+    }
+    public void setRobotButtons(RobotButtons robotButtons) {
+        this.robotButtons = robotButtons;
+    }
+    public static Limelight getLimelight() {
+        return limelight;
+    }
+    public collectWheels getM_CollectWheels() {
+        return m_CollectWheels;
+    }
+    public CollectSubsystem getM_CollectSubsystem() {
+        return m_CollectSubsystem;
+    }
+    public armCollectSubsystem getM_armCollectSubsystem() {
+        return m_armCollectSubsystem;
+    }
+    public CartridgeSubsystem getM_cartridgeSubsystem() {
+        return m_cartridgeSubsystem;
+    }
+    public CenterCloseToHumanCube getCenterCloseToHumanCube() {
+        return centerCloseToHumanCube;
+    }
+    public Center3Cubes getCenter3Cubes() {
+        return center3Cubes;
+    }
+    public Next2Human3Cubes getNext2Human3Cubes() {
+        return next2Human3Cubes;
+    }
+    public ShootingGroupCommand getJustShoot() {
+        return justShoot;
+    }
+    public CenterFarFromHumanCube getCenterAtuo(){
+        return centerAtuo;
+    }
+    public ShootingGroupCommand getJustShootAtuo(){
+        return justShoot;
+    }
+    public Next2HumanCommand getNext2Human() {
+        return next2Human;
+    }
+    public FarFromHumanCube getFarFromHumanCube(){
+        return farFromHumanCube;
+    }
+    public Command getTest(){
+       return AutoCommand.getAutoCommand(s_Swerve, "test");
     }
 }
  
