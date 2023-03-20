@@ -6,13 +6,13 @@ package frc.robot.commands.timercommand;
 
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class TimerCollectWheels extends CommandBase {
-  private final collectWheels collectWheels;
+  private final collectWheelsSubsystem collectWheels;
   private double WheelsOutput;
   private double centeringOutput;
   private double seconds;
@@ -28,7 +28,7 @@ public class TimerCollectWheels extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public 
-  TimerCollectWheels(collectWheels collectWheels, double WheelsOutput, double centeringOutput,double seconds, double delay) {
+  TimerCollectWheels(collectWheelsSubsystem collectWheels, double WheelsOutput, double centeringOutput,double seconds, double delay) {
     this.collectWheels = collectWheels;
     this.WheelsOutput = WheelsOutput;
     this.centeringOutput = centeringOutput;

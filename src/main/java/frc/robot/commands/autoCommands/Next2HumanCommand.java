@@ -14,8 +14,7 @@ import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
-import frc.robot.subsystems.armSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
 import frc.util.vision.Limelight;
 import frc.robot.commands.ShootingCommnads.ShootingCommand;
@@ -28,7 +27,6 @@ import frc.robot.commands.resetCommand;
 import frc.robot.commands.ArmCommands.ArmCollectCommand;
 import frc.robot.commands.ArmCommands.armCollectOutput;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
-import frc.robot.commands.timercommand.TimerArmPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -40,7 +38,7 @@ public class Next2HumanCommand extends SequentialCommandGroup {
   public Next2HumanCommand(Swerve swerve,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
-  collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight, shootingSubsystem shootingSubsystem) {
+  collectWheelsSubsystem collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight, shootingSubsystem shootingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
@@ -48,7 +46,7 @@ public class Next2HumanCommand extends SequentialCommandGroup {
     new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 3), armCollectSubsystem, swerve),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.2),
     new LimelightCommand(limelight, swerve, true, -0.2, 0),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.4, 0.51)
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW)
     ); 
   }
 }

@@ -30,7 +30,6 @@ public class CollectSubsystem extends SuperSystem {
       public SuperTalonSRX openCollectMotor;
       public DigitalInput closeMicroSwitch;
       public Gains collectGains;
-      private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("collectSubsystem", this);
 
       int counter = 0;
       double point = 0;
@@ -44,7 +43,7 @@ public class CollectSubsystem extends SuperSystem {
     collectGains = new Gains("collectGains",3, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
     this.resetEncoder();
-    shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetEncoder()));
+    getTab().addCommandToDashboard("Reset", new InstantCommand(() -> this.resetEncoder()));
     // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
     // setDefaultCommand(new setPointCollectCommand(this,0));
   }
@@ -53,9 +52,9 @@ public class CollectSubsystem extends SuperSystem {
   
   @Override
   public void periodic() {
-    shuffleBoardTab.putInDashboard("collect position", openCollectMotor.getPosition(), false);
-    shuffleBoardTab.putInDashboard("collect output", openCollectMotor.getOutput(), false);
-    shuffleBoardTab.putInDashboard("shooting position", openCollectMotor.getVelocity(), false);
+    getTab().putInDashboard("collect position", openCollectMotor.getPosition(), false);
+    getTab().putInDashboard("collect output", openCollectMotor.getOutput(), false);
+    getTab().putInDashboard("shooting position", openCollectMotor.getVelocity(), false);
     // System.out.println("p" + getPosition());
   }
 

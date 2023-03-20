@@ -20,7 +20,6 @@ import frc.robot.commands.autoCommands.Next2HumanCommand;
 import frc.robot.commands.autoCommands.Center3Cubes;
 import frc.robot.commands.autoCommands.CenterCloseToHumanCube;
 import frc.robot.commands.autoCommands.CenterFarFromHumanCube;
-import frc.robot.commands.timercommand.TimerArmPosition;
 import frc.robot.commands.timercommand.collectAtuoCommand;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
@@ -41,18 +40,17 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final collectWheels m_CollectWheels = new collectWheels();
+    private final collectWheelsSubsystem m_CollectWheels = new collectWheelsSubsystem();
     private final shootingSubsystem  m_ShootingSubsystem = new shootingSubsystem();
     private final CollectSubsystem m_CollectSubsystem = new CollectSubsystem();
-    private final armSubsystem m_ArmSubsystem = new armSubsystem();
     private final armCollectSubsystem m_armCollectSubsystem = new armCollectSubsystem();
     private final CartridgeSubsystem m_cartridgeSubsystem = new CartridgeSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public final CenterFarFromHumanCube CenterFarFromHumanCube = new CenterFarFromHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem,
+    public final CenterFarFromHumanCube CenterFarFromHumanCube = new CenterFarFromHumanCube(s_Swerve,  m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
-    public final CenterCloseToHumanCube centerCloseToHumanCube = new CenterCloseToHumanCube(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
-    public final Center3Cubes center3Cubes = new Center3Cubes(s_Swerve, m_ArmSubsystem, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
+    public final CenterCloseToHumanCube centerCloseToHumanCube = new CenterCloseToHumanCube(s_Swerve,  m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
+    public final Center3Cubes center3Cubes = new Center3Cubes(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem, m_CollectWheels, m_ShootingSubsystem, m_armCollectSubsystem);
     
     public final Next2HumanCommand next2Human = new Next2HumanCommand(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
@@ -61,7 +59,7 @@ public class RobotContainer {
     public final FarFromHumanCube farFromHumanCube = new FarFromHumanCube(s_Swerve, m_CollectSubsystem, m_cartridgeSubsystem,
      m_CollectWheels, m_armCollectSubsystem, limelight, m_ShootingSubsystem);
     
-    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.3, 0.75);
+    public final ShootingGroupCommand justShoot = new ShootingGroupCommand(m_ShootingSubsystem, m_armCollectSubsystem, m_cartridgeSubsystem , Constants.SHOOTING_HIGH);
      
     public RobotContainer() {
 
@@ -82,7 +80,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         configureSwerveButtons();
-        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem, m_ArmSubsystem, s_Swerve, m_CollectWheels, limelight, m_armCollectSubsystem, m_cartridgeSubsystem);
+        robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem,  s_Swerve, m_CollectWheels, limelight, m_armCollectSubsystem, m_cartridgeSubsystem);
     }
  
     /**
@@ -108,9 +106,6 @@ public class RobotContainer {
         return m_CollectSubsystem;
     }
 
-    public armSubsystem getM_ArmSubsystem() {
-        return m_ArmSubsystem;
-    }
     public CartridgeSubsystem getM_CartridgeSubsystem(){
         return m_cartridgeSubsystem;
     }
@@ -123,7 +118,7 @@ public class RobotContainer {
     public static Limelight getLimelight() {
         return limelight;
     }
-    public collectWheels getM_CollectWheels() {
+    public collectWheelsSubsystem getM_CollectWheels() {
         return m_CollectWheels;
     }
     public CollectSubsystem getM_CollectSubsystem() {

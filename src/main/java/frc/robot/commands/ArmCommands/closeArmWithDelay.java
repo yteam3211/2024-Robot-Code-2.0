@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.armCollectSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 
 public class closeArmWithDelay extends SequentialCommandGroup
 {

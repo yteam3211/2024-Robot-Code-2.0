@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotButtons;
 import frc.robot.autos.AutoCommand;
 import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 
 public class LeftGRIDmovmentCommand extends CommandBase {
   /** Creates a new rightGRIDmovmentCommand. */

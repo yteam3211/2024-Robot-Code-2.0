@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.dashboard.SuperSystem;
+import frc.util.SuperInterface;
 
-public class collectWheels extends SubsystemBase {
+public class collectWheelsSubsystem extends SuperSystem {
   public VictorSP collectWheelsMotor ;
   public VictorSP centeringMotor;
   /** Creates a new collectWheels. */
-  public collectWheels() {
+  public collectWheelsSubsystem() {
+    super("collect wheels");
     collectWheelsMotor = new VictorSP(1);
     centeringMotor = new VictorSP(2);
   }

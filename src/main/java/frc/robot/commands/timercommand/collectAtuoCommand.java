@@ -7,10 +7,10 @@ package frc.robot.commands.timercommand;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 
 public class collectAtuoCommand extends CommandBase {
-    private final collectWheels collectWheels;
+    private final collectWheelsSubsystem collectWheels;
     private double WheelsOutput;
     private double centeringOutput;
     private Timer timer = new Timer();
@@ -22,7 +22,7 @@ public class collectAtuoCommand extends CommandBase {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public collectAtuoCommand(collectWheels collectWheels, double Output, double output, int timeOfFunctioning) {
+    public collectAtuoCommand(collectWheelsSubsystem collectWheels, double Output, double output, int timeOfFunctioning) {
       this.collectWheels = collectWheels;
       this.WheelsOutput = output;
       this.centeringOutput = Output;

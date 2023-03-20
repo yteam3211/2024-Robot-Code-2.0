@@ -46,7 +46,7 @@ public abstract class DriveControl {
      * @return distance
      */
     public static double angle2Distance(double angle) {
-        return Constants.SwerveConst.trackWidth / 2 * Math.toRadians(angle);
+        return Constants.SwerveConstant.trackWidth / 2 * Math.toRadians(angle);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class DriveControl {
      * @return angle
      */
     public static double distance2Angle(double distance) {
-        return Math.toDegrees(distance / Constants.SwerveConst.trackWidth * 2);
+        return Math.toDegrees(distance / Constants.SwerveConstant.trackWidth * 2);
     }
 
     /**%
@@ -63,6 +63,6 @@ public abstract class DriveControl {
      * @return angle
      */
     public static double distance2Angle(double distanceLeft, double distanceRight) {
-        return Math.toDegrees((distanceLeft - distanceRight) / Constants.SwerveConst.trackWidth);
+        return Math.toDegrees((distanceLeft - distanceRight) / Constants.SwerveConstant.trackWidth);
     }
 }

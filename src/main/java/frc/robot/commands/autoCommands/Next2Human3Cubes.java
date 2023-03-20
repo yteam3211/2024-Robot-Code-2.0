@@ -21,7 +21,7 @@ import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -32,7 +32,7 @@ public class Next2Human3Cubes extends SequentialCommandGroup {
   public Next2Human3Cubes(Swerve swerve,
   CollectSubsystem collectSubsystem,
   CartridgeSubsystem cartridgeSubsystem,
-  collectWheels collectWheels, armCollectSubsystem armCollectSubsystem, shootingSubsystem shootingSubsystem) {
+  collectWheelsSubsystem collectWheels, armCollectSubsystem armCollectSubsystem, shootingSubsystem shootingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
@@ -42,7 +42,7 @@ public class Next2Human3Cubes extends SequentialCommandGroup {
     new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(Constants.ARM_OPEN_POSITION)),
     new ParallelCommandGroup(
       AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 2),
-      new TimerCollectWheels(collectWheels, -0.7, -0.15, 3, 0.3),
+      new TimerCollectWheels(collectWheels, Constants.COLLECT_WHEELS_OUTPUT, Constants.CENTERING_WHEELS_OUTPUT, 3, 0.3),
       new SequentialCommandGroup(
         new WaitCommand(1.1),
         new InstantCommand(() -> collectSubsystem.setPosition(0))
@@ -50,7 +50,7 @@ public class Next2Human3Cubes extends SequentialCommandGroup {
       new AutoCubeFixture(cartridgeSubsystem, 2)
     ),
     new TurnToZeroCommand(swerve),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.4, 0.29),
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW),
     new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "Next To Human - 3 cubes Additon", 5), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 3, 0.2)
     );
   }

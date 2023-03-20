@@ -35,8 +35,7 @@ import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
-import frc.robot.subsystems.armSubsystem;
-import frc.robot.subsystems.collectWheels;
+import frc.robot.subsystems.collectWheelsSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
 import frc.util.vision.Limelight;
 // import frc.robot.commands.Balance;
@@ -90,7 +89,7 @@ public class RobotButtons {
      * @param swerve
      */
     public void loadButtons(shootingSubsystem shootingSubsystem, CollectSubsystem collectSubsystem,
-            armSubsystem armSubsystem, Swerve swerve,collectWheels collectWheels, Limelight limelight, armCollectSubsystem armCollectSubsystem,CartridgeSubsystem cartridgeSubsystem) {
+             Swerve swerve,collectWheelsSubsystem collectWheels, Limelight limelight, armCollectSubsystem armCollectSubsystem,CartridgeSubsystem cartridgeSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -109,23 +108,23 @@ public class RobotButtons {
         TurnToZero.whileTrue(new TurnToZeroCommand(swerve));
         WheelsLock.onTrue(new lockWheelsCommnad(swerve));
         TurnToZero.onTrue(new TurnToZeroCommand(swerve));
-        testShooting.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.7, 0.9));
+        // testShooting.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.ARM_OPEN_POSITION, 0 , 0.7, 0.9));
         // LimelightRetroReflectiveFloor.whileTrue(new LimelightCommand(limelight, swerve, false, 8));
 
         // systems joystick commands
-        OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, -0.5, -0.15, 250, 5.2));
+        OpenCollect.whileTrue(new OpenIntakeAndArm(collectSubsystem, collectWheels, armCollectSubsystem, Constants.COLLECT_WHEELS_OUTPUT, Constants.CENTERING_WHEELS_OUTPUT, Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION));
         collectWheelsBack.whileTrue(new collectWheelsCommand(collectWheels, 0.6, 0.5));
         
         resetArmCollect.onTrue(new armCollectOutput(armCollectSubsystem, -0.2, 0));
 
-        shootingHigh.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.3, 0.75));
-        shootinghMid.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.51));
-        shootingLow.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , 5.2, 0 , 0.4, 0.29));
+        shootingHigh.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem, Constants.SHOOTING_HIGH));
+        shootinghMid.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_MID));
+        shootingLow.onTrue(new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW));
         shootingFixture.onTrue(new CubeFixtureGroupCommand(cartridgeSubsystem, 0, 0.15, 1400, -0.2, 20));
         reverseShooterTrigger.onTrue(new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem,-0.3, 0));
 
 
-        openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(5.2)));
+        openArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(Constants.ARM_OPEN_POSITION)));
         closeArmCollect.onTrue(new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(0)));
         
         

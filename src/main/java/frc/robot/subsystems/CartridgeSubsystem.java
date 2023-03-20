@@ -42,7 +42,7 @@ private Gains shootingGains;
 
   // Motors, Selenoid and Sensors declaration
   public CartridgeSubsystem() {
-    super("ShootingSubsystem");
+    super("CartrridgeSubsystem");
     shootingGains = new Gains("_shootingGains",0.03, 0,0);
     Shooting = new SuperTalonFX(Constants.SHOOTING_MOTOR, 30, false, false, NeutralMode.Coast, shootingGains, TalonFXControlMode.PercentOutput);
   }

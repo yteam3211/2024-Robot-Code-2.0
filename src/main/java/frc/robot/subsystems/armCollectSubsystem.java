@@ -38,18 +38,17 @@ public class armCollectSubsystem extends SuperSystem {
   public Gains armCollectgGains;
   public DigitalInput downMicroSwitch;
 
-  private SuperSubSystemTab shuffleBoardTab = new SuperSubSystemTab("armCollect", this);
 
 
 
   // Motors, Selenoid and Sensors declaration
   public armCollectSubsystem() {
-    super("armCollect");
+    super("arm Collect");
     armCollectgGains = new Gains("grippergGains", 0.1, 0, 0);
       downMicroSwitch = new DigitalInput(0);
      armCollectMotor = new SuperSparkMax(Constants.ARM_COLLECT_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, armCollectgGains, 0, 0, 0);
-        shuffleBoardTab.addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
+        getTab().addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
     this.resetArmCollectEncoder();
     setDefaultCommand(new ResetArmCommand(this));
 
@@ -59,9 +58,9 @@ public class armCollectSubsystem extends SuperSystem {
 
   @Override
   public void periodic() {
-    shuffleBoardTab.putInDashboard("collect position", armCollectMotor.getPosition(), false);
-    shuffleBoardTab.putInDashboard("collect output", armCollectMotor.getOutput(), false);
-    shuffleBoardTab.putInDashboard("collect micri", downMicroSwitch.get(), false);
+    getTab().putInDashboard("collect position", armCollectMotor.getPosition(), 4, 0, false);
+    getTab().putInDashboard("collect output", armCollectMotor.getOutput(), 5, 0, false);
+    getTab().putInDashboard("collect micri", downMicroSwitch.get(), 6, 0, false);
     // System.out.println("collect position" + armCollectMotor.getPosition());
     // This method will be called once per scheduler run
     // SmartDashboard.putNumber("Gripper Position", gripperMotor.getPosition());

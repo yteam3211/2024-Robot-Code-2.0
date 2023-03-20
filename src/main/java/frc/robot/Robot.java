@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.autoCommands.Next2HumanCommand;
 import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.armSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,10 +27,9 @@ import frc.robot.subsystems.armSubsystem;
  */
 public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
-  public armSubsystem armsubsystem;
   private Command m_autonomousCommand;
   private CartridgeSubsystem shootingSubsystem;
-  private static RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer;
   private static final String centerFarFromHumanCubeAuto = "Center far from human cube";
   private static final String centerCloseToHumanCubeAuto = "Center close to human cube";
   private static final String test = "test";
@@ -65,7 +63,6 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Center 3 Cubes", Center3Cubes);
     SmartDashboard.putData("Auto choices", m_chooser);
     m_robotContainer = new RobotContainer();
-    armsubsystem = m_robotContainer.getM_ArmSubsystem();
     CameraServer.startAutomaticCapture();
   }
 
@@ -98,7 +95,6 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_robotContainer.getM_ArmSubsystem().getTab().putInDashboard("choose", m_chooser.getSelected(),true);
     if (m_chooser.getSelected().equals(centerFarFromHumanCubeAuto)) m_autonomousCommand = m_robotContainer.getCenterFarFromHumanCube();
     else if (m_chooser.getSelected().equals(centerCloseToHumanCubeAuto)) m_autonomousCommand = m_robotContainer.getCenterCloseToHumanCube();
     else if (m_chooser.getSelected().equals(Next2Human)) m_autonomousCommand = m_robotContainer.getNext2Human();
