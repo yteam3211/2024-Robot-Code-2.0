@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
 import frc.robot.commands.resetCommand;
+import frc.robot.commands.IntakeCommands.CloseIntakeCommand;
 import frc.robot.commands.IntakeCommands.setPointCollectCommand;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
@@ -44,8 +45,8 @@ public class CollectSubsystem extends SuperSystem {
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
     this.resetEncoder();
     getTab().addCommandToDashboard("Reset", new InstantCommand(() -> this.resetEncoder()));
-    // closeMicroSwitch = new DigitalInput(Constants.CLOSE_MICROSWITCH);
-    // setDefaultCommand(new setPointCollectCommand(this,0));
+    // closeMicroSwitch = new DigitalInput(Constants.COLLECT_CLOSE_MICROSWITCH);
+    // setDefaultCommand(new CloseIntakeCommand(this, Constants.CLOSE_COLLECT_OUTPUT));
   }
 
   /** Creates a new ExampleSubsystem. */
@@ -66,8 +67,16 @@ public class CollectSubsystem extends SuperSystem {
     // };
   }
 
-  public void setPoint(double point){
-    this.point = point;
+  public void setOutput(double output){
+    openCollectMotor.set(ControlMode.PercentOutput, output);
+  }
+
+  // public void setPoint(double point){
+  //   this.point = point;
+  // }
+
+  public boolean isClose(){
+    return closeMicroSwitch.get();
   }
   
   // public boolean isCollectClose(){

@@ -22,10 +22,10 @@ public final class Constants {
 
         // motors ID constants
         public static final int SHOOTING_MOTOR = 15;
-        public static final int DOWN_MICROSWITCH = 0; 
+        public static final int ARM_DOWN_MICROSWITCH = 0; 
         public static final int UP_MICROSWITCH = 0;
         public static final int RIGHT_LEADER_COLLECT_MOTOR = 16;
-        public static final int CLOSE_MICROSWITCH = 0;
+        public static final int COLLECT_CLOSE_MICROSWITCH = 1;
         public static final int ARM_MOTOR = 17;
         public static final int ARM_COLLECT_MOTOR = 20;
         public static final int GRIPPER_MOTOR = 18; 
@@ -45,6 +45,7 @@ public final class Constants {
         // collect constants
         public static final double COLLECT_WHEELS_OUTPUT = -0.7;
         public static final double CENTERING_WHEELS_OUTPUT = -0.15;
+        public static final double CLOSE_COLLECT_OUTPUT = -0.3;
 
         // subsystems constants
         // public static final SubsystemsConstants SUBSYSTEMS = new SubsystemsConstants(

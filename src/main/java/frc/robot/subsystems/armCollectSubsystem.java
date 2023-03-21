@@ -45,7 +45,7 @@ public class armCollectSubsystem extends SuperSystem {
   public armCollectSubsystem() {
     super("arm Collect");
     armCollectgGains = new Gains("grippergGains", 0.1, 0, 0);
-      downMicroSwitch = new DigitalInput(0);
+      downMicroSwitch = new DigitalInput(Constants.ARM_DOWN_MICROSWITCH);
      armCollectMotor = new SuperSparkMax(Constants.ARM_COLLECT_MOTOR, MotorType.kBrushless, 30, false, 1, 1, IdleMode.kBrake,
         ControlType.kPosition, armCollectgGains, 0, 0, 0);
         getTab().addCommandToDashboard("Reset", new InstantCommand(() -> this.resetArmCollectEncoder()));
