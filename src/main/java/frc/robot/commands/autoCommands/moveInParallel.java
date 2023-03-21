@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
 import frc.robot.Constants;
@@ -32,7 +33,7 @@ public class moveInParallel extends SequentialCommandGroup {
   /** Creates a new collectInParallel. */
   public moveInParallel(Swerve s_Swerve, CollectSubsystem collectSubsystem,
   collectWheelsSubsystem collectWheels, armCollectSubsystem armCollectSubsystem, CartridgeSubsystem cartridgeSubsystem, Command movment,
-   double collectPoint, double armCollectPoint, double collectSeconds, double collectDelay) {
+   double collectPoint, double armCollectPoint, double collectSeconds, double collectDelay, boolean isClose) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
@@ -42,7 +43,7 @@ public class moveInParallel extends SequentialCommandGroup {
       new timeSetPointCollectCommand(collectSubsystem, armCollectSubsystem, collectPoint, armCollectPoint, collectSeconds, collectDelay),
       new TimerCollectWheels(collectWheels, Constants.COLLECT_WHEELS_OUTPUT, Constants.CENTERING_WHEELS_OUTPUT, collectSeconds + 2, collectDelay),
       new AutoCubeFixture(cartridgeSubsystem, collectSeconds + 0.3),
-      new ArmCollectCommand(armCollectSubsystem, 0.3 , collectSeconds + 1.5)
+     isClose ? new ArmCollectCommand(armCollectSubsystem, Constants.ARM_CLOSE_POSITION , collectSeconds + 1.5) : new WaitCommand(0)
       ),
       new TurnToZeroCommand(s_Swerve)
     );

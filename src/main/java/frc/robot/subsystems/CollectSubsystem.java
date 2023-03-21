@@ -40,7 +40,7 @@ public class CollectSubsystem extends SuperSystem {
    */
   public CollectSubsystem() {
     super("collectSubsystem");
-    collectGains = new Gains("collectGains",3, 0,0);
+    collectGains = new Gains("collectGains",5, 0,0);
     openCollectMotor = new SuperTalonSRX(Constants.RIGHT_LEADER_COLLECT_MOTOR, 30, false, false, 0, 1, 0, collectGains, ControlMode.Position);
     this.resetEncoder();
     getTab().addCommandToDashboard("Reset", new InstantCommand(() -> this.resetEncoder()));
@@ -53,8 +53,6 @@ public class CollectSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     getTab().putInDashboard("collect position", openCollectMotor.getPosition(), false);
-    getTab().putInDashboard("collect output", openCollectMotor.getOutput(), false);
-    getTab().putInDashboard("shooting position", openCollectMotor.getVelocity(), false);
     // System.out.println("p" + getPosition());
   }
 

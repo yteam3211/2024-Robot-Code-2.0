@@ -62,8 +62,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Next to Human 3 Cubes", Next2Human3Cubes);
     m_chooser.addOption("Center 3 Cubes", Center3Cubes);
     SmartDashboard.putData("Auto choices", m_chooser);
-    m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
+    m_robotContainer = new RobotContainer();
   }
 
   /**

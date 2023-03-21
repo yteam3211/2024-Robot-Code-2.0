@@ -6,6 +6,7 @@ package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
@@ -40,7 +41,7 @@ public class Next2Human3Cubes extends SequentialCommandGroup {
     new InstantCommand(() -> collectSubsystem.setPosition(290)),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 5), armCollectSubsystem, swerve),
     new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(Constants.ARM_OPEN_POSITION)),
-    new ParallelCommandGroup(
+    new ParallelDeadlineGroup(
       AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 2),
       new TimerCollectWheels(collectWheels, Constants.COLLECT_WHEELS_OUTPUT, Constants.CENTERING_WHEELS_OUTPUT, 3, 0.3),
       new SequentialCommandGroup(
@@ -51,7 +52,7 @@ public class Next2Human3Cubes extends SequentialCommandGroup {
     ),
     new TurnToZeroCommand(swerve),
     new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "Next To Human - 3 cubes Additon", 5), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 3, 0.2)
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "Next To Human - 3 cubes Additon", 5), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 5, 0.7,false)
     );
   }
 }

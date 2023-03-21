@@ -42,7 +42,7 @@ public class CenterCloseToHumanCube extends SequentialCommandGroup {
   
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start Close To Human Cube", 3), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - Close To Human Cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - Close To Human Cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5, false),
     new BalanceCommand(swerve)
     );  
   }

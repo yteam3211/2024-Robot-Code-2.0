@@ -2,8 +2,6 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax.IdleMode;
-import java.util.Date;
-import javax.xml.crypto.Data;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -11,8 +9,17 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
+import frc.robot.subsystems.CartridgeSubsystem;
+import frc.robot.subsystems.CollectSubsystem;
+import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.armCollectSubsystem;
+import frc.robot.subsystems.collectWheelsSubsystem;
+import frc.robot.subsystems.shootingSubsystem;
+import frc.util.vision.Limelight;
 
 public final class Constants {
+        // subsystems
+
         // motors ID constants
         public static final int SHOOTING_MOTOR = 15;
         public static final int DOWN_MICROSWITCH = 0; 
@@ -25,12 +32,111 @@ public final class Constants {
         public static final int RIGHT_SHOOTING_M0TOR = 21; 
         public static final int LEFT_SHOOTIN_MOTOR = 22; 
 
+        // positions constants
+        public static final double ARM_OPEN_POSITION = 5.2;
+        public static final double ARM_CLOSE_POSITION = 0.3;
+        public static final double COLLECT_OPEN_POSITION = 250;
+        
+        // shooting constsnts
+        public static final ShootingConstants SHOOTING_HIGH = new ShootingConstants(0.3, 0.75);
+        public static final ShootingConstants SHOOTING_MID = new ShootingConstants(0.4, 0.51);
+        public static final ShootingConstants SHOOTING_LOW = new ShootingConstants(0.4, 0.29);
+
+        // collect constants
+        public static final double COLLECT_WHEELS_OUTPUT = -0.7;
+        public static final double CENTERING_WHEELS_OUTPUT = -0.15;
+
+        // subsystems constants
+        // public static final SubsystemsConstants SUBSYSTEMS = new SubsystemsConstants(
+        // Robot.getm_robotContainer().getM_armCollectSubsystem(),
+        //  Robot.getm_robotContainer().getM_CartridgeSubsystem(),
+        //  Robot.getm_robotContainer().getM_CollectSubsystem(),
+        //  Robot.getm_robotContainer().getM_CollectWheels(),
+        //  Robot.getm_robotContainer().getM_ShootingSubsystem(),
+        //  Robot.getm_robotContainer().getS_Swerve(),
+        //  Robot.getm_robotContainer().getLimelight()
+        // );
+
+    public static final class ShootingConstants{ 
+        private  final double ArmPosition = ARM_OPEN_POSITION;
+        private final double ArmSeconds = 0;
+        private final double CartridgeOutput;
+        private final double ShootingWheelsOutput;
+        public ShootingConstants(double CartridgeOutput, double ShootingWheelsOutput){
+            this.CartridgeOutput = CartridgeOutput;
+            this.ShootingWheelsOutput  = ShootingWheelsOutput;
+        }
+        
+        public double getArmPosition() {
+            return ArmPosition;
+        }
+        public double getArmSeconds() {
+            return ArmSeconds;
+        }
+        public double getCartridgeOutput() {
+            return CartridgeOutput;
+        }
+        public double getShootingWheelsOutput() {
+            return ShootingWheelsOutput;
+        }
+    }
+    public static final class SubsystemsConstants{
+        private final armCollectSubsystem armCollectSubsystem;
+        private final CartridgeSubsystem cartridgeSubsystem;
+        private final CollectSubsystem collectSubsystem;
+        private final collectWheelsSubsystem collectWheelsSubsystem;
+        private final shootingSubsystem shootingSubsystem;
+        private final Swerve swerve;
+        private final Limelight limelight;
+
+        public SubsystemsConstants(armCollectSubsystem armCollectSubsystem,
+                CartridgeSubsystem cartridgeSubsystem, CollectSubsystem collectSubsystem,
+                collectWheelsSubsystem collectWheelsSubsystem,
+                shootingSubsystem shootingSubsystem, Swerve swerve, Limelight limelight) 
+            {
+            this.armCollectSubsystem = armCollectSubsystem;
+            this.cartridgeSubsystem = cartridgeSubsystem;
+            this.collectSubsystem = collectSubsystem;
+            this.collectWheelsSubsystem = collectWheelsSubsystem;
+            this.shootingSubsystem = shootingSubsystem;
+            this.swerve = swerve;
+            this.limelight = limelight;
+            }
+
+        public armCollectSubsystem getArmCollectSubsystem() {
+            return armCollectSubsystem;
+        }
+
+        public CartridgeSubsystem getCartridgeSubsystem() {
+            return cartridgeSubsystem;
+        }
+
+        public CollectSubsystem getCollectSubsystem() {
+            return collectSubsystem;
+        }
+
+        public collectWheelsSubsystem getCollectWheelsSubsystem() {
+            return collectWheelsSubsystem;
+        }
+
+        public shootingSubsystem getShootingSubsystem() {
+            return shootingSubsystem;
+        }
+
+        public Swerve getSwerve() {
+            return swerve;
+        }
+        public Limelight getLimelight() {
+            return limelight;
+        }
+    }
+    
         
 
 
     public static final double stickDeadband = 0.01;
 
-    public static final class SwerveConst {
+    public static final class SwerveConstant {
         public static final int pigeonID = 1;
         public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
 
