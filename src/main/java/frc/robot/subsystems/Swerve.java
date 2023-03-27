@@ -27,7 +27,6 @@ public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-    public Gains balanceGains = new Gains("balance gains", 0.02, 0.0001, 0.32);
 
     public Swerve() {
         super("Swerve");
@@ -48,19 +47,15 @@ public class Swerve extends SuperSystem {
         swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions());
     }
 
-    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+    public void drive(Translation2d translation, double rotation, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
             Constants.SwerveConstant.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
                                     rotation, 
                                     getYaw()
                                 )
-                                : new ChassisSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation)
                                 );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstant.maxSpeed);
 
