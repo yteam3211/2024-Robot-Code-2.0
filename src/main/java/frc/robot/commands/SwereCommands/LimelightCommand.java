@@ -80,21 +80,21 @@ public class LimelightCommand extends CommandBase {
       count = false;
       timer.start();
       // System.out.println("timer started! ");
-      swerve.drive(new Translation2d(0, 0), 0, false, true);
+      swerve.drive(new Translation2d(0, 0), 0, true);
     }
     else if(Math.abs(Math.abs(yPos) - Math.abs(limelight.getY())) > 0.4 || Math.abs(Math.abs(xPos) - Math.abs(limelight.getX())) > 3 || Math.abs(Swerve.gyro.getYaw()) > 0.5 && count){
       timer.stop();
       timer.reset();
       // System.out.println("timer reset! ");
       count = true;
-      swerve.drive(new Translation2d(yOutput, xOutput), rOutput, false, true);
+      swerve.drive(new Translation2d(yOutput, xOutput), rOutput, true);
   }
 }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    swerve.drive(new Translation2d(0, 0), 0, false, true);
+    swerve.drive(new Translation2d(0, 0), 0, true);
   }
 
   // Returns true when the command should end.

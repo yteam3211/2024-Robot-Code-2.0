@@ -15,10 +15,9 @@ public class LeftGRIDmovmentCommand extends CommandBase {
   /** Creates a new rightGRIDmovmentCommand. */
   private Swerve swerve;
   private String name;
-  private int presses = 0;
+  private int presses;
   private boolean pressed = false;
   private Timer pressesTimer = new Timer();
-  private Timer finishTimer = new Timer();
   public LeftGRIDmovmentCommand(Swerve swerve) {
     this.swerve = swerve;
     // Use addRequirements() here to declare subsystem dependencies.

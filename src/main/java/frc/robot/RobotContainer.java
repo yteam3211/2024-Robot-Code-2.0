@@ -65,12 +65,8 @@ public class RobotContainer {
 
         // Configure the button bindings
         configureButtonBindings();
-        
     }
     
-    private void configureSwerveButtons() {
-        
-    }
 
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
@@ -79,7 +75,6 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        configureSwerveButtons();
         robotButtons.loadButtons(m_ShootingSubsystem, m_CollectSubsystem,  s_Swerve, m_CollectWheels, limelight, m_armCollectSubsystem, m_cartridgeSubsystem);
     }
  
@@ -111,9 +106,6 @@ public class RobotContainer {
     }
     public RobotButtons getRobotButtons() {
         return robotButtons;
-    }
-    public void setRobotButtons(RobotButtons robotButtons) {
-        this.robotButtons = robotButtons;
     }
     public static Limelight getLimelight() {
         return limelight;

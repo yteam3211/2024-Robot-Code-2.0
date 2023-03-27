@@ -5,7 +5,9 @@
 package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.autos.AutoCommand;
@@ -17,8 +19,10 @@ import frc.robot.subsystems.CartridgeSubsystem;
 import frc.robot.subsystems.collectWheelsSubsystem;
 import frc.robot.subsystems.shootingSubsystem;
 import frc.robot.commands.ShootingCommnads.ShootingCommand;
+import frc.robot.commands.ShootingCommnads.ShootingGroupCommand;
 import frc.robot.commands.SwereCommands.BalanceCommand;
 import frc.robot.commands.SwereCommands.TurnToZeroCommand;
+import frc.robot.commands.SwereCommands.lockWheelsCommnad;
 // import frc.robot.commands.ClosingCollectGroupCommand;
 import frc.robot.commands.ShootingCommnads.CartridgeOutputCommand;
 
@@ -40,11 +44,17 @@ public class CenterFarFromHumanCube extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     
   
-    addCommands(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
+    addCommands(new ParallelDeadlineGroup(new WaitCommand(14.85), new SequentialCommandGroup(new InstantCommand(() -> swerve.zeroGyro()), new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
     new StartAuto(AutoCommand.getAutoCommand(swerve, "center - start far from human cube", 3), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - start far from human cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5, false),
+    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "center - far from human cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.5, false),
     // AutoCommand.getAutoCommand(s_Swerve),
-    new BalanceCommand(swerve)
+    new BalanceCommand(swerve, true),
+    new TurnToZeroCommand(swerve),
+    new lockWheelsCommnad(swerve, true),
+    // new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3)
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem, Constants.SHOOTING_AUTO_HIGH)
+    )),
+      new lockWheelsCommnad(swerve)
     );  
   }
 }

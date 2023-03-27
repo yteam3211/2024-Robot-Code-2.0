@@ -6,11 +6,14 @@ package frc.robot.commands.autoCommands;
 
 import frc.robot.autos.AutoCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.armCollectSubsystem;
+import frc.robot.commands.timercommand.TimerCollectWheels;
 import frc.robot.commands.timercommand.timeSetPointCollectCommand;
 import frc.robot.subsystems.CollectSubsystem;
 import frc.robot.subsystems.CartridgeSubsystem;
@@ -41,12 +44,33 @@ public class Next2HumanCommand extends SequentialCommandGroup {
   collectWheelsSubsystem collectWheels, armCollectSubsystem armCollectSubsystem, Limelight limelight, shootingSubsystem shootingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
     addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
     new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
-    new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 3), armCollectSubsystem, swerve),
-    new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.2, false),
-    new LimelightCommand(limelight, swerve, true, -0.2, 0),
-    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW)
+    new InstantCommand(() -> collectSubsystem.setPosition(290)),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 5), armCollectSubsystem, swerve),
+    new InstantCommand(() -> armCollectSubsystem.setArmCollectPosition(Constants.ARM_OPEN_POSITION)),
+    new ParallelDeadlineGroup(
+      AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 2),
+      new TimerCollectWheels(collectWheels, Constants.COLLECT_WHEELS_OUTPUT, Constants.CENTERING_WHEELS_OUTPUT, 3, 0.3),
+      new SequentialCommandGroup(
+        new WaitCommand(1.1),
+        new InstantCommand(() -> collectSubsystem.setPosition(0))
+      ),
+      new AutoCubeFixture(cartridgeSubsystem, 2)
+    ),
+    new TurnToZeroCommand(swerve),
+    new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW),
+    new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 3), armCollectSubsystem, swerve)
     ); 
   }
 }
+
+// prev settings
+
+// addCommands(new InstantCommand(() -> swerve.zeroGyro()), new resetCommand(shootingSubsystem, collectSubsystem, armCollectSubsystem, cartridgeSubsystem),
+    // new ShootingCommand(shootingSubsystem, cartridgeSubsystem, armCollectSubsystem, 0.75, 0.3),
+    // new StartAuto(AutoCommand.getAutoCommand(swerve, "Next 2 Human - start", 3), armCollectSubsystem, swerve),
+    // new moveInParallel(swerve, collectSubsystem, collectWheels, armCollectSubsystem, cartridgeSubsystem, AutoCommand.getAutoCommand(swerve, "next 2 human & 1 cube", 3), Constants.COLLECT_OPEN_POSITION, Constants.ARM_OPEN_POSITION, 2, 0.2, false),
+    // new LimelightCommand(limelight, swerve, true, -0.2, 0),
+    // new ShootingGroupCommand(shootingSubsystem, armCollectSubsystem, cartridgeSubsystem , Constants.SHOOTING_LOW)

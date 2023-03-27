@@ -18,15 +18,13 @@ public class TeleopSwerve extends CommandBase {
     private DoubleSupplier translationSup;
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
-    private BooleanSupplier robotCentricSup;
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, double seconds) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
-        this.robotCentricSup = robotCentricSup;
     }
 
     @Override
@@ -41,7 +39,6 @@ public class TeleopSwerve extends CommandBase {
             s_Swerve.drive(            
                 new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstant.maxSpeed), 
                 rotationVal * Constants.SwerveConstant.maxAngularVelocity, 
-                !robotCentricSup.getAsBoolean(), //Field oriented by the controller switch
              true
             );
         }

@@ -38,7 +38,7 @@ public class rightGRIDmovmentCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("presses: " + presses + "time: " + pressesTimer.get());
+    // System.out.println("presses: " + presses + "time: " + pressesTimer.get());
     if(!pressesTimer.hasElapsed(0.25) && RobotButtons.rightGRIDmovment.getAsBoolean() && !pressed){
       presses++;
       pressed = true;

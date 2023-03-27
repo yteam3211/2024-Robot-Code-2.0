@@ -28,7 +28,6 @@ import frc.robot.subsystems.Swerve;
 public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   private Command m_autonomousCommand;
-  private CartridgeSubsystem shootingSubsystem;
   public static RobotContainer m_robotContainer;
   private static final String centerFarFromHumanCubeAuto = "Center far from human cube";
   private static final String centerCloseToHumanCubeAuto = "Center close to human cube";
@@ -56,7 +55,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("just shoot", justShootAtuo);
     m_chooser.addOption("Center far from human cube", centerFarFromHumanCubeAuto);
     m_chooser.addOption("Center close to human cube", centerCloseToHumanCubeAuto);
-    // m_chooser.addOption("Next to Human", Next2Human);
+    m_chooser.addOption("Next to Human", Next2Human);
     m_chooser.addOption("Far from human", FarFromHumanCube);
     m_chooser.addOption("test", test);
     m_chooser.addOption("Next to Human 3 Cubes", Next2Human3Cubes);
@@ -143,7 +142,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // m_robotContainer.getS_Swerve().zeroGyro();
+    m_robotContainer.getS_Swerve().zeroGyro();
    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

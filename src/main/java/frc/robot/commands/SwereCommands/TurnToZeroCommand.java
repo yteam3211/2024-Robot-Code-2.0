@@ -45,7 +45,7 @@ public class TurnToZeroCommand extends CommandBase {
     double Output = pid.getOutput(Swerve.gyro.getYaw());
     Output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(Output);
     if(Math.abs(Swerve.gyro.getYaw()) > 1.5){
-      swerve.drive(new Translation2d(0.046, 0.046), Output, false, true);
+      swerve.drive(new Translation2d(0.046, 0.046), Output, true);
       timer.reset();
       rightPosition = true;
     }
@@ -59,7 +59,7 @@ public class TurnToZeroCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    swerve.drive(new Translation2d(0.0, 0.0), 0, false, true);
+    swerve.drive(new Translation2d(0.0, 0.0), 0, true);
   }
 
   // Returns true when the command should end.
