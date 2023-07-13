@@ -1,0 +1,14 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/arm Collect/commands/Reset": "Command",
+      "/Shuffleboard/collectSubsystem/commands/Reset": "Command",
+      "/Shuffleboard/limelight/LED Off": "Command",
+      "/Shuffleboard/limelight/LED On": "Command",
+      "/Shuffleboard/limelight/View Mode": "Command",
+      "/Shuffleboard/limelight/Vision Mode": "Command",
+      "/SmartDashboard/Auto choices": "String Chooser"
+    }
+  }
+}
