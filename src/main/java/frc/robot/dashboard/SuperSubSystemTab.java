@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.dashboard.SuperSystem;
-import frc.robot.subsystems.armCollectSubsystem;
 
 public class SuperSubSystemTab extends SuperShuffleBoardTab {
     private final ShuffleboardLayout commandList;

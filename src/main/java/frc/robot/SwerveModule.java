@@ -68,7 +68,7 @@ public class SwerveModule {
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){
         double desiredSpeed = desiredState.speedMetersPerSecond;
         if (RobotButtons.halfSpeed.getAsBoolean()) {
-            desiredSpeed /= 2.3;
+            desiredSpeed /= 2.3; // increase the divider for dicrease speed.
         }
 
         if(isOpenLoop){
@@ -102,12 +102,11 @@ public class SwerveModule {
 
     public Rotation2d getCanCoder(){
         return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition());
-        // return Rotation2d.fromDegrees(angleEncoder.getSelectedSensorPosition() * (360.0 / 4096.0)); // for a relative Encoder (4096 = CPR of the Encoder)
+        // return Rotation2d.fromDegrees(angleEncoder.getSelectedSensorPosition() * (360.0 / 4096.0));
     }
 
     public void resetToAbsolute(){
-        // double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio); // for an absolute Encoder
-        // double absolutePosition = 0; // for a relative Encoder
+        // double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio);
         integratedAngleEncoder.setPosition(getCanCoder().getDegrees() - angleOffset.getDegrees());
     }
 
