@@ -40,7 +40,6 @@ public class Swerve extends SuperSystem {
 
     public Swerve(Limelight limelight) {
         super("Swerve");
-        limelight.setPipeline(4);
         this.limelight = limelight;
         zeroGyro();
         mSwerveMods = new SwerveModule[] {
@@ -48,12 +47,12 @@ public class Swerve extends SuperSystem {
             new SwerveModule(1, Constants.SwerveConstant.Mod1.constants),
             new SwerveModule(2, Constants.SwerveConstant.Mod2.constants),
             new SwerveModule(3, Constants.SwerveConstant.Mod3.constants)
-
+        };
             AutoBuilder.configureHolonomic(
                 this::getPose, // Robot pose supplier
                 this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
                 this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-                this::drive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+                this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
                         new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
                         new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
@@ -74,6 +73,8 @@ public class Swerve extends SuperSystem {
                 },
                 this // Reference to this subsystem to set requirements
         );
+
+        
         
 
         /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
@@ -108,6 +109,17 @@ public class Swerve extends SuperSystem {
 
     }    
 
+    public void driveRobotRelative(ChassisSpeeds chassisSpeeds) {
+        SwerveModuleState[] swerveModuleStates = 
+            Constants.SwerveConstant.swerveKinematics.toSwerveModuleStates(chassisSpeeds);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstant.maxSpeed);
+
+        for(SwerveModule mod : mSwerveMods){
+            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], true);
+        }
+    }    
+
+
     public void setStop(){
         mSwerveMods[0].forceSetAngle(Rotation2d.fromDegrees(45));
         mSwerveMods[1].forceSetAngle(Rotation2d.fromDegrees(-45));
@@ -138,6 +150,10 @@ public class Swerve extends SuperSystem {
             states[mod.moduleNumber] = mod.getState();
         }
         return states;
+    }
+
+    public ChassisSpeeds getRobotRelativeSpeeds(){
+        return Constants.SwerveConstant.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
 
     public SwerveModulePosition[] getModulePositions(){
