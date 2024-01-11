@@ -4,11 +4,11 @@
 
 package frc.util.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.DriveSystem;
 import frc.util.vision.Limelight;
 
-public class TurnInPlaceLimelight extends CommandBase {
+public class TurnInPlaceLimelight extends Command {
   /** Creates a new TurnInPlaceLimelight. */
   DriveSystem driveSystem;
   Limelight limelight;

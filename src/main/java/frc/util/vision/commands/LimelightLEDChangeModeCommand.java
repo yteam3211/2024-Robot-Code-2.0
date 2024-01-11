@@ -8,14 +8,14 @@
 package frc.util.vision.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightLEDMode;
 
 /**
  * This command will cahnge LED mode to blink / on / off.
  */
-public class LimelightLEDChangeModeCommand extends CommandBase {
+public class LimelightLEDChangeModeCommand extends Command {
 
   protected Limelight limelight_;
   protected double timeToBlink_, startTime_;

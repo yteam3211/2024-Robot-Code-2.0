@@ -6,10 +6,10 @@ package frc.util.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.OutputSystem;
 
-public class SetOutputCommand extends CommandBase {
+public class SetOutputCommand extends Command {
   /** Creates a new SetOutputCommand. */
   OutputSystem outputSystem;
   double output;

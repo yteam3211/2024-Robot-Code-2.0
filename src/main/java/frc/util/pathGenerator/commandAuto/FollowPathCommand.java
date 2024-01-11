@@ -7,7 +7,7 @@
 
 package frc.util.pathGenerator.commandAuto;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import frc.util.PID.Gains;
 import frc.util.pathGenerator.Path;
@@ -17,7 +17,7 @@ import frc.util.DriveSystem;
 /**
  * @author Amitai Algom
  */
-public class FollowPathCommand extends CommandBase {
+public class FollowPathCommand extends Command {
     private Path path;
     private double leftLestError, rightLestError, leftOutput, rightOutput, errorLeft, errorRight;;
     private Gains gains;

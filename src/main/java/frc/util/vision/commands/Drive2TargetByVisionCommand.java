@@ -9,7 +9,7 @@
 
 // import java.util.function.BooleanSupplier;
 
-// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import edu.wpi.first.wpilibj2.command.Command;
 // import frc.util.DriveSystem;
 // import frc.util.PID.Gains;
 // import frc.util.SuperNavX;
@@ -18,7 +18,7 @@
 // import frc.util.vision.Limelight.limelightCameraMode;
 // import frc.util.vision.Limelight.limelightLEDMode;
 
-// public class Drive2TargetByVisionCommand extends CommandBase {
+// public class Drive2TargetByVisionCommand extends Command {
 //   private double max_speed, speed, turn, deadBand, defaultAngleOfSet, startAngle;
 //   private Limelight limelight;
 //   private Gains gains_speed, gains_turn;

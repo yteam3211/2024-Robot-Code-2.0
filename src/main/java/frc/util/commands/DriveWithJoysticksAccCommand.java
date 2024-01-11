@@ -10,9 +10,9 @@ package frc.util.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.DriveSystem;
-public class DriveWithJoysticksAccCommand extends CommandBase {
+public class DriveWithJoysticksAccCommand extends Command {
 
 	private double turn, speed, right, left, maxAdd, sl, sr, restraintOutput;
 	private double lastLeft_, lastRight_;

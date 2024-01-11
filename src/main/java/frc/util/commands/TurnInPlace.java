@@ -6,12 +6,12 @@ package frc.util.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.DriveSystem;
 import frc.util.SuperNavX;
 import frc.util.PID.Gains;
 
-public class TurnInPlace extends CommandBase {
+public class TurnInPlace extends Command {
   DriveSystem driveSystem;
   SuperNavX navX;
   double angle, LastAngle, maxOutput;

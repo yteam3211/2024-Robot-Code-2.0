@@ -9,7 +9,7 @@ package frc.util.dashboard;
 
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.SuperSystem;
 
 public class SuperSubSystemTab extends SuperShuffleBoardTab {
@@ -27,7 +27,7 @@ public class SuperSubSystemTab extends SuperShuffleBoardTab {
         commandList.add(name, system);
     }
 
-    public void addCommandToDashboard(final String commandName, final CommandBase command) {
+    public void addCommandToDashboard(final String commandName, final Command command) {
         command.setName(commandName);
         commandList.add(command);
     }

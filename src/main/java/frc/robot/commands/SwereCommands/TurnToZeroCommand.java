@@ -8,13 +8,13 @@ import java.sql.Time;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
 
-public class TurnToZeroCommand extends CommandBase {
+public class TurnToZeroCommand extends Command {
   private Swerve swerve;
   private boolean rightPosition;
   private Timer timer = new Timer();

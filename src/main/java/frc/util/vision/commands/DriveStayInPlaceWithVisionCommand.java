@@ -7,7 +7,7 @@
 
 package frc.util.vision.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.util.DriveSystem;
 import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
@@ -15,7 +15,7 @@ import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightCameraMode;
 import frc.util.vision.Limelight.limelightLEDMode;
 
-public class DriveStayInPlaceWithVisionCommand extends CommandBase {
+public class DriveStayInPlaceWithVisionCommand extends Command {
   /**
    * Creates a new DriveStayInPlaceNewCommand.
    */

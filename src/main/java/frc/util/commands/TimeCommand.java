@@ -4,9 +4,9 @@
 
 package frc.util.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
-public class TimeCommand extends CommandBase {
+public class TimeCommand extends Command {
 
   long milliSeconds;
   long start;

@@ -3,12 +3,14 @@ package frc.robot.subsystems;
 import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
 import frc.util.PID.Gains;
+import frc.util.vision.Limelight;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 
 // import com.ctre.phoenix.sensors.Pigeon2;
 
@@ -21,22 +23,58 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Swerve extends SuperSystem {
     public SwerveDriveOdometry swerveOdometry;
+    public SwerveDrivePoseEstimator poseEstimator;
     public SwerveModule[] mSwerveMods;
+    public Limelight limelight;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
-    public Swerve() {
+    public Swerve(Limelight limelight) {
         super("Swerve");
+        limelight.setPipeline(4);
+        this.limelight = limelight;
         zeroGyro();
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.SwerveConstant.Mod0.constants),
             new SwerveModule(1, Constants.SwerveConstant.Mod1.constants),
             new SwerveModule(2, Constants.SwerveConstant.Mod2.constants),
             new SwerveModule(3, Constants.SwerveConstant.Mod3.constants)
-        };
+
+            AutoBuilder.configureHolonomic(
+                this::getPose, // Robot pose supplier
+                this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+                this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+                this::drive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        4.5, // Max module speed, in m/s
+                        0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                        new ReplanningConfig() // Default path replanning config. See the API for the options here
+                ),
+                () -> {
+                    // Boolean supplier that controls when the path will be mirrored for the red alliance
+                    // This will flip the path being followed to the red side of the field.
+                    // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+                    var alliance = DriverStation.getAlliance();
+                    if (alliance.isPresent()) {
+                        return alliance.get() == DriverStation.Alliance.Red;
+                    }
+                    return false;
+                },
+                this // Reference to this subsystem to set requirements
+        );
+        
 
         /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
          * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info.
@@ -45,10 +83,11 @@ public class Swerve extends SuperSystem {
         resetModulesToAbsolute();
 
         swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions());
+        poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions(), new Pose2d());
     }
 
     public void drive(Translation2d translation, double rotation, boolean isOpenLoop) {
-        SwerveModuleState[] swerveModuleStates =
+        SwerveModuleState[] swerveModuleStates = 
             Constants.SwerveConstant.swerveKinematics.toSwerveModuleStates(
                 ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
@@ -86,11 +125,11 @@ public class Swerve extends SuperSystem {
     }    
 
     public Pose2d getPose() {
-        return swerveOdometry.getPoseMeters();
+        return poseEstimator.getEstimatedPosition();
     }
 
     public void resetOdometry(Pose2d pose) {
-        swerveOdometry.resetPosition(getYaw(), getModulePositions(), pose);
+        poseEstimator.resetPosition(getYaw(), getModulePositions(), pose);
     }
 
     public SwerveModuleState[] getModuleStates(){
@@ -128,14 +167,24 @@ public class Swerve extends SuperSystem {
     public void periodic(){
         getTab().putInDashboard("pose y", getPose().getX(), false);
         getTab().putInDashboard("pose x", getPose().getY(), false);
-        getTab().putInDashboard("yaw", gyro.getYaw(), false);
-        getTab().putInDashboard("roll", gyro.getRoll(), false);
-        getTab().putInDashboard("pitch", gyro.getPitch(), false);
+        getTab().putInDashboard("LL x pos", limelight.getBotpose()[0], false);
+        getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
+        
+        // getTab().putInDashboard("yaw", gyro.getYaw(), false);
+        // getTab().putInDashboard("roll", gyro.getRoll(), false);
+        // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         swerveOdometry.update(getYaw(), getModulePositions());  
-        for(SwerveModule mod : mSwerveMods){
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees(), false);
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
+        if(limelight.isValid()){
+            poseEstimator.update(getYaw(), getModulePositions());
+            Pose2d camPose = new Pose2d(limelight.getBotpose()[0], limelight.getBotpose()[1], getYaw());
+            poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());
+
+            poseEstimator.resetPosition(getYaw(), getModulePositions(), poseEstimator.getEstimatedPosition());
         }
+        // for(SwerveModule mod : mSwerveMods){
+        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees(), false);
+        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
+        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
+        // }
     }
 }

@@ -15,7 +15,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Swerve;
@@ -41,6 +41,7 @@ public class Limelight extends SubsystemBase {
   protected NetworkTableEntry cameraMode;
   protected NetworkTableEntry streamMode;
   protected NetworkTableEntry pipeline;
+  protected NetworkTableEntry botpose;
 
   protected double tx_ = 0, ty_ = 0, ta_ = 0, ts_ = 0;
   protected double pipeline_ = 0;
@@ -73,12 +74,12 @@ public class Limelight extends SubsystemBase {
     this.cameraDistanceFromCenterRobot = builder.cameraDistanceFromCenterRobot;
     this.high = builder.high;
     tab = Shuffleboard.getTab(builder.table);
-    CommandBase ledOn = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOn);
-    CommandBase ledOff = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOff);
+    Command ledOn = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOn);
+    Command ledOff = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOff);
 
-    CommandBase view = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kView);
-    CommandBase vision = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kVision);
-    // CommandBase USB = new LimelightCameraChangeModeCommand(this,
+    Command view = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kView);
+    Command vision = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kVision);
+    // Command USB = new LimelightCameraChangeModeCommand(this,
     // limelightCameraMode.kUSB);
     setStreamMode(limelightStreamMode.kStandard);
 
@@ -210,6 +211,13 @@ public class Limelight extends SubsystemBase {
     return ts_;
   }
 
+  public double getLatency(){
+    return limelightTable.getEntry("tl").getDouble(0);
+  }
+
+  public double[] getBotpose(){
+    return limelightTable.getEntry("botpose").getDoubleArray(new double[0]);
+  }
   /**
    * @return true if valid.
    */
@@ -335,7 +343,7 @@ public class Limelight extends SubsystemBase {
     kStandard, kPiPMain, kPiPSecondary
   }
 
-  private class LimelightUpdateValue extends CommandBase {
+  private class LimelightUpdateValue extends Command {
     protected Limelight limelight;
 
     public LimelightUpdateValue(Limelight limelight) {

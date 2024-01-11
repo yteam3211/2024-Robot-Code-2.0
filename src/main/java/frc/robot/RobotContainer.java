@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.autos.*;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightStreamMode;
@@ -27,9 +25,9 @@ public class RobotContainer {
     private RobotButtons robotButtons = new RobotButtons();
     
     /* Subsystems */
-    private final Swerve swerve = new Swerve();
+    private final Swerve swerve = new Swerve(limelight);
     public static final Limelight limelight = new Limelight.Builder().build();
-
+    
      
     public RobotContainer() {
 

@@ -7,11 +7,11 @@ package frc.robot.commands.SwereCommands;
 import org.opencv.core.TickMeter;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
 
-public class lockWheelsCommnad extends CommandBase {
+public class lockWheelsCommnad extends Command {
   private Swerve swerve;
   private boolean isAuto = false;
   private Timer timer = new Timer();
