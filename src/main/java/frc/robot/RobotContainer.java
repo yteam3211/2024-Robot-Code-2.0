@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -9,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightStreamMode;
@@ -27,9 +28,12 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve swerve = new Swerve(limelight);
     public static final Limelight limelight = new Limelight.Builder().build();
+
+    //auto commands register
     
      
     public RobotContainer() {
+    NamedCommands.registerCommand("", new LockWheelsCommnad(swerve));
 
         // Configure the button bindings
         configureButtonBindings();

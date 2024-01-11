@@ -11,19 +11,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
 
-public class lockWheelsCommnad extends Command {
+public class LockWheelsCommnad extends Command {
   private Swerve swerve;
   private boolean isAuto = false;
   private Timer timer = new Timer();
 
 
   /** Creates a new lockWheelsCommnad. */
-  public lockWheelsCommnad(Swerve swerve) {
+  public LockWheelsCommnad(Swerve swerve) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.swerve = swerve;
   }
 
-  public lockWheelsCommnad(Swerve swerve, boolean isAutonmous){
+  public LockWheelsCommnad(Swerve swerve, boolean isAutonmous){
     this.swerve = swerve;
     this.isAuto = isAutonmous;
   }
