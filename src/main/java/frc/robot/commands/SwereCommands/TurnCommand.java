@@ -4,36 +4,35 @@
 
 package frc.robot.commands.SwereCommands;
 
-import java.sql.Time;
 
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
+import frc.util.vision.Limelight;
 
-public class TurnToZeroCommand extends Command {
+public class TurnCommand extends Command {
   private Swerve swerve;
-  private boolean rightPosition;
-  private Timer timer = new Timer();
-  protected Gains gains = new Gains("gains r", 0.08, 0, 0.4);
+  private Limelight limelight;
+  private double angleThreshold;
+  protected Gains gains = new Gains("rotation gains", 0.08, 0, 0.4);
 
   protected PIDController pid = new PIDController(gains);
 
   /** Creates a new TurnToZeroCommand. */
-  public TurnToZeroCommand(Swerve swerve) {
+  public TurnCommand(Swerve swerve, Limelight limelight, double angleThreshold) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.limelight = limelight;
     this.swerve = swerve;
+    this.angleThreshold = angleThreshold;
     addRequirements(swerve);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    rightPosition = true;
-    timer.reset();
     pid.setTargetPosition(0);
     pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
   }
@@ -41,19 +40,9 @@ public class TurnToZeroCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("inside " + Swerve.gyro.getYaw());
-    double Output = pid.getOutput(Swerve.gyro.getYaw());
-    Output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(Output);
-    if(Math.abs(Swerve.gyro.getYaw()) > 1.5){
-      swerve.drive(new Translation2d(0.046, 0.046), Output, true);
-      timer.reset();
-      rightPosition = true;
-    }
-    else if(Math.abs(Swerve.gyro.getYaw()) < 1.5 && rightPosition){
-      System.out.println("timer started!! ");
-      timer.start();
-      rightPosition = false;
-    }
+    double output = pid.getOutput(limelight.getX());
+    output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
+    swerve.drive(new Translation2d(0.0, 0.0), output, true);
   }
 
   // Called once the command ends or is interrupted.
@@ -65,6 +54,9 @@ public class TurnToZeroCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(0.3);
+    return Math.abs(limelight.getX()) < angleThreshold;
+    };
   }
-}
+
+  
+
