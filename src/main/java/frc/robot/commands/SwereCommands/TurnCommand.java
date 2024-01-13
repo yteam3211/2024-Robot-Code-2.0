@@ -17,7 +17,7 @@ public class TurnCommand extends Command {
   private Swerve swerve;
   private Limelight limelight;
   private double angleThreshold;
-  protected Gains gains = new Gains("rotation gains", 0.08, 0, 0.4);
+  protected Gains gains = new Gains("rotation gains", 0, 0, 0);
 
   protected PIDController pid = new PIDController(gains);
 
