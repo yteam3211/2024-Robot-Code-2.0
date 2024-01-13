@@ -19,7 +19,9 @@ public final class Constants {
 
 
     // Motors constants
-
+    public static final int INTAKE_MOTOR = 0;
+    public static final int INTAKE_WHEEL_MOTOR = 0;
+    public static final int INTAKE_MICROW = 0;
 
 
     public static final double stickDeadband = 0.01;
