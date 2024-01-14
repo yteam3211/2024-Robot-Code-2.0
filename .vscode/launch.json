@@ -16,6 +16,17 @@
       "name": "WPILib roboRIO Debug",
       "request": "launch",
       "desktop": false,
+    },
+    {
+      "type": "java",
+      "name": "Sim - local",
+      "request": "launch",
+      "mainClass": "frc.robot.Sim",
+      "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir",
+      "env": {
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir",
+        "Path": "${env:Path};${workspaceFolder}\\build\\tmp/jniExtractDir"
+      }
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/limelight/LED Off": "Command",
+      "/Shuffleboard/limelight/LED On": "Command",
+      "/Shuffleboard/limelight/View Mode": "Command",
+      "/Shuffleboard/limelight/Vision Mode": "Command",
+      "/SmartDashboard/Auto choices": "String Chooser"
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  }
+}

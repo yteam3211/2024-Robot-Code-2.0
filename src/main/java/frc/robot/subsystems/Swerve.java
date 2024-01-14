@@ -183,8 +183,8 @@ public class Swerve extends SuperSystem {
     public void periodic(){
         getTab().putInDashboard("pose xy", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
-        getTab().putInDashboard("LL x pos", limelight.getBotpose()[0], false);
-        getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
+        // getTab().putInDashboard("LL x pos", limelight.getBotpose()[0], false);
+        // getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
         
         // getTab().putInDashboard("yaw", gyro.getYaw(), false);
         // getTab().putInDashboard("roll", gyro.getRoll(), false);
