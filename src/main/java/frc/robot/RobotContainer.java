@@ -31,10 +31,10 @@ public class RobotContainer {
     public static final Limelight limelight = new Limelight.Builder().build();
 
     //auto commands register
-    
+     
      
     public RobotContainer() {
-    NamedCommands.registerCommand("", new TurnCommand(swerve, limelight, Constants.shootingTurnTreshold));
+    NamedCommands.registerCommand("Turn Command", new TurnCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
 
         // Configure the button bindings
         configureButtonBindings();

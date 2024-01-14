@@ -15,13 +15,35 @@ import frc.util.vision.Limelight;
 public final class Constants {
 
     // General constants
-    public static final double shootingTurnTreshold = 2;
-    public static final double shootingVelocityTreshold = 10;
+    public static final double SHOOTING_ANGLE_TRESHOLD = 2;
+    public static final double SHOOTING_VELOCITY_TRESHOLD = 10;
+    public static final double PITCHING_ENCODER_OFFSET = 0;
 
-    // Motors constants
+    public static final double LIMELIGHT_ANGLE_FROM_VERTICAL = 0;
+    public static final double LIMELIGHT_LENS_HIGHT_CM = 0;
+    public static final double SPEAKER_APRILTAG_HIGHT = 145;
+    public static final double SPEAKER_HIGHT = 215;
+
+
+
+    // ID constants
     public static final int INTAKE_MOTOR = 0;
     public static final int INTAKE_WHEEL_MOTOR = 0;
     public static final int INTAKE_MICROW = 0;
+
+    public static final int MASTER_SHOOTER_MOTOR = 0;
+    public static final int SLAVE_SHOOTER_MOTOR = 0;
+    public static final int KICKER_SHOOTER_MOTOR = 0;
+    
+    public static final int MASTER_PITCHING_MOTOR = 0;
+    public static final int SLAVE_PITCHING_MOTOR = 0;
+    public static final int PITCHING_ENCODER = 0;
+
+
+
+    
+
+
 
 
     public static final double stickDeadband = 0.01;

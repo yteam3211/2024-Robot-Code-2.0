@@ -68,20 +68,11 @@ public class SwerveModule {
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){
         double desiredSpeed = desiredState.speedMetersPerSecond;
         double breakDesiredSpeed = desiredSpeed;
-        // System.out.println("break" + RobotButtons.BreakValue.getAsDouble());
-        if (RobotButtons.halfSpeed.getAsBoolean()) {
-            desiredSpeed /= 2.3;
-        }
-        else if (RobotButtons.BreakValue.getAsDouble() > 0.01){
-            // System.out.println("break 222");
-            breakDesiredSpeed *= ((1.15 - RobotButtons.BreakValue.getAsDouble()));
-            if(breakDesiredSpeed > 1)
-                breakDesiredSpeed -= 0.15;
-            desiredSpeed = breakDesiredSpeed;
-        }
-
-        if (RobotButtons.halfSpeed.getAsBoolean()) {
-            desiredSpeed /= 2.3; // increase the divider for dicrease speed.
+        if (RobotButtons.BreakValue.getAsDouble() > 0.01){
+        breakDesiredSpeed *= ((1.15 - RobotButtons.BreakValue.getAsDouble()));
+        if(breakDesiredSpeed > 1)
+            breakDesiredSpeed -= 0.15;
+        desiredSpeed = breakDesiredSpeed;
         }
 
         if(isOpenLoop){

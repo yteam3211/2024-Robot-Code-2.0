@@ -30,7 +30,7 @@ public class ShootingCommand extends Command {
   public void execute()
   {
     shootingSubsystem.setShooterVelocity(shootingVelocity);
-    if(Math.abs(shootingVelocity - shootingSubsystem.getVelocity()) < Constants.shootingVelocityTreshold)
+    if(Math.abs(shootingVelocity - shootingSubsystem.getVelocity()) < Constants.SHOOTING_VELOCITY_TRESHOLD)
     {
       shootingSubsystem.setKickerOutput(kickerOutput);
     }

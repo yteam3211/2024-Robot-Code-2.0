@@ -24,7 +24,6 @@ import frc.util.vision.Limelight;
 
 // Yteam loadButtons
 public class RobotButtons {
-    public static BooleanSupplier GRIDmovmentHelper = (() -> true);
     
 
     public static Joystick systems = new Joystick(1);
@@ -35,7 +34,6 @@ public class RobotButtons {
     public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
     public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
     public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
-    public static Trigger halfSpeed = new Trigger(() -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.3);
     // systems joystick buttons
     
     
