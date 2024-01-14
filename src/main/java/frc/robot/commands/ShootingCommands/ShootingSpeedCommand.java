@@ -7,11 +7,11 @@ package frc.robot.commands.ShootingCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShootingSubsystem;
 
-public class ShooterWheelsCommand extends Command {
+public class ShootingSpeedCommand extends Command {
   /** Creates a new ShooterWheelsCommand. */
   private ShootingSubsystem shootingSubsystem;
   private double shootingVelocity;
-  public ShooterWheelsCommand(ShootingSubsystem shootingSubsystem, double shootingVelocity) {
+  public ShootingSpeedCommand(ShootingSubsystem shootingSubsystem, double shootingVelocity) {
     this.shootingSubsystem = shootingSubsystem;
     this.shootingVelocity = shootingVelocity;
     // Use addRequirements() here to declare subsystem dependencies.

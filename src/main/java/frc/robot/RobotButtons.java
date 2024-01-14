@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
-import frc.robot.commands.SwereCommands.TurnCommand;
+import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;

@@ -13,7 +13,7 @@ import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
 import frc.util.vision.Limelight;
 
-public class TurnCommand extends Command {
+public class TurnToShootingCommand extends Command {
   private Swerve swerve;
   private Limelight limelight;
   private double angleThreshold;
@@ -22,7 +22,7 @@ public class TurnCommand extends Command {
   protected PIDController pid = new PIDController(gains);
 
   /** Creates a new TurnToZeroCommand. */
-  public TurnCommand(Swerve swerve, Limelight limelight, double angleThreshold) {
+  public TurnToShootingCommand(Swerve swerve, Limelight limelight, double angleThreshold) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limelight = limelight;
     this.swerve = swerve;

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
-import frc.robot.commands.SwereCommands.TurnCommand;
+import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightStreamMode;
@@ -34,7 +34,7 @@ public class RobotContainer {
      
      
     public RobotContainer() {
-    NamedCommands.registerCommand("Turn Command", new TurnCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
+    NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
 
         // Configure the button bindings
         configureButtonBindings();

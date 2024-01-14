@@ -40,7 +40,6 @@ public class PitchCommand extends Command {
     distanceFromLimelightToGoalCM = (Constants.SPEAKER_APRILTAG_HIGHT - Constants.LIMELIGHT_LENS_HIGHT_CM)/ Math.tan(angleToGoalRadians);
     angleToSpeakerRadians = Math.atan(distanceFromLimelightToGoalCM / Constants.SPEAKER_HIGHT);
     angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
-    
   }
 
   // Called once the command ends or is interrupted.
