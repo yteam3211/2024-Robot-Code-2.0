@@ -16,7 +16,7 @@ public final class Constants {
 
     // General constants
     public static final double shootingTurnTreshold = 2;
-
+    public static final double shootingVelocityTreshold = 10;
 
     // Motors constants
     public static final int INTAKE_MOTOR = 0;
