@@ -17,13 +17,14 @@ import frc.util.vision.Limelight;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class CompleteSootingCommand extends SequentialCommandGroup {
+public class CompleteShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteSootingCommand. */
-  public CompleteSootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem) {
+  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD), new PitchCommand(limelight,pitchingSubsystem), new ShootingSpeedCommand(shootingSubsystem, 0))
+      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD), new PitchCommand(limelight,pitchingSubsystem), new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY))
+
     );
   }
 }

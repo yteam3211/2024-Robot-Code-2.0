@@ -24,7 +24,8 @@ public final class Constants {
     public static final double SPEAKER_APRILTAG_HIGHT = 145;
     public static final double SPEAKER_HIGHT = 215;
 
-
+    public static final double SHOOTING_VELCITY = 0;
+    
 
     // ID constants
     public static final int INTAKE_MOTOR = 0;
