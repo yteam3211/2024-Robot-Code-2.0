@@ -25,6 +25,7 @@ public final class Constants {
     public static final double SPEAKER_HIGHT = 215;
 
     public static final double SHOOTING_VELCITY = 0;
+    public static final double ELEAVATOR_TRESHOLD = 10;
     
 
     // ID constants
@@ -40,6 +41,10 @@ public final class Constants {
     public static final int SLAVE_PITCHING_MOTOR = 0;
     public static final int PITCHING_ENCODER = 0;
 
+    public static final int MASTER_ELEAVATOR_MOTOR = 0;
+    public static final int SLAVE1_ELEAVATOR_MOTOR = 0;
+    public static final int SLAVE2_ELEAVATOR_MOTOR = 0;
+    public static final int MICROWSWITCH_ELEAVATOR = 0;
 
 
     

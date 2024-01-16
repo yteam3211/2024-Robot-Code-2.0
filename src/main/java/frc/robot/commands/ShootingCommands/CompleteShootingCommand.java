@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
+import frc.robot.subsystems.EleavatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
@@ -19,11 +21,12 @@ import frc.util.vision.Limelight;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class CompleteShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteSootingCommand. */
-  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem) {
+  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,EleavatorSubsystem eleavatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD), new PitchCommand(limelight,pitchingSubsystem), new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY))
+    addCommands(             //dont forget to change the eleavator position!!!!!!!!!!!! and the kickers output
+      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD),new EleavatorCommand(eleavatorSubsystem, 0) ,new PitchCommand(limelight,pitchingSubsystem), new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY)),
+      new KickerCommand(shootingSubsystem, 0)
 
     );
   }

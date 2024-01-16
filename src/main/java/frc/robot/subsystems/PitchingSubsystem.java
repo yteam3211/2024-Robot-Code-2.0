@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,7 +24,7 @@ public class PitchingSubsystem extends SubsystemBase {
 
   public PitchingSubsystem() {
     pitchingGains = new Gains("pitchingGains", 0, 0, 0);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR, 40, false, false, NeutralMode.Coast, pitchingGains, null); //queen dont forget control mode
+    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR, 40, false, false, NeutralMode.Coast, pitchingGains, TalonFXControlMode.Position); //queen dont forget control mode
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR, 40, false);
     angleEncoder = new CANCoder(Constants.PITCHING_ENCODER);
   }
