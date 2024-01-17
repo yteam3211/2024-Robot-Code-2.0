@@ -46,6 +46,6 @@ public class LockWheelsCommnad extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean() || (isAuto && timer.hasElapsed(0.05));
+    return true;//RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean() || (isAuto && timer.hasElapsed(0.05));
   }
 }

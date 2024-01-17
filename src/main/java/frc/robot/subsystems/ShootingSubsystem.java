@@ -27,9 +27,9 @@ public class ShootingSubsystem extends SuperSystem {
   public ShootingSubsystem() {
     super("shooting");
     shooterGains = new Gains("shooterGains", 0, 0, 0);
-    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
-    masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR, 40, false, false, NeutralMode.Coast, shooterGains, null); //queen dont forget control mode
-    slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR, 40, false);
+    // kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
+    // masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR, 40, false, false, NeutralMode.Coast, shooterGains, null); //queen dont forget control mode
+    // slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR, 40, false);
 
 
   }

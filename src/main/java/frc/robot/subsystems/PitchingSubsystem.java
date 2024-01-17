@@ -23,9 +23,9 @@ public class PitchingSubsystem extends SubsystemBase {
 
   public PitchingSubsystem() {
     pitchingGains = new Gains("pitchingGains", 0, 0, 0);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR, 40, false, false, NeutralMode.Coast, pitchingGains, null); //queen dont forget control mode
-    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR, 40, false);
-    angleEncoder = new CANCoder(Constants.PITCHING_ENCODER);
+    // masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR, 40, false, false, NeutralMode.Coast, pitchingGains, null); //queen dont forget control mode
+    // slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR, 40, false);
+    // angleEncoder = new CANCoder(Constants.PITCHING_ENCODER);
   }
 
   public void setPosition(double position){

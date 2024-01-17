@@ -7,17 +7,12 @@ package frc.robot.commands.IntakeCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakePosCommand extends Command {
+public class IntakeBackwordsCommand extends Command {
   private IntakeSubsystem intakeSubsystem;
-  private double intakePosition;
   private double intakeWheelsOutput;
-  public IntakePosCommand(IntakeSubsystem intakeSubsystem,double intakePosition,double intakeWheelsOutput)
-  {
+  public IntakeBackwordsCommand(IntakeSubsystem intakeSubsystem,double intakeWheelsOutput) {
     this.intakeSubsystem = intakeSubsystem;
-    this.intakePosition = intakePosition;
     this.intakeWheelsOutput = intakeWheelsOutput;
-
-    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +24,6 @@ public class IntakePosCommand extends Command {
   public void execute() 
   {
     intakeSubsystem.setWheeksOutput(intakeWheelsOutput);
-    intakeSubsystem.setIntakeMotorPos(intakePosition);
   }
 
   // Called once the command ends or is interrupted.
@@ -37,7 +31,6 @@ public class IntakePosCommand extends Command {
   public void end(boolean interrupted) 
   {
     intakeSubsystem.setWheeksOutput(0);
-    intakeSubsystem.setIntakeMotorPos(0);
   }
 
   // Returns true when the command should end.

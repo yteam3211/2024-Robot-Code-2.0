@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.IntakeCommands.IntakeCommand;
+import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
@@ -27,14 +29,20 @@ public class RobotContainer {
     private RobotButtons robotButtons = new RobotButtons();
     
     /* Subsystems */
-    private final Swerve swerve = new Swerve(limelight);
     public static final Limelight limelight = new Limelight.Builder().build();
+    private final Swerve swerve = new Swerve(limelight);
+    private final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
+    private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem();
+    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
     //auto commands register
      
      
     public RobotContainer() {
-    NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
+    // NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
+    // NamedCommands.registerCommand("Shooting Command", new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem));
+    // NamedCommands.registerCommand("Open Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_OUTPUT));
+    // NamedCommands.registerCommand("Close Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, 0));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -65,6 +73,5 @@ public class RobotContainer {
     public Swerve getSwerve() {
         return swerve;
     }
-
 }
  
