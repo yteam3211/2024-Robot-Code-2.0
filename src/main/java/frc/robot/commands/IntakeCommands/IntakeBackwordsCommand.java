@@ -10,7 +10,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeBackwordsCommand extends Command {
   private IntakeSubsystem intakeSubsystem;
   private double intakeWheelsOutput;
-  public IntakeBackwordsCommand(IntakeSubsystem intakeSubsystem,double intakeWheelsOutput) {
+  public IntakeBackwordsCommand(IntakeSubsystem intakeSubsystem, double intakeWheelsOutput) {
     this.intakeSubsystem = intakeSubsystem;
     this.intakeWheelsOutput = intakeWheelsOutput;
   }

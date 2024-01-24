@@ -29,42 +29,6 @@ public class COTSFalconSwerveConstants {
         this.angleMotorInvert = angleMotorInvert;
         this.canCoderInvert = canCoderInvert;
     }
-    
-    /** Swerve Drive Specialties - MK3 Module*/
-    public static COTSFalconSwerveConstants SDSMK3(double driveGearRatio){
-        double wheelDiameter = Units.inchesToMeters(4.0);
- 
-        /** 12.8 : 1 */
-        double angleGearRatio = (12.8 / 1.0);
- 
-        double angleKP = 0.2;
-        double angleKI = 0.0;
-        double angleKD = 0.0;
-        double angleKF = 0.0;
- 
-        boolean driveMotorInvert = false;
-        boolean angleMotorInvert = false;
-        boolean canCoderInvert = false;
-        return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD, angleKF, driveMotorInvert, angleMotorInvert, canCoderInvert);
-    }
-
-    /** Swerve Drive Specialties - MK4 Module*/
-    public static COTSFalconSwerveConstants SDSMK4(double driveGearRatio){
-        double wheelDiameter = Units.inchesToMeters(4.0);
- 
-        /** 12.8 : 1 */
-        double angleGearRatio = (12.8 / 1.0);
- 
-        double angleKP = 0.2;
-        double angleKI = 0.0;
-        double angleKD = 0.0;
-        double angleKF = 0.0;
- 
-        boolean driveMotorInvert = false;
-        boolean angleMotorInvert = false;
-        boolean canCoderInvert = false;
-        return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD, angleKF, driveMotorInvert, angleMotorInvert, canCoderInvert);
-    }
 
     /** Swerve Drive Specialties - MK4i Module*/
     public static COTSFalconSwerveConstants SDSMK4i(double driveGearRatio){
@@ -78,7 +42,7 @@ public class COTSFalconSwerveConstants {
         double angleKD = 0.0;
         double angleKF = 0.0;
 
-        boolean driveMotorInvert = false;
+        boolean driveMotorInvert = true;
         boolean angleMotorInvert = true;
         boolean canCoderInvert = false;
         return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD, angleKF, driveMotorInvert, angleMotorInvert, canCoderInvert);

@@ -183,10 +183,10 @@ public class Swerve extends SuperSystem {
     public void periodic(){
         getTab().putInDashboard("pose xy", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
-        getTab().putInDashboard("LL x pos", limelight.getBotpose()[0], false);
-        getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
+        // getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
+        // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         
-        // getTab().putInDashboard("yaw", gyro.getYaw(), false);
+        getTab().putInDashboard("yaw", gyro.getYaw(), false);
         // getTab().putInDashboard("roll", gyro.getRoll(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         swerveOdometry.update(getYaw(), getModulePositions());  
@@ -197,10 +197,10 @@ public class Swerve extends SuperSystem {
 
             poseEstimator.resetPosition(getYaw(), getModulePositions(), poseEstimator.getEstimatedPosition());
         }
-        // for(SwerveModule mod : mSwerveMods){
-        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees(), false);
-        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
-        //     getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
-        // }
+        for(SwerveModule mod : mSwerveMods){
+            getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
+            getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
+            getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
+        }
     }
 }
