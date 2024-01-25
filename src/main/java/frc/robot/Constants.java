@@ -31,6 +31,10 @@ public final class Constants {
 
     public static final double INTAKE_OPEN_POSITION = 0; 
     public static final double INTAKE_WHEELS_OUTPUT = 0; 
+
+    public static final double MIN_ELEAVATOR_POS = 0;    
+    public static final double MAX_ELEAVATOR_POS = 0;
+
     
 
     // ID constants

@@ -15,6 +15,7 @@ public class ShootingSpeedCommand extends Command {
   public ShootingSpeedCommand(ShootingSubsystem shootingSubsystem, double shootingVelocity) {
     this.shootingSubsystem = shootingSubsystem;
     this.shootingVelocity = shootingVelocity;
+    addRequirements(shootingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

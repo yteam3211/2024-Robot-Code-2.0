@@ -27,9 +27,9 @@ public class IntakeSubsystem extends SuperSystem {
   public IntakeSubsystem() {
     super("Intake Subsystem");
     intakeGains = new Gains("intakeGains", 0, 0, 0);
-    // intakeWheelsMotor = new SuperCanFlex(Constants.INTAKE_WHEELS_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
-    // intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeGains, 0, 0, 0);
-    // closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROW);
+    intakeWheelsMotor = new SuperCanFlex(Constants.INTAKE_WHEELS_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
+    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeGains, 0, 0, 0);
+    closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROW);
     getTab().addCommandToDashboard("Reset Intake pos", new InstantCommand(() -> this.resetEncoder()));
     }
 
@@ -80,7 +80,7 @@ public class IntakeSubsystem extends SuperSystem {
 
     public boolean isIntakeOn()
     {
-      return false;//closeIntakeMicroSwitch.get();
+      return closeIntakeMicroSwitch.get();
     }
 
 }

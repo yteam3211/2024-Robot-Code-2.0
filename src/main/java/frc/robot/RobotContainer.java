@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
