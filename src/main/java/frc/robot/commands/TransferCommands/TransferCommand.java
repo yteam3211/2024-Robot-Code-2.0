@@ -2,18 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.IntakeCommands;
+package frc.robot.commands.TransferCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.TransferSubsystem;
 
-public class IntakeBackwordsCommand extends Command {
-  private IntakeSubsystem intakeSubsystem;
-  private double intakeWheelsOutput;
-  public IntakeBackwordsCommand(IntakeSubsystem intakeSubsystem, double intakeWheelsOutput) {
-    this.intakeSubsystem = intakeSubsystem;
-    this.intakeWheelsOutput = intakeWheelsOutput;
+public class TransferCommand extends Command {
+  TransferSubsystem transferSubsystem;
+  double output;
+
+  /** Creates a new TransferCommand. */
+  public TransferCommand(TransferSubsystem transferSubsystem, double output) {
+    this.transferSubsystem = transferSubsystem;
+    this.output = output;
+    addRequirements(transferSubsystem);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
@@ -21,16 +25,14 @@ public class IntakeBackwordsCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() 
-  {
-    intakeSubsystem.setWheelsMotorOutput(intakeWheelsOutput);
+  public void execute() {
+    transferSubsystem.setOutput(output);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
-  {
-    intakeSubsystem.setWheelsMotorOutput(0);
+  public void end(boolean interrupted) {
+    transferSubsystem.setOutput(0);
   }
 
   // Returns true when the command should end.

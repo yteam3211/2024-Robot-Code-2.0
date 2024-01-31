@@ -26,18 +26,20 @@ public class ShootingSubsystem extends SuperSystem {
   public SuperTalonFX slaveShooterMotor;
   public Gains shooterGains;
   public ShootingSubsystem() {
-    super("shooting");
-    shooterGains = new Gains("shooterGains", 0, 0, 0);
-    // kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
-    // masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR, 40, false, false, NeutralMode.Coast, shooterGains, null); //queen dont forget control mode
-    // slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR, 40, false);
+    super("shooting Subsystem");
+    shooterGains = new Gains("shooterGains", 4, 0, 0);
+    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, false, IdleMode.kBrake);
+    masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, 40, false, false, NeutralMode.Coast, shooterGains, TalonFXControlMode.Velocity); //queen dont forget control mode
+    slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR_ID, 40, false);
+   
 
-
+    getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
   }
 
   public void setShooterVelocity(double velocity)
@@ -55,5 +57,7 @@ public class ShootingSubsystem extends SuperSystem {
   {
     return masterShooterMotor.getVelocity();
   }
+
+
 
 }

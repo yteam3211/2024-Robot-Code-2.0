@@ -34,6 +34,8 @@ public class RobotContainer {
     private final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
     private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    private final TransferSubsystem transferSubsystem = new TransferSubsystem();
+
 
     //auto commands register
      
@@ -56,7 +58,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem);
+        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem);
     }
  
     /**
@@ -70,8 +72,32 @@ public class RobotContainer {
     }
 
     // gets & sets 
+    public static Limelight getLimelight() {
+        return limelight;
+    }
+
     public Swerve getSwerve() {
         return swerve;
+    }
+
+    public RobotButtons getRobotButtons() {
+        return robotButtons;
+    }
+
+    public ShootingSubsystem getShootingSubsystem() {
+        return shootingSubsystem;
+    }
+
+    public PitchingSubsystem getPitchingSubsystem() {
+        return pitchingSubsystem;
+    }
+
+    public IntakeSubsystem getIntakeSubsystem() {
+        return intakeSubsystem;
+    }
+
+    public TransferSubsystem getTransferSubsystem() {
+        return transferSubsystem;
     }
 }
  

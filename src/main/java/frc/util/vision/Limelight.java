@@ -241,9 +241,9 @@ public class Limelight extends SubsystemBase {
    * 
    * @return the distance to target.
    */
-  public double getDistanceToTarget() {
-    distance = high / Math.tan(getY() + pitchAngle);
-    return distance;
+  public double getDistanceToTarget(double hight, double cameraAngle) {
+    distance = hight / Math.tan(Math.toRadians(getY() + cameraAngle));
+    return distance; 
   }
 
   /**
@@ -303,7 +303,6 @@ public class Limelight extends SubsystemBase {
     putInDashboard("Ts", ts_, 1, 1);
 
     putInDashboard("Angle", getAngleToTarget(Swerve.gyro.getYaw()), 1, 3);
-    putInDashboard("Distance", getDistanceToTarget(), 1, 2);
   }
 
   public void putInDashboard(String key, Object value, int columnIndex, int rowIndex) {

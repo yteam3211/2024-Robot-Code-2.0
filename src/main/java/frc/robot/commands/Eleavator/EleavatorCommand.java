@@ -6,13 +6,13 @@ package frc.robot.commands.Eleavator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.EleavatorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 
 public class EleavatorCommand extends Command {
-  private EleavatorSubsystem eleavatorSubsysten;
+  private ElevatorSubsystem eleavatorSubsysten;
   private double eleavatorPosition;
   /** Creates a new Eleavator. */
-  public EleavatorCommand(EleavatorSubsystem eleavatorSubsysten,double eleavatorPosition) {
+  public EleavatorCommand(ElevatorSubsystem eleavatorSubsysten,double eleavatorPosition) {
     this.eleavatorSubsysten = eleavatorSubsysten;
     this.eleavatorPosition =eleavatorPosition;
     // Use addRequirements() here to declare subsystem dependencies.

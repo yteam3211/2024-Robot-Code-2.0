@@ -28,16 +28,16 @@ public class IntakeCommand extends Command {
   @Override
   public void execute() 
   {
-    intakeSubsystem.setWheeksOutput(intakeWheelsOutput);
-    intakeSubsystem.setIntakeMotorPos(intakePosition);
+    intakeSubsystem.setWheelsMotorOutput(intakeWheelsOutput);
+    intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    intakeSubsystem.setWheeksOutput(0);
-    intakeSubsystem.setIntakeMotorPos(0);
+    intakeSubsystem.setWheelsMotorOutput(0);
+    intakeSubsystem.setIntakeOpenMotorPosition(0);
   }
 
   // Returns true when the command should end.

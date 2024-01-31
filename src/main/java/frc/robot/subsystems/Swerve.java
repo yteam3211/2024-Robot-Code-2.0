@@ -193,6 +193,7 @@ public class Swerve extends SuperSystem {
         if(limelight.isValid()){
             poseEstimator.update(getYaw(), getModulePositions());
             Pose2d camPose = new Pose2d(limelight.getBotpose()[0], limelight.getBotpose()[1], getYaw());
+            
             poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());
 
             poseEstimator.resetPosition(getYaw(), getModulePositions(), poseEstimator.getEstimatedPosition());

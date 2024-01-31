@@ -17,11 +17,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
+import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
+import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.TransferSubsystem;
 import frc.util.vision.Limelight;
 // import frc.robot.commands.Balance;
 
@@ -33,11 +36,16 @@ public class RobotButtons {
 
     // driver jpoystick buttons
     public static DoubleSupplier BreakValue = () -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value);
+    
     // public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
     // public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // systems joystick buttons
+    public static Trigger intakeTrigger = new Trigger(() -> systems.getRawAxis(PS5Controller.Axis.kL2.value)>0.1);
+    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
+    public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);
     
     
 
@@ -47,7 +55,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem) {
+    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -56,8 +64,13 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kLeftX.value),
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
+
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem));
+        apmShootingTrigger.whileTrue( new  ShootingSpeedCommand(shootingSubsystem, 17000));
     }
     // systems joystick commands
+
+    
 
 }
 

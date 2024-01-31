@@ -17,39 +17,52 @@ import frc.util.vision.Limelight;
 public final class Constants {
 
     // General constants
-    public static final double SHOOTING_ANGLE_TRESHOLD = 2;
-    public static final double SHOOTING_VELOCITY_TRESHOLD = 10;
-    public static final double PITCHING_ENCODER_OFFSET = 0;
+    public static final double SHOOTING_ANGLE_TRESHOLD = 2; //TODO: set when the robot is build
+    public static final double SHOOTING_VELOCITY_TRESHOLD = 10; //TODO: set when the robot is build 
+    public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
+    
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0); //TODO: set when the robot is build
+    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.60890684614;
+    public static final double LIMELIGHT_TO_PIVOT = 347.32;
+    public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
+    public static final double SPEAKER_HIGHT = 2150; //in millimeters
+    public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
+    public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
 
-    public static final double LIMELIGHT_ANGLE_FROM_VERTICAL = 0;
-    public static final double LIMELIGHT_LENS_HIGHT_CM = 0;
-    public static final double SPEAKER_APRILTAG_HIGHT = 145;
-    public static final double SPEAKER_HIGHT = 215;
 
-    public static final double SHOOTING_VELCITY = 0;
-    public static final double ELEAVATOR_TRESHOLD = 10;
+    public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
+    public static final double ELEAVATOR_GEAR_RATIO = 15.31 / 1;
+    private static final double ELEAVATOR_WINCH_DIAMETER = 50; // diameter in millimeters
+    public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
+    public static final double FLOOR_TO_CLOSE_ELEAVATOR = 0; //TODO: check on robot after mechanical stop has added
+    public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
 
-    public static final double INTAKE_OPEN_POSITION = 0; 
-    public static final double INTAKE_WHEELS_OUTPUT = 0; 
+    public static final double  TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
+
+    public static final double INTAKE_OPEN_POSITION = 0; //TODO: set when the robot is build
+    public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     
 
     // ID constants
-    public static final int INTAKE_OPEN_MOTOR = 0;
-    public static final int INTAKE_WHEELS_MOTOR = 0;
-    public static final int INTAKE_MICROW = 0;
-
-    public static final int MASTER_SHOOTER_MOTOR = 0;
-    public static final int SLAVE_SHOOTER_MOTOR = 0;
-    public static final int KICKER_SHOOTER_MOTOR = 0;
+    public static final int INTAKE_OPEN_MOTOR_ID = 0;
+    public static final int INTAKE_WHEELS_MOTOR_ID = 25;
+    public static final int INTAKE_MICROSWITCH_ID = 0;
     
-    public static final int MASTER_PITCHING_MOTOR = 0;
-    public static final int SLAVE_PITCHING_MOTOR = 0;
-    public static final int PITCHING_ENCODER = 0;
+    public static final int TRANSFER_MOTOR_ID = 29;
+    
 
-    public static final int MASTER_ELEAVATOR_MOTOR = 0;
-    public static final int SLAVE1_ELEAVATOR_MOTOR = 0;
-    public static final int SLAVE2_ELEAVATOR_MOTOR = 0;
-    public static final int MICROWSWITCH_ELEAVATOR = 0;
+    public static final int MASTER_SHOOTER_MOTOR_ID = 21;
+    public static final int SLAVE_SHOOTER_MOTOR_ID = 22;
+    public static final int KICKER_SHOOTER_MOTOR_ID = 23;
+    
+    public static final int MASTER_PITCHING_MOTOR_ID = 0;
+    public static final int SLAVE_PITCHING_MOTOR_ID = 0;
+    public static final int PITCHING_ENCODER_ID = 0;
+
+    public static final int MASTER_ELEAVATOR_MOTOR_ID = 13;
+    public static final int SLAVE1_ELEAVATOR_MOTOR_ID = 14;
+    public static final int SLAVE2_ELEAVATOR_MOTOR_ID = 15;
+    public static final int MICROSWITCH_ELEAVATOR_ID = 0;
 
 
     
@@ -63,12 +76,12 @@ public final class Constants {
         public static final int pigeonID = 1;
         public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
 
-        public static final COTSFalconSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
+        public static final COTSFalconSwerveConstants chosenModule = 
             COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(20.34);; //TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(20.34); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = 0.59655; //TODO: This must be tuned to specific robot
+        public static final double wheelBase = 0.59655; //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
@@ -114,22 +127,22 @@ public final class Constants {
         public static final double angleKF = chosenModule.angleKF;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.01; //TODO: This must be tuned to specific robot
+        public static final double driveKP = 0.01;
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;
 
         /* Drive Motor Characterization Values 
          * Divide SYSID values by 12 to convert from volts to percent output for CTRE */
-        public static final double driveKS = (0.32 / 12); //TODO: This must be tuned to specific robot
+        public static final double driveKS = (0.32 / 12); 
         public static final double driveKV = (1.51 / 12);
         public static final double driveKA = (0.27 / 12);
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 4.5; 
         /** Radians per Second */
-        public static final double maxAngularVelocity = 7.0; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 7.0; 
 
         /* Neutral Modes */
         public static final IdleMode angleNeutralMode = IdleMode.kBrake;
@@ -137,7 +150,7 @@ public final class Constants {
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { //TODO: This must be tuned to specific robot
+        public static final class Mod0 { 
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
@@ -147,7 +160,7 @@ public final class Constants {
         }
 
         /* Front Right Module - Module 1 */
-        public static final class Mod1 { //TODO: This must be tuned to specific robot
+        public static final class Mod1 { 
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
@@ -157,7 +170,7 @@ public final class Constants {
         }
         
         /* Back Left Module - Module 2 */
-        public static final class Mod2 { //TODO: This must be tuned to specific robot
+        public static final class Mod2 { 
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
@@ -167,7 +180,7 @@ public final class Constants {
         }
 
         /* Back Right Module - Module 3 */
-        public static final class Mod3 { //TODO: This must be tuned to specific robot
+        public static final class Mod3 { 
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;

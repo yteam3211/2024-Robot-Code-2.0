@@ -70,7 +70,7 @@ public class COTSFalconSwerveConstants {
         /** SDS MK4i - 8.14 : 1 */
         public static final double SDSMK4i_L1 = (8.14 / 1.0);
         /** SDS MK4i - 6.75 : 1 */
-        public static final double SDSMK4i_L2 = (6.75 * 1.0);//.047); // TODO: check where is the correct place to change the gear ratio
+        public static final double SDSMK4i_L2 = (6.75 * 1.0);//.047);
         /** SDS MK4i - 6.12 : 1 */
         public static final double SDSMK4i_L3 = (6.12 / 1.0);
     }

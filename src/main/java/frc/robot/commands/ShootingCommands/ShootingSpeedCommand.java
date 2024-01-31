@@ -31,7 +31,7 @@ public class ShootingSpeedCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    shootingSubsystem.setShooterVelocity(0);
   }
 
   // Returns true when the command should end.
