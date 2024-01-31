@@ -50,6 +50,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public void resetEncoder()
   {
     masterEleavatorMotor.reset(0);
+    masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
   }
   
   public void setPosition(double position)
@@ -68,7 +69,12 @@ public class ElevatorSubsystem extends SuperSystem {
   public void periodic() {
     if (this.isEleavatorDown()) 
     {
-  
+      resetEncoder();
+    }
+
+    if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() < Constants.MAX_ELEAVATOR_POS))
+    {
+      masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
     }
     // This method will be called once per scheduler run
   }
