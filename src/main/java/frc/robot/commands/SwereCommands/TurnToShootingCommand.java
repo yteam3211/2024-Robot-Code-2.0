@@ -16,17 +16,15 @@ import frc.util.vision.Limelight;
 public class TurnToShootingCommand extends Command {
   private Swerve swerve;
   private Limelight limelight;
-  private double angleThreshold;
   protected Gains gains = new Gains("rotation gains", 0, 0, 0);
 
   protected PIDController pid = new PIDController(gains);
 
   /** Creates a new TurnToZeroCommand. */
-  public TurnToShootingCommand(Swerve swerve, Limelight limelight, double angleThreshold) {
+  public TurnToShootingCommand(Swerve swerve, Limelight limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limelight = limelight;
     this.swerve = swerve;
-    this.angleThreshold = angleThreshold;
     addRequirements(swerve);
   }
 
@@ -54,7 +52,7 @@ public class TurnToShootingCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(limelight.getX()) < angleThreshold;
+    return Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD;
     };
   }
 

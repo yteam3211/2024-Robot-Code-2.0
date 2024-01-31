@@ -17,9 +17,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
+import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
+import frc.robot.commands.IntakeCommands.IntakeCommand;
+import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
@@ -42,11 +46,12 @@ public class RobotButtons {
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // systems joystick buttons
-    public static Trigger intakeTrigger = new Trigger(() -> systems.getRawAxis(PS5Controller.Axis.kL2.value)>0.1);
-    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
-    public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
+    public static Trigger intakeTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
+    public static Trigger  speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
     public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);
-    
+
+    public static Trigger shooterAndIntakeTest = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));
     
 
     /**
@@ -55,7 +60,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem) {
+    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ElevatorSubsystem eleavatorSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -65,8 +70,12 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
 
-        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem));
-        apmShootingTrigger.whileTrue( new  ShootingSpeedCommand(shootingSubsystem, 17000));
+        shooterAndIntakeTest.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem));
+
+
+        speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem));
+        climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
+        intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem,0,0));
     }
     // systems joystick commands
 
