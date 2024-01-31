@@ -11,8 +11,11 @@ import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.ShootingCommands.KickerCommand;
+import frc.robot.commands.ShootingCommands.ShootingOutput;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperCanFlex;
@@ -26,14 +29,12 @@ public class ShootingSubsystem extends SuperSystem {
   public SuperTalonFX slaveShooterMotor;
   public Gains shooterGains;
   public ShootingSubsystem() {
-    super("shooting Subsystem");
-    shooterGains = new Gains("shooterGains", 4, 0, 0);
-    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, false, IdleMode.kBrake);
-    masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, 40, false, false, NeutralMode.Coast, shooterGains, TalonFXControlMode.Velocity); //queen dont forget control mode
+    super("shooting");
+    shooterGains = new Gains("shooterGains", 0, 0, 0,0,0,0,0);
+    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kDutyCycle, null, 0, 0, 0);
+    masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, 40, false, false, NeutralMode.Coast, shooterGains, null); //queen dont forget control mode
     slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR_ID, 40, false);
-   
-
-    getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
+    setDefaultCommand(new ParallelCommandGroup(new KickerCommand(this, 0), new ShootingOutput(this, 0)));
   }
 
   @Override
@@ -58,6 +59,9 @@ public class ShootingSubsystem extends SuperSystem {
     return masterShooterMotor.getVelocity();
   }
 
-
+   public void setShooterOutput(double output)
+  {
+     masterShooterMotor.set(ControlMode.PercentOutput, output);
+  }
 
 }
