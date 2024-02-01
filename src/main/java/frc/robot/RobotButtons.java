@@ -25,6 +25,7 @@ import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
@@ -60,7 +61,7 @@ public class RobotButtons {
      * @param armSubsystem
      * @param swerve
      */
-    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ElevatorSubsystem eleavatorSubsystem) {
+    public void loadButtons(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem) {
         // driver joystick commands
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -70,10 +71,10 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
 
-        shooterAndIntakeTest.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem));
+        shooterAndIntakeTest.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem,kickerSubsystem));
 
 
-        speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem));
+        speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));
         climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
         intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem,0,0));
     }

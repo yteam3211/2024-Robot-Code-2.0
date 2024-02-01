@@ -5,17 +5,20 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 
 public class KickerCommand extends Command {
   /** Creates a new kickerCommand. */
+  private KickerSubsystem kickerSubsystem;
   private ShootingSubsystem shootingSubsystem;
   private double kickerOutput;
 
-  public KickerCommand(ShootingSubsystem shootingSubsystem,double kickerOutput) {
+  public KickerCommand(KickerSubsystem kickerSubsystem,ShootingSubsystem shootingSubsystem,double kickerOutput) {
+  this.kickerSubsystem = kickerSubsystem;
   this.shootingSubsystem = shootingSubsystem;
   this.kickerOutput = kickerOutput;
-  addRequirements(shootingSubsystem);
+  addRequirements(kickerSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -26,13 +29,13 @@ public class KickerCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setKickerOutput(kickerOutput);
+    kickerSubsystem.setKickerOutput(kickerOutput);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shootingSubsystem.setKickerOutput(0);
+    kickerSubsystem.setKickerOutput(0);
     shootingSubsystem.setShooterOutput(0);
   }
 

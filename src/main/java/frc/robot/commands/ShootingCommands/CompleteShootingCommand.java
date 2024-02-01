@@ -11,6 +11,7 @@ import frc.robot.Constants;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
@@ -21,12 +22,12 @@ import frc.util.vision.Limelight;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class CompleteShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteSootingCommand. */
-  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem) {
+  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(             //TODO: dont forget to change the eleavator position and the kickers output
       new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight),new EleavatorCommand(eleavatorSubsystem, 0) ,new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem), new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY)),
-      new KickerCommand(shootingSubsystem, 0)
+      new KickerCommand(kickerSubsystem,shootingSubsystem, 0)
 
     );
   }
