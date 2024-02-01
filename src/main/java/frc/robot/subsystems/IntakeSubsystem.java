@@ -22,13 +22,15 @@ public class IntakeSubsystem extends SuperSystem {
   public SuperSparkMax intakeOpenMotor;
   public SuperSparkMax intakeWheelsMotor;
   public DigitalInput closeIntakeMicroSwitch;
-  public Gains intakeGains;
+  public Gains intakeOpenGains;
+  public Gains intakeWheelsGains;
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     super("Intake Subsystem");
-    intakeGains = new Gains("intakeGains", 0, 0, 0);
+    intakeOpenGains = new Gains("intake Open Gains", 0.05, 0, 0);
+    intakeWheelsGains = new Gains("intake Wheels Gains", 0.001, 0, 0);
     intakeWheelsMotor = new SuperSparkMax(Constants.INTAKE_WHEELS_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast); //
-    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeGains, 0, 0, 0);
+    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
     // closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROSWITCH_ID);
     getTab().addCommandToDashboard("Reset Intake pos", new InstantCommand(() -> this.resetEncoder()));
     }
@@ -69,6 +71,11 @@ public class IntakeSubsystem extends SuperSystem {
     intakeWheelsMotor.setMode(ControlMode.PercentOutput);
     intakeWheelsMotor.set(Output);
   }
+
+  public void setWheelsMotorVelocity(double velocity){
+    intakeWheelsMotor.setMode(ControlMode.Velocity);
+    intakeWheelsMotor.set(velocity);
+  }
   
   /**
    * check if the microswitch is preesed or not
@@ -83,8 +90,8 @@ public class IntakeSubsystem extends SuperSystem {
     // This method will be called once per scheduler run
     public void periodic() 
     {
-      getTab().putInDashboard("intske pos", intakeOpenMotor.getPosition(), false);
-      getTab().putInDashboard("pose xy", 5, false);
+      getTab().putInDashboard("intake pos", intakeOpenMotor.getPosition(), 3, 1, false);
+      getTab().putInDashboard("intake velocity", intakeWheelsMotor.getVelocity(), 4, 1, false);
       // System.out.println(intakeOpenMotor.getPosition());
       if(this.isIntakeOn())
       {

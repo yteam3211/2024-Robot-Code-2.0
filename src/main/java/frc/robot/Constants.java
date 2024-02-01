@@ -3,6 +3,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkBase.IdleMode;
+
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -16,11 +18,12 @@ import frc.util.vision.Limelight;
 
 public final class Constants {
 
-    // General constants
+    // shooting constants
     public static final double SHOOTING_ANGLE_TRESHOLD = 2; //TODO: set when the robot is build
     public static final double SHOOTING_VELOCITY_TRESHOLD = 10; //TODO: set when the robot is build 
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
+    // pitching constants
     public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0); //TODO: set when the robot is build
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.60890684614;
     public static final double LIMELIGHT_TO_PIVOT = 347.32;
@@ -29,26 +32,38 @@ public final class Constants {
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
 
-
+    // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
     public static final double ELEAVATOR_GEAR_RATIO = 15.31 / 1;
     private static final double ELEAVATOR_WINCH_DIAMETER = 50; // diameter in millimeters
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
     public static final double FLOOR_TO_CLOSE_ELEAVATOR = 0; //TODO: check on robot after mechanical stop has added
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
-
-    public static final double  TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
-
-    public static final double INTAKE_OPEN_POSITION = 0; //TODO: set when the robot is build
-    public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
-
     public static final double MIN_ELEAVATOR_POS = 0;    
     public static final double MAX_ELEAVATOR_POS = 0;
 
+    // swerve constants
+    public static final double  TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
+    public static final double  ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
+
+    // intake constants
+    public static final double INTAKE_OPEN_POSITION = 39; // in rotations
+    public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
+    public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
+
+    // alliance constants
+    public static final Pose2d RED_SPEAKER_POS = new Pose2d(new Translation2d(16.54, 5.57), new Rotation2d());
+    public static final Pose2d BLUE_SPEAKER_POS = new Pose2d(new Translation2d(0, 5.57), new Rotation2d());
+    public static final double RED_SPEAKER_LIMELIGHT_PIPELINE = 0;
+    public static final double BLUE_SPEAKER_LIMELIGHT_PIPELINE = 1;      
+    public static final double AMP_LIMELIGHT_PIPELINE = 2;
+    public static final double RED_AMP_ANGLE = 90;
+    public static final double BLUE_AMP_ANGLE = -90; 
     
 
+
     // ID constants
-    public static final int INTAKE_OPEN_MOTOR_ID = 0;
+    public static final int INTAKE_OPEN_MOTOR_ID = 24;   
     public static final int INTAKE_WHEELS_MOTOR_ID = 25;
     public static final int INTAKE_MICROSWITCH_ID = 0;
     

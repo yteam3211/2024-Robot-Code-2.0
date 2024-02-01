@@ -54,9 +54,9 @@ public class PitchingSubsystem extends SuperSystem {
   }
 
   /**
-   * Return the absolute angle of the Cancoder
+   * Return the current angle - the angle offset 
    *
-   * @return the current angle - the angle offset.
+   * @return the absolute angle of the Cancoder in degrees.
    */
   public double getAbsolutePosition(){
     return Units.rotationsToDegrees(angleEncoder.getPosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
@@ -93,6 +93,14 @@ public class PitchingSubsystem extends SuperSystem {
   }
 
   public double getAngleToSpeaker(ElevatorSubsystem elevatorSubsystem, Limelight limelight){
+    if(!limelight.isValid()){
+      if(getAbsolutePosition() < -5 || getAbsolutePosition() > 15 || Math.abs(Robot.m_robotContainer.getSwerve().getYaw().getDegrees() - Robot.m_robotContainer.getSwerve().getEstematedSpeakerShootingAngle()) > Constants.ESTEMATED_ANGLE_TRESHOLD){ // TODO: fix it
+        setPosition(5);
+      }else {
+        // Robot.m_robotContainer.getElevatorSubsystem().
+          
+      }
+    }
     double hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - getVerticalLimelightHightFromfloor(elevatorSubsystem);
     double distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, getAbsolutePosition());
     double hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);

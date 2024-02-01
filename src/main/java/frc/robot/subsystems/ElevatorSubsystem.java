@@ -57,6 +57,8 @@ public class ElevatorSubsystem extends SuperSystem {
   {
     masterEleavatorMotor.set(ControlMode.Position, position);
   }
+
+  
   /**
    * get the hight that the elevator got up. 
    * @return the hight from the base of the elevator to the bottom of the elevator's rider in milimeters
@@ -71,7 +73,7 @@ public class ElevatorSubsystem extends SuperSystem {
     {
       resetEncoder();
     }
-
+    
     if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() < Constants.MAX_ELEAVATOR_POS))
     {
       masterEleavatorMotor.set(ControlMode.PercentOutput, 0);

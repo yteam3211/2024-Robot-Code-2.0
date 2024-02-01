@@ -37,23 +37,12 @@ public class PitchCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    if(!limelight.isValid()){
-      pitchingSubsystem.setPosition(20);
-    }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - pitchingSubsystem.getVerticalLimelightHightFromfloor(eleavatorSubsystem);
-    if(limelight.isValid()){
-      distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, pitchingSubsystem.getAbsolutePosition());
-    }
-    hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (pitchingSubsystem.getVerticalLimelightHightFromfloor(eleavatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
-    distanceFromShooterToSpeaker = distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER;
-    angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
-    angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
+    pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
   }
 
   // Called once the command ends or is interrupted.

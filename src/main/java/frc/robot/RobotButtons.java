@@ -21,6 +21,7 @@ import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
+import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -40,19 +41,21 @@ public class RobotButtons {
     public static Joystick driver = new Joystick(0);
 
     // driver jpoystick buttons
-    public static DoubleSupplier BreakValue = () -> driver.getRawAxis(XboxController.Axis.kRightTrigger.value);
+    public static DoubleSupplier BreakValue = () -> driver.getRawAxis(PS5Controller.Button.kR2.value);
     
     // public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
     // public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // systems joystick buttons
+    
     public static Trigger intakeTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
-    public static Trigger  speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
     public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
     public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);
 
-    public static Trigger shooterAndIntakeTest = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));
+    // public static Trigger shooterAndIntakeTest = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));
+    public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
     
 
     /**
@@ -71,16 +74,14 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
 
-        shooterAndIntakeTest.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem,shootingSubsystem,kickerSubsystem));
-
+        // shooterAndIntakeTest.whileTrue(new ShootingSpeedCommand(shootingSubsystem, 3000));
+        kicker.whileTrue(new KickerCommand(kickerSubsystem,shootingSubsystem,0.4));
 
         speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));
         climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
-        intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem,0,0));
+        intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000));
     }
     // systems joystick commands
-
-    
 
 }
 

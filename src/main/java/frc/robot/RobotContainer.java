@@ -3,6 +3,7 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -25,8 +26,10 @@ import frc.util.vision.Limelight.limelightStreamMode;
  */
 public class RobotContainer {
     
-    private RobotButtons robotButtons = new RobotButtons();
-    
+    public static boolean isRed;
+    private final RobotButtons robotButtons = new RobotButtons();
+    private final AllianceSpecs allianceSpecs = new AllianceSpecs();
+
     /* Subsystems */
     public static final Limelight limelight = new Limelight.Builder().build();
     private final Swerve swerve = new Swerve(limelight);
@@ -39,9 +42,10 @@ public class RobotContainer {
 
 
     //auto commands register
-     
-     
+
+
     public RobotContainer() {
+
     // NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
     // NamedCommands.registerCommand("Shooting Command", new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem));
     // NamedCommands.registerCommand("Open Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_OUTPUT));
@@ -59,7 +63,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem,elevatorSubsystem,kickerSubsystem);
+        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem, elevatorSubsystem, kickerSubsystem);
     }
  
     /**
@@ -84,6 +88,10 @@ public class RobotContainer {
     public RobotButtons getRobotButtons() {
         return robotButtons;
     }
+        
+    public AllianceSpecs getAllianceSpecs() {
+        return allianceSpecs;
+    }
 
     public ShootingSubsystem getShootingSubsystem() {
         return shootingSubsystem;
@@ -99,6 +107,14 @@ public class RobotContainer {
 
     public TransferSubsystem getTransferSubsystem() {
         return transferSubsystem;
+    }
+
+    public KickerSubsystem getKickerSubsystem() {
+        return kickerSubsystem;
+    }
+
+    public ElevatorSubsystem getElevatorSubsystem() {
+        return elevatorSubsystem;
     }
 }
  

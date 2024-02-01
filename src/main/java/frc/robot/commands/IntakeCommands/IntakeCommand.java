@@ -10,12 +10,12 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeCommand extends Command {
   private IntakeSubsystem intakeSubsystem;
   private double intakePosition;
-  private double intakeWheelsOutput;
-  public IntakeCommand(IntakeSubsystem intakeSubsystem,double intakePosition,double intakeWheelsOutput)
+  private double intakeWheelsVelocity;
+  public IntakeCommand(IntakeSubsystem intakeSubsystem,double intakePosition,double intakeWheelsVelocity)
   {
     this.intakeSubsystem = intakeSubsystem;
     this.intakePosition = intakePosition;
-    this.intakeWheelsOutput = intakeWheelsOutput;
+    this.intakeWheelsVelocity = intakeWheelsVelocity;
 
     addRequirements(intakeSubsystem);
   }
@@ -28,8 +28,10 @@ public class IntakeCommand extends Command {
   @Override
   public void execute() 
   {
-    intakeSubsystem.setWheelsMotorOutput(intakeWheelsOutput);
+    System.out.println("in");
+    intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
     intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
+    // intakeSubsystem.setIntakeOpenMotorOutput(intakePosition);
   }
 
   // Called once the command ends or is interrupted.

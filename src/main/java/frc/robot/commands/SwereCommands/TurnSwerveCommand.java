@@ -49,7 +49,7 @@ public class TurnSwerveCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(Swerve.gyro.getYaw() - targetPosition)< Constants.TURN_SWERVE_TRESHOLD ) {
+    if (Math.abs(Swerve.gyro.getYaw() - targetPosition) < Constants.TURN_SWERVE_TRESHOLD ) {
       return true;
     }
     else

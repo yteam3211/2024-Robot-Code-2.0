@@ -4,7 +4,9 @@ import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.vision.Limelight;
+import frc.lib.util.COTSFalconSwerveConstants.driveGearRatios;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotButtons;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -18,7 +20,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -32,12 +36,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Swerve extends SuperSystem {
-    public SwerveDriveOdometry swerveOdometry;
+    // public SwerveDriveOdometry swerveOdometry;
     public SwerveDrivePoseEstimator poseEstimator;
     public SwerveModule[] mSwerveMods;
     public Limelight limelight;
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-
+    
     public Swerve(Limelight limelight) {
         super("Swerve");
         this.limelight = limelight;
@@ -48,6 +52,7 @@ public class Swerve extends SuperSystem {
             new SwerveModule(2, Constants.SwerveConstant.Mod2.constants),
             new SwerveModule(3, Constants.SwerveConstant.Mod3.constants)
         };
+        getTab().getTab().add("field", 0).withWidget(BuiltInWidgets.kField).getEntry(); 
             AutoBuilder.configureHolonomic(
                 this::getPose, // Robot pose supplier
                 this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -83,7 +88,7 @@ public class Swerve extends SuperSystem {
         Timer.delay(1.0);
         resetModulesToAbsolute();
 
-        swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions());
+        // swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions());
         poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstant.swerveKinematics, getYaw(), getModulePositions(), new Pose2d());
     }
 
@@ -179,6 +184,14 @@ public class Swerve extends SuperSystem {
         }
     }
 
+    public double getEstematedSpeakerShootingAngle(){
+        double estematedAngle = Units.radiansToDegrees(Math.atan(Math.abs(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getY() - getPose().getY()) / Math.abs(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getX() - getPose().getX())));
+        if(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getY() - getPose().getY() < 0){
+            estematedAngle *= -1;
+        }
+        return estematedAngle;
+    }
+
     @Override
     public void periodic(){
         getTab().putInDashboard("pose xy", getPose().getX(), false);
@@ -189,9 +202,10 @@ public class Swerve extends SuperSystem {
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
         // getTab().putInDashboard("roll", gyro.getRoll(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
-        swerveOdometry.update(getYaw(), getModulePositions());  
+
+        // swerveOdometry.update(getYaw(), getModulePositions());  
+        poseEstimator.update(getYaw(), getModulePositions());
         if(limelight.isValid()){
-            poseEstimator.update(getYaw(), getModulePositions());
             Pose2d camPose = new Pose2d(limelight.getBotpose()[0], limelight.getBotpose()[1], getYaw());
             
             poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());
@@ -199,9 +213,9 @@ public class Swerve extends SuperSystem {
             poseEstimator.resetPosition(getYaw(), getModulePositions(), poseEstimator.getEstimatedPosition());
         }
         for(SwerveModule mod : mSwerveMods){
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
         }
     }
 }
