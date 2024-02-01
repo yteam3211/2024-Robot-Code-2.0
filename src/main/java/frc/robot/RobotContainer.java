@@ -34,6 +34,8 @@ public class RobotContainer {
     private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
+    private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+    private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
 
 
     //auto commands register
@@ -57,7 +59,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem);
+        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem,elevatorSubsystem,kickerSubsystem);
     }
  
     /**

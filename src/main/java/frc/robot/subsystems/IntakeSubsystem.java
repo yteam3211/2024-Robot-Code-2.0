@@ -83,7 +83,9 @@ public class IntakeSubsystem extends SuperSystem {
     // This method will be called once per scheduler run
     public void periodic() 
     {
+      getTab().putInDashboard("intske pos", intakeOpenMotor.getPosition(), false);
       getTab().putInDashboard("pose xy", 5, false);
+      // System.out.println(intakeOpenMotor.getPosition());
       if(this.isIntakeOn())
       {
         this.resetEncoder();
