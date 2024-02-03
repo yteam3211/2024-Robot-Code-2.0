@@ -24,13 +24,14 @@ public final class Constants {
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0); //TODO: set when the robot is build
+    public static final double PITCHING_ENCODER_OFFSET = 321.15234375; //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.60890684614;
     public static final double LIMELIGHT_TO_PIVOT = 347.32;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
     public static final double SPEAKER_HIGHT = 2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
+    public static final double PITCHING_GEAR_RATIO = 160 / 1;
 
     // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
@@ -43,8 +44,9 @@ public final class Constants {
     public static final double MAX_ELEAVATOR_POS = 0;
 
     // swerve constants
-    public static final double  TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
-    public static final double  ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
+    public static final double TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
+    public static final double ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
+    public static final double MAX_SHOOTING_RANGE = 5; // in meters
 
     // intake constants
     public static final double INTAKE_OPEN_POSITION = 39; // in rotations
@@ -74,9 +76,9 @@ public final class Constants {
     public static final int SLAVE_SHOOTER_MOTOR_ID = 22;
     public static final int KICKER_SHOOTER_MOTOR_ID = 23;
     
-    public static final int MASTER_PITCHING_MOTOR_ID = 0;
-    public static final int SLAVE_PITCHING_MOTOR_ID = 0;
-    public static final int PITCHING_ENCODER_ID = 0;
+    public static final int MASTER_PITCHING_MOTOR_ID = 19;
+    public static final int SLAVE_PITCHING_MOTOR_ID = 20;
+    public static final int PITCHING_ENCODER_ID = 18;
 
     public static final int MASTER_ELEAVATOR_MOTOR_ID = 13;
     public static final int SLAVE1_ELEAVATOR_MOTOR_ID = 14;
