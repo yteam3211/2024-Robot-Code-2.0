@@ -18,19 +18,18 @@ import frc.util.motor.SuperTalonFX;
 
 public class ElevatorSubsystem extends SuperSystem {
   private SuperTalonFX masterEleavatorMotor;
-  private SuperTalonFX slave1rEleavatorMotor;
-  private SuperTalonFX slave2rEleavatorMotor;
-  private Gains eleavatorGains;
+  private SuperTalonFX slave1EleavatorMotor;
+  private SuperTalonFX slave2EleavatorMotor;
+  private Gains eleavatorUpGains;
   private DigitalInput EleavatorMicrowSwitch;
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorGains = new Gains("eleavatorGains", 0, 0, 0);
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorGains, TalonFXControlMode.Position);
-    slave1rEleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
-    slave2rEleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
+    eleavatorUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic);
+    slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
+    slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
-
   }
   
   /**
@@ -44,7 +43,7 @@ public class ElevatorSubsystem extends SuperSystem {
   
   public boolean isEleavatorDown()
   {
-    return EleavatorMicrowSwitch.get();
+    return !EleavatorMicrowSwitch.get();
   }
   
   public void resetEncoder()
@@ -53,11 +52,19 @@ public class ElevatorSubsystem extends SuperSystem {
     masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
   }
   
-  public void setPosition(double position)
+  /**
+   * set the hight that the elevator should go
+   * @param hight hight im milimeters
+   */
+  public void setPosition(double hight)
   {
-    masterEleavatorMotor.set(ControlMode.Position, position);
+    double falconPos = (hight / Constants.ELEAVATOR_WINCH_CIRCUMFERENCE) * Constants.ELEAVATOR_GEAR_RATIO * 2048;
+    masterEleavatorMotor.set(ControlMode.Position, falconPos);
   }
 
+  public void setOutput(double Output){
+    masterEleavatorMotor.set(ControlMode.PercentOutput, Output);
+  }
   
   /**
    * get the hight that the elevator got up. 
@@ -69,7 +76,10 @@ public class ElevatorSubsystem extends SuperSystem {
 
   @Override
   public void periodic() {
-    if (this.isEleavatorDown()) 
+    getTab().putInDashboard("elevator hight", getElevatorHight(), false);
+    getTab().putInDashboard("elevator master integrated encoder", masterEleavatorMotor.getPosition(), false);
+    getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
+    if (this.isEleavatorDown())
     {
       resetEncoder();
     }

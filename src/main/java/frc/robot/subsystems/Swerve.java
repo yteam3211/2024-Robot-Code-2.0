@@ -5,6 +5,7 @@ import frc.robot.dashboard.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.vision.Limelight;
 import frc.lib.util.COTSFalconSwerveConstants.driveGearRatios;
+import frc.robot.AllianceSpecs;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotButtons;
@@ -185,11 +186,15 @@ public class Swerve extends SuperSystem {
     }
 
     public double getEstematedSpeakerShootingAngle(){
-        double estematedAngle = Units.radiansToDegrees(Math.atan(Math.abs(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getY() - getPose().getY()) / Math.abs(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getX() - getPose().getX())));
-        if(Robot.m_robotContainer.getAllianceSpecs().speakerPos.getY() - getPose().getY() < 0){
+        double estematedAngle = Units.radiansToDegrees(Math.atan(Math.abs(AllianceSpecs.speakerPos.getY() - getPose().getY()) / Math.abs(AllianceSpecs.speakerPos.getX() - getPose().getX())));
+        if(AllianceSpecs.speakerPos.getY() - getPose().getY() < 0){
             estematedAngle *= -1;
         }
         return estematedAngle;
+    }
+
+    public boolean isShootingRange(){
+        return Math.sqrt(Math.pow((getPose().getX() - AllianceSpecs.speakerPos.getX()), 2) + Math.pow((getPose().getY() - AllianceSpecs.speakerPos.getY()), 2)) < Constants.MAX_SHOOTING_RANGE;
     }
 
     @Override
@@ -202,7 +207,6 @@ public class Swerve extends SuperSystem {
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
         // getTab().putInDashboard("roll", gyro.getRoll(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
-
         // swerveOdometry.update(getYaw(), getModulePositions());  
         poseEstimator.update(getYaw(), getModulePositions());
         if(limelight.isValid()){

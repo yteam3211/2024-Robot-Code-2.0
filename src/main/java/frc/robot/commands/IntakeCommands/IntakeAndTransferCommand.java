@@ -5,6 +5,8 @@
 package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.TransferCommands.TransferCommand;
@@ -21,11 +23,12 @@ public class IntakeAndTransferCommand extends ParallelCommandGroup {
   public IntakeAndTransferCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new IntakeBackwordsCommand(intakeSubsystem, -0.8), // TODO: change to IntakeCommand
-      new TransferCommand(transferSubsystem, 0.8),
-      new ShootingSpeedCommand(shootingSubsystem, 17000),
-      new KickerCommand(kickerSubsystem,shootingSubsystem,0.8)
+      addCommands(
+          new IntakeBackwordsCommand(intakeSubsystem, -0.8), // TODO: change to IntakeCommand
+          new TransferCommand(transferSubsystem, 0.8),
+          new ShootingSpeedCommand(shootingSubsystem, 17000),
+          new KickerCommand(kickerSubsystem,shootingSubsystem,0.8)
+      
     );
-  }
+    }
 }
