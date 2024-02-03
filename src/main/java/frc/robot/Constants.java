@@ -31,6 +31,8 @@ public final class Constants {
     public static final double SPEAKER_HIGHT = 2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
+    public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
+    public static final double MAX_PITCHING_ANGLE = 0;
 
     // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
@@ -39,7 +41,7 @@ public final class Constants {
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
     public static final double FLOOR_TO_CLOSE_ELEAVATOR = 0; //TODO: check on robot after mechanical stop has added
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
-    public static final double MIN_ELEAVATOR_POS = 0;    
+    public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
 
     // swerve constants

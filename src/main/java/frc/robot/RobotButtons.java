@@ -22,6 +22,7 @@ import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
+import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -54,7 +55,7 @@ public class RobotButtons {
     public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
     public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);
 
-    // public static Trigger shooterAndIntakeTest = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));
+    public static Trigger pitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
     
 
@@ -80,6 +81,8 @@ public class RobotButtons {
         speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));
         climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
         intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000));
+
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 10));
     }
     // systems joystick commands
 

@@ -42,7 +42,7 @@ public class PitchCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
+   angleToSpeakerDegrees = pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
   }
 
   // Called once the command ends or is interrupted.

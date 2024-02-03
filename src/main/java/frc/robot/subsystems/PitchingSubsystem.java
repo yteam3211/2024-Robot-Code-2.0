@@ -30,8 +30,8 @@ public class PitchingSubsystem extends SuperSystem {
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
-    pitchingGains = new Gains("pitchingGains", 0, 0, 0);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Coast, pitchingGains, TalonFXControlMode.Position); //queen dont forget control mode
+    pitchingGains = new Gains("pitchingGains", 0.1, 0, 0);
+    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.Position); //queen dont forget control mode
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, 40, false);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
     configAngleEncoder();
@@ -44,6 +44,7 @@ public class PitchingSubsystem extends SuperSystem {
    * @param position position in degrees.
    */
   public void setPosition(double position){
+    System.out.println("here 11");
     masterPitchingMotor.set(ControlMode.Position, degreesToFalconEncoder(position));
   }
 /**
@@ -77,7 +78,7 @@ public class PitchingSubsystem extends SuperSystem {
    * @return the amount of falcon raw sensor units.
    */
   public double degreesToFalconEncoder(double degrees){
-    return (degrees / 360) * 2048; 
+    return (degrees / 360) * 160; 
   }
 
   /**
@@ -113,6 +114,10 @@ public class PitchingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) ||(getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE))
+    {
+      masterPitchingMotor.set(ControlMode.PercentOutput, 0);
+    }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
   }
 }

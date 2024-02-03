@@ -74,7 +74,7 @@ public class ElevatorSubsystem extends SuperSystem {
       resetEncoder();
     }
     
-    if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() < Constants.MAX_ELEAVATOR_POS))
+    if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
     {
       masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
     }
