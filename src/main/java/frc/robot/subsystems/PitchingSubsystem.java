@@ -12,6 +12,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Unit;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.math.Conversions;
 import frc.robot.Constants;
@@ -36,15 +37,19 @@ public class PitchingSubsystem extends SuperSystem {
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
     configAngleEncoder();
     resetFalconEncoder();
+    getTab().addCommandToDashboard("reset falcon encoder", new InstantCommand( () -> resetFalconEncoder()));
   }
 
+  public void SetOutput(double output){
+    masterPitchingMotor.set(ControlMode.PercentOutput, output);
+  }
   /**
    * Set the position of the motor.
    *
    * @param position position in degrees.
    */
   public void setPosition(double position){
-    System.out.println("here 11");
+    System.out.println("falcon raw sensor unit pos: " + degreesToFalconEncoder(position));
     masterPitchingMotor.set(ControlMode.Position, degreesToFalconEncoder(position));
   }
 /**
@@ -60,13 +65,17 @@ public class PitchingSubsystem extends SuperSystem {
    * @return the absolute angle of the Cancoder in degrees.
    */
   public double getAbsolutePosition(){
-    return Units.rotationsToDegrees(angleEncoder.getPosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
+    return Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
   }
 
   /**
  * reset the falcon integrated encoder
  */
   public void resetFalconEncoder(){
+    System.out.println("reset pitching falconnnnnnnnnnnnnnnnnnnnnnn" + degreesToFalconEncoder(getAbsolutePosition()));
+    System.out.println("absolute position: " + getAbsolutePosition());
+    double absolutePosition = degreesToFalconEncoder(getAbsolutePosition()) > 180 ? degreesToFalconEncoder(getAbsolutePosition()) : degreesToFalconEncoder(getAbsolutePosition()) * -1;
+
     masterPitchingMotor.reset(degreesToFalconEncoder(getAbsolutePosition())); 
   }
   
@@ -78,7 +87,7 @@ public class PitchingSubsystem extends SuperSystem {
    * @return the amount of falcon raw sensor units.
    */
   public double degreesToFalconEncoder(double degrees){
-    return (degrees / 360) * 160; 
+    return (degrees / 360) * Constants.PITCHING_GEAR_RATIO * 2048;
   }
 
   /**
@@ -98,7 +107,7 @@ public class PitchingSubsystem extends SuperSystem {
       if(getAbsolutePosition() < -5 || getAbsolutePosition() > 15 || Math.abs(Robot.m_robotContainer.getSwerve().getYaw().getDegrees() - Robot.m_robotContainer.getSwerve().getEstematedSpeakerShootingAngle()) > Constants.ESTEMATED_ANGLE_TRESHOLD){ // TODO: fix it
         setPosition(5);
       }else {
-        // Robot.m_robotContainer.getElevatorSubsystem().
+        elevatorSubsystem.setPosition(elevatorSubsystem.getElevatorHight() + 5);
           
       }
     }
@@ -119,5 +128,8 @@ public class PitchingSubsystem extends SuperSystem {
       masterPitchingMotor.set(ControlMode.PercentOutput, 0);
     }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
+    getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
+    getTab().putInDashboard("absolute position", getAbsolutePosition(), false);
+
   }
 }

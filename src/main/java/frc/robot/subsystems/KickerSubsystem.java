@@ -24,6 +24,7 @@ public class KickerSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // test( 1 > 2 ? 3 : 2, 2);
     // This method will be called once per scheduler run
   }
 
@@ -32,4 +33,6 @@ public class KickerSubsystem extends SubsystemBase {
     kickerMotor.setMode(ControlMode.PercentOutput);
     kickerMotor.set(Output);
   }
-}
+  public void test(double a, double b){}
+  }
+

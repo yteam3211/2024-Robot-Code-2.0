@@ -23,6 +23,7 @@ import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.PitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -75,16 +76,16 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
 
-        // shooterAndIntakeTest.whileTrue(new ShootingSpeedCommand(shootingSubsystem, 3000));
+                // systems joystick commands
+        PitchTest.whileTrue(new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, 10));
         kicker.whileTrue(new KickerCommand(kickerSubsystem,shootingSubsystem,0.4));
-
-        speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));
-        climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
-        intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000));
+        
+        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
+        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, 17000));                    
+        climbTrigger.whileTrue(new EleavatorCommand(eleavatorSubsystem, 200));
+        // intakeTrigger.whileTrue(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000));
 
         pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 10));
     }
-    // systems joystick commands
-
 }
 

@@ -7,6 +7,7 @@ package frc.robot.commands.ShootingCommands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
@@ -26,7 +27,11 @@ public class CompleteShootingCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(             //TODO: dont forget to change the eleavator position and the kickers output
-      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight),new EleavatorCommand(eleavatorSubsystem, 0) ,new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem), new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY)),
+    1 > 2 ?
+      new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight),
+      new EleavatorCommand(eleavatorSubsystem, 0) ,
+      new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, 0),
+      new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY)) : new WaitCommand(0),
       new KickerCommand(kickerSubsystem,shootingSubsystem, 0)
 
     );

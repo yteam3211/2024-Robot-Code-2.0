@@ -38,13 +38,14 @@ public class ShootingSpeedCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(shootingVelocity - shootingSubsystem.getVelocity()) < Constants.SHOOTING_VELOCITY_TRESHOLD) {
-      return true;
-    }
-    else
-    {
-      return false;
+  //   if (Math.abs(shootingVelocity - shootingSubsystem.getVelocity()) < Constants.SHOOTING_VELOCITY_TRESHOLD) {
+  //     return true;
+  //   }
+  //   else
+  //   {
+  //     return false;
 
-    }
+  //   }
+  return false;
   }
 }

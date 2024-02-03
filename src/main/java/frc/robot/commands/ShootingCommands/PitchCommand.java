@@ -16,6 +16,7 @@ public class PitchCommand extends Command {
   private Limelight limelight;
   private PitchingSubsystem pitchingSubsystem;
   ElevatorSubsystem eleavatorSubsystem;
+  private double position;
   private double angleToGoalDegrees ;
   private double angleToGoalRadians;
   private double distanceFromLimelightToSpeaker;
@@ -27,10 +28,11 @@ public class PitchCommand extends Command {
 
 
   /** Creates a new PichCommand. */
-  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem) {
+  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem, double position) {
     this.limelight = limelight;
     this.pitchingSubsystem = pitchingSubsystem;
     this.eleavatorSubsystem = eleavatorSubsystem;
+    this.position = position;
     addRequirements(pitchingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -48,12 +50,14 @@ public class PitchCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pitchingSubsystem.setPosition(angleToSpeakerDegrees);
+    // pitchingSubsystem.setPosition(angleToSpeakerDegrees);
+    pitchingSubsystem.setPosition(position);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
