@@ -56,19 +56,30 @@ public class PitchingSubsystem extends SuperSystem {
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
   }
 /**
- * config the angle encoder
+ * config the angle encoder 356 - 140
  */
   private void configAngleEncoder(){        
+    angleEncoder.getPosition().setUpdateFrequency(4);
     angleEncoder.getConfigurator().apply(Robot.ctreConfigs.pitchingCanCoderConfig);
   }
 
   /**
-   * Return the current angle - the angle offset 
+   * Return the current angle - the angle offset 0.227051
    *
-   * @return the absolute angle of the Cancoder in degrees.
+   * @return the absolute angle of the Cancoder in degrees. 
    */
   public double getAbsolutePosition(){
-    return Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
+    double absolutePosition;
+    if(Constants.PITCHING_ENCODER_OFFSET < 85 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) > 200){
+      absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - (Constants.PITCHING_ENCODER_OFFSET + 360);
+    }
+    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80){
+      absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET + 360;
+    }
+    else{
+      absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
+    }
+    return absolutePosition;
   }
 
   /**
@@ -137,7 +148,7 @@ public class PitchingSubsystem extends SuperSystem {
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);
-    System.out.println( noteIn.get());
+    // System.out.println( noteIn.get());
 
   }
 }
