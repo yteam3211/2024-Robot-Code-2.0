@@ -51,7 +51,7 @@ public final class Constants {
     public static final double MAX_SHOOTING_RANGE = 5; // in meters
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 39; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 37.5; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 

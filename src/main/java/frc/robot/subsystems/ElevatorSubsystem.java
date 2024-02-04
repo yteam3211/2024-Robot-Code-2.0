@@ -17,19 +17,39 @@ import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
 public class ElevatorSubsystem extends SuperSystem {
+  public enum gains{
+      EleavatorUp(0),
+      EleavatorDown(1),
+      EleavatorClimbUp(2),
+      EleavatorClimbDown(4);
+      public final int value;
+      gains(int index) {
+        value = index;
+     }
+  }
   private SuperTalonFX masterEleavatorMotor;
   private SuperTalonFX slave1EleavatorMotor;
   private SuperTalonFX slave2EleavatorMotor;
   private Gains eleavatorUpGains;
+  private Gains eleavatorDownGains;    
+  private Gains eleavatorClimbUpGains;  
+  private Gains eleavatorClimbDownGains;
+  public gains mode;
+
   private DigitalInput EleavatorMicrowSwitch;
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic);
+    eleavatorUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);    
+    eleavatorDownGains = new Gains("eleavator up Gains", 0.03, 0, 0);
+    eleavatorClimbUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);
+    eleavatorClimbDownGains = new Gains("eleavator up Gains", 0.03, 0, 0);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 0, 0,0);
     slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
+
+    
   }
   
   /**

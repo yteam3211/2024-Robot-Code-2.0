@@ -36,7 +36,7 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
      * @param gains
      */
     public SuperTalonFX(int deviceNumber, int amps, boolean inverted, boolean PhaseSensor, NeutralMode mNeutralMode,
-            Gains gains, TalonFXControlMode mode) {
+            Gains gains, TalonFXControlMode mode, double maxAcc, double maxVel, double error) {
         super(deviceNumber);
         this.mode = mode;
 
@@ -57,6 +57,9 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
         config_kI(0, gains.ki);
         config_kD(0, gains.kd);
         setSelectedSensorPosition(0, 0, 0);
+        configMotionAcceleration(maxAcc);
+        configMotionCruiseVelocity(maxVel);
+        configAllowableClosedloopError(0, error);
     }
 
     /**
@@ -117,5 +120,9 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
 
     public SuperSparkMax getEncoder() {
         return null;
+    }
+    
+    public void setMotionMagicMaxAccAndVel(double maxAcc, double maxVel){
+
     }
 }
