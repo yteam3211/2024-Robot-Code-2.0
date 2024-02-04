@@ -44,14 +44,15 @@ public class RobotButtons {
 
     // driver jpoystick buttons
     public static DoubleSupplier BreakValue = () -> driver.getRawAxis(PS5Controller.Button.kR2.value);
-    
+    public static Trigger resetGyro = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kL1.value));
     // public static Trigger forwardJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftY.value)) > 0.1);
     // public static Trigger sidesJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kLeftX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
+    
     // systems joystick buttons
     
-    public static Trigger intakeTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
+    public static Trigger intakeTrigger = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kL2.value));
     public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
     public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
     public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);
@@ -77,6 +78,7 @@ public class RobotButtons {
                     () -> driver.getRawAxis(PS5Controller.Axis.kLeftX.value),
                     () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
+        resetGyro.onTrue(new InstantCommand(() -> Robot.m_robotContainer.getSwerve().zeroGyro()));
 
                 // systems joystick commands
         kicker.whileTrue(new KickerCommand(kickerSubsystem,shootingSubsystem,0.4));

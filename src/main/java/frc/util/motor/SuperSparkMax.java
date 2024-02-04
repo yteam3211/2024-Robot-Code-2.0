@@ -89,6 +89,10 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
         setInverted(inverted);
         setSmartCurrentLimit(amps);
         setIdleMode(mode);
+
+        setPeriodicFramePeriod(PeriodicFrame.kStatus0, 100);
+        setPeriodicFramePeriod(PeriodicFrame.kStatus1, 500);
+        setPeriodicFramePeriod(PeriodicFrame.kStatus2, 500);
     }
 
     /**

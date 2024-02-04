@@ -119,7 +119,8 @@ public class SwerveModule {
     }
 
 
-    private void configAngleEncoder(){        
+    private void configAngleEncoder(){      
+        angleEncoder.getPosition().setUpdateFrequency(5);  
         angleEncoder.getConfigurator().apply(Robot.ctreConfigs.swerveCanCoderConfig);
     }
 

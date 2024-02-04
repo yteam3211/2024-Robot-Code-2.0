@@ -76,6 +76,9 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
         selectProfileSlot(0, 0);
         setInverted(inverted);
         follow(leader);
+        setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255);
+        setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 225); 
+
     }
 
     @Override
