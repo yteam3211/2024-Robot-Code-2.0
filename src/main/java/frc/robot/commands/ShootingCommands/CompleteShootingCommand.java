@@ -31,7 +31,7 @@ public class CompleteShootingCommand extends SequentialCommandGroup {
       new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight),
       new EleavatorCommand(eleavatorSubsystem, 0) ,
       new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, 0),
-      new ShootingSpeedCommand(shootingSubsystem, Constants.SHOOTING_VELCITY)) : new WaitCommand(0),
+      new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)) : new WaitCommand(0),
       new KickerCommand(kickerSubsystem,shootingSubsystem, 0)
 
     );

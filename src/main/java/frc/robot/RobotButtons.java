@@ -84,8 +84,8 @@ public class RobotButtons {
                 // systems joystick commands
         kicker.whileTrue(new KickerCommand(kickerSubsystem,shootingSubsystem,0.4));
         
-        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem, pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
-        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, 17000));                    
+        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
+        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.4));                    
         climbTrigger.whileTrue(new EleavatorCommand(eleavatorSubsystem, 200));
         intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 

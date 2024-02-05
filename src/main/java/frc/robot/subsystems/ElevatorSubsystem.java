@@ -41,16 +41,28 @@ public class ElevatorSubsystem extends SuperSystem {
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
     eleavatorUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);    
-    eleavatorDownGains = new Gains("eleavator up Gains", 0.03, 0, 0);
-    eleavatorClimbUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);
-    eleavatorClimbDownGains = new Gains("eleavator up Gains", 0.03, 0, 0);
+    eleavatorDownGains = new Gains("eleavator down Gains", 0.03, 0, 0);
+    eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
+    eleavatorClimbDownGains = new Gains("eleavator climd down Gains", 0.03, 0, 0);
     masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 0, 0,0);
     slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
 
+    masterEleavatorMotor.config_kP(1, eleavatorDownGains.kp);
+    masterEleavatorMotor.config_kI(1, eleavatorDownGains.ki);
+    masterEleavatorMotor.config_kD(1, eleavatorDownGains.kd);
+
+    masterEleavatorMotor.config_kP(2, eleavatorClimbUpGains.kp);
+    masterEleavatorMotor.config_kI(2, eleavatorClimbUpGains.ki);
+    masterEleavatorMotor.config_kD(2, eleavatorClimbUpGains.kd);
+
+    masterEleavatorMotor.config_kP(3, eleavatorClimbDownGains.kp);
+    masterEleavatorMotor.config_kI(3, eleavatorClimbDownGains.ki);
+    masterEleavatorMotor.config_kD(3, eleavatorClimbDownGains.kd);
     
   }
+
   
   /**
    * get the master motor of the eleavator
