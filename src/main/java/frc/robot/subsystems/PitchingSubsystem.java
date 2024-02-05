@@ -43,7 +43,7 @@ public class PitchingSubsystem extends SuperSystem {
     getTab().addCommandToDashboard("reset falcon encoder", new InstantCommand( () -> resetFalconEncoder()));
   }
 
-  public void SetOutput(double output){
+  public void SetOutput(double output){ 
     masterPitchingMotor.set(ControlMode.PercentOutput, output);
   }
   /**
@@ -59,14 +59,14 @@ public class PitchingSubsystem extends SuperSystem {
  * config the angle encoder 356 - 140
  */
   private void configAngleEncoder(){        
-    angleEncoder.getPosition().setUpdateFrequency(4);
+angleEncoder.getPosition().setUpdateFrequency(4);
     angleEncoder.getConfigurator().apply(Robot.ctreConfigs.pitchingCanCoderConfig);
   }
 
   /**
-   * Return the current angle - the angle offset 0.227051
+   * Return the current angle - the angle offset 0.227051 
    *
-   * @return the absolute angle of the Cancoder in degrees. 
+   * @return the absolute angle of the Cancoder in degrees.
    */
   public double getAbsolutePosition(){
     double absolutePosition;
@@ -148,7 +148,6 @@ public class PitchingSubsystem extends SuperSystem {
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);
-    // System.out.println( noteIn.get());
 
   }
 }
