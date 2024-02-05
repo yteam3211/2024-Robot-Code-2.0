@@ -61,6 +61,7 @@ public class RobotButtons {
     public static Trigger pitchTrig = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
 
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
+
     
 
     /**
@@ -83,13 +84,13 @@ public class RobotButtons {
                 // systems joystick commands
         kicker.whileTrue(new KickerCommand(kickerSubsystem,shootingSubsystem,0.4));
         
-        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
+        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem, pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
         speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, 17000));                    
         climbTrigger.whileTrue(new EleavatorCommand(eleavatorSubsystem, 200));
         intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 
         pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 45));
-        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -10));       
+        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -10));
 
     }
 }
