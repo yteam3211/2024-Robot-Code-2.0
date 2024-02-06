@@ -32,31 +32,30 @@ public class ShootingSubsystem extends SuperSystem {
     shooterGains = new Gains("shooterGains", 0, 0, 1,0,0,0,0); //TODO: need to add kf
     masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, 40, false, false, NeutralMode.Coast, shooterGains, TalonFXControlMode.Velocity, 0, 0,0); 
     slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR_ID, 40, false);
-    setDefaultCommand( new ShootingOutput(this, 0)
-    );
+    setDefaultCommand( new ShootingOutput(this, 0));
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
-  }
-
+  
   public void setShooterVelocity(double velocity)
   {
-     masterShooterMotor.set(ControlMode.Velocity, velocity);
+    masterShooterMotor.set(ControlMode.Velocity, velocity);
   }
-
-
-
+  
+  
   public double getVelocity()
   {
     return masterShooterMotor.getVelocity();
   }
-
-   public void setShooterOutput(double output)
+  
+  public void setShooterOutput(double output)
   {
-     masterShooterMotor.set(ControlMode.PercentOutput, output);
+    masterShooterMotor.set(ControlMode.PercentOutput, output);
   }
-
+  
+  
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    // getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
+  }
 }
