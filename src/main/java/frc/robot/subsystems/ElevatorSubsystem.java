@@ -20,8 +20,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public enum gains{
       EleavatorUp(0),
       EleavatorDown(1),
-      EleavatorClimbUp(2),
-      EleavatorClimbDown(4);
+      EleavatorClimbUp(2);
       public final int value;
       gains(int index) {
         value = index;
@@ -40,11 +39,11 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.03, 0, 0);    
+    eleavatorUpGains = new Gains("eleavator up Gains", 0.09, 0, 0.001);    
     eleavatorDownGains = new Gains("eleavator down Gains", 0.03, 0, 0);
     eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
-    eleavatorClimbDownGains = new Gains("eleavator climd down Gains", 0.03, 0, 0);
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 0, 0,0);
+
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 10000, 8000,5);
     slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
@@ -56,10 +55,6 @@ public class ElevatorSubsystem extends SuperSystem {
     masterEleavatorMotor.config_kP(2, eleavatorClimbUpGains.kp);
     masterEleavatorMotor.config_kI(2, eleavatorClimbUpGains.ki);
     masterEleavatorMotor.config_kD(2, eleavatorClimbUpGains.kd);
-
-    masterEleavatorMotor.config_kP(3, eleavatorClimbDownGains.kp);
-    masterEleavatorMotor.config_kI(3, eleavatorClimbDownGains.ki);
-    masterEleavatorMotor.config_kD(3, eleavatorClimbDownGains.kd);
     
   }
 
@@ -91,7 +86,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public void setPosition(double hight)
   {
     double falconPos = (hight / Constants.ELEAVATOR_WINCH_CIRCUMFERENCE) * Constants.ELEAVATOR_GEAR_RATIO * 2048;
-    masterEleavatorMotor.set(ControlMode.Position, falconPos);
+    masterEleavatorMotor.set(ControlMode.MotionMagic, falconPos);
   }
 
   public void setOutput(double Output){
@@ -106,20 +101,24 @@ public class ElevatorSubsystem extends SuperSystem {
     return ((getMasterPosition() / 2048) / Constants.ELEAVATOR_GEAR_RATIO) * Constants.ELEAVATOR_WINCH_CIRCUMFERENCE;
   }
 
+  public void changeStation(gains mode){
+   masterEleavatorMotor.selectProfileSlot(mode.value, 0);
+  }
+
   @Override
   public void periodic() {
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", masterEleavatorMotor.getPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
-    if (this.isEleavatorDown())
-    {
-      resetEncoder();
-    }
+    // if (this.isEleavatorDown())
+    // {
+    //   resetEncoder();
+    // }
     
-    if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
-    {
-      masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
-    }
+    // if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
+    // {
+    //   masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
+    // }
     // This method will be called once per scheduler run
   }
 }

@@ -91,6 +91,7 @@ public class Robot extends TimedRobot {
     m_robotContainer.getSwerve().zeroGyro();
     // new restShooting(m_robotContainer.getPitchingSubsystem());
     m_robotContainer.getPitchingSubsystem().SetOutput(0);
+    m_robotContainer.getElevatorSubsystem().setOutput(0);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

@@ -32,7 +32,10 @@ public class ShootingSpeedCommand extends Command {
   @Override
   public void execute() { 
      shootingSubsystem.setShooterVelocity(shootingVelocity);
-    if (shootingVelocity - shootingSubsystem.getVelocity() < Constants.SHOOTING_VELOCITY_TRESHOLD) {
+     System.out.println("out " + shootingSubsystem.getVelocity());
+    if ((shootingVelocity - 2000) < shootingSubsystem.getVelocity()) {
+      System.out.println("in " + shootingSubsystem.getVelocity());
+
       kickerSubsystem.setKickerOutput(kickerOutput);
     }
   }
@@ -40,7 +43,8 @@ public class ShootingSpeedCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shootingSubsystem.setShooterVelocity(0);
+    shootingSubsystem.setShooterOutput(0);
+    kickerSubsystem.setKickerOutput(0);
   }
 
   // Returns true when the command should end.

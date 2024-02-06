@@ -28,7 +28,7 @@ public class IntakeCommand extends Command {
   @Override
   public void execute() 
   {
-    System.out.println("in");
+    
     intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
     intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
     // intakeSubsystem.setIntakeOpenMotorOutput(intakePosition);

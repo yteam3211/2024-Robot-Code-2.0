@@ -29,7 +29,6 @@ public class PitchingSubsystem extends SuperSystem {
   public SuperTalonFX slavePitchingMotor;
   public CANcoder angleEncoder;
   public Gains pitchingGains;
-  private DigitalInput noteIn;
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
@@ -37,7 +36,6 @@ public class PitchingSubsystem extends SuperSystem {
     masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,8000, 5000,5); 
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, 40, false);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
-    noteIn = new DigitalInput(1);
     configAngleEncoder();
     resetFalconEncoder();
     getTab().addCommandToDashboard("reset falcon encoder", new InstantCommand( () -> resetFalconEncoder()));
@@ -52,7 +50,6 @@ public class PitchingSubsystem extends SuperSystem {
    * @param position position in degrees.
    */
   public void setPosition(double position){
-    System.out.println("falcon raw sensor unit pos: " + degreesToFalconEncoder(position));
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
   }
 /**
@@ -86,8 +83,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
  * reset the falcon integrated encoder
  */
   public void resetFalconEncoder(){
-    System.out.println("reset pitching falconnnnnnnnnnnnnnnnnnnnnnn" + degreesToFalconEncoder(getAbsolutePosition()));
-    System.out.println("absolute position: " + getAbsolutePosition());
+
 
     masterPitchingMotor.reset(degreesToFalconEncoder(getAbsolutePosition())); 
   }
@@ -133,10 +129,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
     return angleToSpeakerDegrees;
   }
 
-  public boolean isNoteIn()
-  {
-     return noteIn.get();
-  }
+
 
   @Override
   public void periodic() {

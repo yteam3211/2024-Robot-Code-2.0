@@ -11,12 +11,10 @@ import frc.robot.subsystems.ShootingSubsystem;
 public class KickerCommand extends Command {
   /** Creates a new kickerCommand. */
   private KickerSubsystem kickerSubsystem;
-  private ShootingSubsystem shootingSubsystem;
   private double kickerOutput;
 
-  public KickerCommand(KickerSubsystem kickerSubsystem,ShootingSubsystem shootingSubsystem,double kickerOutput) {
+  public KickerCommand(KickerSubsystem kickerSubsystem,double kickerOutput) {
   this.kickerSubsystem = kickerSubsystem;
-  this.shootingSubsystem = shootingSubsystem;
   this.kickerOutput = kickerOutput;
   addRequirements(kickerSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,12 +34,18 @@ public class KickerCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     kickerSubsystem.setKickerOutput(0);
-    shootingSubsystem.setShooterOutput(0);
+  
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (!kickerSubsystem.isNoteIn()) {
+     return true;
+    }
+    else{
     return false;
+
+    }
   }
 }

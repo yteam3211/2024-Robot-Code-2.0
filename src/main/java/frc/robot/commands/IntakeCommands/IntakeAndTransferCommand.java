@@ -25,7 +25,9 @@ public class IntakeAndTransferCommand extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
          new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000), // TODO: change to IntakeCommand
-          new TransferCommand(transferSubsystem, 0.8)
+          new TransferCommand(transferSubsystem, 0.8),
+          new KickerCommand(kickerSubsystem, 0.4)
+
           // ,
           // new ShootingSpeedCommand(shootingSubsystem, 17000),
           // new KickerCommand(kickerSubsystem,shootingSubsystem,0.8)

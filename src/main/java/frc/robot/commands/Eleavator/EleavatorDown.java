@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class EleavatorCommand extends Command {
+public class EleavatorDown extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
   private double eleavatorPosition;
   /** Creates a new Eleavator. */
-  public EleavatorCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  public EleavatorDown(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
     this.eleavatorSubsystem = eleavatorSubsystem;
     this.eleavatorPosition =eleavatorPosition;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -20,12 +20,19 @@ public class EleavatorCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    eleavatorSubsystem.setPosition(eleavatorPosition);
+    if (eleavatorSubsystem.isEleavatorDown() ) {
+      eleavatorSubsystem.setOutput(0);
+    }
+    else
+    {
+      eleavatorSubsystem.setPosition(eleavatorPosition);
+    }
     
   }
 
