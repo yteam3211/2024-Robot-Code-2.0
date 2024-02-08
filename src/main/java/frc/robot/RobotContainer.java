@@ -31,13 +31,13 @@ public class RobotContainer {
     private final AllianceSpecs allianceSpecs = new AllianceSpecs();
 
     /* Subsystems */
-    public static final Limelight limelight = new Limelight.Builder().build();
+    private final Limelight limelight = new Limelight.Builder().build();
     private final Swerve swerve = new Swerve(limelight);
     private final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
-    private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem();
+    private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+    private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem(elevatorSubsystem);
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
-    private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
 
 
@@ -77,7 +77,7 @@ public class RobotContainer {
     }
 
     // gets & sets 
-    public static Limelight getLimelight() {
+    public Limelight getLimelight() {
         return limelight;
     }
 

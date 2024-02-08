@@ -25,12 +25,12 @@ public final class Constants {
     
     // pitching constants
     public static final double PITCHING_ENCODER_OFFSET = 81.73828125; //in degrees
-    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.60890684614;
-    public static final double LIMELIGHT_TO_PIVOT = 347.32;
+    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
+    public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
     public static final double SPEAKER_HIGHT = 2150; //in millimeters
-    public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
-    public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 150; //in millimeters
+    public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
+    public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
     public static final double MAX_PITCHING_ANGLE = 0;
     public static final double PITCHING_GEAR_RATIO = 160 / 1;
@@ -38,9 +38,9 @@ public final class Constants {
     // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
     public static final double ELEAVATOR_GEAR_RATIO = 15.31 / 1;
-    private static final double ELEAVATOR_WINCH_DIAMETER = 50; // diameter in millimeters
+    private static final double ELEAVATOR_WINCH_DIAMETER = 50; //in millimeters
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
-    public static final double FLOOR_TO_CLOSE_ELEAVATOR = 0; //TODO: check on robot after mechanical stop has added
+    public static final double FLOOR_TO_CLOSE_ELEAVATOR = 165; //in millimeters
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
