@@ -7,6 +7,7 @@ package frc.robot.commands.Eleavator;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem.gains;
 
 public class EleavatorDown extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
@@ -21,6 +22,7 @@ public class EleavatorDown extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    eleavatorSubsystem.changeStation(gains.EleavatorUp);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,20 +40,28 @@ public class EleavatorDown extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    eleavatorSubsystem.setOutput(0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (eleavatorSubsystem.isEleavatorDown()) {
+      return true;
+    }
+    else{
+       return false;
+    }
     // if( Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD)
     // {
-    //   return true;
+      
     // }
     // else
     // {
     //   return false;
     // }
-    return false;
-    
+   
+    // return true;
   }
 }

@@ -9,23 +9,21 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem.gains;
 
-public class EleavatorCommand extends Command {
+public class EleavatorClimbDown extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
   private double eleavatorPosition;
   /** Creates a new Eleavator. */
-  public EleavatorCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  public EleavatorClimbDown(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
     this.eleavatorSubsystem = eleavatorSubsystem;
-    this.eleavatorPosition = eleavatorPosition;
-    addRequirements(eleavatorSubsystem);
+    this.eleavatorPosition =eleavatorPosition;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    eleavatorSubsystem.changeStation(gains.EleavatorUp);
-
-    // eleavatorSubsystem.changeStation();
+    
+    eleavatorSubsystem.changeStation(gains.EleavatorClimbUp);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,15 +40,7 @@ public class EleavatorCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // if( Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD)
-    // {
-    //   return true;
-    // }
-    // else
-    // {
-    //   return false;
-    // }
-    return true;
+    return false;
     
   }
 }

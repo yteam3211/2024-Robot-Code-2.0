@@ -8,10 +8,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotButtons;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
@@ -32,18 +35,20 @@ public class ElevatorSubsystem extends SuperSystem {
   private Gains eleavatorUpGains;
   private Gains eleavatorDownGains;    
   private Gains eleavatorClimbUpGains;  
-  private Gains eleavatorClimbDownGains;
+  private Gains eleavatorTestGains;
   public gains mode;
+  public PIDController pidController = new PIDController(0, 0, 0);
 
   private DigitalInput EleavatorMicrowSwitch;
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.15, 0, 1);    
-    eleavatorDownGains = new Gains("eleavator down Gains", 0.03, 0, 0);
+    eleavatorTestGains = new Gains("eleavator up Gains", 0.1, 0, 0.009867);
+    eleavatorDownGains = new Gains("eleavator down Gains", 0.16, 0, 0);
     eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
+    eleavatorUpGains = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 10000, 8000,5);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorTestGains, TalonFXControlMode.MotionMagic, 17000, 13000,100);
     slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
@@ -76,7 +81,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public void resetEncoder()
   {
     masterEleavatorMotor.reset(0);
-    masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
+    // masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
   }
   
   /**
@@ -107,13 +112,14 @@ public class ElevatorSubsystem extends SuperSystem {
 
   @Override
   public void periodic() {
+    getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", masterEleavatorMotor.getPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
-    if (this.isEleavatorDown())
-    {
-      resetEncoder();
-    }
+    // if (this.isEleavatorDown())
+    // {
+    //   resetEncoder();
+    // }
     
     // if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
     // {

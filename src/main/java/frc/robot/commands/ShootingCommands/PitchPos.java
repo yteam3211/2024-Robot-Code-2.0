@@ -25,6 +25,7 @@ public class PitchPos extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("pitch");
     pitchingSubsystem.setPosition(angleDegrees);
   }
 
@@ -45,6 +46,6 @@ public class PitchPos extends Command {
   //   System.out.println("false");
   //    return false;
   //  }
-  return false;
+  return true;
   }
 }
