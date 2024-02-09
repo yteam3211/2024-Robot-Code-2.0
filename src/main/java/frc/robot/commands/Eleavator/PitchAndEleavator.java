@@ -17,17 +17,15 @@ import frc.robot.subsystems.PitchingSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PitchindAnDEleavator extends ParallelCommandGroup{
+public class PitchAndEleavator extends ParallelCommandGroup{
   /** Creates a new PitchindAnDEleavator. */
-  public PitchindAnDEleavator( PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem, double angle,double eleavatorPos) {
+  public PitchAndEleavator( PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem, double angle,double eleavatorPos) {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(  
-    new EleavatorCommand(eleavatorSubsystem, eleavatorPos),
-    new WaitCommand(0.02),
-    new PitchPos(pitchingSubsystem, angle)
-
+      new PitchPos(pitchingSubsystem, angle),
+      new EleavatorCommand(eleavatorSubsystem, eleavatorPos)
     );
   }
 }
