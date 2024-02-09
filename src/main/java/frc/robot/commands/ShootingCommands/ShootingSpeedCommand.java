@@ -35,7 +35,7 @@ public class ShootingSpeedCommand extends Command {
      System.out.println("out " + shootingSubsystem.getVelocity());
     if ((shootingVelocity - 2000) < shootingSubsystem.getVelocity()) {
       System.out.println("in " + shootingSubsystem.getVelocity());
-
+      
       kickerSubsystem.setKickerOutput(kickerOutput);
     }
   }
