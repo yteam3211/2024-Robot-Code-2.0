@@ -21,7 +21,6 @@ import frc.robot.commands.Eleavator.EleavatorClimbDown;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.Eleavator.EleavatorDown;
 import frc.robot.commands.Eleavator.PitchAndEleavator;
-import frc.robot.commands.Eleavator.PitchindAnDEleavator;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakeWheels;

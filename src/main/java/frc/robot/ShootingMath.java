@@ -57,9 +57,9 @@ public class ShootingMath extends SuperSystem {
     //     elevatorSubsystem.setPosition(elevatorSubsystem.getElevatorHight() + 5);  
     //   }
     // }
-    hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - getVerticalLimelightHightFromfloor(elevatorSubsystem);
-    distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, getAbsolutePosition());
-    hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
+    // hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - getVerticalLimelightHightFromfloor(elevatorSubsystem);
+    // distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, getAbsolutePosition());
+    // hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
     distanceFromShooterToSpeaker = distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER;
     angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
     angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
@@ -76,7 +76,7 @@ public class ShootingMath extends SuperSystem {
     //   masterPitchingMotor.set (ControlMode.PercentOutput, 0);
     // }
     getTab().putInDashboard("limelight to AprilTag", distanceFromLimelightToSpeaker, false);
-    getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
+    // getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
   }
 
 
