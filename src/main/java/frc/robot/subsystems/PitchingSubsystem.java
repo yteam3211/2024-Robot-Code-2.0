@@ -120,22 +120,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
     return Constants.FLOOR_TO_CLOSE_ELEAVATOR + eleavatorSubsystem.getElevatorHight() + Constants.RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL + getVerticalLimelightHightFromPivot();
   }
 
-  public double getAngleToSpeaker(ElevatorSubsystem elevatorSubsystem, Limelight limelight){
-    if(!limelight.isValid()){
-      if(getAbsolutePosition() < -5 || getAbsolutePosition() > 15 || Math.abs(Robot.m_robotContainer.getSwerve().getYaw().getDegrees() - Robot.m_robotContainer.getSwerve().getEstematedSpeakerShootingAngle()) > Constants.ESTEMATED_ANGLE_TRESHOLD){ // TODO: fix it
-        setPosition(5);
-      }else {
-        elevatorSubsystem.setPosition(elevatorSubsystem.getElevatorHight() + 5);  
-      }
-    }
-    hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - getVerticalLimelightHightFromfloor(elevatorSubsystem);
-    distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, getAbsolutePosition());
-    hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
-    distanceFromShooterToSpeaker = distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER;
-    angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
-    angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
-    return angleToSpeakerDegrees;
-  }
+
 
 
 

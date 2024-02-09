@@ -53,7 +53,7 @@ public class Swerve extends SuperSystem {
             new SwerveModule(2, Constants.SwerveConstant.Mod2.constants),
             new SwerveModule(3, Constants.SwerveConstant.Mod3.constants)
         };
-        getTab().getTab().add("field", 0).withWidget(BuiltInWidgets.kField).getEntry(); 
+        // getTab().getTab().add("field", 0).withWidget(BuiltInWidgets.kField).getEntry(); 
             AutoBuilder.configureHolonomic(
                 this::getPose, // Robot pose supplier
                 this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -184,30 +184,22 @@ public class Swerve extends SuperSystem {
             mod.resetToAbsolute();
         }
     }
+    
 
-    public double getEstematedSpeakerShootingAngle(){
-        double estematedAngle = Units.radiansToDegrees(Math.atan(Math.abs(AllianceSpecs.speakerPos.getY() - getPose().getY()) / Math.abs(AllianceSpecs.speakerPos.getX() - getPose().getX())));
-        if(AllianceSpecs.speakerPos.getY() - getPose().getY() < 0){
-            estematedAngle *= -1;
-        }
-        return estematedAngle;
-    }
 
-    public boolean isShootingRange(){
-        return Math.sqrt(Math.pow((getPose().getX() - AllianceSpecs.speakerPos.getX()), 2) + Math.pow((getPose().getY() - AllianceSpecs.speakerPos.getY()), 2)) < Constants.MAX_SHOOTING_RANGE;
-    }
+
 
     @Override
     public void periodic(){
-        getTab().putInDashboard("pose xy", getPose().getX(), false);
+        getTab().putInDashboard("pose x", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
         // getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
-        // getTab().putInDashboard("roll", gyro.getRoll(), false);
+        // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
-        // swerveOdometry.update(getYaw(), getModulePositions());  
+        // swerveOdometry.update(getYaw(), getModulePositions());
         poseEstimator.update(getYaw(), getModulePositions());
         if(limelight.isValid()){
             Pose2d camPose = new Pose2d(limelight.getBotpose()[0], limelight.getBotpose()[1], getYaw());

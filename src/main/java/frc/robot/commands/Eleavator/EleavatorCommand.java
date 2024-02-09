@@ -45,6 +45,5 @@ public class EleavatorCommand extends Command {
     //   return false;
     // }
     return false;
-    
   }
 }

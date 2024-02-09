@@ -36,12 +36,10 @@ public class TeleopSwerve extends Command {
 
   
         /* Drive */
-            s_Swerve.drive(            
+            s_Swerve.drive(
                 new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstant.maxSpeed), 
-                rotationVal * Constants.SwerveConstant.maxAngularVelocity, 
+                rotationVal * Constants.SwerveConstant.maxAngularVelocity,
              true
             );
-        }
-       
+        }   
     }
-

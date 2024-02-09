@@ -39,7 +39,7 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.09, 0, 0.001);    
+    eleavatorUpGains = new Gains("eleavator up Gains", 0.15, 0, 1);    
     eleavatorDownGains = new Gains("eleavator down Gains", 0.03, 0, 0);
     eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
 
@@ -69,7 +69,7 @@ public class ElevatorSubsystem extends SuperSystem {
   }
   
   public boolean isEleavatorDown()
-  {
+  {    
     return !EleavatorMicrowSwitch.get();
   }
   
@@ -110,10 +110,10 @@ public class ElevatorSubsystem extends SuperSystem {
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", masterEleavatorMotor.getPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
-    // if (this.isEleavatorDown())
-    // {
-    //   resetEncoder();
-    // }
+    if (this.isEleavatorDown())
+    {
+      resetEncoder();
+    }
     
     // if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
     // {
