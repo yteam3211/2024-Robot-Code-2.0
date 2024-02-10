@@ -11,7 +11,7 @@ public class PitchPos extends Command {
   /** Creates a new PitchPos. */
     private PitchingSubsystem pitchingSubsystem;
     private double angleDegrees;
-  public PitchPos(PitchingSubsystem pitchingSubsystem,double angleDegrees) {
+  public PitchPos(PitchingSubsystem pitchingSubsystem, double angleDegrees) {
     this.pitchingSubsystem = pitchingSubsystem;
     this.angleDegrees = angleDegrees;
     addRequirements(pitchingSubsystem);

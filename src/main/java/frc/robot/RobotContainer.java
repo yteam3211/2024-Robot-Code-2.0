@@ -28,22 +28,21 @@ public class RobotContainer {
     
     public static boolean isRed;
     private final RobotButtons robotButtons = new RobotButtons();
-    private final AllianceSpecs allianceSpecs = new AllianceSpecs();
-
+    
     /* Subsystems */
     private final Limelight limelight = new Limelight.Builder().build();
     private final Swerve swerve = new Swerve(limelight);
     private final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
     private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-    private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem(elevatorSubsystem);
+    private final PitchingSubsystem pitchingSubsystem = new PitchingSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-
+    
+    private final AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
+    private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
 
     //auto commands register
-
-
     public RobotContainer() {
 
     // NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
@@ -63,7 +62,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem, elevatorSubsystem, kickerSubsystem);
+        robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath);
     }
  
     /**
@@ -115,5 +114,8 @@ public class RobotContainer {
 
     public ElevatorSubsystem getElevatorSubsystem() {
         return elevatorSubsystem;
+    }
+        public ShootingMath getShootingMath() {
+        return shootingMath;
     }
 }

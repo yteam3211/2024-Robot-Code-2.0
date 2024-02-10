@@ -42,6 +42,7 @@ public final class Constants {
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
     public static final double FLOOR_TO_CLOSE_ELEAVATOR = 165; //in millimeters
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
+    public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS = 189.242138; // raw encoder units
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
 
@@ -58,9 +59,6 @@ public final class Constants {
     // alliance constants
     public static final Pose2d RED_SPEAKER_POS = new Pose2d(new Translation2d(16.54, 5.57), new Rotation2d());
     public static final Pose2d BLUE_SPEAKER_POS = new Pose2d(new Translation2d(0, 5.57), new Rotation2d());
-    public static final double RED_SPEAKER_LIMELIGHT_PIPELINE = 0;
-    public static final double BLUE_SPEAKER_LIMELIGHT_PIPELINE = 1;      
-    public static final double AMP_LIMELIGHT_PIPELINE = 2;
     public static final double RED_AMP_ANGLE = 90;
     public static final double BLUE_AMP_ANGLE = -90; 
     

@@ -6,8 +6,10 @@ package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.ShootingMath;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
+import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
 
 // @author Noya Aberjil
@@ -15,24 +17,17 @@ import frc.util.vision.Limelight;
 public class PitchCommand extends Command {
   private Limelight limelight;
   private PitchingSubsystem pitchingSubsystem;
-  ElevatorSubsystem eleavatorSubsystem;
-  private double position;
-  private double angleToGoalDegrees ;
-  private double angleToGoalRadians;
-  private double distanceFromLimelightToSpeaker;
-  private double angleToSpeakerRadians;
-  private double angleToSpeakerDegrees;
-  private double hightLimelightToApriltag;
-  private double hightShootingToSpeaker;
-  private double distanceFromShooterToSpeaker;
+  private ElevatorSubsystem eleavatorSubsystem;
+  private ShootingMath shootingMath;
+
 
 
   /** Creates a new PichCommand. */
-  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem, double position) {
+  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem, ShootingMath shootingMath) {
     this.limelight = limelight;
     this.pitchingSubsystem = pitchingSubsystem;
     this.eleavatorSubsystem = eleavatorSubsystem;
-    this.position = position;
+    this.shootingMath = shootingMath;
     addRequirements(pitchingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -45,19 +40,20 @@ public class PitchCommand extends Command {
   @Override
   public void execute() {
   //  angleToSpeakerDegrees = pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
+    System.out.println("right pitch: " + shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // pitchingSubsystem.setPosition(angleToSpeakerDegrees);
-    pitchingSubsystem.setPosition(position);
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

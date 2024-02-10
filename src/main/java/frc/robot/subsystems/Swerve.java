@@ -193,7 +193,6 @@ public class Swerve extends SuperSystem {
     public void periodic(){
         getTab().putInDashboard("pose x", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
-        // getTab().putInDashboard("LL y pos", limelight.getBotpose()[1], false);
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
@@ -202,16 +201,18 @@ public class Swerve extends SuperSystem {
         // swerveOdometry.update(getYaw(), getModulePositions());
         poseEstimator.update(getYaw(), getModulePositions());
         if(limelight.isValid()){
-            Pose2d camPose = new Pose2d(limelight.getBotpose()[0], limelight.getBotpose()[1], getYaw());
+            Pose2d camPose = new Pose2d(AllianceSpecs.poseX.getAsDouble(), AllianceSpecs.poseY.getAsDouble(), getYaw());
             
             poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());
-
-            poseEstimator.resetPosition(getYaw(), getModulePositions(), poseEstimator.getEstimatedPosition());
+            
+            poseEstimator.resetPosition(getYaw(), getModulePositions(), camPose);
+            getTab().putInDashboard("LL x pos", AllianceSpecs.poseX.getAsDouble(), false);
+            getTab().putInDashboard("LL y pos", AllianceSpecs.poseY.getAsDouble(), false);
         }
         for(SwerveModule mod : mSwerveMods){
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);    
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false); 189.242138
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false); 120358
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false); 636
         }
     }
 }
