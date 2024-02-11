@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.ShootingMath;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -23,15 +24,14 @@ import frc.util.vision.Limelight;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class CompleteShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteSootingCommand. */
-  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem) {
+  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(             //TODO: dont forget to change the eleavator position and the kickers output
-    1 > 2 ?
+    addCommands(             //TODO: change the eleavator position and the kickers output
       new ParallelCommandGroup(new TurnToShootingCommand(swerve, limelight),
-      new EleavatorCommand(eleavatorSubsystem, 0) ,
-      new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, 0),
-      new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)) : new WaitCommand(0),
+      new EleavatorCommand(eleavatorSubsystem, 0),
+      new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, shootingMath),
+      new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
       new KickerCommand(kickerSubsystem, 0)
 
     );
