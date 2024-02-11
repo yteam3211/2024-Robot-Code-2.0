@@ -55,10 +55,10 @@ public class RobotButtons {
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     
     // systems joystick buttons
-    
     public static Trigger intakeTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
     public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
-    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
+    public static Trigger completeSpeakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kSquare.value));
     public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);    
     public static Trigger climbTrig = new Trigger(() -> systems.getPOV() == 90);    
     public static Trigger climb = new Trigger(() -> systems.getPOV() == 180);
@@ -90,16 +90,17 @@ public class RobotButtons {
         resetGyro.onTrue(new InstantCommand(() -> Robot.m_robotContainer.getSwerve().zeroGyro()));
 
         // systems joystick commands
+
         kicker.whileTrue(new KickerCommand(kickerSubsystem,0.4));
         
         // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
         speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
-        
+        completeSpeakerShootingTrigger.onTrue(new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath).onlyIf(() -> shootingMath.isShootingRange(swerve)));
         
         climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,45,605));
         climb.onTrue(new EleavatorDown(elevatorSubsystem, 50));
 
-        intakeTrigger.whileTrue(new  IntakeWheels( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
+        intakeTrigger.whileTrue(new IntakeWheels( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 
         pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 20));
         pitchTrig.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath));

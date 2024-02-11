@@ -51,7 +51,7 @@ public class ShootingMath extends SuperSystem {
         return estematedAngle;
     }
 
-    public static boolean isShootingRange(Swerve swerve){
+    public boolean isShootingRange(Swerve swerve){
         return getSpeakerShootingDistance(swerve) < Constants.MAX_SHOOTING_RANGE;
     }
 
