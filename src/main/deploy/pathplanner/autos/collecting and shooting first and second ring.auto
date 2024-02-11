@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.73,
+      "y": 6.68
+    },
+    "rotation": 60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shooting and collecting first ring from forst spot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shooting ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from first ring collecting second parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from second parallel ring to shooting spot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "first row and second row",
+  "choreoAuto": false
+}
