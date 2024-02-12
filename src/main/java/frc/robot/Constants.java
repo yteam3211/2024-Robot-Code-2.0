@@ -42,13 +42,14 @@ public final class Constants {
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
     public static final double FLOOR_TO_CLOSE_ELEAVATOR = 165; //in millimeters
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
+    public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS = 189.242138; // raw encoder units
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
 
     // swerve constants
     public static final double TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
     public static final double ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
-    public static final double MAX_SHOOTING_RANGE = 5; // in meters
+    public static final double MAX_SHOOTING_RANGE = 3.5; // in meters
 
     // intake constants
     public static final double INTAKE_OPEN_POSITION = 37.5; // in rotations
@@ -58,9 +59,6 @@ public final class Constants {
     // alliance constants
     public static final Pose2d RED_SPEAKER_POS = new Pose2d(new Translation2d(16.54, 5.57), new Rotation2d());
     public static final Pose2d BLUE_SPEAKER_POS = new Pose2d(new Translation2d(0, 5.57), new Rotation2d());
-    public static final double RED_SPEAKER_LIMELIGHT_PIPELINE = 0;
-    public static final double BLUE_SPEAKER_LIMELIGHT_PIPELINE = 1;      
-    public static final double AMP_LIMELIGHT_PIPELINE = 2;
     public static final double RED_AMP_ANGLE = 90;
     public static final double BLUE_AMP_ANGLE = -90; 
     
@@ -177,7 +175,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.054688));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.554199));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -187,7 +185,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.085693));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.587402));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -197,7 +195,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.102051 )); 
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.601074)); 
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -207,7 +205,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.017090));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.512939));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

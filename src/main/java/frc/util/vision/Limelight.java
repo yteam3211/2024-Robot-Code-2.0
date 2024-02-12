@@ -216,8 +216,15 @@ public class Limelight extends SubsystemBase {
   }
 
   public double[] getBotpose(){
-    return limelightTable.getEntry("botpose").getDoubleArray(new double[0]);
+    return limelightTable.getEntry("botpose").getDoubleArray(new double[6]);
   }
+  public double[] getRedBotpose(){
+    return limelightTable.getEntry("botpose_wpired").getDoubleArray(new double[6]);
+  }
+  public double[] getBlueBotpose(){
+    return limelightTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
+  }
+
   /**
    * @return true if valid.
    */

@@ -28,7 +28,6 @@ public class PitchingSubsystem extends SuperSystem {
   public SuperTalonFX masterPitchingMotor;
   public SuperTalonFX slavePitchingMotor;
   public CANcoder angleEncoder;
-  private ElevatorSubsystem elevatorSubsystem;
   public Gains pitchingGains;
   public double hightLimelightToApriltag;
   public double distanceFromLimelightToSpeaker;
@@ -38,13 +37,12 @@ public class PitchingSubsystem extends SuperSystem {
   public double angleToSpeakerDegrees;
   
 
-  public PitchingSubsystem(ElevatorSubsystem elevatorSubsystem) {
+  public PitchingSubsystem() {
     super("Pitching Subsystem");
     pitchingGains = new Gains("pitchingGains", 0.383, 0, 0.003);
     masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,8000, 5000,5); 
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, 40, false);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
-    this.elevatorSubsystem = elevatorSubsystem;
     configAngleEncoder();
     resetFalconEncoder();
     getTab().addCommandToDashboard("reset falcon encoder", new InstantCommand( () -> resetFalconEncoder()));
@@ -70,7 +68,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   }
 
   /**
-   * Return the current angle - the angle offset 0.227051 
+   * Return the current angle - the angle offset 
    *
    * @return the absolute angle of the Cancoder in degrees.
    */
@@ -112,43 +110,15 @@ angleEncoder.getPosition().setUpdateFrequency(4);
    * get the vertical hight of the Limelight lens from the pivot point of the shooting system
    * @return the limelight vertical hight in Millimeters
    */
-  public double getVerticalLimelightHightFromPivot(){
-    return Math.sin(getAbsolutePosition() + Constants.LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT) * Constants.LIMELIGHT_TO_PIVOT;
-  }
-
-  public double   getVerticalLimelightHightFromfloor(ElevatorSubsystem eleavatorSubsystem){
-    return Constants.FLOOR_TO_CLOSE_ELEAVATOR + eleavatorSubsystem.getElevatorHight() + Constants.RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL + getVerticalLimelightHightFromPivot();
-  }
-
-  public double getAngleToSpeaker(ElevatorSubsystem elevatorSubsystem, Limelight limelight){
-    if(!limelight.isValid()){
-      if(getAbsolutePosition() < -5 || getAbsolutePosition() > 15 || Math.abs(Robot.m_robotContainer.getSwerve().getYaw().getDegrees() - Robot.m_robotContainer.getSwerve().getEstematedSpeakerShootingAngle()) > Constants.ESTEMATED_ANGLE_TRESHOLD){ // TODO: fix it
-        setPosition(5);
-      }else {
-        elevatorSubsystem.setPosition(elevatorSubsystem.getElevatorHight() + 5);  
-      }
-    }
-    hightLimelightToApriltag = Constants.SPEAKER_APRILTAG_HIGHT - getVerticalLimelightHightFromfloor(elevatorSubsystem);
-    distanceFromLimelightToSpeaker = limelight.getDistanceToTarget(hightLimelightToApriltag, getAbsolutePosition());
-    hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
-    distanceFromShooterToSpeaker = distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER;
-    angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
-    angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
-    return angleToSpeakerDegrees;
-  }
-
-
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) ||(getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
-    // {
-    //   masterPitchingMotor.set (ControlMode.PercentOutput, 0);
-    // }
-    getTab().putInDashboard("limelight to AprilTag", distanceFromLimelightToSpeaker, false);
-    getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
+    // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
+    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
+    {
+      masterPitchingMotor.set (ControlMode.PercentOutput, 0);
+    }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);

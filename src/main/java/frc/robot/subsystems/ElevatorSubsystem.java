@@ -74,7 +74,7 @@ public class ElevatorSubsystem extends SuperSystem {
   }
   
   public boolean isEleavatorDown()
-  {
+  {    
     return !EleavatorMicrowSwitch.get();
   }
   
@@ -90,7 +90,7 @@ public class ElevatorSubsystem extends SuperSystem {
    */
   public void setPosition(double hight)
   {
-    double falconPos = (hight / Constants.ELEAVATOR_WINCH_CIRCUMFERENCE) * Constants.ELEAVATOR_GEAR_RATIO * 2048;
+    double falconPos = hight * Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS;
     masterEleavatorMotor.set(ControlMode.MotionMagic, falconPos);
   }
 
@@ -103,7 +103,8 @@ public class ElevatorSubsystem extends SuperSystem {
    * @return the hight from the base of the elevator to the bottom of the elevator's rider in milimeters
    */
   public double getElevatorHight(){
-    return ((getMasterPosition() / 2048) / Constants.ELEAVATOR_GEAR_RATIO) * Constants.ELEAVATOR_WINCH_CIRCUMFERENCE;
+    // return ((getMasterPosition() / 2048) / Constants.ELEAVATOR_GEAR_RATIO) * Constants.ELEAVATOR_WINCH_CIRCUMFERENCE;
+    return getMasterPosition() / Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS;
   }
 
   public void changeStation(gains mode){
@@ -114,10 +115,8 @@ public class ElevatorSubsystem extends SuperSystem {
   public void periodic() {
     getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
-    getTab().putInDashboard("elevator master integrated encoder", masterEleavatorMotor.getPosition(), false);   
-     getTab().putInDashboard("elevator pidController.getD()",pidController.getD() , false);
-    getTab().putInDashboard("is elevator down", isEleavatorDown(),false);
-    SmartDashboard.putData("eleavator gains",pidController);
+    getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
+    getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
     if (this.isEleavatorDown())
     {
       resetEncoder();
