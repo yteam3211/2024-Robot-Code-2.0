@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2119536546765417,
-        "y": 1.6280455637834357
+        "x": 1.6246356302236413,
+        "y": 1.125372524915325
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 0.77
       },
       "prevControl": {
-        "x": 5.408843125378559,
-        "y": 0.9176256814052094
+        "x": 4.135993264771522,
+        "y": 0.7462996744175311
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,12 +59,6 @@
               "type": "named",
               "data": {
                 "name": "open collect"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
               }
             }
           ]

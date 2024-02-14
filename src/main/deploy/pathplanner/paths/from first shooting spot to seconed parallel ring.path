@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.0,
-        "y": 7.0
+        "x": 2.9,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.912057208729804,
-        "y": 6.591117797620211
+        "x": 4.0530710787251305,
+        "y": 6.716697069757776
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 5.75
       },
       "prevControl": {
-        "x": 6.879017604189056,
-        "y": 6.137238428323012
+        "x": 6.291970101977721,
+        "y": 6.621928857133328
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,12 +59,6 @@
               "type": "named",
               "data": {
                 "name": "open collect"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
               }
             }
           ]

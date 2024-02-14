@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.303745530567986,
-        "y": 5.75
+        "x": 2.9,
+        "y": 5.55
       },
       "prevControl": {
-        "x": 5.152302612297534,
-        "y": 6.837791367890429
+        "x": 3.748557081729548,
+        "y": 6.637791367890429
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,12 +42,6 @@
               "type": "named",
               "data": {
                 "name": "shooting ring"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 5.0
               }
             }
           ]

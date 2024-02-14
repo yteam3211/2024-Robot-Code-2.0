@@ -3,37 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.4,
-        "y": 5.5
+        "x": 2.5,
+        "y": 5.56
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.399425568081907,
-        "y": 5.999101228971689
+        "x": 1.9089402680969862,
+        "y": 5.946705342184133
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4,
-        "y": 7.0
+        "x": 2.5,
+        "y": 6.7640811760699995
       },
       "prevControl": {
-        "x": 2.399425568081907,
-        "y": 6.502315312322933
+        "x": 1.9089402680969862,
+        "y": 6.408700378728318
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "open collect",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "parallel",
         "data": {
@@ -43,19 +49,13 @@
               "data": {
                 "name": "open collect"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
-              }
             }
           ]
         }
       }
     },
     {
-      "name": "collect and shoot",
+      "name": "collect",
       "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
@@ -66,23 +66,22 @@
               "data": {
                 "name": "collect"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 5.0
-              }
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "shooting ring",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
             {
               "type": "named",
               "data": {
                 "name": "shooting ring"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
               }
             }
           ]
@@ -98,14 +97,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 31.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "shooting and collecting the next ring",
-  "previewStartingState": {
-    "rotation": 45.0,
-    "velocity": 0
-  },
+  "folder": "collecting ring from side ring to side ring",
+  "previewStartingState": null,
   "useDefaultConstraints": false
 }

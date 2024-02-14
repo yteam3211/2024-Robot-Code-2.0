@@ -38,7 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "going from the first parallel ring to the seconed"
+            "pathName": "from first parallel ring to shooting spot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from first shooting spot to seconed parallel ring"
           }
         },
         {

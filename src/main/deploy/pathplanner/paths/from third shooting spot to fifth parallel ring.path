@@ -60,12 +60,6 @@
               "data": {
                 "name": "open collect"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
-              }
             }
           ]
         }

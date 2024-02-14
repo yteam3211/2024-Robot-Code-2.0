@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 2.4,
-        "y": 4.1
+        "x": 2.501241596999788,
+        "y": 4.35
       },
       "prevControl": {
-        "x": 1.8271428850550027,
-        "y": 4.331587893945019
+        "x": 1.9283844820547908,
+        "y": 4.581587893945019
       },
       "nextControl": null,
       "isLocked": false,
@@ -56,6 +56,12 @@
         "data": {
           "commands": [
             {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.5
+              }
+            },
+            {
               "type": "named",
               "data": {
                 "name": "shooting ring"
@@ -77,12 +83,6 @@
               "data": {
                 "name": "open collect"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
-              }
             }
           ]
         }
@@ -97,7 +97,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -30.0,
     "rotateFast": false
   },
   "reversed": false,

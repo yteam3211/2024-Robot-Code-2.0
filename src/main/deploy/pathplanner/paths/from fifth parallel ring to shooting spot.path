@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.1192630077561025,
-        "y": 0.8189562532918382
+        "x": 5.450902214935743,
+        "y": 0.7462996744175311
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9914421367304285,
-        "y": 3.0094175572966533
+        "x": 2.0,
+        "y": 4.098725196007391
       },
       "prevControl": {
-        "x": 3.909067818134954,
-        "y": 2.200328246805056
+        "x": 2.071076159468336,
+        "y": 1.930902332223134
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,12 +43,6 @@
               "data": {
                 "name": "shooting ring"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 5.0
-              }
             }
           ]
         }
@@ -63,7 +57,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": -35.0,
     "rotateFast": false
   },
   "reversed": false,
