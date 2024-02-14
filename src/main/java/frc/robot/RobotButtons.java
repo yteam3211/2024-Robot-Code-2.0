@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
+import frc.robot.commands.TransferCommands.TransferCommand;
 import frc.robot.commands.Eleavator.EleavatorClimbDown;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.Eleavator.EleavatorDown;
@@ -89,21 +91,22 @@ public class RobotButtons {
                     ));
         resetGyro.onTrue(new InstantCommand(() -> Robot.m_robotContainer.getSwerve().zeroGyro()));
 
-        // systems joystick commands
-
-        kicker.whileTrue(new KickerCommand(kickerSubsystem,0.4));
+                // systems joystick commands
+        // kicker.whileTrue(new KickerCommand(kickerSubsystem,0.4));
         
         // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
-        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
-        completeSpeakerShootingTrigger.onTrue(new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath).onlyIf(() -> shootingMath.isShootingRange(swerve)));
+       
+        // speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
         
-        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,45,605));
-        climb.onTrue(new EleavatorDown(elevatorSubsystem, 50));
+        
+        // climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,eleavatorSubsystem,45,400));
+        // climb.onTrue(new EleavatorDown(eleavatorSubsystem, -10));
+        // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        intakeTrigger.whileTrue(new IntakeWheels( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
+        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 20));
-        pitchTrig.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath));
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 45));
+        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -15));
 
     }
 }
