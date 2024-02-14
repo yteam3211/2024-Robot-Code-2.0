@@ -40,8 +40,8 @@ public class PitchingSubsystem extends SuperSystem {
   public PitchingSubsystem() {
     super("Pitching Subsystem");
     pitchingGains = new Gains("pitchingGains", 0.383, 0, 0.003);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,8000, 5000,5); 
-    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, 40, false);
+    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,8000, 5000,5); 
+    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
     configAngleEncoder();
     resetFalconEncoder();
@@ -60,7 +60,7 @@ public class PitchingSubsystem extends SuperSystem {
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
   }
 /**
- * config the angle encoder 356 - 140
+ * config the angle encoder
  */
   private void configAngleEncoder(){        
 angleEncoder.getPosition().setUpdateFrequency(4);
@@ -68,7 +68,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   }
 
   /**
-   * Return the current angle - the angle offset 
+   * Return the current angle - the angle offset
    *
    * @return the absolute angle of the Cancoder in degrees.
    */

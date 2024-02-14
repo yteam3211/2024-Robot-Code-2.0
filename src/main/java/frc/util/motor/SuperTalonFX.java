@@ -35,15 +35,16 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
      * @param mNeutralMode mode of motor brake or coast
      * @param gains
      */
-    public SuperTalonFX(int deviceNumber, int amps, boolean inverted, boolean PhaseSensor, NeutralMode mNeutralMode,
+    public SuperTalonFX(int deviceNumber, String canBusName, int amps, boolean inverted, boolean PhaseSensor, NeutralMode mNeutralMode,
             Gains gains, TalonFXControlMode mode, double maxAcc, double maxVel, double error) {
-        super(deviceNumber);
+        super(deviceNumber, canBusName);
         this.mode = mode;
 
         configFactoryDefault();
         configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
+        
         setInverted(inverted);
         setSensorPhase(PhaseSensor);
         setNeutralMode(mNeutralMode);
@@ -70,8 +71,8 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
      * @param amps         amper limitation
      * @param inverted     when side motor move
      */
-    public SuperTalonFX(IMotorController leader, int deviceNumber, int amps, boolean inverted) {
-        super(deviceNumber);
+    public SuperTalonFX(IMotorController leader, int deviceNumber, String canBusName, int amps, boolean inverted) {
+        super(deviceNumber, canBusName);
 
         selectProfileSlot(0, 0);
         setInverted(inverted);

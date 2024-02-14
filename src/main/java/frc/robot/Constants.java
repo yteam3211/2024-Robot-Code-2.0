@@ -34,6 +34,9 @@ public final class Constants {
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
     public static final double MAX_PITCHING_ANGLE = 0;
     public static final double PITCHING_GEAR_RATIO = 160 / 1;
+    public static final double LIMELIGHT_lOOKING_ANGLE = 10;
+    public static final double LIMELIGHT_lOOKING_ANGLE_TRESHOLD = 4;
+
 
     // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
@@ -89,13 +92,17 @@ public final class Constants {
     
 
 
+     public static final class CanBus{
+        public static final String CANivore = "can1";
+        public static final String RIO = "rio";
+     }
 
 
     public static final double stickDeadband = 0.01;
 
     public static final class SwerveConstant {
         public static final int pigeonID = 1;
-        public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
+        public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSFalconSwerveConstants chosenModule = 
             COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);

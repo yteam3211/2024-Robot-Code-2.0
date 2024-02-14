@@ -57,7 +57,7 @@ public class SwerveModule {
         configAngleMotor();
 
         /* Drive Motor Config */
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
+        mDriveMotor = new TalonFX(moduleConstants.driveMotorID, Constants.CanBus.CANivore);
         configDriveMotor();
 
         lastAngle = getState().angle;
