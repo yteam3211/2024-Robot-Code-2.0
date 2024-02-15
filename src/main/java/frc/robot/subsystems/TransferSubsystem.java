@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.util.SuperSystem;
@@ -16,10 +17,12 @@ import frc.util.motor.SuperSparkMax;
 
 public class TransferSubsystem extends SuperSystem {
   private SuperSparkMax transferMotor;
+  private DigitalInput noteIn; 
   /** Creates a new TransferSubsystem. */
   public TransferSubsystem() {
     super("Transfer Subsystem");
     transferMotor = new SuperSparkMax(Constants.TRANSFER_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast);
+    noteIn = new DigitalInput(2);
   }
 
   public void setOutput(double output){
@@ -29,6 +32,10 @@ public class TransferSubsystem extends SuperSystem {
 
   public double getOutput(){
     return transferMotor.getOutput();
+  }
+
+  public boolean isNoteIn(){
+    return noteIn.get();
   }
   @Override
   public void periodic() {

@@ -103,10 +103,12 @@ public class RobotButtons {
         // climb.onTrue(new EleavatorDown(eleavatorSubsystem, -10));
         // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
+        // intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 45));
-        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -15));
+        // pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 45));
+        // pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -15));
+
+        intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 
     }
 }

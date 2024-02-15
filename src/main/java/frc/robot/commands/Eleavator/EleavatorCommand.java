@@ -42,15 +42,7 @@ public class EleavatorCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // if( Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD)
-    // {
-    //   return true;
-    // }
-    // else
-    // {
-    //   return false;
-    // }
-    return true;
+    return Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD;
     
   }
 }
