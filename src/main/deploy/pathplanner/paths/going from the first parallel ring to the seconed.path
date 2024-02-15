@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.8,
-        "y": 7.4
+        "y": 7.451150717597251
       },
       "prevControl": null,
       "nextControl": {
         "x": 7.8163771712158825,
-        "y": 6.896993024755281
+        "y": 6.948143742352531
       },
       "isLocked": false,
       "linkedName": null
@@ -20,7 +20,7 @@
         "y": 5.75
       },
       "prevControl": {
-        "x": 7.796643285594264,
+        "x": 7.796643285594263,
         "y": 6.245774799241906
       },
       "nextControl": null,
@@ -28,13 +28,7 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -45.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
@@ -48,12 +42,6 @@
               "type": "named",
               "data": {
                 "name": "open collect"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 3.0
               }
             }
           ]
@@ -72,12 +60,6 @@
               "data": {
                 "name": "collect"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 5.0
-              }
             }
           ]
         }
@@ -92,11 +74,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -45.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "shooting and collecting the next ring",
+  "folder": "collecting ring from side ring to side ring",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

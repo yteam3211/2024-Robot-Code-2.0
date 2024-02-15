@@ -1,13 +1,13 @@
 {
   "robotWidth": 0.9,
-  "robotLength": 0.9,
+  "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
     "collecting, from first row to second row",
     "from parallel ring to shooting spot",
     "from shooting spot to parallel ring",
     "shooting and collecting ring from first row",
-    "shooting and collecting the next ring"
+    "collecting ring from side ring to side ring"
   ],
   "autoFolders": [
     "first row and second row",
