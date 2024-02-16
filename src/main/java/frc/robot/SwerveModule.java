@@ -47,7 +47,7 @@ public class SwerveModule {
         
         
         /* Angle Encoder Config */
-        angleEncoder = new CANcoder(moduleConstants.cancoderID);
+        angleEncoder = new CANcoder(moduleConstants.cancoderID, Constants.CanBus.CANivore);
         configAngleEncoder();
 
         /* Angle Motor Config */

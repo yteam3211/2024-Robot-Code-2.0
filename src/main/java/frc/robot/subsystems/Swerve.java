@@ -61,7 +61,7 @@ public class Swerve extends SuperSystem {
                 this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
                         new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        new PIDConstants(0.5, 0.0, 0.0), // Rotation PID constants
                         4.5, // Max module speed, in m/s
                         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                         new ReplanningConfig() // Default path replanning config. See the API for the options here
@@ -97,9 +97,9 @@ public class Swerve extends SuperSystem {
         SwerveModuleState[] swerveModuleStates = 
             Constants.SwerveConstant.swerveKinematics.toSwerveModuleStates(
                 ChassisSpeeds.fromFieldRelativeSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation, 
+                                    translation.getX(),
+                                    translation.getY(),
+                                    rotation,
                                     getYaw()
                                 )
                                 );
@@ -195,7 +195,7 @@ public class Swerve extends SuperSystem {
         getTab().putInDashboard("pose y", getPose().getY(), false);
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         
-        getTab().putInDashboard("yaw", gyro.getYaw(), false);
+        getTab().putInDashboard("yaw", getYaw().getDegrees(), false);
         // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         // swerveOdometry.update(getYaw(), getModulePositions());
@@ -210,9 +210,9 @@ public class Swerve extends SuperSystem {
             getTab().putInDashboard("LL y pos", AllianceSpecs.poseY.getAsDouble(), false);
         }
         for(SwerveModule mod : mSwerveMods){
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false); 189.242138
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false); 120358
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false); 636
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false); 
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false); 
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false); 
         }
     }
 }

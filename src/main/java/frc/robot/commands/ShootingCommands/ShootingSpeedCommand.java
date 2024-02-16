@@ -32,11 +32,11 @@ public class ShootingSpeedCommand extends Command {
   @Override
   public void execute() { 
      shootingSubsystem.setShooterVelocity(shootingVelocity);
-     System.out.println("out " + shootingSubsystem.getVelocity());
+    //  System.out.println("out " + shootingSubsystem.getVelocity());
     if ((shootingVelocity - 2000) < shootingSubsystem.getVelocity()) {
-      System.out.println("in " + shootingSubsystem.getVelocity());
-      
+      // System.out.println("in " + shootingSubsystem.getVelocity());
       kickerSubsystem.setKickerOutput(kickerOutput);
+      
     }
   }
 
