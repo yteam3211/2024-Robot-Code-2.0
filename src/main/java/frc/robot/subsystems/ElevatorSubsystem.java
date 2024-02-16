@@ -117,6 +117,7 @@ public class ElevatorSubsystem extends SuperSystem {
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
+    SmartDashboard.putData("eleavator gains",pidController);
     if (this.isEleavatorDown())
     {
       resetEncoder();
