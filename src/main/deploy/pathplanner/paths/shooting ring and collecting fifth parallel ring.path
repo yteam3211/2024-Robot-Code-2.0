@@ -3,43 +3,54 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5,
-        "y": 6.76
+        "x": 0.72,
+        "y": 4.42
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8863445419198543,
-        "y": 6.571383911998593
+        "x": 1.5368524854696768,
+        "y": 3.640275515845149
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 5.56
+        "x": 7.839053325165476,
+        "y": 0.7766439062289884
       },
       "prevControl": {
-        "x": 1.9159453703522806,
-        "y": 5.782028487133897
+        "x": 6.523330693720212,
+        "y": 1.1304516726680522
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
+      "name": "shooting ring",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "shooting ring"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "open collect",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {
@@ -70,23 +81,6 @@
           ]
         }
       }
-    },
-    {
-      "name": "shooting ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "shooting ring"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
@@ -97,11 +91,14 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 31.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "collecting ring from side ring to side ring",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "folder": "shooting and collecting ring from first row",
+  "previewStartingState": {
+    "rotation": -60.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }
