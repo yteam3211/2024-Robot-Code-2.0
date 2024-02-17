@@ -27,9 +27,9 @@ public class IntakeSubsystem extends SuperSystem {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     super("Intake Subsystem");
-    intakeOpenGains = new Gains("intake Open Gains", 0.06, 0, 0.001);
+    intakeOpenGains = new Gains("intake Open Gains", 0.035, 0, 0.001);
     intakeWheelsGains = new Gains("intake Wheels Gains", 0.001, 0, 0);
-    intakeWheelsMotor = new SuperSparkMax(Constants.INTAKE_WHEELS_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast); //
+    intakeWheelsMotor = new SuperSparkMax(Constants.INTAKE_WHEELS_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast);
     intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
     // closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROSWITCH_ID);
     getTab().addCommandToDashboard("Reset Intake pos", new InstantCommand(() -> resetEncoder()));

@@ -1,16 +1,10 @@
 package frc.robot.commands.SwereCommands;
 import frc.robot.Constants;
-import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
-import frc.util.PID.Gains;
-import frc.util.PID.PIDController;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopSwerve extends Command {    

@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 2.5,
-        "y": 4.35
+        "y": 6.76
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.89709424151893,
-        "y": 4.773948710956585
+        "x": 1.8863445419198543,
+        "y": 6.571383911998593
       },
       "isLocked": false,
       "linkedName": null
@@ -17,22 +17,28 @@
     {
       "anchor": {
         "x": 2.5,
-        "y": 5.555786465108285
+        "y": 5.56
       },
       "prevControl": {
-        "x": 1.9089402680969862,
-        "y": 5.330711960125218
+        "x": 1.9159453703522806,
+        "y": 5.782028487133897
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "open collection",
+      "name": "open collect",
       "waypointRelativePos": 0.2,
       "command": {
         "type": "parallel",
@@ -49,8 +55,8 @@
       }
     },
     {
-      "name": "collect ",
-      "waypointRelativePos": 0.5,
+      "name": "collect",
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -77,12 +83,6 @@
               "data": {
                 "name": "shooting ring"
               }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1.0
-              }
             }
           ]
         }
@@ -97,7 +97,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 31.0,
     "rotateFast": false
   },
   "reversed": false,

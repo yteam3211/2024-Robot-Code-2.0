@@ -16,12 +16,6 @@
           "data": {
             "pathName": "3 M "
           }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.1
-          }
         }
       ]
     }

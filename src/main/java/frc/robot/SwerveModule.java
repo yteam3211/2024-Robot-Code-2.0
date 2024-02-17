@@ -47,7 +47,7 @@ public class SwerveModule {
         
         
         /* Angle Encoder Config */
-        angleEncoder = new CANcoder(moduleConstants.cancoderID);
+        angleEncoder = new CANcoder(moduleConstants.cancoderID, Constants.CanBus.CANivore);
         configAngleEncoder();
 
         /* Angle Motor Config */
@@ -57,7 +57,7 @@ public class SwerveModule {
         configAngleMotor();
 
         /* Drive Motor Config */
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
+        mDriveMotor = new TalonFX(moduleConstants.driveMotorID, Constants.CanBus.CANivore);
         configDriveMotor();
 
         lastAngle = getState().angle;

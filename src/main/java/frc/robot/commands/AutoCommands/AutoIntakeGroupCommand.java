@@ -2,12 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.IntakeCommands;
+package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.Eleavator.EleavatorCommand;
+import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
@@ -22,17 +24,24 @@ import frc.robot.subsystems.TransferSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class IntakeAndTransferCommand extends ParallelCommandGroup {
+public class AutoIntakeGroupCommand extends SequentialCommandGroup {
   /** Creates a new IntakeAndTransferCommand. */
-  public IntakeAndTransferCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,ElevatorSubsystem elevatorSubsystem,PitchingSubsystem pitchingSubsystem) {
+  public AutoIntakeGroupCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem, ElevatorSubsystem elevatorSubsystem,PitchingSubsystem pitchingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
-        new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
-        new TransferCommand(transferSubsystem, 0.8),
-        new KickerCommand(kickerSubsystem, 0.4),
-        new PitchPos(pitchingSubsystem, -15) //TODO: change it to the right pos
-      
+        new ParallelCommandGroup(
+          new EleavatorCommand(elevatorSubsystem, 0), //TODO: change it to the right pos
+          new PitchPos(pitchingSubsystem, 0) //TODO: change it to the right pos
+        ),
+        new ParallelCommandGroup(
+          new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000).onlyWhile(() -> !kickerSubsystem.isNoteIn()),
+          new TransferCommand(transferSubsystem, 0.8),
+          new KickerCommand(kickerSubsystem, 0.4)
+        )
+
+
+
     );
     }
 }

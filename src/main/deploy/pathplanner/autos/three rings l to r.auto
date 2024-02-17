@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.72,
+      "y": 4.42
+    },
+    "rotation": -60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shooting and collecting third ring from third spot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "going from third ring to the second and shooting it"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "going from the second ring to the first ring and shooting it"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "collecting parallel ring and shooting it",
+  "choreoAuto": false
+}

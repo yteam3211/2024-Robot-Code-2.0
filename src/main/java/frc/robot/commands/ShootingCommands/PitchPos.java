@@ -38,14 +38,10 @@ public class PitchPos extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  //   if ((pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 1 ) {
-  //     System.out.println("true");
-  //   return true;
-  //   }
-  //  else{
-  //   System.out.println("false");
-  //    return false;
-  //  }
+
+    // return false;
+    //  return Math.abs(pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 1 ;
+
   return true;
   }
 }

@@ -68,7 +68,7 @@ public class RobotButtons {
 
 
     public static Trigger pitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));    
-    public static Trigger pitchTrig = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kR1.value));
+    public static Trigger pitchTrig = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
 
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
 
@@ -99,14 +99,16 @@ public class RobotButtons {
         // speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
         
         
-        // climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,eleavatorSubsystem,45,400));
-        // climb.onTrue(new EleavatorDown(eleavatorSubsystem, -10));
+        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,-15,400));
+        climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
         // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
+        // intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 45));
-        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, -15));
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, -15));
+        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, 25));
+
+        intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 
     }
 }

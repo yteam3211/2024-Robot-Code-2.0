@@ -14,11 +14,11 @@ import frc.util.PID.PIDController;
 public class TurnSwerveCommand extends Command {
   /** Creates a new TurnSwerveCommand. */
   private Swerve swerve;
-  protected Gains gains = new Gains("turn gains", 0.08, 0, 0.4);
+  protected Gains gains = new Gains("turn gains", 0, 0, 0);
   protected PIDController pid = new PIDController(gains);
   private double targetPosition;
 
-  public TurnSwerveCommand(Swerve swerve,double targetPosition) {
+  public TurnSwerveCommand(Swerve swerve, double targetPosition) {
     this.swerve = swerve;
     this.targetPosition = targetPosition;
     addRequirements(swerve);
@@ -49,12 +49,6 @@ public class TurnSwerveCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(Swerve.gyro.getYaw() - targetPosition) < Constants.TURN_SWERVE_TRESHOLD ) {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return (Math.abs(Swerve.gyro.getYaw() - targetPosition) < Constants.TURN_SWERVE_TRESHOLD); 
   }
 }

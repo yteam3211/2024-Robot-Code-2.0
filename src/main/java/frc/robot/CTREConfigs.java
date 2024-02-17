@@ -57,7 +57,7 @@ public final class CTREConfigs {
 
         /* Pitching CANCoder Configuration */
         pitchingCanCoderConfig.MagnetSensor.AbsoluteSensorRange  = AbsoluteSensorRangeValue.Unsigned_0To1;
-        pitchingCanCoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
+        pitchingCanCoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
         
         
     }

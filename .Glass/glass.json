@@ -2,13 +2,21 @@
   "NetworkTables": {
     "transitory": {
       "Shuffleboard": {
+        "ElevatorSubsystem": {
+          "open": true
+        },
         "Shooting Math": {
           "open": true
         },
-        "open": true,
         "shooting": {
           "open": true
         }
+      },
+      "SmartDashboard": {
+        "eleavator gains": {
+          "open": true
+        },
+        "open": true
       }
     },
     "types": {
@@ -24,11 +32,19 @@
     }
   },
   "NetworkTables Info": {
+    "Server": {
+      "Subscribers": {
+        "open": true
+      }
+    },
     "visible": true
   },
   "NetworkTables Settings": {
     "mode": "Client (NT4)",
     "serverTeam": "localHost"
+  },
+  "NetworkTables View": {
+    "visible": false
   },
   "Plots": {
     "Plot <0>": {
@@ -67,16 +83,16 @@
             0.0,
             0.8500000238418579
           ],
-          "height": 592,
+          "height": 332,
           "series": [
             {
               "color": [
-                0.2980392277240753,
-                0.44705885648727417,
-                0.6901960968971252,
+                0.8666667342185974,
+                0.5176470875740051,
+                0.32156863808631897,
                 1.0
               ],
-              "id": "NT:/Shuffleboard/Shooting Math/shooting angle"
+              "id": "NT:/Shuffleboard/ElevatorSubsystem/elevator hight"
             }
           ]
         }

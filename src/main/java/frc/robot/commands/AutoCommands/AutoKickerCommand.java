@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ShootingCommands;
+package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.KickerSubsystem;
 
-public class KickerCommand extends Command {
+public class AutoKickerCommand extends Command {
   /** Creates a new kickerCommand. */
   private KickerSubsystem kickerSubsystem;
   private double kickerOutput;
 
-  public KickerCommand(KickerSubsystem kickerSubsystem,double kickerOutput) {
+  public AutoKickerCommand(KickerSubsystem kickerSubsystem,double kickerOutput) {
   this.kickerSubsystem = kickerSubsystem;
   this.kickerOutput = kickerOutput;
   addRequirements(kickerSubsystem);
@@ -39,7 +39,7 @@ public class KickerCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (!kickerSubsystem.isNoteIn()) {
+    if (!kickerSubsystem.isNoteIn()) { //TODO: change this to return true when the sensor is false (when the note is out)
      return true;
     }
     else{

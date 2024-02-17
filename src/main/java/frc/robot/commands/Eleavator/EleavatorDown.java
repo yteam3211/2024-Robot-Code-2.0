@@ -47,21 +47,9 @@ public class EleavatorDown extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (eleavatorSubsystem.isEleavatorDown()) {
+    if (eleavatorSubsystem.isEleavatorDown() ||( Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD)) {
       return true;
     }
-    else{
-       return false;
-    }
-    // if( Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD)
-    // {
-      
-    // }
-    // else
-    // {
-    //   return false;
-    // }
-   
-    // return true;
+    else return false;
   }
 }

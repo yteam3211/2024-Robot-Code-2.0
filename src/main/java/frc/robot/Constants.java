@@ -1,20 +1,15 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.CAN;
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
-import frc.robot.subsystems.Swerve;
-import frc.util.vision.Limelight;
 
 public final class Constants {
 
@@ -24,7 +19,7 @@ public final class Constants {
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = 81.73828125; //in degrees
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.839844); //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
@@ -34,6 +29,9 @@ public final class Constants {
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
     public static final double MAX_PITCHING_ANGLE = 0;
     public static final double PITCHING_GEAR_RATIO = 160 / 1;
+    public static final double LIMELIGHT_lOOKING_ANGLE = 10;
+    public static final double LIMELIGHT_lOOKING_ANGLE_TRESHOLD = 4;
+
 
     // elevator constnats
     public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
@@ -89,13 +87,17 @@ public final class Constants {
     
 
 
+     public static final class CanBus{
+        public static final String CANivore = "can1";
+        public static final String RIO = "rio";
+     }
 
 
     public static final double stickDeadband = 0.01;
 
     public static final class SwerveConstant {
         public static final int pigeonID = 1;
-        public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
+        public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSFalconSwerveConstants chosenModule = 
             COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);
@@ -175,7 +177,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.554199));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.760986));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -185,7 +187,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.587402));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.774902));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -195,7 +197,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.601074)); 
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.446289)); 
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -205,7 +207,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.512939));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.668457));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

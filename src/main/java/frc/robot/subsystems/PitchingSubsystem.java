@@ -39,9 +39,9 @@ public class PitchingSubsystem extends SuperSystem {
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
-    pitchingGains = new Gains("pitchingGains", 0.383, 0, 0.003);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,8000, 5000,5); 
-    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, 40, false);
+    pitchingGains = new Gains("pitchingGains", 0.7, 0, 0.003);
+    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,10000, 11000,0); 
+    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
     configAngleEncoder();
     resetFalconEncoder();
@@ -60,7 +60,7 @@ public class PitchingSubsystem extends SuperSystem {
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
   }
 /**
- * config the angle encoder 356 - 140
+ * config the angle encoder
  */
   private void configAngleEncoder(){        
 angleEncoder.getPosition().setUpdateFrequency(4);
@@ -68,7 +68,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   }
 
   /**
-   * Return the current angle - the angle offset 
+   * Return the current angle - the angle offset
    *
    * @return the absolute angle of the Cancoder in degrees.
    */
@@ -77,7 +77,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
     if(Constants.PITCHING_ENCODER_OFFSET < 85 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) > 200){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - (Constants.PITCHING_ENCODER_OFFSET + 360);
     }
-    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80){
+    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80  ){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET + 360;
     }
     else{
@@ -115,10 +115,10 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
-    {
-      masterPitchingMotor.set (ControlMode.PercentOutput, 0);
-    }
+    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
+    // {
+    //   masterPitchingMotor.set (ControlMode.PercentOutput, 0);
+    // }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);

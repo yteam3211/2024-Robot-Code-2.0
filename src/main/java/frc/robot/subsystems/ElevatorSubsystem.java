@@ -43,14 +43,14 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorTestGains = new Gains("eleavator up Gains", 0.1, 0, 0.009867);
+    eleavatorTestGains = new Gains("eleavator up Gains", 0.1, 0, 0);
     eleavatorDownGains = new Gains("eleavator down Gains", 0.16, 0, 0);
     eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
     eleavatorUpGains = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, 40, false, false, NeutralMode.Brake, eleavatorTestGains, TalonFXControlMode.MotionMagic, 17000, 13000,100);
-    slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, 40, false);
-    slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, 40, false);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorTestGains, TalonFXControlMode.MotionMagic, 17000, 13000,100);
+    slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
+    slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
 
     masterEleavatorMotor.config_kP(1, eleavatorDownGains.kp);
@@ -117,6 +117,7 @@ public class ElevatorSubsystem extends SuperSystem {
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
+    SmartDashboard.putData("eleavator gains",pidController);
     if (this.isEleavatorDown())
     {
       resetEncoder();

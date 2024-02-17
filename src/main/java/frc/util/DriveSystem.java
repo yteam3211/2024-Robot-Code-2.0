@@ -1,6 +1,5 @@
 package frc.util;
 
-import frc.util.OutputSystem;
 import frc.util.PID.Gains;
 
 public abstract class DriveSystem extends OutputSystem{
