@@ -77,7 +77,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
     if(Constants.PITCHING_ENCODER_OFFSET < 85 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) > 200){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - (Constants.PITCHING_ENCODER_OFFSET + 360);
     }
-    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80){
+    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80  ){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET + 360;
     }
     else{

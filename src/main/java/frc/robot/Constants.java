@@ -19,7 +19,7 @@ public final class Constants {
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.159424); //in degrees
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.839844); //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
