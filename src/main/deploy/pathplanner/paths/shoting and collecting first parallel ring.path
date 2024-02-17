@@ -3,43 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5,
-        "y": 6.76
+        "x": 0.73,
+        "y": 6.68
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8863445419198543,
-        "y": 6.571383911998593
+        "x": 1.7666769645955847,
+        "y": 6.798830580304686
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 5.56
+        "x": 7.8,
+        "y": 7.45
       },
       "prevControl": {
-        "x": 1.9159453703522806,
-        "y": 5.782028487133897
+        "x": 6.812748044721724,
+        "y": 7.339875400712082
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "open collect",
-      "waypointRelativePos": 0.2,
+      "name": "shooting ring",
+      "waypointRelativePos": 0,
       "command": {
         "type": "parallel",
         "data": {
@@ -47,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "open collect"
+                "name": "shooting ring"
               }
             }
           ]
@@ -55,7 +49,7 @@
       }
     },
     {
-      "name": "collect",
+      "name": "collecting ring",
       "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
@@ -72,8 +66,8 @@
       }
     },
     {
-      "name": "shooting ring",
-      "waypointRelativePos": 1.0,
+      "name": "open collect",
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -81,7 +75,7 @@
             {
               "type": "named",
               "data": {
-                "name": "shooting ring"
+                "name": "open collect"
               }
             }
           ]
@@ -97,11 +91,14 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 31.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "collecting ring from side ring to side ring",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "folder": "shooting and collecting ring from first row",
+  "previewStartingState": {
+    "rotation": 60.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }
