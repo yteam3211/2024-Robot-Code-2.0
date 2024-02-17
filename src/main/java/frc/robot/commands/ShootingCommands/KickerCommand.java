@@ -21,7 +21,9 @@ public class KickerCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside KickerCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -33,6 +35,7 @@ public class KickerCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     kickerSubsystem.setKickerOutput(0);
+    System.out.println("********exit KickerCommand");
   
   }
 

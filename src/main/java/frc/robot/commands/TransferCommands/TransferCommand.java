@@ -21,7 +21,10 @@ public class TransferCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside TransferCommand");
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -33,6 +36,8 @@ public class TransferCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     transferSubsystem.setOutput(0);
+    System.out.println("********exit TransferCommand");
+
   }
 
   // Returns true when the command should end.

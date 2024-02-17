@@ -32,7 +32,9 @@ public class PitchCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside PitchCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -46,6 +48,7 @@ public class PitchCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    System.out.println("********exit PitchCommand");
   }
 
   // Returns true when the command should end.

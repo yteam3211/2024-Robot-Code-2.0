@@ -64,7 +64,16 @@ public class RobotContainer {
     private void configureButtonBindings() {
         robotButtons.loadButtons(swerve, limelight, shootingSubsystem, pitchingSubsystem, intakeSubsystem, transferSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath);
     }
- 
+
+    public void SetOutputToZero(){
+        shootingSubsystem.setShooterOutput(0);
+        intakeSubsystem.setIntakeOpenMotorUotput(0);
+        intakeSubsystem.setWheelsMotorOutput(0);
+        transferSubsystem.setOutput(0);
+        kickerSubsystem.setKickerOutput(0);
+        pitchingSubsystem.SetOutput(0);
+        elevatorSubsystem.setOutput(0); 
+    }
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *

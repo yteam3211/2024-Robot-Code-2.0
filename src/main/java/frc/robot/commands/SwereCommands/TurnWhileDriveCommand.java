@@ -38,6 +38,8 @@ public class TurnWhileDriveCommand extends Command {
   public void initialize() {
     pid.setTargetPosition(0);
     pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
+    System.out.println("******** inside TurnWhileDriveCommand");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,6 +56,7 @@ public class TurnWhileDriveCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("********exit TurnWhileDriveCommand");
   }
 
   // Returns true when the command should end.
