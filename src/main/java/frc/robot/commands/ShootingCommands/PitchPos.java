@@ -39,9 +39,9 @@ public class PitchPos extends Command {
   @Override
   public boolean isFinished() {
 
-    return false;
+    // return false;
     //  return Math.abs(pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 1 ;
 
-  // return true;
+  return true;
   }
 }

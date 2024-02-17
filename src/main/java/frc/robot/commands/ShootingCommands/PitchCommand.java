@@ -5,11 +5,9 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.ShootingMath;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
-import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
 
 // @author Noya Aberjil
