@@ -31,8 +31,7 @@ public class IntakeAndTransferCommand extends ParallelCommandGroup {
         new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
         new TransferCommand(transferSubsystem, 0.8),
         new KickerCommand(kickerSubsystem, 0.4),
-        new EleavatorCommand(elevatorSubsystem, 0), //TODO: change it to the right pos
-        new PitchPos(pitchingSubsystem, 0) //TODO: change it to the right pos
+        new PitchPos(pitchingSubsystem, -15) //TODO: change it to the right pos
       
     );
     }

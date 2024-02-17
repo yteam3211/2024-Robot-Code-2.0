@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorTestGains = new Gains("eleavator up Gains", 0.1, 0, 0.009867);
+    eleavatorTestGains = new Gains("eleavator up Gains", 0.1, 0, 0);
     eleavatorDownGains = new Gains("eleavator down Gains", 0.16, 0, 0);
     eleavatorClimbUpGains = new Gains("eleavator climb up Gains", 0.03, 0, 0);
     eleavatorUpGains = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
