@@ -47,23 +47,6 @@
           ]
         }
       }
-    },
-    {
-      "name": "collect",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "collect"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
@@ -78,7 +61,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "shooting and collecting the next ring",
+  "folder": "collecting ring from side ring to side ring",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

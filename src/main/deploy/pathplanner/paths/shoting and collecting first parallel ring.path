@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.4,
-        "y": 4.1
+        "x": 0.73,
+        "y": 6.68
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6246356302236413,
-        "y": 1.125372524915325
+        "x": 1.7666769645955847,
+        "y": 6.798830580304686
       },
       "isLocked": false,
       "linkedName": null
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 7.8,
-        "y": 0.77
+        "y": 7.45
       },
       "prevControl": {
-        "x": 4.135993264771522,
-        "y": 0.7462996744175311
+        "x": 6.812748044721724,
+        "y": 7.339875400712082
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,25 @@
   "constraintZones": [],
   "eventMarkers": [
     {
+      "name": "shooting ring",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "shooting ring"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "open collect",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -61,7 +78,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "collecting, from first row to second row",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "folder": "shooting and collecting ring from first row",
+  "previewStartingState": {
+    "rotation": 60.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }

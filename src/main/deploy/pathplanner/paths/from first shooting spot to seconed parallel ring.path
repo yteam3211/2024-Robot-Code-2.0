@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.85,
-        "y": 6.25
+        "x": 2.89,
+        "y": 5.54
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.389983455147285,
-        "y": 7.162144046510315
+        "x": 4.429983455147285,
+        "y": 6.452144046510315
       },
       "isLocked": false,
       "linkedName": null
@@ -31,23 +31,6 @@
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
-    {
-      "name": "collect seconed parallel ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "collect"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "name": "open collect",
       "waypointRelativePos": 0.7,

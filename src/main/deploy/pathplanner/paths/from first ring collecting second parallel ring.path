@@ -32,23 +32,6 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "collecting ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "collect"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "open collect",
       "waypointRelativePos": 0.7,
       "command": {

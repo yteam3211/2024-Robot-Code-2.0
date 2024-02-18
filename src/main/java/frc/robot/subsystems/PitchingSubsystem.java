@@ -39,9 +39,9 @@ public class PitchingSubsystem extends SuperSystem {
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
-    pitchingGains = new Gains("pitchingGains", 0.7, 0, 0.003);
-    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,10000, 11000,0); 
-    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, false);
+    pitchingGains = new Gains("pitchingGains", 0.82, 0, 0.003);
+    masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,10000, 11000,0); 
+    slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
     configAngleEncoder();
     resetFalconEncoder();
@@ -63,7 +63,7 @@ public class PitchingSubsystem extends SuperSystem {
  * config the angle encoder
  */
   private void configAngleEncoder(){        
-angleEncoder.getPosition().setUpdateFrequency(4);
+// angleEncoder.getPosition().setUpdateFrequency(4);
     angleEncoder.getConfigurator().apply(Robot.ctreConfigs.pitchingCanCoderConfig);
   }
 
@@ -90,7 +90,8 @@ angleEncoder.getPosition().setUpdateFrequency(4);
  * reset the falcon integrated encoder
  */
   public void resetFalconEncoder(){
-    masterPitchingMotor.reset(degreesToFalconEncoder(getAbsolutePosition())); 
+    masterPitchingMotor.reset(degreesToFalconEncoder(getAbsolutePosition()));
+    System.out.println("reset: " + degreesToFalconEncoder(getAbsolutePosition())); 
   }
   
   /**
@@ -113,8 +114,8 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
-    // {  
+    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
+    // {
     //   masterPitchingMotor.set (ControlMode.PercentOutput, 0);
     // }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);

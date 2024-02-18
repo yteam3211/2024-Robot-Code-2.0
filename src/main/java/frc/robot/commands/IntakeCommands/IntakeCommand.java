@@ -22,7 +22,10 @@ public class IntakeCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+    System.out.println("******** inside IntakeCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -39,12 +42,24 @@ public class IntakeCommand extends Command {
   public void end(boolean interrupted) 
   {
     intakeSubsystem.setWheelsMotorOutput(0);
-    intakeSubsystem.setIntakeOpenMotorPosition(0);
+    intakeSubsystem.setIntakeOpenMotorPosition(-10);
+    System.out.println("********exit IntakeCommand");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+  if (intakeSubsystem.isIntakeOn() || (intakePosition > 0.5 || intakePosition < 0.5))
+  {
     return false;
+    
+    // else return false;
   }
-}
+  else if (intakeSubsystem.getPosition()- intakePosition < 5) return true;
+
+  else return true;
+
+    }
+    
+  }
+

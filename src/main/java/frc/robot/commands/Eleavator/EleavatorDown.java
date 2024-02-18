@@ -23,6 +23,8 @@ public class EleavatorDown extends Command {
   @Override
   public void initialize() {
     eleavatorSubsystem.changeStation(gains.EleavatorUp);
+    System.out.println("******** inside EleavatorDown");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +44,7 @@ public class EleavatorDown extends Command {
   @Override
   public void end(boolean interrupted) {
     eleavatorSubsystem.setOutput(0);
+    System.out.println("********exit EleavatorDown");
   }
 
   // Returns true when the command should end.

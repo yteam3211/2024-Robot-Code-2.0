@@ -6,11 +6,8 @@ package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
-import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
 import frc.robot.commands.TransferCommands.TransferCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -24,14 +21,14 @@ import frc.robot.subsystems.TransferSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeAndTransferCommand extends ParallelCommandGroup {
   /** Creates a new IntakeAndTransferCommand. */
-  public IntakeAndTransferCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,ElevatorSubsystem elevatorSubsystem,PitchingSubsystem pitchingSubsystem) {
+  public IntakeAndTransferCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,PitchingSubsystem pitchingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
         new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
         new TransferCommand(transferSubsystem, 0.8),
         new KickerCommand(kickerSubsystem, 0.4),
-        new PitchPos(pitchingSubsystem, -15) //TODO: change it to the right pos
+        new PitchPos(pitchingSubsystem, 35) //TODO: change it to the right pos
       
     );
     }

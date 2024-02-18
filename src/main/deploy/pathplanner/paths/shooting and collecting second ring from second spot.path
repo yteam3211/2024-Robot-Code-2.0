@@ -32,23 +32,6 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "collecting second ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "collect"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "shooting ring",
       "waypointRelativePos": 0,
       "command": {

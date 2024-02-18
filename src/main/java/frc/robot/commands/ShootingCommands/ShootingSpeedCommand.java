@@ -5,7 +5,6 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 
@@ -26,7 +25,9 @@ public class ShootingSpeedCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside ShootingSpeedCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -45,6 +46,7 @@ public class ShootingSpeedCommand extends Command {
   public void end(boolean interrupted) {
     shootingSubsystem.setShooterOutput(0);
     kickerSubsystem.setKickerOutput(0);
+    System.out.println("********exit ShootingSpeedCommand");
   }
 
   // Returns true when the command should end.
@@ -58,6 +60,6 @@ public class ShootingSpeedCommand extends Command {
   //     return false;
 
   //   }
-  return false;
+  return  false;
   }
 }

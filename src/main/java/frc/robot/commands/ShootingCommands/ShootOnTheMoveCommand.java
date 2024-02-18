@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.ShootingMath;
-import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.SwereCommands.TurnWhileDriveCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;

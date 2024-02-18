@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.TransferCommands.TransferCommand;
+import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.Eleavator.EleavatorClimbDown;
 import frc.robot.commands.Eleavator.EleavatorCommand;
 import frc.robot.commands.Eleavator.EleavatorDown;
@@ -97,19 +98,20 @@ public class RobotButtons {
         
         // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
        
-        // speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
+        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
         
         
-        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,-15,400));
+        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,400));
         climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
         // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        // intakeTrigger.whileTrue(new  IntakeAndTransferCommand(intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
+        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
 
-        intakeTrigger.whileTrue(new IntakeWheels(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem));
         pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 15));
         pitchTrig.onTrue(new PitchPos(pitchingSubsystem, 0));
+        apmShootingTrigger.whileTrue(new AutoShooingWheels(shootingSubsystem,17000));
 
+        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
         LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
         // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 

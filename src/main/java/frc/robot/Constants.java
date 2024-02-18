@@ -1,20 +1,15 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.CAN;
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
-import frc.robot.subsystems.Swerve;
-import frc.util.vision.Limelight;
 
 public final class Constants {
 
@@ -55,7 +50,7 @@ public final class Constants {
     public static final double MAX_SHOOTING_RANGE = 3.5; // in meters
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 37.5; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 43; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 
@@ -70,7 +65,7 @@ public final class Constants {
     // ID constants
     public static final int INTAKE_OPEN_MOTOR_ID = 24;   
     public static final int INTAKE_WHEELS_MOTOR_ID = 25;
-    public static final int INTAKE_MICROSWITCH_ID = 0;
+    public static final int INTAKE_MICROSWITCH_ID = 4;
     
     public static final int TRANSFER_MOTOR_ID = 29;
     

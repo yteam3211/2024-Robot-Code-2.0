@@ -5,11 +5,9 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.ShootingMath;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
-import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
 
 // @author Noya Aberjil
@@ -34,7 +32,9 @@ public class PitchCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside PitchCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -48,6 +48,7 @@ public class PitchCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    System.out.println("********exit PitchCommand");
   }
 
   // Returns true when the command should end.

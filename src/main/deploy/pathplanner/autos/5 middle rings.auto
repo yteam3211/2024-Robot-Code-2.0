@@ -1,0 +1,55 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.72,
+      "y": 4.42
+    },
+    "rotation": -60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shooting ring and collecting fifth parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shooting fifth parallel ring and collecting forth parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shooting forth parallel ring and collecting thered parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shooting thered parallel ring and collecting second parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shooting second parallel ring and collecting first parallel ring"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shooting ring"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "parallel ring shooting",
+  "choreoAuto": false
+}

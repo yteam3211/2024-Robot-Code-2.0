@@ -29,6 +29,7 @@ public class TurnSwerveCommand extends Command {
   public void initialize() {
     pid.setTargetPosition(targetPosition);
     pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
+    System.out.println("******** inside TurnSwerveCommand");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +43,7 @@ public class TurnSwerveCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("********exit TurnSwerveCommand");
     swerve.drive(new Translation2d(0.0, 0.0), 0, true);
   }
 
