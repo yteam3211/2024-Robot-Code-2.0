@@ -28,9 +28,7 @@ public class AutoIntakeGroupCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
-        new ParallelCommandGroup(
-          new PitchPos(pitchingSubsystem, 15) //TODO: change it to the right pos
-        ).onlyIf(() -> pitchingSubsystem.getAbsolutePosition() < 15),
+        new PitchPos(pitchingSubsystem, 15).onlyIf(() -> pitchingSubsystem.getAbsolutePosition() < 15),//TODO: change it to the right pos 
         new ParallelCommandGroup(
           new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000).onlyWhile(() -> !kickerSubsystem.isNoteIn()),
           new TransferCommand(transferSubsystem, 0.8),
