@@ -26,7 +26,7 @@ import frc.robot.commands.Eleavator.PitchAndEleavator;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakeWheels;
-import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
+import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.PitchCommand;
@@ -72,6 +72,7 @@ public class RobotButtons {
 
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
 
+    public Trigger LEDtTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
     
 
     /**
@@ -103,12 +104,14 @@ public class RobotButtons {
         climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
         // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        // intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem));
+        // intakeTrigger.whileTrue(new  IntakeAndTransferCommand(intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, -15));
-        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, 25));
+        intakeTrigger.whileTrue(new IntakeWheels(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem));
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 15));
+        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, 0));
 
-        intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
+        LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
+        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 
     }
 }

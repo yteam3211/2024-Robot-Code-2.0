@@ -77,7 +77,7 @@ angleEncoder.getPosition().setUpdateFrequency(4);
     if(Constants.PITCHING_ENCODER_OFFSET < 85 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) > 200){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - (Constants.PITCHING_ENCODER_OFFSET + 360);
     }
-    else if(Constants.PITCHING_ENCODER_OFFSET > 305 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80  ){
+    else if(Constants.PITCHING_ENCODER_OFFSET > 300 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) < 80  ){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET + 360;
     }
     else{
@@ -90,8 +90,6 @@ angleEncoder.getPosition().setUpdateFrequency(4);
  * reset the falcon integrated encoder
  */
   public void resetFalconEncoder(){
-
-
     masterPitchingMotor.reset(degreesToFalconEncoder(getAbsolutePosition())); 
   }
   
@@ -115,10 +113,10 @@ angleEncoder.getPosition().setUpdateFrequency(4);
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
-    {
-      masterPitchingMotor.set (ControlMode.PercentOutput, 0);
-    }
+    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: 
+    // {  
+    //   masterPitchingMotor.set (ControlMode.PercentOutput, 0);
+    // }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);

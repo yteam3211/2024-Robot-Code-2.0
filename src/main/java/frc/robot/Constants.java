@@ -24,7 +24,7 @@ public final class Constants {
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.839844); //in degrees
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.843018); //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
@@ -87,7 +87,11 @@ public final class Constants {
     public static final int SLAVE1_ELEAVATOR_MOTOR_ID = 14;
     public static final int SLAVE2_ELEAVATOR_MOTOR_ID = 15;
     public static final int MICROSWITCH_ELEAVATOR_ID = 0;
-
+    
+    
+    public static final int RED_LED_ID = 8;
+    public static final int BLUE_LED_ID = 7;
+    public static final int GREEN_LED_ID = 9;
 
     
 

@@ -14,7 +14,7 @@ import frc.util.PID.PIDController;
 public class TurnSwerveCommand extends Command {
   /** Creates a new TurnSwerveCommand. */
   private Swerve swerve;
-  protected Gains gains = new Gains("turn gains", 0, 0, 0);
+  protected Gains gains = new Gains("turn gains", 0, 0, 0);           
   protected PIDController pid = new PIDController(gains);
   private double targetPosition;
 
@@ -43,7 +43,6 @@ public class TurnSwerveCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     swerve.drive(new Translation2d(0.0, 0.0), 0, true);
-
   }
 
   // Returns true when the command should end.
