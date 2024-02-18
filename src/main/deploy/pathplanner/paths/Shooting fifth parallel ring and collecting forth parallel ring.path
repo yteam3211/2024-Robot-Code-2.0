@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.826276630650824,
-        "y": 0.7615572853448863
+        "x": 7.826244114026691,
+        "y": 0.7696215392430785
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.826244114026691,
-        "y": 2.4371348742697485
+        "x": 7.964381313378012,
+        "y": 2.12139270432387
       },
       "prevControl": {
-        "x": 6.826276112490773,
-        "y": 2.4291351302574626
+        "x": 7.964381313378012,
+        "y": 2.12139270432387
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,23 +42,6 @@
               "type": "named",
               "data": {
                 "name": "shooting ring"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "collecting ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "collect"
               }
             }
           ]
@@ -91,8 +74,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": 45.0,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "collecting ring from side ring to side ring",
