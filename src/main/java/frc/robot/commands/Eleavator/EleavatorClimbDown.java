@@ -21,8 +21,8 @@ public class EleavatorClimbDown extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
     eleavatorSubsystem.changeStation(gains.EleavatorClimbUp);
+    System.out.println("******** inside EleavatorClimbDown");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,7 +34,9 @@ public class EleavatorClimbDown extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("********exit EleavatorClimbDown");
+  }
 
   // Returns true when the command should end.
   @Override

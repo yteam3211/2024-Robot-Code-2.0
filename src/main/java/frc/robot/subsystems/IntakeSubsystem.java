@@ -60,6 +60,11 @@ public class IntakeSubsystem extends SuperSystem {
     intakeOpenMotor.getPIDController().setReference(position, ControlType.kPosition);
     
   }
+    public  void setIntakeOpenMotorUotput(double output) {
+    intakeOpenMotor.setMode(ControlMode.PercentOutput);
+    intakeOpenMotor.set(output);
+    
+  }
   
   //intakeWheelMotor functions
   

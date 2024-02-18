@@ -33,7 +33,8 @@ public class TurnToShootingCommand extends Command {
   public void initialize() {
     pid.setTargetPosition(0);
     pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
-  }
+    System.out.println("******** inside TurnToShootingCommand");
+    }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -47,12 +48,14 @@ public class TurnToShootingCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     swerve.drive(new Translation2d(0.0, 0.0), 0, true);
+    System.out.println("********exit TurnToShootingCommand");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD;
+
     };
   }
 

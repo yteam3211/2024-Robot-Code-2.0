@@ -20,7 +20,9 @@ public class PitchPos extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside PitchPos");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -32,7 +34,7 @@ public class PitchPos extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    System.out.println("********exit PitchPos");
   }
 
   // Returns true when the command should end.
