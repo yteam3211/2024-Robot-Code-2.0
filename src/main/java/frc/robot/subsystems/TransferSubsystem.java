@@ -20,7 +20,7 @@ public class TransferSubsystem extends SuperSystem {
   public TransferSubsystem() {
     super("Transfer Subsystem");
     transferMotor = new SuperSparkMax(Constants.TRANSFER_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast);
-    noteIn = new DigitalInput(2);
+    noteIn = new DigitalInput(3);
   }
 
   public void setOutput(double output){

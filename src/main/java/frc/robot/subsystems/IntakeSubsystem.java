@@ -30,8 +30,8 @@ public class IntakeSubsystem extends SuperSystem {
     intakeOpenGains = new Gains("intake Open Gains", 0.035, 0, 0.001);
     intakeWheelsGains = new Gains("intake Wheels Gains", 0.001, 0, 0);
     intakeWheelsMotor = new SuperSparkMax(Constants.INTAKE_WHEELS_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast);
-    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kBrake, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
-    // closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROSWITCH_ID);
+    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
+    closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROSWITCH_ID);
     getTab().addCommandToDashboard("Reset Intake pos", new InstantCommand(() -> resetEncoder()));
     }
     //intakeMotor functions
@@ -40,6 +40,7 @@ public class IntakeSubsystem extends SuperSystem {
      * reset the integrated encoder to 0.
      */
     public void resetEncoder(){
+        setIntakeOpenMotorPosition(0);
       intakeOpenMotor.reset(0);
     } 
     
@@ -88,7 +89,7 @@ public class IntakeSubsystem extends SuperSystem {
    */
   public boolean isIntakeOn()
   {
-    return false;//closeIntakeMicroSwitch.get();
+    return !closeIntakeMicroSwitch.get();
   }
   
     @Override
@@ -96,11 +97,13 @@ public class IntakeSubsystem extends SuperSystem {
     public void periodic() 
     {
       getTab().putInDashboard("intake pos", intakeOpenMotor.getPosition(), 3, 1, false);
-      getTab().putInDashboard("intake velocity", intakeWheelsMotor.getVelocity(), 4, 1, false);
+      getTab().putInDashboard("intake velocity", intakeWheelsMotor.getVelocity(), 4, 1, false);      
+      getTab().putInDashboard("intake micro",isIntakeOn(), 5, 1, false);
+
       // System.out.println(intakeOpenMotor.getPosition());
       if(this.isIntakeOn())
       {
-        this.resetEncoder();
+        resetEncoder();
       }
     }
 }
