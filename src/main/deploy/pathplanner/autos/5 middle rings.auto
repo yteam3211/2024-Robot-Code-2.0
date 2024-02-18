@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.73,
-      "y": 6.68
+      "x": 0.72,
+      "y": 4.42
     },
-    "rotation": 60.0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
@@ -14,37 +14,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "shoting and collecting first parallel ring"
+            "pathName": "shooting ring and collecting fifth parallel ring"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "from first parallel ring to shooting spot"
+            "pathName": "Shooting fifth parallel ring and collecting forth parallel ring"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "from first shooting spot to seconed parallel ring"
+            "pathName": "Shooting forth parallel ring and collecting thered parallel ring"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "from second parallel ring to shooting spot"
+            "pathName": "Shooting thered parallel ring and collecting second parallel ring"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "fome second shooting spot to thered parallel ring"
+            "pathName": "Shooting second parallel ring and collecting first parallel ring"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "from third parallel ring to shooting spot"
+            "name": "shooting ring"
           }
         }
       ]

@@ -10,8 +10,9 @@
     "collecting ring from side ring to side ring"
   ],
   "autoFolders": [
-    "first row and second row",
-    "collecting parallel ring and shooting it"
+    "parallel ring shooting",
+    "collecting parallel ring and shooting it",
+    "first row and second row"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
