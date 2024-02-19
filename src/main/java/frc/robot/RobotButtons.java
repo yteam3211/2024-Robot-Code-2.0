@@ -32,7 +32,7 @@ import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.PitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
-import frc.robot.commands.SwereCommands.LockWheelsCommnad;
+import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
