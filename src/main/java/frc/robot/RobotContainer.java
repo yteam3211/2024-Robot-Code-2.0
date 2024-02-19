@@ -3,6 +3,7 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -51,6 +52,11 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Shooting Command", new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem));
     // NamedCommands.registerCommand("Open Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_OUTPUT));
     // NamedCommands.registerCommand("Close Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, 0));
+        
+        // Register Named Commands // Need to put right commands and right subsystems
+        // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
+        // NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
+        // NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
 
         // Configure the button bindings
         configureButtonBindings();
