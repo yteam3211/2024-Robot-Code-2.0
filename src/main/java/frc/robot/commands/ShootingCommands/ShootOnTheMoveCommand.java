@@ -29,12 +29,14 @@ public class ShootOnTheMoveCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ParallelDeadlineGroup(
-        new ParallelCommandGroup(
-          new TurnToShootingCommand(swerve, limelight, shootingMath),
-          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
-        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath)),
-      new KickerCommand(kickerSubsystem, 0)
+      // new ParallelDeadlineGroup(
+      //   new ParallelCommandGroup(
+      //     new TurnToShootingCommand(swerve, limelight, shootingMath),
+      //     new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
+      //   new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem)),
+      // new KickerCommand(kickerSubsystem, 0)
+      new TurnToShootingCommand(swerve, limelight, shootingMath),
+      new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem, 14500, 0.4)
     );
   }
 }

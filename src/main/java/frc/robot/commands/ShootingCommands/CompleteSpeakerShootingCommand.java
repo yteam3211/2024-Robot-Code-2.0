@@ -33,7 +33,7 @@ public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
           new TurnToShootingCommand(swerve, limelight, shootingMath),
           new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
-        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath)),
+        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem  )),
       new KickerCommand(kickerSubsystem, 0)
     );
   }

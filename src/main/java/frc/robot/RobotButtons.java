@@ -30,9 +30,9 @@ import frc.robot.commands.IntakeCommands.IntakeWheels;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.ShootOnTheMoveCommand;
 import frc.robot.commands.ShootingCommands.PitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
-import frc.robot.commands.SwereCommands.LockWheelsCommnad;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -96,22 +96,22 @@ public class RobotButtons {
                 // systems joystick commands
         // kicker.whileTrue(new KickerCommand(kickerSubsystem,0.4));
         
-        // speakerShootingTrigger.onTrue(new CompleteShootingCommand( swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
+        // speakerShootingTrigger.onTrue(new CompleteShootingCommand(swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
        
-        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,17000,0.25));  
+        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,14500,0.25));  
+        // speakerShootingTrigger.whileTrue(new ShootOnTheMoveCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath, BreakValue, BreakValue));  
         
-        
-        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,400));
+        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,500));
         climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
         // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
 
-        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem,  transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
+        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 15));
-        pitchTrig.onTrue(new PitchPos(pitchingSubsystem, 0));
-        apmShootingTrigger.whileTrue(new AutoShooingWheels(shootingSubsystem,17000));
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 0));
+        pitchTrig.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        // apmShootingTrigger.whileTrue(new AutoShooingWheels(shootingSubsystem,18000));
 
-        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
+        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE _OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
         LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
         // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 

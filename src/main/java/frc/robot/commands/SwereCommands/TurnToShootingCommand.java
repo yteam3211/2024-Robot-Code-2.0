@@ -19,7 +19,7 @@ public class TurnToShootingCommand extends Command {
   private Limelight limelight;
   private ShootingMath shootingMath;
   double output;
-  protected Gains gains = new Gains("rotation gains", 0, 0, 0);
+  protected Gains gains = new Gains("rotation gains", 0.03, 0, 0.4);
 
   protected PIDController pid = new PIDController(gains);
 

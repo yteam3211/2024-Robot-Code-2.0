@@ -17,7 +17,7 @@ public class SuperSubSystemTab extends SuperShuffleBoardTab {
 
     public SuperSubSystemTab(String name, SuperSystem superSystem) {
         super(name);
-        commandList = tab.getLayout("commands", BuiltInLayouts.kList).withPosition(0, 0).withSize(2, 6);
+        commandList = tab.getLayout("commands", BuiltInLayouts.kList).withPosition(8, 0).withSize(2, 4);
         // .withPosition(RobotConstants.Dashboard.MAX_WIDTH_GRID - 2, 0).withSize(2,
         // RobotConstants.Dashboard.MAX_HIGH_GRID + 5);
         // .withProperties(Map.of("Label position", "HIDDEN"));
