@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.ShootingMath;
+import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.SwereCommands.TurnWhileDriveCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -28,12 +29,11 @@ public class ShootOnTheMoveCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ViewLimelightCommand(swerve, pitchingSubsystem).onlyWhile(() -> !limelight.isValid()),
-      new ParallelCommandGroup(
-        new TurnWhileDriveCommand(swerve, limelight, translationSup, strafeSup),
-        new ParallelDeadlineGroup(
-          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4),
-          new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, shootingMath))),
+      new ParallelDeadlineGroup(
+        new ParallelCommandGroup(
+          new TurnToShootingCommand(swerve, limelight, shootingMath),
+          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
+        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath)),
       new KickerCommand(kickerSubsystem, 0)
     );
   }
