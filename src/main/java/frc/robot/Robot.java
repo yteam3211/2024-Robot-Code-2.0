@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
 
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  // private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     //m_chooser.setDefaultOption("", deafult_auto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    // SmartDashboard.putData("Auto choices", m_chooser);
     // CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
   }
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    m_autoSelected = m_chooser.getSelected();
+    // m_autoSelected = m_chooser.getSelected();
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
         // Create a path following command using AutoBuilder. This will also trigger event markers.
-    m_autonomousCommand = new PathPlannerAuto("3 M");
+    // m_autonomousCommand = new PathPlannerAuto("3 M");
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
