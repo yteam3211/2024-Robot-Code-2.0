@@ -25,11 +25,15 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Swerve extends SuperSystem {
     // public SwerveDriveOdometry swerveOdometry;
+    public static DigitalOutput redLED = new DigitalOutput(Constants.RED_LED_ID);
+    public static DigitalOutput greenLED = new DigitalOutput(Constants.GREEN_LED_ID);
+    public static DigitalOutput blueLED = new DigitalOutput(Constants.BLUE_LED_ID);
     public SwerveDrivePoseEstimator poseEstimator;
     public SwerveModule[] mSwerveMods;
     public Limelight limelight;
@@ -178,7 +182,11 @@ public class Swerve extends SuperSystem {
         }
     }
     
-
+    public void setLEDS(boolean red, boolean green, boolean blue){
+        redLED.set(red);
+        greenLED.set(green);
+        blueLED.set(blue);
+    }
 
 
 

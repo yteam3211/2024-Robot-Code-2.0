@@ -5,6 +5,7 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 
@@ -34,8 +35,9 @@ public class ShootingSpeedCommand extends Command {
   public void execute() { 
      shootingSubsystem.setShooterVelocity(shootingVelocity);
     //  System.out.println("out " + shootingSubsystem.getVelocity());
-    if ((shootingVelocity - 2000) < shootingSubsystem.getVelocity()) {
+    if ((shootingVelocity - Constants.SHOOTING_VELOCITY_TRESHOLD) < shootingSubsystem.getVelocity()) {
       // System.out.println("in " + shootingSubsystem.getVelocity());
+      System.out.println("start Kicker");
       kickerSubsystem.setKickerOutput(kickerOutput);
       
     }

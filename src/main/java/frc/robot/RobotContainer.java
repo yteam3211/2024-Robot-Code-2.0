@@ -3,6 +3,7 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -13,8 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ShootingCommands.CompleteShootingCommand;
-import frc.robot.commands.SwereCommands.LockWheelsCommnad;
+import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
@@ -41,6 +41,7 @@ public class RobotContainer {
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
     // private final SendableChooser<Command> autoChooser;
+    // private final SendableChooser<Command> autoChooser;
     
     private final AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
@@ -52,6 +53,11 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Shooting Command", new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem));
     // NamedCommands.registerCommand("Open Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_OUTPUT));
     // NamedCommands.registerCommand("Close Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, 0));
+        
+        // Register Named Commands // Need to put right commands and right subsystems
+        // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
+        // NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
+        // NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
 
         // Configure the button bindings
         configureButtonBindings();
@@ -89,8 +95,8 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     // public Command getAutonomousCommand() {
-    //     // An ExampleCommand will run in autonomous
-    //     return autoChooser.getSelected();
+        // An ExampleCommand will run in autonomous
+        // return autoChooser.getSelected();
     // }
 
     // gets & sets 

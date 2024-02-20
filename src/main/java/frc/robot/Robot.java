@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
         // Create a path following command using AutoBuilder. This will also trigger event markers.
-    m_autonomousCommand = new PathPlannerAuto("3 M");
+    // m_autonomousCommand = new PathPlannerAuto("3 M");
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

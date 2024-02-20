@@ -14,8 +14,8 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
 
     // shooting constants
-    public static final double SHOOTING_ANGLE_TRESHOLD = 2; //TODO: set when the robot is build
-    public static final double SHOOTING_VELOCITY_TRESHOLD = 200; //TODO: set when the robot is build 
+    public static final double SHOOTING_ANGLE_TRESHOLD = 0.7; //TODO: set when the robot is build
+    public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
     public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
     
     // pitching constants
@@ -23,7 +23,7 @@ public final class Constants {
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2150; //in millimeters
+    public static final double SPEAKER_HIGHT = 2500;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
@@ -50,7 +50,7 @@ public final class Constants {
     public static final double MAX_SHOOTING_RANGE = 3.5; // in meters
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 43; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 41; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 
@@ -82,7 +82,11 @@ public final class Constants {
     public static final int SLAVE1_ELEAVATOR_MOTOR_ID = 14;
     public static final int SLAVE2_ELEAVATOR_MOTOR_ID = 15;
     public static final int MICROSWITCH_ELEAVATOR_ID = 0;
-
+    
+    
+    public static final int RED_LED_ID = 8;
+    public static final int BLUE_LED_ID = 7;
+    public static final int GREEN_LED_ID = 9;
 
     
 
@@ -97,7 +101,7 @@ public final class Constants {
 
     public static final class SwerveConstant {
         public static final int pigeonID = 1;
-        public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
+        public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSFalconSwerveConstants chosenModule = 
             COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);

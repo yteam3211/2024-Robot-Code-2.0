@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.ShootingMath;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
+import frc.robot.subsystems.ShootingSubsystem;
 import frc.util.vision.Limelight;
 
 // @author Noya Aberjil
@@ -17,15 +18,17 @@ public class PitchCommand extends Command {
   private PitchingSubsystem pitchingSubsystem;
   private ElevatorSubsystem eleavatorSubsystem;
   private ShootingMath shootingMath;
+  protected ShootingSubsystem shootingSubsystem;
 
 
 
   /** Creates a new PichCommand. */
-  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem, ShootingMath shootingMath) {
+  public PitchCommand(Limelight limelight, PitchingSubsystem pitchingSubsystem, ElevatorSubsystem eleavatorSubsystem, ShootingMath shootingMath, ShootingSubsystem shootingSubsystem) {
     this.limelight = limelight;
     this.pitchingSubsystem = pitchingSubsystem;
     this.eleavatorSubsystem = eleavatorSubsystem;
     this.shootingMath = shootingMath;
+    this.shootingSubsystem = shootingSubsystem;
     addRequirements(pitchingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -47,7 +50,7 @@ public class PitchCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    // pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
     System.out.println("********exit PitchCommand");
   }
 

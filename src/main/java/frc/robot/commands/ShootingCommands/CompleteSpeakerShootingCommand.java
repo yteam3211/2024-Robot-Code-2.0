@@ -21,19 +21,19 @@ import frc.util.vision.Limelight;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class CompleteShootingCommand extends SequentialCommandGroup {
+public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteSootingCommand. */
-  public CompleteShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath) {
+  public CompleteSpeakerShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(         //TODO: change the eleavator position and the kickers output
       // !limelight.isValid() ? Math.abs(Constants.LIMELIGHT_lOOKING_ANGLE - pitchingSubsystem.getAbsolutePosition()) > Constants.LIMELIGHT_lOOKING_ANGLE_TRESHOLD ? new PitchPos(pitchingSubsystem, Constants.LIMELIGHT_lOOKING_ANGLE) : new WaitCommand(0) : new EleavatorCommand(eleavatorSubsystem, 0) ,
       // new ViewLimelightCommand(swerve, pitchingSubsystem).onlyWhile(() -> !limelight.isValid()),
-      new ParallelCommandGroup(
-        new TurnToShootingCommand(swerve, limelight),
-        new ParallelDeadlineGroup(
-          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4),
-          new PitchCommand(limelight,pitchingSubsystem,eleavatorSubsystem, shootingMath))),
+      new ParallelDeadlineGroup(
+        new ParallelCommandGroup(
+          new TurnToShootingCommand(swerve, limelight, shootingMath),
+          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
+        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem  )),
       new KickerCommand(kickerSubsystem, 0)
     );
   }

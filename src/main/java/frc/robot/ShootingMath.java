@@ -23,6 +23,7 @@ public class ShootingMath extends SuperSystem {
     public PitchingSubsystem pitchingSubsystem;
     public Limelight limelight;
     public double distanceFromLimelightToSpeaker;
+    public double hightShootingFromFloor;
     public double hightShootingToSpeaker;
     public double distanceFromShooterToSpeaker;
     public double angleToSpeakerRadians;
@@ -72,6 +73,7 @@ public class ShootingMath extends SuperSystem {
       //   }
       // }
       distanceFromLimelightToSpeaker = getSpeakerShootingDistance(swerve);
+      hightShootingFromFloor = (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
       hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
       distanceFromShooterToSpeaker = (distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER);
       angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
@@ -84,10 +86,12 @@ public class ShootingMath extends SuperSystem {
   public void periodic() {
     // This method will be called once per scheduler run
     getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
+    getTab().putInDashboard("hight shooter from floor", hightShootingFromFloor, false);
     getTab().putInDashboard("hight Shooting To Speaker", hightShootingToSpeaker, false);
     getTab().putInDashboard("limelight to AprilTag", distanceFromLimelightToSpeaker, false);
     getTab().putInDashboard("shooting angle", getAngleToSpeaker(elevatorSubsystem, limelight), false);
     getTab().putInDashboard("get Vertical Limelight Hight From Pivot", getVerticalLimelightHightFromPivot(), false);
+    getTab().putInDashboard("Swerve Angle", getEstematedSpeakerShootingAngle(swerve), false);
 
     // getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
   }
