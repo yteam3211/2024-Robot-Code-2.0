@@ -16,7 +16,9 @@ public final class Constants {
     // shooting constants
     public static final double SHOOTING_ANGLE_TRESHOLD = 0.7; //TODO: set when the robot is build
     public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
-    public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
+    public static final double SHOOTING_VELCITY = 16500; //TODO: set when the robot is build
+    public static final double KICKER_OUTPUT = 0.4; //TODO: set when the robot is build
+    
     
     // pitching constants
     public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.843018); //in degrees

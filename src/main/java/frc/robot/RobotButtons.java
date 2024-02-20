@@ -98,7 +98,7 @@ public class RobotButtons {
         
         // speakerShootingTrigger.onTrue(new CompleteShootingCommand(swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
        
-        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,14500,0.25));  
+        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,Constants.SHOOTING_VELCITY,0.25));  
         // speakerShootingTrigger.whileTrue(new ShootOnTheMoveCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath, BreakValue, BreakValue));  
         
         
@@ -108,8 +108,9 @@ public class RobotButtons {
 
         intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 0));
+        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 50));
         pitchTrig.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        apmShootingTrigger.whileTrue(new IntakeWheels(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem));
         // apmShootingTrigger.whileTrue(new AutoShooingWheels(shootingSubsystem,18000));
 
         // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE _OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));

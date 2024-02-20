@@ -44,12 +44,12 @@
         {
           "type": "named",
           "data": {
-            "name": "shooting ring"
+            "name": "Shooting wheels"
           }
         }
       ]
     }
   },
-  "folder": "parallel ring shooting",
+  "folder": "middel row",
   "choreoAuto": false
 }

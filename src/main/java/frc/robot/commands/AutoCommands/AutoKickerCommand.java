@@ -5,16 +5,20 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.KickerSubsystem;
+import frc.robot.subsystems.ShootingSubsystem;
 
 public class AutoKickerCommand extends Command {
   /** Creates a new kickerCommand. */
   private KickerSubsystem kickerSubsystem;
+  ShootingSubsystem shootingSubsystem;
   private double kickerOutput;
 
-  public AutoKickerCommand(KickerSubsystem kickerSubsystem,double kickerOutput) {
+  public AutoKickerCommand(KickerSubsystem kickerSubsystem, ShootingSubsystem shootingSubsystem, double kickerOutput) {
   this.kickerSubsystem = kickerSubsystem;
   this.kickerOutput = kickerOutput;
+  this.shootingSubsystem = shootingSubsystem;
   addRequirements(kickerSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,6 +30,7 @@ public class AutoKickerCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if((Constants.SHOOTING_VELCITY - 5000) < shootingSubsystem.getVelocity())
     kickerSubsystem.setKickerOutput(kickerOutput);
   }
 
@@ -39,12 +44,6 @@ public class AutoKickerCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (!kickerSubsystem.isNoteIn()) { //TODO: change this to return true when the sensor is false (when the note is out)
-     return true;
-    }
-    else{
-    return false;
-
-    }
+    return !kickerSubsystem.isNoteIn(); //TODO: change this to return true when the sensor is false (when the note is out)
   }
 }
