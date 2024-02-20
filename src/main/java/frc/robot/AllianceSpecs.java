@@ -9,6 +9,7 @@ import frc.util.vision.Limelight;
 public class AllianceSpecs {
     public static boolean isRed;
     public static Pose2d speakerPos;
+    public static Pose2d AMPPose;
     public static DoubleSupplier poseY;
     public static DoubleSupplier poseX;
     
@@ -17,8 +18,8 @@ public class AllianceSpecs {
         if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
             isRed = true;
             speakerPos = Constants.RED_SPEAKER_POS;
-            poseX = () -> limelight.getRedBotpose()[0];
-            poseY = () -> limelight.getRedBotpose()[1];
+            poseX = () -> limelight.getBlueBotpose()[0];//limelight.getRedBotpose()[0];
+            poseY = () -> limelight.getBlueBotpose()[1];//limelight.getRedBotpose()[1];
             
         }
         else{
