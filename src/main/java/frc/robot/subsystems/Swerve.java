@@ -5,6 +5,7 @@ import frc.robot.dashboard.SuperSystem;
 import frc.util.vision.Limelight;
 import frc.robot.AllianceSpecs;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -57,7 +58,7 @@ public class Swerve extends SuperSystem {
                 this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                 this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(6, 0.0, 0.0), // Translation PID constants
                         new PIDConstants(0.5, 0.0, 0.0), // Rotation PID constants
                         4.5, // Max module speed, in m/s
                         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
@@ -196,12 +197,12 @@ public class Swerve extends SuperSystem {
         getTab().putInDashboard("pose y", getPose().getY(), false);
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         
-        getTab().putInDashboard("yaw", getYaw().getDegrees(), false);
+        getTab().putInDashboard("yaw", gyro.getYaw(), false);
         // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         // swerveOdometry.update(getYaw(), getModulePositions());
         poseEstimator.update(getYaw(), getModulePositions());
-        if(limelight.isValid()){
+        if(limelight.isValid() && !Robot.isAutonomous){
             Pose2d camPose = new Pose2d(AllianceSpecs.poseX.getAsDouble(), AllianceSpecs.poseY.getAsDouble(), getYaw());
             
             poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());

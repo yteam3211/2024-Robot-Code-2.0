@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
+  public static boolean isAutonomous;
 
   //private static final String rAuto = "next to human & 1 cube";
   private String m_autoSelected;
@@ -69,6 +70,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    isAutonomous = true;
   }
 
   @Override
@@ -78,7 +80,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
+    isAutonomous = true;
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
         // Create a path following command using AutoBuilder. This will also trigger event markers.
     // m_autonomousCommand = new PathPlannerAuto("3 M");
     // schedule the autonomous command (example)
@@ -93,6 +96,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    isAutonomous = true;
     m_robotContainer.getSwerve().zeroGyro();
     // new restShooting(m_robotContainer.getPitchingSubsystem());
     m_robotContainer.SetOutputToZero();

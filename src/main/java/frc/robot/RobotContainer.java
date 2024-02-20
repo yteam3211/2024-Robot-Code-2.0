@@ -14,7 +14,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
+import frc.robot.commands.AutoCommands.AutoKickerCommand;
+import frc.robot.commands.AutoCommands.AutoShooingWheels;
+import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
+import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
@@ -41,7 +46,7 @@ public class RobotContainer {
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-    private final SendableChooser<Command> autoChooser;
+    // private final SendableChooser<Command> autoChooser;
     
     private final AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
@@ -49,10 +54,11 @@ public class RobotContainer {
     //auto commands register
     public RobotContainer() {
 
-    // NamedCommands.registerCommand("Turn Command", new TurnToShootingCommand(swerve, limelight, Constants.SHOOTING_ANGLE_TRESHOLD));
-    // NamedCommands.registerCommand("Shooting Command", new CompleteShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem));
-    // NamedCommands.registerCommand("Open Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_OUTPUT));
-    // NamedCommands.registerCommand("Close Intake Command", new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, 0));
+    NamedCommands.registerCommand("Open Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
+    NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_VELCITY));
+    NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 54));
+    NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem,  19));
+    NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
         // Register Named Commands // Need to put right commands and right subsystems
         // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
@@ -63,10 +69,10 @@ public class RobotContainer {
         configureButtonBindings();
         
         // Build an auto chooser. This will use Commands.none() as the default option.
-        autoChooser = AutoBuilder.buildAutoChooser();
+        // autoChooser = AutoBuilder.buildAutoChooser("3 MA");
         // Another option that allows you to specify the default auto by its name
         // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-        SmartDashboard.putData("Auto Chooser", autoChooser);
+        // SmartDashboard.putData("Auto Chooser", autoChooser);
     }
     
 
@@ -96,8 +102,8 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        // return new PathPlannerAuto("3 MA");
-        return autoChooser.getSelected();
+        return new PathPlannerAuto("collecting first ring and shotting it");
+        // return autoChooser.getSelected();
     }
 
     // gets & sets 

@@ -22,9 +22,10 @@ public class IntakeWheels extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
-         new IntakeBackwordsCommand(intakeSubsystem, -1000), // TODO: change to IntakeCommand
-         new TransferCommand(transferSubsystem, 0.8),
-         new KickerCommand(kickerSubsystem, 0.4)      
+         new IntakeBackwordsCommand(intakeSubsystem, -1000)
+        //  , // TODO: change to IntakeCommand
+        //  new TransferCommand(transferSubsystem, 0.8),
+        //  new KickerCommand(kickerSubsystem, 0.4)      
     );
     }
 }

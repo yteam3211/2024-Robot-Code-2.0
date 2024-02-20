@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4225982298118458,
-        "y": 6.522049197944548
+        "x": 1.5950797094176201,
+        "y": 6.4292492636340475
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5130876235778445,
-        "y": 6.75
+        "x": 3.023801768002964,
+        "y": 7.0733452736520315
       },
       "prevControl": {
-        "x": 2.0290329939301253,
-        "y": 6.390452511674254
+        "x": 2.4851032868970147,
+        "y": 6.487803446362955
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,39 +32,22 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "shooting ring",
-      "waypointRelativePos": 0,
+      "name": "open collect",
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
           "commands": [
             {
-              "type": "wait",
+              "type": "named",
               "data": {
-                "waitTime": 0.5
+                "name": "Close 1 pitch"
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "shooting ring"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "open collect",
-      "waypointRelativePos": 0.7,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "open collect"
+                "name": "Open Intake Command"
               }
             }
           ]
@@ -73,14 +56,14 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 1.2,
+    "maxAcceleration": 1.2,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 32.0,
+    "rotation": 27.0,
     "rotateFast": false
   },
   "reversed": false,
