@@ -58,7 +58,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_VELCITY));
     NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 54));
     NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem,  19));
-    NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem Constants.KICKER_OUTPUT));
+    NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
         // Register Named Commands // Need to put right commands and right subsystems
         // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
