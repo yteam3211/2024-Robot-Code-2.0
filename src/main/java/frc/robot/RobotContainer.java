@@ -40,7 +40,7 @@ public class RobotContainer {
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-    private final SendableChooser<Command> autoChooser;
+    // private final SendableChooser<Command> autoChooser;
     
     private final AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
@@ -57,10 +57,10 @@ public class RobotContainer {
         configureButtonBindings();
         
         // Build an auto chooser. This will use Commands.none() as the default option.
-        autoChooser = AutoBuilder.buildAutoChooser();
+        // autoChooser = AutoBuilder.buildAutoChooser();
         // Another option that allows you to specify the default auto by its name
         // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-        SmartDashboard.putData("Auto Chooser", autoChooser);
+        // SmartDashboard.putData("Auto Chooser", autoChooser);
     }
     
 
@@ -88,10 +88,10 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return autoChooser.getSelected();
-    }
+    // public Command getAutonomousCommand() {
+    //     // An ExampleCommand will run in autonomous
+    //     return autoChooser.getSelected();
+    // }
 
     // gets & sets 
     public Limelight getLimelight() {

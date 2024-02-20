@@ -98,7 +98,11 @@ public class IntakeSubsystem extends SuperSystem {
     {
       getTab().putInDashboard("intake pos", intakeOpenMotor.getPosition(), 3, 1, false);
       getTab().putInDashboard("intake velocity", intakeWheelsMotor.getVelocity(), 4, 1, false);      
-      getTab().putInDashboard("intake micro",isIntakeOn(), 5, 1, false);
+      getTab().putInDashboard("intake micro",isIntakeOn(), 5, 1, false);      
+      getTab().putInDashboard("intake volt",intakeOpenMotor.getBusVoltage(), 6, 1, false);
+      getTab().putInDashboard("intake amp",intakeOpenMotor.getAmper(), 7, 1, false);
+
+
 
       // System.out.println(intakeOpenMotor.getPosition());
       if(this.isIntakeOn())
