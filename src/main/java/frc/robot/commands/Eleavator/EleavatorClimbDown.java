@@ -21,7 +21,7 @@ public class EleavatorClimbDown extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    eleavatorSubsystem.changeStation(gains.EleavatorClimbUp);
+    eleavatorSubsystem.changeStation(gains.EleavatorClimbDowm);
     System.out.println("******** inside EleavatorClimbDown");
   }
 

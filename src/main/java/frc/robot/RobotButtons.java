@@ -101,9 +101,10 @@ public class RobotButtons {
         speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,14500,0.25));  
         // speakerShootingTrigger.whileTrue(new ShootOnTheMoveCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath, BreakValue, BreakValue));  
         
-        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,500));
+        
+        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,590));
         climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
-        // climb.onTrue(new EleavatorClimbDown(eleavatorSubsystem, 50));
+        climbTrig.onTrue(new EleavatorClimbDown(elevatorSubsystem, -40));
 
         intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
 
