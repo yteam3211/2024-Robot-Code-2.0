@@ -5,6 +5,7 @@
 package frc.robot.commands.ShootingCommands;
 
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -32,9 +33,10 @@ public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
       new ParallelDeadlineGroup(
         new ParallelCommandGroup(
           new TurnToShootingCommand(swerve, limelight, shootingMath),
-          new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
+          new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_VELCITY)),
         new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem  )),
-      new KickerCommand(kickerSubsystem, 0)
+      new KickerCommand(kickerSubsystem, 0),
+      new InstantCommand(() -> shootingSubsystem.setShooterOutput(0))
     );
   }
 }

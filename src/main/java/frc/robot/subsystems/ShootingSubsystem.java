@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.ShootingCommands.KickerCommand;
-import frc.robot.commands.ShootingCommands.ShootingOutput;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperCanFlex;
@@ -32,7 +31,6 @@ public class ShootingSubsystem extends SuperSystem {
     shooterGains = new Gains("shooterGains", 0, 0, 2,0.00015,4,0,0); //TODO: need to add kf
     masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, Constants.CanBus.RIO, 40, true, false, NeutralMode.Coast, shooterGains, TalonFXControlMode.Velocity, 0, 0,0); 
     slaveShooterMotor = new SuperTalonFX(masterShooterMotor, Constants.SLAVE_SHOOTER_MOTOR_ID, Constants.CanBus.RIO, 40, true);
-    setDefaultCommand( new ShootingOutput(this, 0));
   }
 
   

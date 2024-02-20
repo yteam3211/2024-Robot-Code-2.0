@@ -5,14 +5,15 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShootingSubsystem;
 
-public class ShootingOutput extends Command {
+public class ShootingVelocity extends Command {
   private ShootingSubsystem shootingSubsystem;
-  private double output;
-  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
+  private double velocity;
+  public ShootingVelocity(ShootingSubsystem shootingSubsystem, double velocity) {
     this.shootingSubsystem = shootingSubsystem;
-    this.output = output;
+    this.velocity = velocity;
     addRequirements(shootingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,7 +27,7 @@ public class ShootingOutput extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setShooterOutput(output);
+    shootingSubsystem.setShooterVelocity(velocity);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +39,6 @@ public class ShootingOutput extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (Math.abs(velocity - shootingSubsystem.getVelocity()) < Constants.SHOOTING_VELOCITY_TRESHOLD);
   }
 }
