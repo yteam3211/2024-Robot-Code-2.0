@@ -96,8 +96,8 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        // return new PathPlannerAuto("Example Auto");
-        return autoChooser.getSelected();
+        return new PathPlannerAuto("3 MA");
+        // return autoChooser.getSelected();
     }
 
     // gets & sets 
