@@ -5,47 +5,40 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.KickerSubsystem;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShootingSubsystem;
 
-public class KickerCommand extends Command {
-  /** Creates a new kickerCommand. */
-  private KickerSubsystem kickerSubsystem;
+public class ShootingOutput extends Command {
   private ShootingSubsystem shootingSubsystem;
-  private double kickerOutput;
-
-  public KickerCommand(KickerSubsystem kickerSubsystem, ShootingSubsystem shootingSubsystem, double kickerOutput) {
-  this.kickerSubsystem = kickerSubsystem;
-  this.shootingSubsystem = shootingSubsystem;
-  this.kickerOutput = kickerOutput;
-  addRequirements(kickerSubsystem);
+  private double output;
+  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
+    this.shootingSubsystem = shootingSubsystem;
+    this.output = output;
+    addRequirements(shootingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("******** inside KickerCommand");
+    System.out.println("******** inside ShootingOutput");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    kickerSubsystem.setKickerOutput(kickerOutput);
+    shootingSubsystem.setShooterOutput(output);;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    kickerSubsystem.setKickerOutput(0);
-    System.out.println("********exit KickerCommand");
-  
+    System.out.println("********exit ShootingOutput");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("********note is in *************" + kickerSubsystem.isNoteIn());
-    return kickerSubsystem.isNoteIn();
+    return (Math.abs(output - shootingSubsystem.getOutput()) < 0.02);
   }
 }

@@ -28,14 +28,20 @@
       "/Shuffleboard/limelight/View Mode": "Command",
       "/Shuffleboard/limelight/Vision Mode": "Command",
       "/SmartDashboard/Auto choices": "String Chooser",
-      "/SmartDashboard/eleavator gains": "PIDController"
+      "/SmartDashboard/eleavator gains": "PIDController",
+      "/SmartDashboard/pid swerve": "PIDController"
+    },
+    "windows": {
+      "/SmartDashboard/pid swerve": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables Info": {
-    "Server": {
-      "Subscribers": {
-        "open": true
-      }
+    "Clients": {
+      "open": true
     },
     "visible": true
   },
@@ -83,7 +89,7 @@
             0.0,
             0.8500000238418579
           ],
-          "height": 332,
+          "height": 661,
           "series": [
             {
               "color": [
@@ -95,6 +101,19 @@
               "id": "NT:/Shuffleboard/ElevatorSubsystem/elevator hight"
             }
           ]
+        }
+      ]
+    },
+    "Plot <2>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.8500000238418579
+          ],
+          "height": 810
         }
       ]
     }

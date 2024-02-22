@@ -19,7 +19,7 @@ public class TurnToShootingCommand extends Command {
   private Limelight limelight;
   private ShootingMath shootingMath;
   double output;
-  protected Gains gains = new Gains("rotation gains", 0.03, 0, 0.4);
+  protected Gains gains = new Gains("rotation gains", 0.065, 0, 0.007);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -35,7 +35,8 @@ public class TurnToShootingCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
+    pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.8);
+    System.out.println("target " + ShootingMath.getEstematedSpeakerShootingAngle(swerve));
     System.out.println("******** inside TurnToShootingCommand");
     }
 
@@ -44,11 +45,13 @@ public class TurnToShootingCommand extends Command {
   public void execute() {
     if(!limelight.isValid()){
       pid.setTargetPosition(ShootingMath.getEstematedSpeakerShootingAngle(swerve));
-      output = pid.getOutput(Swerve.gyro.getYaw());
+      output = pid.getOutput(Swerve.gyro.getYaw()) *-1 +0.2;
+      // System.out.println("current " + Swerve.gyro.getYaw());
     }
     else{
       pid.setTargetPosition(0);
       output = pid.getOutput(limelight.getX());
+
     }
     output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
     swerve.drive(new Translation2d(0.046, 0.046), output, true);
@@ -58,6 +61,7 @@ public class TurnToShootingCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     swerve.drive(new Translation2d(0.0, 0.0), 0, true);
+    swerve.lockWheels();
     System.out.println("********exit TurnToShootingCommand");
   }
 

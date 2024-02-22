@@ -18,6 +18,7 @@ import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
+import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
@@ -55,7 +56,7 @@ public class RobotContainer {
     public RobotContainer() {
 
     NamedCommands.registerCommand("Open Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
-    NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_VELCITY));
+    NamedCommands.registerCommand("Start Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
     NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 54));
     NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem,  19));
     NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));

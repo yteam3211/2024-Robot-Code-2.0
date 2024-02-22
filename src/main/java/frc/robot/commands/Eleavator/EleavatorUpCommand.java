@@ -9,11 +9,11 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem.gains;
 
-public class EleavatorCommand extends Command {
+public class EleavatorUpCommand extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
   private double eleavatorPosition;
   /** Creates a new Eleavator. */
-  public EleavatorCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  public EleavatorUpCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
     this.eleavatorSubsystem = eleavatorSubsystem;
     this.eleavatorPosition = eleavatorPosition;
     addRequirements(eleavatorSubsystem);

@@ -30,13 +30,12 @@ public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
     addCommands(         //TODO: change the eleavator position and the kickers output
       // !limelight.isValid() ? Math.abs(Constants.LIMELIGHT_lOOKING_ANGLE - pitchingSubsystem.getAbsolutePosition()) > Constants.LIMELIGHT_lOOKING_ANGLE_TRESHOLD ? new PitchPos(pitchingSubsystem, Constants.LIMELIGHT_lOOKING_ANGLE) : new WaitCommand(0) : new EleavatorCommand(eleavatorSubsystem, 0) ,
       // new ViewLimelightCommand(swerve, pitchingSubsystem).onlyWhile(() -> !limelight.isValid()),
-      new ParallelDeadlineGroup(
-        new ParallelCommandGroup(
-          new TurnToShootingCommand(swerve, limelight, shootingMath),
-          new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_VELCITY)),
-        new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem  )),
-      new KickerCommand(kickerSubsystem, 0),
-      new InstantCommand(() -> shootingSubsystem.setShooterOutput(0))
+      new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem),
+      new ParallelCommandGroup(
+        new TurnToShootingCommand(swerve, limelight, shootingMath),
+        new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)),
+      new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem),
+      new KickerShootingCommand(kickerSubsystem, shootingSubsystem, 0.4)
     );
   }
 }

@@ -29,8 +29,8 @@ public class KickerSubsystem extends SuperSystem {
   public KickerSubsystem() {
   super("Kicker Subsystem");
    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, true, IdleMode.kCoast);
-   noteInClose = new DigitalInput(1);   
-   noteInFar = new DigitalInput(2);
+   noteInClose = new DigitalInput(2);   
+   noteInFar = new DigitalInput(1);
 
 
   }
@@ -40,7 +40,9 @@ public class KickerSubsystem extends SuperSystem {
     // test( 1 > 2 ? 3 : 2, 2);
     // This method will be called once per scheduler run
     getTab().putInDashboard("is note in close",isNoteIn(), 5, 1, false);    
-    getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);
+    getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);   
+     getTab().putInDashboard("position",kickerMotor.getPosition(),3 , 1, false);
+
 
 
   }
@@ -64,6 +66,7 @@ public class KickerSubsystem extends SuperSystem {
     kickerMotor.set(pos);
 
   }
+
   public void test(double a, double b){}
   }
 

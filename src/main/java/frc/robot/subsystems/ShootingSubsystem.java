@@ -44,6 +44,10 @@ public class ShootingSubsystem extends SuperSystem {
   {
     return masterShooterMotor.getVelocity();
   }
+
+  public double getOutput(){
+    return masterShooterMotor.getOutput();
+  }
   
   public void setShooterOutput(double output)
   {

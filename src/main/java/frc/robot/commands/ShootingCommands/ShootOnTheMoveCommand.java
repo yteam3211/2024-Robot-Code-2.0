@@ -32,7 +32,7 @@ public class ShootOnTheMoveCommand extends SequentialCommandGroup {
       // new ParallelDeadlineGroup(
       //   new ParallelCommandGroup(
       //     new TurnToShootingCommand(swerve, limelight, shootingMath),
-      //     new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_VELCITY,0.4)),
+      //     new ShootingSpeedCommand(shootingSubsystem,kickerSubsystem, Constants.SHOOTING_SPEAKER_VELCITY,0.4)),
       //   new PitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem)),
       // new KickerCommand(kickerSubsystem, 0)
       new TurnToShootingCommand(swerve, limelight, shootingMath),

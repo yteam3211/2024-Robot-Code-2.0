@@ -42,7 +42,7 @@ public class IntakeCommand extends Command {
   public void end(boolean interrupted) 
   {
     intakeSubsystem.setWheelsMotorOutput(0);
-    intakeSubsystem.setIntakeOpenMotorUotput(-0.75 );
+    // intakeSubsystem.setIntakeOpenMotorUotput(-0.75 );
     System.out.println("********exit IntakeCommand");
   }
 

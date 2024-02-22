@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.hardware.CANcoder;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ShootingCommands.PitchCommand;
 import frc.robot.dashboard.SuperSystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -39,14 +40,14 @@ public class ShootingMath extends SuperSystem {
     }
 
     public static double getSpeakerShootingDistance(Swerve swerve){
-      double distance = Math.sqrt(Math.pow(AllianceSpecs.speakerPos.getY() - swerve.getPose().getY(), 2) + Math.pow(AllianceSpecs.speakerPos.getX() - swerve.getPose().getX(),2));
+      double distance = Math.sqrt(Math.pow(Constants.SPEAKER_POS.getY() - swerve.getPose().getY(), 2) + Math.pow(Constants.SPEAKER_POS.getX() - swerve.getPose().getX(),2));
       distance *= 1000;
       return distance;
     }
 
     public static double getEstematedSpeakerShootingAngle(Swerve swerve){
-        double estematedAngle = Math.toDegrees(Math.atan(Math.abs(AllianceSpecs.speakerPos.getY() - swerve.getPose().getY()) / Math.abs(AllianceSpecs.speakerPos.getX() - swerve.getPose().getX())));
-        if(AllianceSpecs.speakerPos.getY() - swerve.getPose().getY() < 0){
+        double estematedAngle = Math.toDegrees(Math.atan(Math.abs(Constants.SPEAKER_POS.getY() - swerve.getPose().getY()) / Math.abs(Constants.SPEAKER_POS.getX() - swerve.getPose().getX())));
+        if(Constants.SPEAKER_POS.getY() - swerve.getPose().getY() < 0){
             estematedAngle *= -1;
         }
         return estematedAngle;
@@ -92,7 +93,7 @@ public class ShootingMath extends SuperSystem {
     getTab().putInDashboard("shooting angle", getAngleToSpeaker(elevatorSubsystem, limelight), false);
     getTab().putInDashboard("get Vertical Limelight Hight From Pivot", getVerticalLimelightHightFromPivot(), false);
     getTab().putInDashboard("Swerve Angle", getEstematedSpeakerShootingAngle(swerve), false);
-
+    SmartDashboard.putNumber("target shooting Angle", getEstematedSpeakerShootingAngle(swerve));
     // getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
   }
 }

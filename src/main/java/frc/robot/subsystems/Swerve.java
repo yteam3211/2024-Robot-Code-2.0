@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
+import frc.util.PID.Gains;
 import frc.util.vision.Limelight;
 import frc.robot.AllianceSpecs;
 import frc.robot.Constants;
@@ -19,6 +20,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -26,6 +28,7 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
@@ -38,11 +41,14 @@ public class Swerve extends SuperSystem {
     public SwerveDrivePoseEstimator poseEstimator;
     public SwerveModule[] mSwerveMods;
     public Limelight limelight;
+ 
 
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
     
     public Swerve(Limelight limelight) {
+        // Gains RotationGains
         super("Swerve");
+
         this.limelight = limelight;
         zeroGyro();
         mSwerveMods = new SwerveModule[] {
@@ -124,7 +130,7 @@ public class Swerve extends SuperSystem {
     }    
 
 
-    public void setStop(){
+    public void lockWheels(){
         mSwerveMods[0].forceSetAngle(Rotation2d.fromDegrees(45));
         mSwerveMods[1].forceSetAngle(Rotation2d.fromDegrees(-45));
         mSwerveMods[2].forceSetAngle(Rotation2d.fromDegrees(-45));
@@ -196,8 +202,8 @@ public class Swerve extends SuperSystem {
         getTab().putInDashboard("pose x", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
-        
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
+        SmartDashboard.putNumber("gyro", gyro.getYaw());
         // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         // swerveOdometry.update(getYaw(), getModulePositions());

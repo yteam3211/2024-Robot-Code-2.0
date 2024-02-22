@@ -43,20 +43,21 @@ public class PitchCommand extends Command {
   @Override
   public void execute() {
   //  angleToSpeakerDegrees = pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
-    System.out.println("right pitch: " + shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    // System.out.println("right pitch: " + shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
     pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
   }
-
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
     System.out.println("********exit PitchCommand");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(pitchingSubsystem.getAbsolutePosition() - shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight)) < 0.5;
   }
 }
