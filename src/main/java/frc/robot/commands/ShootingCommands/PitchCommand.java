@@ -44,6 +44,7 @@ public class PitchCommand extends Command {
   public void execute() {
   //  angleToSpeakerDegrees = pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
     // System.out.println("right pitch: " + shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
+    System.out.println("************ angle to shooting "+ shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight) +"********");
     pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
   }
   
