@@ -17,10 +17,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
+import frc.robot.commands.Eleavator.EleavatorOutput;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.ShootingVelocity;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
@@ -55,11 +57,15 @@ public class RobotContainer {
     //auto commands register
     public RobotContainer() {
 
-    NamedCommands.registerCommand("Open Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
-    NamedCommands.registerCommand("Start Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
-    NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 54));
-    NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem,  19));
+    NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
+    NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
+    NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
+    NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
+    NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 50));
+    NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,  26));
+    NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
     NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
+    NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.05));
         
         // Register Named Commands // Need to put right commands and right subsystems
         // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
@@ -89,7 +95,7 @@ public class RobotContainer {
 
     public void SetOutputToZero(){
         shootingSubsystem.setShooterOutput(0);
-        intakeSubsystem.setIntakeOpenMotorUotput(0);
+        intakeSubsystem.setIntakeOpenMotorOutput(0);
         intakeSubsystem.setWheelsMotorOutput(0);
         transferSubsystem.setOutput(0);
         kickerSubsystem.setKickerOutput(0);
@@ -103,7 +109,9 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new PathPlannerAuto("collecting first ring and shotting it");
+        // return new PathPlannerAuto("3 MA");
+        System.out.println("---Start auto 1 - complition---");
+        return new PathPlannerAuto("Auto 1 - complition");
         // return autoChooser.getSelected();
     }
 

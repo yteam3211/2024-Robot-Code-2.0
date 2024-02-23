@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.665383638459586,
-        "y": 1.864852191242845
+        "x": 5.546980324729882,
+        "y": 1.4504405931888795
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 2.365588982247864
       },
       "prevControl": {
-        "x": 4.6096207577030555,
-        "y": 1.7563158203239486
+        "x": 4.7970926711084205,
+        "y": 1.282702565405131
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,10 +30,34 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Start intake & pitch",
+      "waypointRelativePos": 0.7,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Use Intake Command"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Stage pitch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 2.0,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

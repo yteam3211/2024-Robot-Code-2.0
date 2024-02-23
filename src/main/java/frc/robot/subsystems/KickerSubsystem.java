@@ -21,8 +21,8 @@ import frc.util.motor.SuperSparkMax;
 public class KickerSubsystem extends SuperSystem {
   /** Creates a new KickerSubsystem. */
     public SuperSparkMax kickerMotor;
-    public DigitalInput noteInClose;    
-    public DigitalInput noteInFar;
+    public static DigitalInput noteInClose;    
+    public static DigitalInput noteInFar;
 
     
 
@@ -53,11 +53,11 @@ public class KickerSubsystem extends SuperSystem {
     kickerMotor.set(Output);
   }
 
-  public boolean isNoteIn(){
+  public static boolean isNoteIn(){
     return !noteInClose.get();
   }
 
- public boolean isNoteInFar(){
+ public static boolean isNoteInFar(){
     return !noteInFar.get();
   }
   

@@ -5,6 +5,7 @@
 package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 
@@ -37,15 +38,15 @@ public class KickerCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    kickerSubsystem.setKickerOutput(0);
-    System.out.println("********exit KickerCommand");
-  
+    // if(!KickerSubsystem.isNoteIn() || !Robot.isAutonomous){
+      kickerSubsystem.setKickerOutput(0);
+      System.out.println("********exit KickerCommand");
+    // }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("********note is in *************" + kickerSubsystem.isNoteIn());
     return kickerSubsystem.isNoteIn();
   }
 }

@@ -5,7 +5,9 @@
 package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.KickerSubsystem;
 
 public class IntakeBackwordsCommand extends Command {
   private IntakeSubsystem intakeSubsystem;
@@ -25,7 +27,11 @@ public class IntakeBackwordsCommand extends Command {
   @Override
   public void execute() 
   {
-    intakeSubsystem.setWheelsMotorOutput(intakeWheelsOutput);
+    System.out.println("intake note " + (!KickerSubsystem.isNoteIn() || !Robot.isAutonomous));
+    if(!KickerSubsystem.isNoteIn() || !Robot.isAutonomous){
+      intakeSubsystem.setWheelsMotorOutput(intakeWheelsOutput);
+      System.out.println("wheels: ");
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.601534553838339,
-        "y": 5.55702252789121
+        "x": 5.033899298567829,
+        "y": 6.29510951329595
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.04888532853993
       },
       "prevControl": {
-        "x": 4.214943045271828,
-        "y": 2.6443406732967722
+        "x": 4.412281901486882,
+        "y": 2.417400988648132
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "shooting fifth parallel ring",
-      "waypointRelativePos": 1.0,
+      "name": "Distance pitch",
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,24 @@
             {
               "type": "named",
               "data": {
-                "name": "Shooting wheels"
+                "name": "distance pitch"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "continue intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Use Intake Command"
               }
             }
           ]
@@ -50,18 +67,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -43.315315682103666,
+    "rotation": -40.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "from parallel ring to shooting spot",
   "previewStartingState": null,
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
