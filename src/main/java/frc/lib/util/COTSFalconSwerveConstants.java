@@ -42,7 +42,7 @@ public class COTSFalconSwerveConstants {
         double angleKD = 0.0;
         double angleKF = 0.0;
 
-        boolean driveMotorInvert = true;
+        boolean driveMotorInvert = false;
         boolean angleMotorInvert = true;
         boolean canCoderInvert = false;
         return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD, angleKF, driveMotorInvert, angleMotorInvert, canCoderInvert);
@@ -70,7 +70,7 @@ public class COTSFalconSwerveConstants {
         /** SDS MK4i - 8.14 : 1 */
         public static final double SDSMK4i_L1 = (8.14 / 1.0);
         /** SDS MK4i - 6.75 : 1 */
-        public static final double SDSMK4i_L2 = (6.75 * 1.047); //TODO: make sure is te right ratio, check on a real field
+        public static final double SDSMK4i_L2 = (6.75 * 1.0752); //TODO: make sure is te right ratio, check on a real field
         /** SDS MK4i - 6.12 : 1 */
         public static final double SDSMK4i_L3 = (6.12 / 1.0);
     }

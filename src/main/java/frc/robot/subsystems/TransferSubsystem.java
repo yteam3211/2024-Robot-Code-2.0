@@ -38,6 +38,7 @@ public class TransferSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     getTab().putInDashboard("motor output", getOutput(), false);
+    getTab().putInDashboard("is note in", isNoteIn(), false);
     // This method will be called once per scheduler run
   }
 }

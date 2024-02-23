@@ -21,16 +21,16 @@ import frc.util.motor.SuperSparkMax;
 public class KickerSubsystem extends SuperSystem {
   /** Creates a new KickerSubsystem. */
     public SuperSparkMax kickerMotor;
-    public DigitalInput noteInClose;    
-    public DigitalInput noteInFar;
+    public static DigitalInput noteInClose;    
+    public static DigitalInput noteInFar;
 
     
 
   public KickerSubsystem() {
   super("Kicker Subsystem");
    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, true, IdleMode.kCoast);
-   noteInClose = new DigitalInput(2);   
-   noteInFar = new DigitalInput(1);
+   noteInClose = new DigitalInput(1);   
+   noteInFar = new DigitalInput(2);
 
 
   }
@@ -53,11 +53,11 @@ public class KickerSubsystem extends SuperSystem {
     kickerMotor.set(Output);
   }
 
-  public boolean isNoteIn(){
+  public static boolean isNoteIn(){
     return !noteInClose.get();
   }
 
- public boolean isNoteInFar(){
+ public static boolean isNoteInFar(){
     return !noteInFar.get();
   }
   

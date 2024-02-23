@@ -41,13 +41,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Close 1 pitch"
+                "name": "distance pitch"
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "Open Intake Command"
+                "name": "Use Intake Command"
               }
             }
           ]

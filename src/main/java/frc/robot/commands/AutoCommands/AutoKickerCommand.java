@@ -25,25 +25,31 @@ public class AutoKickerCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("******** inside AutoKickerCommand");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if((Constants.SHOOTING_SPEAKER_VELCITY - 5000) < shootingSubsystem.getVelocity())
-    kickerSubsystem.setKickerOutput(kickerOutput);
+    System.out.println("velocity: " + ((Constants.SHOOTING_SPEAKER_VELCITY - 5000) < shootingSubsystem.getVelocity()));
+    if((Constants.SHOOTING_SPEAKER_VELCITY - 5000) < shootingSubsystem.getVelocity()){
+      kickerSubsystem.setKickerOutput(kickerOutput);
+      System.out.println("set Output");
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     kickerSubsystem.setKickerOutput(0);
-  
+    System.out.println("******** exit AutoKickerCommand");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("is note in: " + !kickerSubsystem.isNoteIn());
     return !kickerSubsystem.isNoteIn(); //TODO: change this to return true when the sensor is false (when the note is out)
   }
 }
