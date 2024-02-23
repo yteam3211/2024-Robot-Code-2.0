@@ -67,10 +67,11 @@ public class RobotButtons {
     public static Trigger intakeTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kR2.value)); 
     public static Trigger completeSpeakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
     public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCross.value));
-    public static Trigger pitchDown = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
-    public static Trigger climbUpTrigger = new Trigger(() -> systems.getPOV() == 0);    
-    public static Trigger climbDown = new Trigger(() -> systems.getPOV() == 180);    
-    public static Trigger climb = new Trigger(() -> systems.getPOV() == 90);
+    public static Trigger pitchDown = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kCircle.value)); // systems
+     public static Trigger pitch = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kSquare.value));// systems
+    public static Trigger climbUpTrigger = new Trigger(() -> driver.getPOV() == 0);  // systems  
+    public static Trigger climbDown = new Trigger(() -> driver.getPOV() == 180); // systems   
+    public static Trigger climb = new Trigger(() -> driver.getPOV() == 90); // systems
 
     public static Trigger PitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
     public static Trigger shootingReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL1.value));
@@ -116,6 +117,7 @@ public class RobotButtons {
 
         PitchTrigger.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));//TODO: ANGLE = 0!!
+        pitch.onTrue(new PitchPos(pitchingSubsystem, -20));
 
         LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
 
