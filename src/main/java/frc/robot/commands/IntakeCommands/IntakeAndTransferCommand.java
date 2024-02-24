@@ -27,7 +27,7 @@ public class IntakeAndTransferCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand(\][]));
       addCommands(
         new ParallelCommandGroup(
-          new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
+          new IntakeBackwordsCommand(intakeSubsystem, -0.9), // new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
           new TransferCommand(transferSubsystem, 0.93),
           new KickerCommand(kickerSubsystem, shootingSubsystem, 0.45),
           new PitchPos(pitchingSubsystem, 35).onlyIf(() -> (pitchingSubsystem.getAbsolutePosition() < 30))

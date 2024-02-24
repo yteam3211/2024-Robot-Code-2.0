@@ -17,7 +17,7 @@ public final class Constants {
     public static final double SHOOTING_ANGLE_TRESHOLD = 3; //TODO: set when the robot is build
     public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
     public static final double SHOOTING_SPEAKER_VELCITY = 16500; //TODO: set when the robot is build
-    public static final double SHOOTING_AMP_OUTPUT = 0.2; //TODO: set when the robot is build
+    public static final double SHOOTING_AMP_OUTPUT = 0.4; //TODO: set when the robot is build
     public static final double KICKER_OUTPUT = 0.4; //TODO: set when the robot is build
     
     
@@ -26,7 +26,7 @@ public final class Constants {
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2350;//2150; //in millimeters
+    public static final double SPEAKER_HIGHT = 2320;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
