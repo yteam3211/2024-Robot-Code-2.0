@@ -62,7 +62,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
     NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
     NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 50));
-    NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,  26));
+    NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,  29.5));
     NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
     NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
     NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.05));
@@ -111,7 +111,7 @@ public class RobotContainer {
         // An ExampleCommand will run in autonomous
         // return new PathPlannerAuto("3 MA");
         System.out.println("---Start auto 1 - complition---");
-        return new PathPlannerAuto("Auto 1 - complition");
+        return new PathPlannerAuto("Auto 2 - complition");
         // return autoChooser.getSelected();
     }
 

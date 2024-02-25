@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
     eleavatorUpGains = new Gains("eleavator up Gains", 0.1, 0, 0);
-    eleavatorDownGains = new Gains("eleavator climb up Gains", 0.085, 0, 0);
+    eleavatorDownGains = new Gains("eleavator climb up Gains", 0.1, 0, 0);
     eleavatorTestGains  = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
     masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 10000, 7000,100);

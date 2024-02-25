@@ -83,30 +83,6 @@
           "data": {
             "name": "Kicker"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "from forth shooting spot to thered parallel ring"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "from third parallel ring to shooting spot"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Kicker"
-          }
         }
       ]
     }

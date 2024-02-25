@@ -113,11 +113,11 @@ public class RobotButtons {
 
         climbUpTrigger.onTrue(new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT));
         climbDown.onTrue(new EleavatorDown(elevatorSubsystem, -5));
-        climb.onTrue(new EleavatorClimbDown(elevatorSubsystem, -40));
+        climb.onTrue(new EleavatorClimbDown(elevatorSubsystem, -90));
 
         PitchTrigger.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));//TODO: ANGLE = 0!!
-        pitch.onTrue(new PitchPos(pitchingSubsystem, -20));
+        pitch.onTrue(new PitchPos(pitchingSubsystem, -60));
 
         LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
 

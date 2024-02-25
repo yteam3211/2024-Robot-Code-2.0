@@ -49,7 +49,7 @@ public final class Constants {
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
     public static final double AMP_ELEVATOR_HIGHT = 625;
-    public static final double CLIMB_ELEVATOR_HIGHT = 590;
+    public static final double CLIMB_ELEVATOR_HIGHT = 630;
 
     // swerve constants
     public static final double TURN_SWERVE_TRESHOLD = 2;//TODO: set when the robot is build

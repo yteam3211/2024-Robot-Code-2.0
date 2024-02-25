@@ -35,13 +35,15 @@ public class EleavatorClimbDown extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    eleavatorSubsystem.setPosition(0);
     System.out.println("********exit EleavatorClimbDown");
   }
 
+  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return eleavatorSubsystem.isEleavatorDown();
     
   }
 }

@@ -38,10 +38,12 @@ public class KickerCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // if(!KickerSubsystem.isNoteIn() || !Robot.isAutonomous){
-      kickerSubsystem.setKickerOutput(0);
+    if(!KickerSubsystem.isNoteIn()){
+      kickerSubsystem.setKickerOutput(0.1);
       System.out.println("********exit KickerCommand");
-    // }
+    }
+    else kickerSubsystem.setKickerOutput(0);
+
   }
 
   // Returns true when the command should end.

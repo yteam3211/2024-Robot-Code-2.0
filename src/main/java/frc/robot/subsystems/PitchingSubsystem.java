@@ -39,7 +39,7 @@ public class PitchingSubsystem extends SuperSystem {
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
-    pitchingGains = new Gains("pitchingGains", 0.82, 0, 0.003);
+    pitchingGains = new Gains("pitchingGains", 0.82, 0, 0.006);
     masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,10000, 11000,0); 
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
