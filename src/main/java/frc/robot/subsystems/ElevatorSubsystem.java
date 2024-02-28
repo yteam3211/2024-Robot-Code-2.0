@@ -47,7 +47,6 @@ public class ElevatorSubsystem extends SuperSystem {
     eleavatorTestGains  = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
     masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 10000, 7000,100);
-    slave1EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE1_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE2_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
 
@@ -84,7 +83,7 @@ public class ElevatorSubsystem extends SuperSystem {
    */
   public void setPosition(double hight)
   {
-    double falconPos = hight * Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS;
+    double falconPos = hight * Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETER;
     masterEleavatorMotor.set(ControlMode.MotionMagic, falconPos);
   }
 
@@ -98,7 +97,7 @@ public class ElevatorSubsystem extends SuperSystem {
    */
   public double getElevatorHight(){
     // return ((getMasterPosition() / 2048) / Constants.ELEAVATOR_GEAR_RATIO) * Constants.ELEAVATOR_WINCH_CIRCUMFERENCE;
-    return getMasterPosition() / Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS;
+    return getMasterPosition() / Constants.ELEVATOR_ENCODER_TICKS_PER_MILLIMETER;
   }
 
   public void changeStation(gains mode){
@@ -107,20 +106,21 @@ public class ElevatorSubsystem extends SuperSystem {
 
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
     getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
     SmartDashboard.putData("eleavator gains",pidController);
+
     if (this.isEleavatorDown())
     {
       resetEncoder();
     }
     
-    // if((getMasterPosition() < Constants.MIN_ELEAVATOR_POS) ||(getMasterPosition() > Constants.MAX_ELEAVATOR_POS))
-    // {
-    //   masterEleavatorMotor.set(ControlMode.PercentOutput, 0);
-    // }
-    // This method will be called once per scheduler run
+    if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)
+    {
+      masterEleavatorMotor.set(ControlMode.Position, Constants.MAX_ELEAVATOR_POS);
+    }
   }
 }

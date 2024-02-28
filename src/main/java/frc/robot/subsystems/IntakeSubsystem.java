@@ -87,7 +87,7 @@ public class IntakeSubsystem extends SuperSystem {
    * check if the microswitch is preesed or not
    * @return true if pressed, false if not pressed
    */
-  public boolean isIntakeOn()
+  public boolean isIntakeClose()
   {
     return !closeIntakeMicroSwitch.get();
   }
@@ -98,14 +98,14 @@ public class IntakeSubsystem extends SuperSystem {
     {
       getTab().putInDashboard("intake pos", intakeOpenMotor.getPosition(), 3, 1, false);
       getTab().putInDashboard("intake velocity", intakeWheelsMotor.getVelocity(), 4, 1, false);      
-      getTab().putInDashboard("intake micro",isIntakeOn(), 5, 1, false);      
+      getTab().putInDashboard("intake micro",isIntakeClose(), 5, 1, false);      
       getTab().putInDashboard("intake volt",intakeOpenMotor.getBusVoltage(), 6, 1, false);
       getTab().putInDashboard("intake amp",intakeOpenMotor.getAmper(), 7, 1, false);
 
 
 
       // System.out.println(intakeOpenMotor.getPosition());
-      if(this.isIntakeOn())
+      if(this.isIntakeClose())
       {
         resetEncoder();
       }

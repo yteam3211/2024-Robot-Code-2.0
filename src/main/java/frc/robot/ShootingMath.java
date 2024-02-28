@@ -4,7 +4,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ShootingCommands.PitchCommand;
+import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.dashboard.SuperSystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
@@ -40,14 +40,14 @@ public class ShootingMath extends SuperSystem {
     }
 
     public static double getSpeakerShootingDistance(Swerve swerve){
-      double distance = Math.sqrt(Math.pow(Constants.SPEAKER_POS.getY() - swerve.getPose().getY(), 2) + Math.pow(Constants.SPEAKER_POS.getX() - swerve.getPose().getX(),2));
+      double distance = Math.sqrt(Math.pow(AllianceSpecs.SpeakerPose.getY() - swerve.getPose().getY(), 2) + Math.pow(AllianceSpecs.SpeakerPose.getX() - swerve.getPose().getX(),2));
       distance *= 1000;
       return distance;
     }
 
     public static double getEstematedSpeakerShootingAngle(Swerve swerve){
-        double estematedAngle = Math.toDegrees(Math.atan(Math.abs(Constants.SPEAKER_POS.getY() - swerve.getPose().getY()) / Math.abs(Constants.SPEAKER_POS.getX() - swerve.getPose().getX())));
-        if(Constants.SPEAKER_POS.getY() - swerve.getPose().getY() < 0){
+        double estematedAngle = Math.toDegrees(Math.atan(Math.abs(AllianceSpecs.SpeakerPose.getY() - swerve.getPose().getY()) / Math.abs(AllianceSpecs.SpeakerPose.getX() - swerve.getPose().getX())));
+        if(AllianceSpecs.SpeakerPose.getY() - swerve.getPose().getY() < 0){
             estematedAngle *= -1;
         }
         return estematedAngle;
@@ -66,13 +66,6 @@ public class ShootingMath extends SuperSystem {
     }
 
     public double getAngleToSpeaker(ElevatorSubsystem elevatorSubsystem, Limelight limelight){
-      // if(!limelight.isValid()){
-      //   if(getAbsolutePosition() < -5 || getAbsolutePosition() > 15 || Math.abs(Robot.m_robotContainer.getSwerve().getYaw().getDegrees() - Robot.m_robotContainer.getSwerve().getEstematedSpeakerShootingAngle()) > Constants.ESTEMATED_ANGLE_TRESHOLD){ // TODO: fix it
-      //     setPosition(5);
-      //   }else {
-      //     elevatorSubsystem.setPosition(elevatorSubsystem.getElevatorHight() + 5);
-      //   }
-      // }
       distanceFromLimelightToSpeaker = getSpeakerShootingDistance(swerve);
       hightShootingFromFloor = (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
       hightShootingToSpeaker = Constants.SPEAKER_HIGHT - (getVerticalLimelightHightFromfloor(elevatorSubsystem) + Constants.VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER);
@@ -80,7 +73,11 @@ public class ShootingMath extends SuperSystem {
       angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
       angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
       return angleToSpeakerDegrees;
-  }
+    } 
+
+    public void setShootingCondition(Boolean shootingCondition){
+      SmartDashboard.putBoolean("Shootable", shootingCondition);
+    }
 
 
   @Override

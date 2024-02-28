@@ -11,6 +11,8 @@ import frc.robot.Constants;
 import frc.robot.ShootingMath;
 import frc.robot.commands.Eleavator.CloseElevatorCommandGroup;
 import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
 import frc.robot.commands.SwereCommands.DriveToTarget;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -39,7 +41,7 @@ public class CompleteAMPShootingCommand extends SequentialCommandGroup {
       // new CloseElevatorCommandGroup(eleavatorSubsystem, pitchingSubsystem)
       new ParallelCommandGroup(
         new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
-        new ShootingOutput(shootingSubsystem, Constants.SHOOTING_AMP_OUTPUT))
+        new ShootingOutput(shootingSubsystem, 0.2))
     );
   }
 }

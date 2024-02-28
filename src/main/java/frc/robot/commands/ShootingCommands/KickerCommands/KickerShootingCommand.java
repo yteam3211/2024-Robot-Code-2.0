@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ShootingCommands;
+package frc.robot.commands.ShootingCommands.KickerCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.KickerSubsystem;
@@ -31,6 +31,7 @@ public class KickerShootingCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("shooting kicker in use");
     kickerSubsystem.setKickerOutput(kickerOutput);
   }
 
@@ -40,12 +41,11 @@ public class KickerShootingCommand extends Command {
     kickerSubsystem.setKickerOutput(0);
     shootingSubsystem.setShooterOutput(0);
     System.out.println("********exit KickerShootingCommand");
-  
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !kickerSubsystem.isNoteIn();
+    return !KickerSubsystem.isNoteIn();
   }
 }

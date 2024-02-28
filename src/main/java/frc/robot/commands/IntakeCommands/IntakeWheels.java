@@ -5,8 +5,8 @@
 package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ShootingCommands.KickerCommand;
-import frc.robot.commands.TransferCommands.TransferCommand;
+import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;

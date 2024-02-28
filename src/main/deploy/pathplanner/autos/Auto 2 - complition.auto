@@ -14,26 +14,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Shooting wheels"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Start pitch"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Kicker"
-                }
-              }
-            ]
+            "name": "Start Shooting"
           }
         },
         {
@@ -43,15 +24,35 @@
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "from fifth parallel ring to shooting spot"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "from fifth parallel ring to shooting spot"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "wait",
+          "type": "deadline",
           "data": {
-            "waitTime": 0.3
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.6
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "keep in Kicker"
+                }
+              }
+            ]
           }
         },
         {
@@ -67,21 +68,9 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "from forth parallel ring to shooting spot"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
           "type": "named",
           "data": {
-            "name": "Kicker"
+            "name": "Use Intake Command"
           }
         }
       ]

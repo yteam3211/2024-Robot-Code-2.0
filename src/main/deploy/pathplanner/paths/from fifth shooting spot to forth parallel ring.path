@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.14,
-        "y": 3.05
+        "x": 3.07,
+        "y": 3.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.307414894430358,
-        "y": 1.3935895489479986
+        "x": 4.0777770571233,
+        "y": 2.1665047609695787
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.836955588319164,
-        "y": 2.4709865111598974
+        "x": 5.2137282020641065,
+        "y": 1.3116136931275284
       },
       "prevControl": {
-        "x": 4.838981432599097,
-        "y": 1.2999028565817468
+        "x": 4.69845139404972,
+        "y": 1.6863604625925368
+      },
+      "nextControl": {
+        "x": 5.6204147680995336,
+        "y": 1.0158416451017631
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.825244751773384,
+        "y": 2.4241431649767726
+      },
+      "prevControl": {
+        "x": 6.677582770286794,
+        "y": 1.8268905011419148
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "Start intake & pitch",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 1.4,
       "command": {
         "type": "parallel",
         "data": {
@@ -53,6 +69,23 @@
           ]
         }
       }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Stage pitch"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -63,13 +96,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "from shooting spot to parallel ring",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -37.0,
     "velocity": 0
   },
   "useDefaultConstraints": true
