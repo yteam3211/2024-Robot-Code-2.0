@@ -24,16 +24,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "from fifth parallel ring to shooting spot"
-                }
-              }
-            ]
+            "pathName": "from fifth parallel ring to shooting spot"
           }
         },
         {

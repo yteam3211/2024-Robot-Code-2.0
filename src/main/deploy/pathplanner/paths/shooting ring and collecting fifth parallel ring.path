@@ -8,48 +8,38 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3679949214391995,
-        "y": 2.705203242075528
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 4.206596259126896,
+        "x": 1.9346939692452838,
         "y": 1.4404328951311258
       },
-      "prevControl": {
-        "x": 2.950996601564627,
-        "y": 1.688452580575527
-      },
-      "nextControl": {
-        "x": 5.155174019335199,
-        "y": 1.2530595103986197
-      },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.848666424864946,
+        "x": 7.88,
         "y": 0.78
       },
       "prevControl": {
-        "x": 7.852730378641925,
-        "y": 0.782264452574553
+        "x": 3.8163397186138166,
+        "y": 0.7377827023842345
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "use collect",
-      "waypointRelativePos": 0.65,
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "sequential",
         "data": {
@@ -66,7 +56,7 @@
     },
     {
       "name": "Open intake",
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "parallel",
         "data": {
@@ -83,7 +73,7 @@
     },
     {
       "name": "elevator down",
-      "waypointRelativePos": 0.1,
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {

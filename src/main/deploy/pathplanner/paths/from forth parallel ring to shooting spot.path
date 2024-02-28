@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.94,
-        "y": 2.37
+        "x": 7.88,
+        "y": 2.42
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.033899298567829,
-        "y": 6.29510951329595
+        "x": 5.5695518134735025,
+        "y": 0.5064093495795863
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.139446278893679,
-        "y": 3.04888532853993
+        "x": 1.75,
+        "y": 3.56
       },
       "prevControl": {
-        "x": 4.412281901486882,
-        "y": 2.417400988648132
+        "x": 3.0228356225932025,
+        "y": 2.928515660108202
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Distance pitch",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -74,7 +74,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -37.0,
+    "rotation": -50.0,
     "rotateFast": false
   },
   "reversed": false,
