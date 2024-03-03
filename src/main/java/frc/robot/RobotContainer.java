@@ -61,20 +61,22 @@ public class RobotContainer {
     //auto commands register
     public RobotContainer() {
 
+        //register commands for PathPlanner
         NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
         NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
         NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
         NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
         NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 48));
-        NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,29.5));//new PitchPos(pitchingSubsystem,  29.5));
+        NamedCommands.registerCommand("distance pitch", new SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
         NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.2));
         NamedCommands.registerCommand("keep in Kicker", new DefaultKicker(kickerSubsystem, 0.1));
         NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
-            
+           
+        //add Autos to the auto chooser
         autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
-        autoChooser.addOption("Auto 2 - complition", new shooterAuto(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        autoChooser.addOption("Auto 2 - complition", new PathPlannerAuto("Auto 2 - complition"));
 
         // Configure the button bindings
         configureButtonBindings();

@@ -57,10 +57,18 @@ public class ShootingMath extends SuperSystem {
         return getSpeakerShootingDistance(swerve) < Constants.MAX_SHOOTING_RANGE;
     }
 
+  /**
+   * get the vertical hight of the Limelight lens from the pivot point of the shooting system
+   * @return the limelight vertical hight in Millimeters
+   */
     public double getVerticalLimelightHightFromPivot(){
         return Math.sin(Math.toRadians(pitchingSubsystem.getAbsolutePosition() + Constants.LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT)) * Constants.LIMELIGHT_TO_PIVOT;
       }
     
+      /**
+   * get the vertical hight of the Limelight lens from the floor
+   * @return the limelight vertical hight in Millimeters
+   */
     public double getVerticalLimelightHightFromfloor(ElevatorSubsystem eleavatorSubsystem){
       return Constants.FLOOR_TO_CLOSE_ELEAVATOR + eleavatorSubsystem.getElevatorHight() + Constants.RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL + getVerticalLimelightHightFromPivot();
     }
@@ -86,7 +94,7 @@ public class ShootingMath extends SuperSystem {
     getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
     getTab().putInDashboard("hight shooter from floor", hightShootingFromFloor, false);
     getTab().putInDashboard("hight Shooting To Speaker", hightShootingToSpeaker, false);
-    getTab().putInDashboard("limelight to AprilTag", distanceFromLimelightToSpeaker, false);
+    getTab().putInDashboard("limelight to AprilTag", distanceFromShooterToSpeaker, false);
     getTab().putInDashboard("shooting angle", getAngleToSpeaker(elevatorSubsystem, limelight), false);
     getTab().putInDashboard("get Vertical Limelight Hight From Pivot", getVerticalLimelightHightFromPivot(), false);
     getTab().putInDashboard("Swerve Angle", getEstematedSpeakerShootingAngle(swerve), false);

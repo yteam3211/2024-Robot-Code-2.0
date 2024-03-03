@@ -45,15 +45,13 @@ public class SpeakerPitchCommand extends Command {
   public void execute() {
     targetAngle = shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight);
   //  angleToSpeakerDegrees = pitchingSubsystem.getAngleToSpeaker(eleavatorSubsystem, limelight);
-    // System.out.println("right pitch: " + shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
-    System.out.println("************ angle to shooting "+ targetAngle +"********");
+    System.out.println("************ angle to shooting "+ targetAngle +" ********");
     pitchingSubsystem.setPosition(targetAngle);
   }
   
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // pitchingSubsystem.setPosition(shootingMath.getAngleToSpeaker(eleavatorSubsystem, limelight));
     pitchingSubsystem.setPosition(targetAngle);
     System.out.println("********exit PitchCommand");
   }

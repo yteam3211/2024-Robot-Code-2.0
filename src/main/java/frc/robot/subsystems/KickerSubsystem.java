@@ -31,43 +31,39 @@ public class KickerSubsystem extends SuperSystem {
   super("Kicker Subsystem");
    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, true, IdleMode.kCoast);
    noteInClose = new DigitalInput(1);   
-   noteInFar = new DigitalInput(2);
+  //  noteInFar = new DigitalInput(2);
   // setDefaultCommand(new DefaultKicker(this, 0.1));
 
   }
 
-  @Override
-  public void periodic() {
-    // test( 1 > 2 ? 3 : 2, 2);
-    // This method will be called once per scheduler run
-    getTab().putInDashboard("is note in close",isNoteIn(), 5, 1, false);    
-    getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);   
-     getTab().putInDashboard("position",kickerMotor.getPosition(),3 , 1, false);
-
-
-
-  }
-
-    public void setKickerOutput(double Output)
+  
+  public void setKickerOutput(double Output)
   {
     kickerMotor.setMode(ControlMode.PercentOutput);
     kickerMotor.set(Output);
   }
-
+  
   public static boolean isNoteIn(){
     return !noteInClose.get();
   }
-
- public static boolean isNoteInFar(){
+  
+  public static boolean isNoteInFar(){
     return !noteInFar.get();
   }
   
   public void setPosition(double pos){
     kickerMotor.setMode(ControlMode.Position);
     kickerMotor.set(pos);
-
+    
   }
-
-  public void test(double a, double b){}
+  
+  @Override
+  public void periodic() {
+    // test( 1 > 2 ? 3 : 2, 2);
+    // This method will be called once per scheduler run
+    getTab().putInDashboard("is note in close",isNoteIn(), 5, 1, false);    
+    // getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);   
+     getTab().putInDashboard("position",kickerMotor.getPosition(),3 , 1, false);
   }
+}
 

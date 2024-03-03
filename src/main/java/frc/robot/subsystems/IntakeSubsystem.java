@@ -30,14 +30,14 @@ public class IntakeSubsystem extends SuperSystem {
     intakeOpenGains = new Gains("intake Open Gains", 0.035, 0, 0.001);
     intakeWheelsGains = new Gains("intake Wheels Gains", 0.001, 0, 0);
     intakeWheelsMotor = new SuperSparkMax(Constants.INTAKE_WHEELS_MOTOR_ID, MotorType.kBrushless, 30, false, IdleMode.kCoast);
-    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, false, 1, 1, IdleMode.kCoast, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
+    intakeOpenMotor = new SuperSparkMax(Constants.INTAKE_OPEN_MOTOR_ID, MotorType.kBrushless, 40, true, 1, 1, IdleMode.kCoast, ControlType.kPosition, intakeOpenGains, 0, 0, 0);
     closeIntakeMicroSwitch = new DigitalInput(Constants.INTAKE_MICROSWITCH_ID);
     getTab().addCommandToDashboard("Reset Intake pos", new InstantCommand(() -> resetEncoder()));
     }
     //intakeMotor functions
     
     /**
-     * reset the integrated encoder to 0.
+     * reset the integ         rated encoder to 0.
      */
     public void resetEncoder(){
         setIntakeOpenMotorPosition(0);

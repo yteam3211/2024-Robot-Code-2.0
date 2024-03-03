@@ -74,6 +74,7 @@ public class RobotButtons {
     public static Trigger climbUpTrigger = new Trigger(() ->  systems.getPOV() == 0);
     public static Trigger  elevstorDown = new Trigger(() ->  systems.getPOV() == 180);
     public static Trigger shoot = new Trigger(() ->  systems.getPOV() == 270);
+    public static Trigger shootTest = new Trigger(() ->  systems.getPOV() == 90);
     
 
 
@@ -106,10 +107,12 @@ public class RobotButtons {
         completeSpeakerShootingTrigger.whileTrue(new CompleteSpeakerShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath)); 
         // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
         shootingReverse.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem, 2000, 0.4));
-        shoot.whileTrue(new SequentialCommandGroup(new PitchPos(pitchingSubsystem, 52),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
+        shoot.whileTrue(new SequentialCommandGroup(new PitchPos(pitchingSubsystem, 22),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
         apmShootingTrigger.onFalse(new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
+        shootTest.onTrue(new PitchPos(pitchingSubsystem, 0));
+
         intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));
         intakeReverse.whileTrue(new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));

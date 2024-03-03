@@ -22,7 +22,7 @@ public final class Constants {
     
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.843018); //in degrees
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.008057); //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
@@ -30,7 +30,7 @@ public final class Constants {
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = -45;  //TODO: set max and min ANGLE of eleavator
-    public static final double MAX_PITCHING_ANGLE = 54;
+    public static final double MAX_PITCHING_ANGLE = 57;
     public static final double PITCHING_GEAR_RATIO = 160 / 1;
     public static final double LIMELIGHT_lOOKING_ANGLE = 10;
     public static final double LIMELIGHT_lOOKING_ANGLE_TRESHOLD = 4;
@@ -59,7 +59,7 @@ public final class Constants {
     public static final double DRIVE_TO_TARGET_TRESHOLD = 0.05;
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 41; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 42.28; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 
@@ -75,13 +75,13 @@ public final class Constants {
     // ID constants
     public static final int INTAKE_OPEN_MOTOR_ID = 24;   
     public static final int INTAKE_WHEELS_MOTOR_ID = 25;
-    public static final int INTAKE_MICROSWITCH_ID = 4;
+    public static final int INTAKE_MICROSWITCH_ID = 2;
     
     public static final int TRANSFER_MOTOR_ID = 29;
     
 
-    public static final int MASTER_SHOOTER_MOTOR_ID = 22;
-    public static final int SLAVE_SHOOTER_MOTOR_ID = 21;
+    public static final int MASTER_SHOOTER_MOTOR_ID = 21;
+    public static final int SLAVE_SHOOTER_MOTOR_ID = 22;
     public static final int KICKER_SHOOTER_MOTOR_ID = 23;
     
     public static final int MASTER_PITCHING_MOTOR_ID = 19;
@@ -89,8 +89,7 @@ public final class Constants {
     public static final int PITCHING_ENCODER_ID = 18;
 
     public static final int MASTER_ELEAVATOR_MOTOR_ID = 13;
-    public static final int SLAVE1_ELEAVATOR_MOTOR_ID = 14;
-    public static final int SLAVE2_ELEAVATOR_MOTOR_ID = 15;
+    public static final int SLAVE_ELEAVATOR_MOTOR_ID = 14;
     public static final int MICROSWITCH_ELEAVATOR_ID = 0;
     
     

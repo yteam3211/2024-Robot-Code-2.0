@@ -5,10 +5,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix6.hardware.CANcoder;
+
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Unit;
@@ -35,11 +38,12 @@ public class PitchingSubsystem extends SuperSystem {
   public double distanceFromShooterToSpeaker;
   public double angleToSpeakerRadians;
   public double angleToSpeakerDegrees;
+  // public CANCoder angleEncoder;
   
 
   public PitchingSubsystem() {
     super("Pitching Subsystem");
-    pitchingGains = new Gains("pitchingGains", 0.75, 0, 0.006);
+    pitchingGains = new Gains("pitchingGains", 0.45, 0, 0.005);
     masterPitchingMotor = new SuperTalonFX(Constants.MASTER_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true, false, NeutralMode.Brake, pitchingGains, TalonFXControlMode.MotionMagic,10000, 11000,0); 
     slavePitchingMotor = new SuperTalonFX(masterPitchingMotor, Constants.SLAVE_PITCHING_MOTOR_ID, Constants.CanBus.RIO, 40, true);
     angleEncoder = new CANcoder(Constants.PITCHING_ENCODER_ID);
@@ -52,12 +56,14 @@ public class PitchingSubsystem extends SuperSystem {
     masterPitchingMotor.set(ControlMode.PercentOutput, output);
   }
   /**
-   * Set the position of the motor.
+   * Set the position of the motor via magic motion control.
    *
    * @param position position in degrees.
    */
   public void setPosition(double position){
+    System.out.println("set pitching position: " + degreesToFalconEncoder(position));
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
+    // masterPitchingMotor.set(ControlMode.MotionMagic, position);
   }
 /**
  * config the angle encoder
@@ -65,6 +71,11 @@ public class PitchingSubsystem extends SuperSystem {
   private void configAngleEncoder(){        
 // angleEncoder.getPosition().setUpdateFrequency(4);
     angleEncoder.getConfigurator().apply(Robot.ctreConfigs.pitchingCanCoderConfig);
+    // angleEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    // angleEncoder.configSensorDirection(true);
+    // angleEncoder.configMagnetOffset(Constants.PITCHING_ENCODER_OFFSET);
+    // masterPitchingMotor.configRemoteFeedbackFilter(angleEncoder, 1);
+    // masterPitchingMotor.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1);
   }
 
   /**
@@ -84,6 +95,7 @@ public class PitchingSubsystem extends SuperSystem {
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - Constants.PITCHING_ENCODER_OFFSET;
     }
     return absolutePosition;
+    // return angleEncoder.getAbsolutePosition();
   }
 
   /**
@@ -103,18 +115,15 @@ public class PitchingSubsystem extends SuperSystem {
    */
   public double degreesToFalconEncoder(double degrees){
     return (degrees / 360) * Constants.PITCHING_GEAR_RATIO * 2048;
+    // return degrees * (2048 / 180);
   }
 
-  /**
-   * get the vertical hight of the Limelight lens from the pivot point of the shooting system
-   * @return the limelight vertical hight in Millimeters
-   */
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE) || (getAbsolutePosition() < Constants.MIN_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
+    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
     {
       masterPitchingMotor.set (ControlMode.PercentOutput, 0);
     }
