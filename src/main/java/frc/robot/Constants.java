@@ -26,7 +26,7 @@ public final class Constants {
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2300;//2150; //in millimeters
+    public static final double SPEAKER_HIGHT = 2600;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = -45;  //TODO: set max and min ANGLE of eleavator

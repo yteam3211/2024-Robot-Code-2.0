@@ -30,6 +30,12 @@
               {
                 "type": "named",
                 "data": {
+                  "name": "Use Intake Command"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
                   "name": "distance pitch"
                 }
               },
@@ -55,6 +61,12 @@
               {
                 "type": "named",
                 "data": {
+                  "name": "Use Intake Command"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
                   "name": "distance pitch"
                 }
               },
@@ -77,6 +89,12 @@
           "type": "sequential",
           "data": {
             "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Use Intake Command"
+                }
+              },
               {
                 "type": "named",
                 "data": {

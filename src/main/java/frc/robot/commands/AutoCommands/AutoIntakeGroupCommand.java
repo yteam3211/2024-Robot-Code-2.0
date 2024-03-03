@@ -30,7 +30,7 @@ public class AutoIntakeGroupCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
         new ParallelCommandGroup(
-          new IntakeBackwordsCommand(intakeSubsystem, -1000),
+          new IntakeBackwordsCommand(intakeSubsystem, -4500),
           new TransferCommand(transferSubsystem, 0.8),
           new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.17)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
         );

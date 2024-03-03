@@ -22,7 +22,7 @@ public class ShootingVelocity extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("******** inside ShootingOutput");
+    System.out.println("******** inside ShootingVelocity");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +35,7 @@ public class ShootingVelocity extends Command {
   @Override
   public void end(boolean interrupted) {
     shootingSubsystem.setShooterOutput(0);
-    System.out.println("********exit ShootingOutput");
+    System.out.println("********exit ShootingVelocity");
   }
 
   // Returns true when the command should end.
