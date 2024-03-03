@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5,
-        "y": 4.35
+        "x": 1.3535296301361848,
+        "y": 5.545221859674489
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.89709424151893,
-        "y": 4.773948710956585
+        "x": 1.7876751138117675,
+        "y": 5.032140833512437
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 5.555786465108285
+        "x": 2.4487602821359506,
+        "y": 4.1046482092964185
       },
       "prevControl": {
-        "x": 1.9089402680969862,
-        "y": 5.330711960125218
+        "x": 2.0639495125144114,
+        "y": 4.597995349836854
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,42 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "open collection",
-      "waypointRelativePos": 0.2,
+      "name": "kicer",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Kicker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "open intake command",
+      "waypointRelativePos": 0.35,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Open Intake Command"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "use intake command",
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -47,44 +81,24 @@
           ]
         }
       }
-    },
-    {
-      "name": "shooting ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shooting wheels"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1.0
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "collecting ring from side ring to side ring",
-  "previewStartingState": null,
-  "useDefaultConstraints": false
+  "folder": "shooting and collecting ring from first row",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
 }

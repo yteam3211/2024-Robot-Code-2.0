@@ -1,0 +1,118 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.35,
+      "y": 5.55
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shooting, collecting and shooting thered ring from second spot"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "distance pitch"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Kicker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "going from third ring to the second and collecting it"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "distance pitch"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Kicker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "going from the second ring to the first ring and collecting it"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "distance pitch"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Kicker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from first ring collecting first parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from first parallel ring to second ring to shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from second ring collecting second parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from second parallel ring to second ring to shoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

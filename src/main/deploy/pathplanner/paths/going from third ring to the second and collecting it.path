@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.8,
-        "y": 7.45
+        "x": 2.45,
+        "y": 4.1
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.796415477390839,
-        "y": 7.451150717597251
+        "x": 1.8470942415189302,
+        "y": 4.523948710956585
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.89,
-        "y": 5.54
+        "x": 2.45,
+        "y": 5.545221859674489
       },
       "prevControl": {
-        "x": 2.89,
-        "y": 5.54
+        "x": 1.8589402680969864,
+        "y": 5.320147354691422
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "shooting first parallel ring",
-      "waypointRelativePos": 1.0,
+      "name": "use intake command",
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Shooting wheels"
+                "name": "Use Intake Command"
               }
             }
           ]
@@ -57,11 +57,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 14.75,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "from parallel ring to shooting spot",
+  "folder": "collecting ring from side ring to side ring",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
