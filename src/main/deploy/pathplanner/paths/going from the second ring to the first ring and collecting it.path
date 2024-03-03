@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5,
-        "y": 5.56
+        "x": 2.45,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9089402680969862,
-        "y": 5.946705342184133
+        "x": 1.8589402680969864,
+        "y": 5.936705342184133
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 6.7640811760699995
+        "x": 2.45,
+        "y": 6.9956624528633675
       },
       "prevControl": {
-        "x": 1.9089402680969862,
-        "y": 6.408700378728318
+        "x": 1.8589402680969864,
+        "y": 6.640281655521686
       },
       "nextControl": null,
       "isLocked": false,
@@ -38,8 +38,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "open collect",
-      "waypointRelativePos": 0.2,
+      "name": "use intake command",
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -48,23 +48,6 @@
               "type": "named",
               "data": {
                 "name": "Use Intake Command"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "shooting ring",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shooting wheels"
               }
             }
           ]
@@ -80,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 31.0,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,

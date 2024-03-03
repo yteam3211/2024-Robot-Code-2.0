@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "going from third ring to the second and shooting it"
+            "pathName": "going from third ring to the second and collecting it"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "going from the second ring to the first ring and shooting it"
+            "pathName": "going from the second ring to the first ring and collecting it"
           }
         }
       ]

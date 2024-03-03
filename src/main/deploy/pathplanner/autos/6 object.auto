@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "going from third ring to the second and shooting it"
+            "pathName": "going from third ring to the second and collecting it"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "going from the second ring to the first ring and shooting it"
+            "pathName": "going from the second ring to the first ring and collecting it"
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "from first parallel ring to shooting spot"
+            "pathName": "from first parallel ring to second ring to shoot"
           }
         },
         {
@@ -50,7 +50,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "from second parallel ring to shooting spot"
+            "pathName": "from second parallel ring to second ring to shoot"
           }
         }
       ]

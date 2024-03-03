@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "from first parallel ring to shooting spot"
+            "pathName": "from first parallel ring to second ring to shoot"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "from second parallel ring to shooting spot"
+            "pathName": "from second parallel ring to second ring to shoot"
           }
         },
         {
@@ -50,6 +50,6 @@
       ]
     }
   },
-  "folder": "middel row",
+  "folder": "parallel ring shooting",
   "choreoAuto": false
 }
