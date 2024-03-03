@@ -4,7 +4,6 @@ import com.ctre.phoenix6.hardware.CANcoder;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.dashboard.SuperSystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;

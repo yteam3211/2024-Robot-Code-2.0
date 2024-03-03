@@ -4,9 +4,9 @@
 
 package frc.robot.commands.ShootingCommands;
 
-
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
 import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
-
+import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
@@ -15,9 +15,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.ShootingMath;
-import frc.robot.commands.ShootingCommands.KickerCommands.KickerShootingCommand;
-import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
-import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -26,6 +23,8 @@ import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerShootingCommand;
+
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

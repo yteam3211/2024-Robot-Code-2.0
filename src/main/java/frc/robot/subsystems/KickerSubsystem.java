@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
-import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
 import frc.util.SuperSystem;
 import frc.util.motor.SuperSparkMax;
 
