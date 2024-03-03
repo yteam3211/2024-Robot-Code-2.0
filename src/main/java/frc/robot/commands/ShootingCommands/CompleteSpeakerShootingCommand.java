@@ -43,9 +43,9 @@ public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
       new ParallelRaceGroup(
         new LockWheelsCommand(swerve),
         new SequentialCommandGroup(
-          new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY).onlyWhile(() -> (Math.abs(Constants.SHOOTING_SPEAKER_VELCITY - shootingSubsystem.getVelocity()) > Constants.SHOOTING_VELOCITY_TRESHOLD)),
           new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem).andThen(() -> shootingMath.setShootingCondition(true)),
-          new KickerShootingCommand(kickerSubsystem, shootingSubsystem, 0.4).onlyWhile(() -> !RobotButtons.kicker.getAsBoolean())))
+          new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY).onlyWhile(() -> (Math.abs(Constants.SHOOTING_SPEAKER_VELCITY - shootingSubsystem.getVelocity()) > Constants.SHOOTING_VELOCITY_TRESHOLD)),
+          new KickerShootingCommand(kickerSubsystem, shootingSubsystem, 0.8).onlyWhile(() -> !RobotButtons.kicker.getAsBoolean())))
           );
   }
 }

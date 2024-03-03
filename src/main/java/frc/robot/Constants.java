@@ -18,7 +18,7 @@ public final class Constants {
     public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
     public static final double SHOOTING_SPEAKER_VELCITY = 16500; //TODO: set when the robot is build
     public static final double SHOOTING_AMP_OUTPUT = 0.4; //TODO: set when the robot is build
-    public static final double KICKER_OUTPUT = 0.4; //TODO: set when the robot is build
+    public static final double KICKER_OUTPUT = 0.8; //TODO: set when the robot is build
     
     
     // pitching constants
@@ -59,7 +59,7 @@ public final class Constants {
     public static final double DRIVE_TO_TARGET_TRESHOLD = 0.05;
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 42.28; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 43; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 

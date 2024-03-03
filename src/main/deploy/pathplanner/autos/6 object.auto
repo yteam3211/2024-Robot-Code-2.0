@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Start Shooting"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "shooting and collecting third ring from third spot"

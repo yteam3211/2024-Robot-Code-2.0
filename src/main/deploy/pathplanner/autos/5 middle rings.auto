@@ -40,16 +40,10 @@
           "data": {
             "pathName": "Shooting second parallel ring and collecting first parallel ring"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooting wheels"
-          }
         }
       ]
     }
   },
-  "folder": "parallel ring shooting",
+  "folder": null,
   "choreoAuto": false
 }

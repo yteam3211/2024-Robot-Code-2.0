@@ -107,11 +107,11 @@ public class RobotButtons {
         completeSpeakerShootingTrigger.whileTrue(new CompleteSpeakerShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath)); 
         // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
         shootingReverse.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem, 2000, 0.4));
-        shoot.whileTrue(new SequentialCommandGroup(new PitchPos(pitchingSubsystem, 22),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
+        shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 52),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
         apmShootingTrigger.onFalse(new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
-        shootTest.onTrue(new PitchPos(pitchingSubsystem, 0));
+        shootTest.onTrue(new PitchPos(pitchingSubsystem, 49));
 
         intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));

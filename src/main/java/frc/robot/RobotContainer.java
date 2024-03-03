@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
+import frc.robot.commands.AutoCommands.DistanceAutoShootingGroup;
 import frc.robot.commands.AutoCommands.StartAutoCommandGroup;
 import frc.robot.commands.AutoCommands.shooterAuto;
 import frc.robot.commands.Eleavator.EleavatorOutput;
@@ -66,8 +67,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
         NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
         NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
-        NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 48));
         NamedCommands.registerCommand("distance pitch", new SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        NamedCommands.registerCommand("distance shooting", new DistanceAutoShootingGroup(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem, kickerSubsystem));
         NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
         NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.2));
@@ -76,7 +77,10 @@ public class RobotContainer {
            
         //add Autos to the auto chooser
         autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
-        autoChooser.addOption("Auto 2 - complition", new PathPlannerAuto("Auto 2 - complition"));
+        autoChooser.addOption("Auto 1 - complition", new PathPlannerAuto("Auto 1 - complition"));
+        autoChooser.addOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
+        autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
+        autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
 
         // Configure the button bindings
         configureButtonBindings();

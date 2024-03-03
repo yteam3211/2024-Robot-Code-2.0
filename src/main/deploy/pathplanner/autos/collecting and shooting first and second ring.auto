@@ -18,12 +18,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Shooting wheels"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "from first ring collecting second parallel ring"
