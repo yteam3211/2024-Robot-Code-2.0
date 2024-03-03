@@ -2,9 +2,11 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.dashboard.SuperSystem;
+import frc.util.PID.Gains;
 import frc.util.vision.Limelight;
 import frc.robot.AllianceSpecs;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -18,6 +20,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -25,6 +28,7 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
@@ -37,11 +41,14 @@ public class Swerve extends SuperSystem {
     public SwerveDrivePoseEstimator poseEstimator;
     public SwerveModule[] mSwerveMods;
     public Limelight limelight;
+ 
 
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
     
     public Swerve(Limelight limelight) {
+        // Gains RotationGains
         super("Swerve");
+
         this.limelight = limelight;
         zeroGyro();
         mSwerveMods = new SwerveModule[] {
@@ -57,8 +64,8 @@ public class Swerve extends SuperSystem {
                 this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                 this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                        new PIDConstants(0.5, 0.0, 0.0), // Rotation PID constants
+                        new PIDConstants(5, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(1.2, 0.0, 0.0), // Rotation PID constants
                         4.5, // Max module speed, in m/s
                         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                         new ReplanningConfig() // Default path replanning config. See the API for the options here
@@ -123,7 +130,7 @@ public class Swerve extends SuperSystem {
     }    
 
 
-    public void setStop(){
+    public void lockWheels(){
         mSwerveMods[0].forceSetAngle(Rotation2d.fromDegrees(45));
         mSwerveMods[1].forceSetAngle(Rotation2d.fromDegrees(-45));
         mSwerveMods[2].forceSetAngle(Rotation2d.fromDegrees(-45));
@@ -194,14 +201,16 @@ public class Swerve extends SuperSystem {
     public void periodic(){
         getTab().putInDashboard("pose x", getPose().getX(), false);
         getTab().putInDashboard("pose y", getPose().getY(), false);
-        // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
+        getTab().putInDashboard("pose Rotation", getPose().getRotation().getDegrees(), false);
         
-        getTab().putInDashboard("yaw", getYaw().getDegrees(), false);
+        // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
+        getTab().putInDashboard("yaw", gyro.getYaw(), false);
+        SmartDashboard.putNumber("gyro", gyro.getYaw());
         // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
         // swerveOdometry.update(getYaw(), getModulePositions());
         poseEstimator.update(getYaw(), getModulePositions());
-        if(limelight.isValid()){
+        if(limelight.isValid() && !Robot.isAutonomous){
             Pose2d camPose = new Pose2d(AllianceSpecs.poseX.getAsDouble(), AllianceSpecs.poseY.getAsDouble(), getYaw());
             
             poseEstimator.addVisionMeasurement(camPose, limelight.getLatency());

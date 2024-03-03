@@ -24,9 +24,9 @@ public class DriveToTarget extends Command {
   protected double ROutput;
   protected double XOutput;
   protected double YOutput;
-  protected Gains RGains = new Gains("rotation gains", 0, 0, 0);
-  protected Gains XGains = new Gains("rotation gains", 0, 0, 0);
-  protected Gains YGains = new Gains("rotation gains", 0, 0, 0);
+  protected Gains RGains = new Gains("rotation gains", 0.045, 0, 0.004);
+  protected Gains XGains = new Gains("X gains", 0, 0, 0);
+  protected Gains YGains = new Gains("Y gains", 0, 0, 0);
 
   protected PIDController Rpid = new PIDController(RGains);
   protected PIDController Xpid = new PIDController(XGains);
@@ -62,9 +62,9 @@ public class DriveToTarget extends Command {
       XOutput = Xpid.getOutput(swerve.getPose().getX());
       YOutput = Ypid.getOutput(swerve.getPose().getY());
     
-    ROutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(ROutput);
-    XOutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(XOutput);
-    YOutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(YOutput);
+    ROutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(ROutput) *-1;
+    XOutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(XOutput) *-1;
+    YOutput += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(YOutput) *-1;
     swerve.drive(new Translation2d(XOutput, YOutput), ROutput, true);
   }
 
@@ -72,14 +72,17 @@ public class DriveToTarget extends Command {
   @Override
   public void end(boolean interrupted) {
     swerve.drive(new Translation2d(0.0, 0.0), 0, true);
+    swerve.lockWheels();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD;
-    };
-  }
+    return Math.abs(desiredAngle - swerve.gyro.getYaw()) < Constants.TURN_SWERVE_TRESHOLD 
+      && Math.abs(desiredXpos = swerve.getPose().getX()) < Constants.DRIVE_TO_TARGET_TRESHOLD 
+      && Math.abs(desiredXpos = swerve.getPose().getX()) < Constants.DRIVE_TO_TARGET_TRESHOLD;
+  };
+}
 
   
 

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.8,
+        "x": 7.84,
         "y": 4.1
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.747052879387143,
-        "y": 3.1628890963409635
+        "x": 4.303745530567986,
+        "y": 5.515621031242063
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9,
-        "y": 5.55
+        "x": 3.14,
+        "y": 3.05
       },
       "prevControl": {
-        "x": 4.562450221581539,
-        "y": 5.413634146171611
+        "x": 4.747757957054377,
+        "y": 2.555538187999453
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "shooting third parallel ring",
-      "waypointRelativePos": 1.0,
+      "name": "Stage Pitch",
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,41 @@
             {
               "type": "named",
               "data": {
-                "name": "shooting ring"
+                "name": "Stage pitch"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "distance pitch",
+      "waypointRelativePos": 0.8,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "distance pitch"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "continue intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Use Intake Command"
               }
             }
           ]
@@ -50,18 +84,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -40.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "from parallel ring to shooting spot",
   "previewStartingState": null,
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

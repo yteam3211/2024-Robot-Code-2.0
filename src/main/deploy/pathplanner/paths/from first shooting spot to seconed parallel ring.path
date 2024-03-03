@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "open collect"
+                "name": "Use Intake Command"
               }
             }
           ]

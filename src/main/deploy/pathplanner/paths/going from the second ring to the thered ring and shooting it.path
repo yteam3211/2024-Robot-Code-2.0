@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "open collect"
+                "name": "Use Intake Command"
               }
             }
           ]
@@ -58,7 +58,7 @@
             {
               "type": "named",
               "data": {
-                "name": "shooting ring"
+                "name": "Shooting wheels"
               }
             },
             {

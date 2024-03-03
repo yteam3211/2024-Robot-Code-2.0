@@ -14,16 +14,19 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
 
     // shooting constants
-    public static final double SHOOTING_ANGLE_TRESHOLD = 0.7; //TODO: set when the robot is build
+    public static final double SHOOTING_ANGLE_TRESHOLD = 3; //TODO: set when the robot is build
     public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
-    public static final double SHOOTING_VELCITY = 0; //TODO: set when the robot is build
+    public static final double SHOOTING_SPEAKER_VELCITY = 16500; //TODO: set when the robot is build
+    public static final double SHOOTING_AMP_OUTPUT = 0.4; //TODO: set when the robot is build
+    public static final double KICKER_OUTPUT = 0.4; //TODO: set when the robot is build
+    
     
     // pitching constants
     public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.843018); //in degrees
     public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
     public static final double LIMELIGHT_TO_PIVOT = 381.76;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2500;//2150; //in millimeters
+    public static final double SPEAKER_HIGHT = 2320;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = 0;  //TODO: set max and min ANGLE of eleavator
@@ -31,6 +34,8 @@ public final class Constants {
     public static final double PITCHING_GEAR_RATIO = 160 / 1;
     public static final double LIMELIGHT_lOOKING_ANGLE = 10;
     public static final double LIMELIGHT_lOOKING_ANGLE_TRESHOLD = 4;
+    public static final double AMP_PITCHING_ANGLE = 40;
+
 
 
     // elevator constnats
@@ -43,11 +48,14 @@ public final class Constants {
     public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETERS = 189.242138; // raw encoder units
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
     public static final double MAX_ELEAVATOR_POS = 0;
+    public static final double AMP_ELEVATOR_HIGHT = 625;
+    public static final double CLIMB_ELEVATOR_HIGHT = 590;
 
     // swerve constants
-    public static final double TURN_SWERVE_TRESHOLD = 0;//TODO: set when the robot is build
+    public static final double TURN_SWERVE_TRESHOLD = 2;//TODO: set when the robot is build
     public static final double ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
     public static final double MAX_SHOOTING_RANGE = 3.5; // in meters
+    public static final double DRIVE_TO_TARGET_TRESHOLD = 0.05;
 
     // intake constants
     public static final double INTAKE_OPEN_POSITION = 41; // in rotations
@@ -55,10 +63,10 @@ public final class Constants {
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 
     // alliance constants
-    public static final Pose2d RED_SPEAKER_POS = new Pose2d(new Translation2d(16.54, 5.57), new Rotation2d());
-    public static final Pose2d BLUE_SPEAKER_POS = new Pose2d(new Translation2d(0, 5.57), new Rotation2d());
-    public static final double RED_AMP_ANGLE = 90;
-    public static final double BLUE_AMP_ANGLE = -90; 
+    public static final Pose2d SPEAKER_POS = new Pose2d(new Translation2d(0, 5.39), new Rotation2d());
+    public static final Pose2d AMP_SHOOTING_POS = new Pose2d(new Translation2d(1.83, 8.10), new Rotation2d());
+    public static final double RED_AMP_ANGLE = -90;
+    public static final double BLUE_AMP_ANGLE = 90; 
     
 
 
@@ -70,8 +78,8 @@ public final class Constants {
     public static final int TRANSFER_MOTOR_ID = 29;
     
 
-    public static final int MASTER_SHOOTER_MOTOR_ID = 21;
-    public static final int SLAVE_SHOOTER_MOTOR_ID = 22;
+    public static final int MASTER_SHOOTER_MOTOR_ID = 22;
+    public static final int SLAVE_SHOOTER_MOTOR_ID = 21;
     public static final int KICKER_SHOOTER_MOTOR_ID = 23;
     
     public static final int MASTER_PITCHING_MOTOR_ID = 19;

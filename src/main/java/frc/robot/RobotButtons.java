@@ -16,23 +16,29 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.SwereCommands.DriveToTarget;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.TransferCommands.TransferCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.Eleavator.EleavatorClimbDown;
-import frc.robot.commands.Eleavator.EleavatorCommand;
+import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.Eleavator.OpenElevatorCommanGroup;
 import frc.robot.commands.Eleavator.EleavatorDown;
 import frc.robot.commands.Eleavator.PitchAndEleavator;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
+import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakeWheels;
+import frc.robot.commands.ShootingCommands.CompleteAMPShootingCommand;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
+import frc.robot.commands.ShootingCommands.KickerShootingCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.ShootOnTheMoveCommand;
 import frc.robot.commands.ShootingCommands.PitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingSpeedCommand;
+import frc.robot.commands.ShootingCommands.ShootingVelocity;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -58,20 +64,20 @@ public class RobotButtons {
     // public static Trigger rotationJoystick = new Trigger(() -> Math.abs(driver.getRawAxis(XboxController.Axis.kRightX.value)) > 0.1);
     
     // systems joystick buttons
-    public static Trigger intakeTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
-    public static Trigger speakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger intakeTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kR2.value)); 
     public static Trigger completeSpeakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
-    public static Trigger apmShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kSquare.value));
-    public static Trigger climbTrigger = new Trigger(() -> systems.getPOV() == 0);    
-    public static Trigger climbTrig = new Trigger(() -> systems.getPOV() == 90);    
-    public static Trigger climb = new Trigger(() -> systems.getPOV() == 180);
+    public static Trigger apmShootingTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCross.value));
+    public static Trigger pitchDown = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCircle.value)); // systems
+     public static Trigger pitch = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kSquare.value));// systems
+    public static Trigger climbUpTrigger = new Trigger(() ->  systems.getPOV() == 0);  // systems  
+    public static Trigger climbDown = new Trigger(() ->  systems.getPOV() == 180); // systems   
+    public static Trigger climb = new Trigger(() ->  systems.getPOV() == 90); // systems
 
-
-
-    public static Trigger pitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR2.value));    
-    public static Trigger pitchTrig = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
-
-    public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCircle.value));
+    public static Trigger PitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
+    public static Trigger shootingReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL1.value));
+    public static Trigger intakeReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
+    
+    
 
     public Trigger LEDtTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
     
@@ -87,34 +93,33 @@ public class RobotButtons {
         swerve.setDefaultCommand(
             new TeleopSwerve(
                     swerve,
-                    () -> driver.getRawAxis(PS5Controller.Axis.kLeftY.value),
-                    () -> driver.getRawAxis(PS5Controller.Axis.kLeftX.value),
-                    () -> driver.getRawAxis(PS5Controller.Axis.kRightX.value)
+                    () -> -driver.getRawAxis(PS5Controller.Axis.kLeftY.value),
+                    () -> -driver.getRawAxis(PS5Controller.Axis.kLeftX.value),
+                    () -> -driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
         resetGyro.onTrue(new InstantCommand(() -> Robot.m_robotContainer.getSwerve().zeroGyro()));
 
                 // systems joystick commands
-        // kicker.whileTrue(new KickerCommand(kickerSubsystem,0.4));
-        
-        // speakerShootingTrigger.onTrue(new CompleteShootingCommand(swerve,  limelight,  shootingSubsystem,  pitchingSubsystem, eleavatorSubsystem, kickerSubsystem));                    climbTrigger.onTrue(new EleavatorCommand(eleavatorSubsystem, 0));
-       
-        speakerShootingTrigger.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem,14500,0.25));  
-        // speakerShootingTrigger.whileTrue(new ShootOnTheMoveCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath, BreakValue, BreakValue));  
-        
-        
-        climbTrigger.onTrue(new PitchAndEleavator(pitchingSubsystem,elevatorSubsystem,15,590));
-        climb.onTrue(new EleavatorDown(elevatorSubsystem, -5));
-        climbTrig.onTrue(new EleavatorClimbDown(elevatorSubsystem, -40));
+        completeSpeakerShootingTrigger.onTrue(new CompleteSpeakerShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath)); 
+        // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
+        shootingReverse.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem, 2000, 0.4));
 
-        intakeTrigger.whileTrue(new  IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
+        apmShootingTrigger.whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
+        apmShootingTrigger.onFalse(new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
+        
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
+        intakeReverse.whileTrue(new IntakeBackwordsCommand(intakeSubsystem, 0.4));
 
-        pitchTrigger.onTrue(new PitchPos(pitchingSubsystem, 0));
-        pitchTrig.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
-        // apmShootingTrigger.whileTrue(new AutoShooingWheels(shootingSubsystem,18000));
 
-        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE _OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
+        climbUpTrigger.onTrue(new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT));
+        climbDown.onTrue(new EleavatorDown(elevatorSubsystem, -5));
+        climb.onTrue(new EleavatorClimbDown(elevatorSubsystem, -40));
+
+        PitchTrigger.onTrue(new PitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));//TODO: ANGLE = 0!!
+        pitch.onTrue(new PitchPos(pitchingSubsystem, -20));
+
         LEDtTrigger.onTrue(new InstantCommand(() -> swerve.setLEDS(false, true, true)));
-        // intakeTrigger.whileTrue(new ParallelCommandGroup(new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),new TransferCommand(transferSubsystem, 0.8)));
 
     }
 }

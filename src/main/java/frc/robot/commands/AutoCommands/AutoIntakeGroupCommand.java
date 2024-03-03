@@ -7,7 +7,8 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Eleavator.EleavatorCommand;
+import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.ShootingCommands.KickerCommand;
 import frc.robot.commands.ShootingCommands.PitchPos;
@@ -29,16 +30,9 @@ public class AutoIntakeGroupCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
         new ParallelCommandGroup(
-          new PitchPos(pitchingSubsystem, 35) //TODO: change it to the right pos
-        ).onlyIf(() -> pitchingSubsystem.getAbsolutePosition() < 35),
-        new ParallelCommandGroup(
-          new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000).onlyWhile(() -> !kickerSubsystem.isNoteIn()),
+          new IntakeBackwordsCommand(intakeSubsystem, -1000),
           new TransferCommand(transferSubsystem, 0.8),
-          new KickerCommand(kickerSubsystem, 0.4)
-        )
-
-
-
-    );
+          new KickerCommand(kickerSubsystem, shootingSubsystem, 0.32)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
+        );
     }
 }

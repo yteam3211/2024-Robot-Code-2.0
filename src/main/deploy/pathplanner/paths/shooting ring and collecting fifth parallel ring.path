@@ -8,19 +8,19 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5368524854696768,
-        "y": 3.640275515845149
+        "x": 1.3929974013794195,
+        "y": 2.2792637892968104
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.839053325165476,
+        "x": 7.64,
         "y": 0.7766439062289884
       },
       "prevControl": {
-        "x": 6.523330693720212,
+        "x": 6.3242773685547355,
         "y": 1.1304516726680522
       },
       "nextControl": null,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "shooting ring",
-      "waypointRelativePos": 0,
+      "name": "use collect",
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "shooting ring"
+                "name": "Use Intake Command"
               }
             }
           ]
@@ -49,8 +49,8 @@
       }
     },
     {
-      "name": "open collect",
-      "waypointRelativePos": 0.85,
+      "name": "Open intake",
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "parallel",
         "data": {
@@ -58,7 +58,41 @@
             {
               "type": "named",
               "data": {
-                "name": "open collect"
+                "name": "Open Intake Command"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "elevator down",
+      "waypointRelativePos": 0.1,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "elevator down"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "distance pitch",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "distance pitch"
               }
             }
           ]
@@ -67,14 +101,14 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -15.0,
     "rotateFast": false
   },
   "reversed": false,

@@ -5,6 +5,7 @@
 package frc.robot.commands.TransferCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.TransferSubsystem;
 
 public class TransferCommand extends Command {
@@ -35,8 +36,10 @@ public class TransferCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    transferSubsystem.setOutput(0);
-    System.out.println("********exit TransferCommand");
+    // if(!KickerSubsystem.isNoteIn()){
+      transferSubsystem.setOutput(0);
+      System.out.println("********exit TransferCommand");
+    // }
 
   }
 

@@ -4,7 +4,6 @@
 
 package frc.robot.commands.Eleavator;
 
-
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ShootingCommands.PitchPos;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -13,15 +12,14 @@ import frc.robot.subsystems.PitchingSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PitchAndEleavator extends ParallelCommandGroup{
-  /** Creates a new PitchindAnDEleavator. */
-  public PitchAndEleavator( PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem, double angle,double eleavatorPos) {
-
+public class CloseElevatorCommandGroup extends ParallelCommandGroup {
+  /** Creates a new CloseElevatorCommandGroup. */
+  public CloseElevatorCommandGroup(ElevatorSubsystem elevatorSubsystem, PitchingSubsystem pitchingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(  
-      new PitchPos(pitchingSubsystem, angle),
-      new EleavatorUpCommand(eleavatorSubsystem, eleavatorPos)
+    addCommands(
+      new EleavatorDown(elevatorSubsystem, 0),
+      new PitchPos(pitchingSubsystem, 0).onlyWhile(() -> pitchingSubsystem.getAbsolutePosition() < -5)
     );
   }
 }

@@ -21,8 +21,8 @@ import frc.util.motor.SuperSparkMax;
 public class KickerSubsystem extends SuperSystem {
   /** Creates a new KickerSubsystem. */
     public SuperSparkMax kickerMotor;
-    public DigitalInput noteInClose;    
-    public DigitalInput noteInFar;
+    public static DigitalInput noteInClose;    
+    public static DigitalInput noteInFar;
 
     
 
@@ -40,7 +40,9 @@ public class KickerSubsystem extends SuperSystem {
     // test( 1 > 2 ? 3 : 2, 2);
     // This method will be called once per scheduler run
     getTab().putInDashboard("is note in close",isNoteIn(), 5, 1, false);    
-    getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);
+    getTab().putInDashboard("is note in far",isNoteInFar(),4 , 1, false);   
+     getTab().putInDashboard("position",kickerMotor.getPosition(),3 , 1, false);
+
 
 
   }
@@ -51,11 +53,11 @@ public class KickerSubsystem extends SuperSystem {
     kickerMotor.set(Output);
   }
 
-  public boolean isNoteIn(){
+  public static boolean isNoteIn(){
     return !noteInClose.get();
   }
 
- public boolean isNoteInFar(){
+ public static boolean isNoteInFar(){
     return !noteInFar.get();
   }
   
@@ -64,6 +66,7 @@ public class KickerSubsystem extends SuperSystem {
     kickerMotor.set(pos);
 
   }
+
   public void test(double a, double b){}
   }
 
