@@ -7,9 +7,9 @@ package frc.robot.commands.IntakeCommands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.ShootingCommands.KickerCommand;
-import frc.robot.commands.ShootingCommands.PitchPos;
-import frc.robot.commands.TransferCommands.TransferCommand;
+import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -27,10 +27,10 @@ public class IntakeAndTransferCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand(\][]));
       addCommands(
         new ParallelCommandGroup(
-          new IntakeBackwordsCommand(intakeSubsystem, -0.9), // new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
+         new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -1000),
           new TransferCommand(transferSubsystem, 0.93),
-          new KickerCommand(kickerSubsystem, shootingSubsystem, 0.45),
-          new PitchPos(pitchingSubsystem, 35).onlyIf(() -> (pitchingSubsystem.getAbsolutePosition() < 30))
+          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.2),
+          new PitchPos(pitchingSubsystem, 20).onlyIf(() -> (pitchingSubsystem.getAbsolutePosition() < 10))
         ),
         new PitchPos(pitchingSubsystem, 0)
 

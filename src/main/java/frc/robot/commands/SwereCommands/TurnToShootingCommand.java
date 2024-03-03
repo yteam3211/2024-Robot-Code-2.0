@@ -19,7 +19,7 @@ public class TurnToShootingCommand extends Command {
   private Limelight limelight;
   private ShootingMath shootingMath;
   double output;
-  protected Gains gains = new Gains("rotation gains", 0.065, 0, 0.007);
+  protected Gains gains = new Gains("rotation gains", 0.025, 0, 0.005);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -51,6 +51,7 @@ public class TurnToShootingCommand extends Command {
     else{
       pid.setTargetPosition(0);
       output = pid.getOutput(limelight.getX());
+      System.out.println("limelight: " + limelight.getX());
 
     }
     output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
@@ -68,7 +69,8 @@ public class TurnToShootingCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD;
+    System.out.println("limelight: " + limelight.getX() + "treshold: " + (Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD));
+    return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD && (limelight.getID() == 7 || limelight.getID() == 4);
     };
   }
 

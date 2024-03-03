@@ -17,12 +17,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
+import frc.robot.commands.AutoCommands.StartAutoCommandGroup;
+import frc.robot.commands.AutoCommands.shooterAuto;
 import frc.robot.commands.Eleavator.EleavatorOutput;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
-import frc.robot.commands.ShootingCommands.PitchPos;
-import frc.robot.commands.ShootingCommands.ShootingVelocity;
+import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
+import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
@@ -49,28 +53,28 @@ public class RobotContainer {
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-    // private final SendableChooser<Command> autoChooser;
+    private final SendableChooser<Command> autoChooser = new SendableChooser<>();
     
-    private final AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
+    public AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
 
     //auto commands register
     public RobotContainer() {
 
-    NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
-    NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
-    NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
-    NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
-    NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 50));
-    NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,  26));
-    NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
-    NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
-    NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.05));
-        
-        // Register Named Commands // Need to put right commands and right subsystems
-        // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
-        // NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
-        // NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
+        NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
+        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
+        NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
+        NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
+        NamedCommands.registerCommand("Start pitch", new PitchPos(pitchingSubsystem, 48));
+        NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem,29.5));//new PitchPos(pitchingSubsystem,  29.5));
+        NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
+        NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
+        NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.2));
+        NamedCommands.registerCommand("keep in Kicker", new DefaultKicker(kickerSubsystem, 0.1));
+        NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+            
+        autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        autoChooser.addOption("Auto 2 - complition", new shooterAuto(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -78,8 +82,7 @@ public class RobotContainer {
         // Build an auto chooser. This will use Commands.none() as the default option.
         // autoChooser = AutoBuilder.buildAutoChooser("3 MA");
         // Another option that allows you to specify the default auto by its name
-        // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-        // SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Auto Chooser", autoChooser);
     }
     
 
@@ -110,9 +113,10 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         // return new PathPlannerAuto("3 MA");
-        System.out.println("---Start auto 1 - complition---");
-        return new PathPlannerAuto("Auto 1 - complition");
-        // return autoChooser.getSelected();
+        // System.out.println("---Start auto 1 - complition---");
+        // return new shooterAuto(shootingSubsystem, pitchingSubsystem, kickerSubsystem);
+        // new PathPlannerAuto("Auto 2 - complition");
+        return autoChooser.getSelected();
     }
 
     // gets & sets 

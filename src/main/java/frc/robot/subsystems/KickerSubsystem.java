@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.ShootingCommands.KickerCommand;
+import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
 import frc.util.SuperSystem;
 import frc.util.motor.SuperSparkMax;
 
@@ -31,7 +32,7 @@ public class KickerSubsystem extends SuperSystem {
    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, true, IdleMode.kCoast);
    noteInClose = new DigitalInput(1);   
    noteInFar = new DigitalInput(2);
-
+  // setDefaultCommand(new DefaultKicker(this, 0.1));
 
   }
 

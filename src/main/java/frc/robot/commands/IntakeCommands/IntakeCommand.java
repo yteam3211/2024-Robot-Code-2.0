@@ -42,24 +42,14 @@ public class IntakeCommand extends Command {
   public void end(boolean interrupted) 
   {
     intakeSubsystem.setWheelsMotorOutput(0);
-    intakeSubsystem.setIntakeOpenMotorOutput(-0.75 );
+    intakeSubsystem.setIntakeOpenMotorOutput(-0.75);
     System.out.println("********exit IntakeCommand");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  if (intakeSubsystem.isIntakeOn() || (intakePosition > 0.5 || intakePosition < 0.5))
-  {
     return false;
-    
-    // else return false;
   }
-  else if (intakeSubsystem.getPosition()- intakePosition < 5) return true;
-
-  else return true;
-
-    }
-    
-  }
+}
 

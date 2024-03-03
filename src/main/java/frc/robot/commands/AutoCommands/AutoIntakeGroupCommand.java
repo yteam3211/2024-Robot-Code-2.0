@@ -10,9 +10,9 @@ import frc.robot.Constants;
 import frc.robot.commands.Eleavator.EleavatorUpCommand;
 import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
-import frc.robot.commands.ShootingCommands.KickerCommand;
-import frc.robot.commands.ShootingCommands.PitchPos;
-import frc.robot.commands.TransferCommands.TransferCommand;
+import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -32,7 +32,7 @@ public class AutoIntakeGroupCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
           new IntakeBackwordsCommand(intakeSubsystem, -1000),
           new TransferCommand(transferSubsystem, 0.8),
-          new KickerCommand(kickerSubsystem, shootingSubsystem, 0.32)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
+          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.17)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
         );
     }
 }

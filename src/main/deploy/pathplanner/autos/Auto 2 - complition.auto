@@ -1,0 +1,74 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.72,
+      "y": 4.42
+    },
+    "rotation": -60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Shooting"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shooting ring and collecting fifth parallel ring"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from fifth parallel ring to shooting spot"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.6
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "keep in Kicker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Kicker"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "from fifth shooting spot to forth parallel ring"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Use Intake Command"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "first row and second row",
+  "choreoAuto": false
+}

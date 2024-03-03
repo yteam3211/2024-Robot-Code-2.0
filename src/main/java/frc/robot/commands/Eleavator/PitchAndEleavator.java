@@ -6,7 +6,7 @@ package frc.robot.commands.Eleavator;
 
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ShootingCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 

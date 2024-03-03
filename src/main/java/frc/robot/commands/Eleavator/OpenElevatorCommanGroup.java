@@ -5,7 +5,7 @@
 package frc.robot.commands.Eleavator;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ShootingCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 
@@ -19,7 +19,7 @@ public class OpenElevatorCommanGroup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new EleavatorUpCommand(elevatorSubsystem, ElevatorPos),
-      new PitchPos(pitchingSubsystem, 15).onlyWhile(() -> pitchingSubsystem.getAbsolutePosition() > 17)
+      new PitchPos(pitchingSubsystem, 0).onlyWhile(() -> pitchingSubsystem.getAbsolutePosition() > 17)
       
     );
   }

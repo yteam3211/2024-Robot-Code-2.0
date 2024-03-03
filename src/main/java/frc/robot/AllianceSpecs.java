@@ -11,6 +11,7 @@ public class AllianceSpecs {
     public static DoubleSupplier poseY;
     public static DoubleSupplier poseX;
     public static double AMPAngle;
+    public static Pose2d SpeakerPose;
     
   
     public AllianceSpecs(Limelight limelight) {
@@ -19,12 +20,14 @@ public class AllianceSpecs {
             poseX = () -> limelight.getRedBotpose()[0];
             poseY = () -> limelight.getRedBotpose()[1];
             AMPAngle = Constants.RED_AMP_ANGLE;
+            SpeakerPose = Constants.RED_SPEAKER_POS;
         }
         else{
             isRed = false;
             poseX = () -> limelight.getBlueBotpose()[0];
             poseY = () -> limelight.getBlueBotpose()[1];
             AMPAngle = Constants.BLUE_AMP_ANGLE;
+            SpeakerPose = Constants.BLUE_SPEAKER_POS;
         }
     }
 }

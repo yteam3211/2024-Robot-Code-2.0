@@ -41,6 +41,8 @@ public class Limelight extends SubsystemBase {
   protected NetworkTableEntry streamMode;
   protected NetworkTableEntry pipeline;
   protected NetworkTableEntry botpose;
+  protected NetworkTableEntry tid;
+
 
   protected double tx_ = 0, ty_ = 0, ta_ = 0, ts_ = 0;
   protected double pipeline_ = 0;
@@ -62,6 +64,7 @@ public class Limelight extends SubsystemBase {
     ta = this.limelightTable.getEntry("ta");
     tv = this.limelightTable.getEntry("tv");
     ts = this.limelightTable.getEntry("ts");
+    tid = this.limelightTable.getEntry("tid");
     
 
     this.LEDMode = this.limelightTable.getEntry("ledMode");
@@ -126,6 +129,8 @@ public class Limelight extends SubsystemBase {
     this.pipeline.setNumber(pipeline);
   }
 
+  
+
   /**
    * set camera to be in vision / driver mode.
    * <p>
@@ -184,7 +189,13 @@ public class Limelight extends SubsystemBase {
   public boolean isValueChange() {
     return isValueChange;
   }
-
+  
+  /**
+   * @return X angle.
+   */
+  public double getID() {
+    return limelightTable.getEntry("tid").getDouble(0);
+  }
   /**
    * @return X angle.
    */

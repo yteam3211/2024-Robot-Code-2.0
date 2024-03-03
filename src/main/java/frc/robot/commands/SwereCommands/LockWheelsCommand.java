@@ -7,12 +7,12 @@ package frc.robot.commands.SwereCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
 
 public class LockWheelsCommand extends Command {
   private Swerve swerve;
   private boolean isAuto = false;
-  private Timer timer = new Timer();
 
 
   /** Creates a new lockWheelsCommnad. */
@@ -21,10 +21,6 @@ public class LockWheelsCommand extends Command {
     this.swerve = swerve;
   }
 
-  public LockWheelsCommand(Swerve swerve, boolean isAutonmous){
-    this.swerve = swerve;
-    this.isAuto = isAutonmous;
-  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -36,7 +32,7 @@ public class LockWheelsCommand extends Command {
   @Override
   public void execute() {
     swerve.lockWheels();
-    timer.start();
+    
 
   }
 
@@ -49,6 +45,6 @@ public class LockWheelsCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;//RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean() || (isAuto && timer.hasElapsed(0.05));
+    return RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean();
   }
 }
