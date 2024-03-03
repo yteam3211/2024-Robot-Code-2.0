@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.45,
-        "y": 4.1
+        "x": 2.51,
+        "y": 4.33
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8470942415189302,
-        "y": 4.523948710956585
+        "x": 1.9070942415189296,
+        "y": 4.753948710956585
       },
       "isLocked": false,
       "linkedName": null
@@ -62,6 +62,9 @@
   },
   "reversed": false,
   "folder": "collecting ring from side ring to side ring",
-  "previewStartingState": null,
+  "previewStartingState": {
+    "rotation": -30.0,
+    "velocity": 0
+  },
   "useDefaultConstraints": false
 }
