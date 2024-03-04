@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    isAutonomous = false;
+    isAutonomous = true;
   }
 
   @Override
@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
     isAutonomous = true;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // Create a path following command using AutoBuilder. This will also trigger event markers.
-    // m_autonomousCommand = new PathPlannerAuto("3 M");
+    // m_autonomousCommand = new PathPlanner[]\Auto("3 M");
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

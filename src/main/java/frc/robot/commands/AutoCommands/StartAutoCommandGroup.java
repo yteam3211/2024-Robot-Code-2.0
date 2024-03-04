@@ -24,7 +24,7 @@ public class StartAutoCommandGroup extends SequentialCommandGroup {
     addCommands(
       new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY),
       new ParallelDeadlineGroup(
-        new PitchPos(pitchingSubsystem, 54),
+        new PitchPos(pitchingSubsystem, 52),
         new DefaultKicker(kickerSubsystem, 0.1)),
       new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT)
     );

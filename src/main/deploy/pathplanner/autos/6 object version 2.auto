@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Start Shooting"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "shooting, collecting and shooting thered ring from second spot"
@@ -30,7 +36,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 3 pitch"
                 }
               },
               {
@@ -92,7 +98,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 1 pitch"
                 }
               },
               {

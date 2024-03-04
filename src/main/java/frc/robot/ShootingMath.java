@@ -2,6 +2,8 @@ package frc.robot;
 
 import com.ctre.phoenix6.hardware.CANcoder;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.dashboard.SuperSystem;
@@ -56,6 +58,7 @@ public class ShootingMath extends SuperSystem {
         return getSpeakerShootingDistance(swerve) < Constants.MAX_SHOOTING_RANGE;
     }
 
+
   /**
    * get the vertical hight of the Limelight lens from the pivot point of the shooting system
    * @return the limelight vertical hight in Millimeters
@@ -63,7 +66,21 @@ public class ShootingMath extends SuperSystem {
     public double getVerticalLimelightHightFromPivot(){
         return Math.sin(Math.toRadians(pitchingSubsystem.getAbsolutePosition() + Constants.LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT)) * Constants.LIMELIGHT_TO_PIVOT;
       }
-    
+
+  /**
+   * get the horizontal distance of the Limelight lens from the pivot point of the shooting system
+   * @return the limelight horizontal distance in Millimeters
+   */
+    public double getHorizontalLimelightDistanceFromPivot(){
+        return Math.cos(Math.toRadians(pitchingSubsystem.getAbsolutePosition() + Constants.LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT)) * Constants.LIMELIGHT_TO_PIVOT;
+      }
+
+    public Pose2d getLimelightFromRobotCenter(Swerve  swerve){
+      double LLToCenter = getHorizontalLimelightDistanceFromPivot() + Constants.ROBOT_CENTER_TO_PIVOT;
+      double Xpos = Math.cos(swerve.getPose().getRotation().getRadians()) * LLToCenter;
+      double Ypos = Math.sin(swerve.getPose().getRotation().getRadians()) * LLToCenter;
+      return new Pose2d(Xpos, Ypos, new Rotation2d());
+    }    
       /**
    * get the vertical hight of the Limelight lens from the floor
    * @return the limelight vertical hight in Millimeters

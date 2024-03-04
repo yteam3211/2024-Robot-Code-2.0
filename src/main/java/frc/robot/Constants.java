@@ -23,8 +23,9 @@ public final class Constants {
     
     // pitching constants
     public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.008057); //in degrees
-    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
-    public static final double LIMELIGHT_TO_PIVOT = 381.76;
+    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -10.031;
+    public static final double LIMELIGHT_TO_PIVOT = 309.5;
+    public static final double ROBOT_CENTER_TO_PIVOT = 150;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
     public static final double SPEAKER_HIGHT = 2600;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters

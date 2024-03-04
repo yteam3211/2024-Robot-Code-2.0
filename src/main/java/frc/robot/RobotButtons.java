@@ -112,7 +112,7 @@ public class RobotButtons {
         // .whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
         apmShootingTrigger.onFalse(new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
-        shootTest.onTrue(new PitchPos(pitchingSubsystem, 49));
+        shootTest.onTrue(new PitchPos(pitchingSubsystem, 32));
 
         intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 10));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));

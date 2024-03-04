@@ -7,6 +7,7 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.ShootingMath;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -23,7 +24,7 @@ public class DistanceAutoShootingGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem),
+      new PitchPos(pitchingSubsystem, 40),
       new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT)
     );
   }
