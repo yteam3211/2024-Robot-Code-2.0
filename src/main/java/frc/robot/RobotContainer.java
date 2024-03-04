@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -17,22 +18,21 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
-import frc.robot.commands.AutoCommands.DistanceAutoShootingGroup;
-import frc.robot.commands.AutoCommands.StartAutoCommandGroup;
-import frc.robot.commands.AutoCommands.shooterAuto;
+import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.commands.Eleavator.EleavatorOutput;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
-import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
-import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
-import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
 import frc.robot.commands.SwereCommands.LockWheelsCommand;
 import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.subsystems.*;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightStreamMode;
+import frc.robot.commands.AutoCommands.StartAutoCommandGroup;
+import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
+import frc.robot.commands.AutoCommands.DistanceAutoShootingGroup;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

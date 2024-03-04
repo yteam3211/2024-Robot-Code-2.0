@@ -7,15 +7,16 @@ package frc.robot.commands.IntakeCommands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
-import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
-import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.TransferSubsystem;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
+import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

@@ -12,8 +12,6 @@ import frc.robot.Constants;
 import frc.robot.ShootingMath;
 import frc.robot.commands.Eleavator.CloseElevatorCommandGroup;
 import frc.robot.commands.Eleavator.EleavatorUpCommand;
-import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
-import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
 import frc.robot.commands.SwereCommands.DriveToTarget;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -21,6 +19,10 @@ import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
+
+
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
