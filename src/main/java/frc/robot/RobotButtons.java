@@ -108,12 +108,13 @@ public class RobotButtons {
         // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
         shootingReverse.whileTrue(new ShootingSpeedCommand(shootingSubsystem, kickerSubsystem, 2000, 0.4));
         shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 52),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
-        apmShootingTrigger.whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
+        apmShootingTrigger.whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem, elevatorSubsystem));
+        // .whileTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem));
         apmShootingTrigger.onFalse(new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
         
         shootTest.onTrue(new PitchPos(pitchingSubsystem, 49));
 
-        intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 10));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));
         intakeReverse.whileTrue(new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));
 
@@ -125,7 +126,7 @@ public class RobotButtons {
 
         PitchTrigger.onTrue(new SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));//TODO: ANGLE = 0!!
-        pitch.onTrue(new PitchPos(pitchingSubsystem,50));
+        pitch.onTrue(new PitchPos(pitchingSubsystem,-40));
 
         turnToShooting.onTrue(new TurnToShootingCommand(swerve, limelight, shootingMath));
 

@@ -40,7 +40,7 @@ public final class Constants {
 
 
     // elevator constnats
-    public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
+    public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build  
     public static final double ELEAVATOR_GEAR_RATIO = 15.31 / 1;
     private static final double ELEAVATOR_WINCH_DIAMETER = 50; //in millimeters
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;

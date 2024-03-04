@@ -116,6 +116,7 @@ public class ElevatorSubsystem extends SuperSystem {
     if (this.isEleavatorDown())
     {
       resetEncoder();
+      setPosition(0);
     }
     
     if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)

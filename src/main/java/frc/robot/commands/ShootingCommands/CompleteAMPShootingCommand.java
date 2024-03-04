@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ShootingCommands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AllianceSpecs;
@@ -27,21 +28,19 @@ import frc.util.vision.Limelight;
 public class CompleteAMPShootingCommand extends SequentialCommandGroup {
   /** Creates a new CompleteAMPShootingCommand. */
   // public CompleteAMPShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath, AllianceSpecs allianceSpecs) {
-  public CompleteAMPShootingCommand(ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem) {
+  public CompleteAMPShootingCommand(ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem elevatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      /*Hopfully for dis 4:)*/
+      new ShootingOutput(shootingSubsystem, 0.2),
+      new InstantCommand(() -> pitchingSubsystem.setPosition(-20)),
+       new EleavatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn()),
+      new PitchPos(pitchingSubsystem, -40).onlyWhile(() -> elevatorSubsystem.getElevatorHight() > 250)
       // new ParallelCommandGroup(
-      //   new DriveToTarget(swerve, limelight, shootingMath, allianceSpecs.AMPAngle, Constants.AMP_SHOOTING_POS.getX(), Constants.AMP_SHOOTING_POS.getY()),
-      //   new EleavatorUpCommand(eleavatorSubsystem, Constants.AMP_ELEVATOR_HIGHT),
-      //   new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
-      //   new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_AMP_VELCITY)),
-      // new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT),
-      // new CloseElevatorCommandGroup(eleavatorSubsystem, pitchingSubsystem)
-      new ParallelCommandGroup(
-        new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
-        new ShootingOutput(shootingSubsystem, 0.2))
+      //   // new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
+      //   // new ShootingOutput(shootingSubsystem, 0.2))
+
+
     );
   }
 }

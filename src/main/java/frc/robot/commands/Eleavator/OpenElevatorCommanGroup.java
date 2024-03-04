@@ -19,7 +19,7 @@ public class OpenElevatorCommanGroup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new EleavatorUpCommand(elevatorSubsystem, ElevatorPos),
-      new PitchPos(pitchingSubsystem, 0).onlyWhile(() -> pitchingSubsystem.getAbsolutePosition() > 17)
+      new PitchPos(pitchingSubsystem, 0).onlyWhile(() -> pitchingSubsystem.getAbsolutePosition() > 10)
       
     );
   }

@@ -39,6 +39,6 @@ public class ShootingOutput extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(output - shootingSubsystem.getOutput()) < 0.02);
+    return true;
   }
 }

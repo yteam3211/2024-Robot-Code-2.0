@@ -33,6 +33,8 @@ public class EleavatorUpCommand extends Command {
   @Override
   public void execute() {
     eleavatorSubsystem.setPosition(eleavatorPosition);
+    System.out.println("******** execute EleavatorCommand" + eleavatorSubsystem.getElevatorHight() );
+
     
   }
 

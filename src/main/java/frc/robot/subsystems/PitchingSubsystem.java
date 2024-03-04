@@ -61,7 +61,6 @@ public class PitchingSubsystem extends SuperSystem {
    * @param position position in degrees.
    */
   public void setPosition(double position){
-    System.out.println("set pitching position: " + degreesToFalconEncoder(position));
     masterPitchingMotor.set(ControlMode.MotionMagic, degreesToFalconEncoder(position));
     // masterPitchingMotor.set(ControlMode.MotionMagic, position);
   }

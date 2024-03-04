@@ -28,7 +28,7 @@ public class PitchPos extends Command {
   @Override
   public void execute() {
     System.out.println("pitch" + pitchingSubsystem.getAbsolutePosition());
-    pitchingSubsystem.setPosition(angleDegrees);
+    pitchingSubsystem.setPosition(angleDegrees);  
   }
 
   // Called once the command ends or is interrupted.
