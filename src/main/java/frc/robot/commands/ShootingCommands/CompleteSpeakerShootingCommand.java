@@ -6,12 +6,15 @@ package frc.robot.commands.ShootingCommands;
 
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
 import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
+
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotButtons;
 import frc.robot.ShootingMath;
@@ -37,14 +40,19 @@ public class CompleteSpeakerShootingCommand extends SequentialCommandGroup {
     addCommands(         //TODO: change the eleavator position and the kickers output
       // !limelight.isValid() ? Math.ab s(Constants.LIMELIGHT_lOOKING_ANGLE - pitchingSubsystem.getAbsolutePosition()) > Constants.LIMELIGHT_lOOKING_ANGLE_TRESHOLD ? new PitchPos(pitchingSubsystem, Constants.LIMELIGHT_lOOKING_ANGLE) : new WaitCommand(0) : new EleavatorCommand(eleavatorSubsystem, 0) ,
       // new ViewLimelightCommand(swerve, pitchingSubsystem).onlyWhile(() -> !limelight.isValid()),
-      new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem),
+      new ParallelRaceGroup(
+        new WaitCommand(0.1),
+        new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem)),
+      // new PitchPos(pitchingSubsystem, 30),
       new TurnToShootingCommand(swerve, limelight, shootingMath),
       new ParallelRaceGroup(
         new LockWheelsCommand(swerve),
         new SequentialCommandGroup(
-          new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem).andThen(() -> shootingMath.setShootingCondition(true)),
           new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY).onlyWhile(() -> (Math.abs(Constants.SHOOTING_SPEAKER_VELCITY - shootingSubsystem.getVelocity()) > Constants.SHOOTING_VELOCITY_TRESHOLD)),
-          new KickerShootingCommand(kickerSubsystem, shootingSubsystem, 0.8).onlyWhile(() -> !RobotButtons.kicker.getAsBoolean())))
+          new ParallelRaceGroup(
+            new WaitCommand(0.5),
+            new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem)).andThen(() -> shootingMath.setShootingCondition(true)),
+          new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT).onlyWhile(() -> !RobotButtons.kicker.getAsBoolean())))
           );
   }
 }

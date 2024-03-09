@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
@@ -80,10 +81,12 @@ public class RobotContainer {
            
         //add Autos to the auto chooser
         autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
-        autoChooser.addOption("Auto 1 - complition", new PathPlannerAuto("Auto 1 - complition"));
+        autoChooser.addOption("complition", new PathPlannerAuto("Auto 1 - complition"));
         autoChooser.addOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
-        autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
-        autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
+        autoChooser.addOption("NO AUTO", new WaitCommand(0));
+        autoChooser.setDefaultOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
+        // autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
+        // autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
 
         // Configure the button bindings
         configureButtonBindings();

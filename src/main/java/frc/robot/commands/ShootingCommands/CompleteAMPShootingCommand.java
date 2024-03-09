@@ -19,6 +19,7 @@ import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 import frc.robot.subsystems.Swerve;
 import frc.util.vision.Limelight;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchAMP;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
 
@@ -27,7 +28,7 @@ import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class CompleteAMPShootingCommand extends SequentialCommandGroup {
+public class CompleteAMPShootingCommand extends ParallelCommandGroup {
   /** Creates a new CompleteAMPShootingCommand. */
   // public CompleteAMPShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath, AllianceSpecs allianceSpecs) {
   public CompleteAMPShootingCommand(ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem elevatorSubsystem) {
@@ -35,9 +36,8 @@ public class CompleteAMPShootingCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ShootingOutput(shootingSubsystem, 0.2),
-      new InstantCommand(() -> pitchingSubsystem.setPosition(-20)),
-       new EleavatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn()),
-      new PitchPos(pitchingSubsystem, -40).onlyWhile(() -> elevatorSubsystem.getElevatorHight() > 250)
+      new PitchAMP(pitchingSubsystem, elevatorSubsystem, -40, 20),
+       new EleavatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn())
       // new ParallelCommandGroup(
       //   // new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
       //   // new ShootingOutput(shootingSubsystem, 0.2))

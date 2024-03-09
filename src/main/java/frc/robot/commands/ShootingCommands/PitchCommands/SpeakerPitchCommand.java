@@ -59,6 +59,6 @@ public class SpeakerPitchCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(pitchingSubsystem.getAbsolutePosition() - targetAngle) < (targetAngle / 40);
+    return Math.abs(pitchingSubsystem.getAbsolutePosition() - targetAngle) < (targetAngle / 20);
   }
 }

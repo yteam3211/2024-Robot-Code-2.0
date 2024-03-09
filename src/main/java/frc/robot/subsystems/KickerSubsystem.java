@@ -28,11 +28,12 @@ public class KickerSubsystem extends SuperSystem {
   public KickerSubsystem() {
   super("Kicker Subsystem");
    kickerMotor = new SuperSparkMax(Constants.KICKER_SHOOTER_MOTOR_ID, MotorType.kBrushless, 40, true, IdleMode.kCoast);
-   noteInClose = new DigitalInput(1);   
+   noteInClose = new DigitalInput(4);   
   //  noteInFar = new DigitalInput(2);
   // setDefaultCommand(new DefaultKicker(this, 0.1));
 
   }
+
 
   
   public void setKickerOutput(double Output)

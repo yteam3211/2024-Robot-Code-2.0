@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+    m_robotContainer.getSwerve().zeroGyro();
   }
 
   /**
@@ -70,7 +71,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    isAutonomous = true;
+    isAutonomous = false;
   }
 
   @Override
@@ -97,7 +98,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     isAutonomous = false;
-    m_robotContainer.getSwerve().zeroGyro();
     // new restShooting(m_robotContainer.getPitchingSubsystem());
     m_robotContainer.SetOutputToZero();
     // This makes sure that the autonomous stops running when

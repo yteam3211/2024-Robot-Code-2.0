@@ -42,7 +42,7 @@ public class PitchPos extends Command {
   public boolean isFinished() {
 
     // return false;
-     return Math.abs(pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 1;
+     return Math.abs(pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 2;
     
     // return true;
   }
