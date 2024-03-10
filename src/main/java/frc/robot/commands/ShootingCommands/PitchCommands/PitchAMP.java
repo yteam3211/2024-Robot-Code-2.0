@@ -5,15 +5,20 @@
 package frc.robot.commands.ShootingCommands.PitchCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 
-public class PitchPos extends Command {
+public class PitchAMP extends Command {
   /** Creates a new PitchPos. */
     private PitchingSubsystem pitchingSubsystem;
     private double angleDegrees;
-  public PitchPos(PitchingSubsystem pitchingSubsystem, double angleDegrees) {
+    private ElevatorSubsystem elevatorSubsystem;
+    private double eleveatorHight;
+  public PitchAMP(PitchingSubsystem pitchingSubsystem,ElevatorSubsystem elevatorSubsystem, double angleDegrees, double eleveatorHight) {
     this.pitchingSubsystem = pitchingSubsystem;
     this.angleDegrees = angleDegrees;
+    this.elevatorSubsystem = elevatorSubsystem;
+    this.eleveatorHight = eleveatorHight;
     addRequirements(pitchingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,7 +33,10 @@ public class PitchPos extends Command {
   @Override
   public void execute() {
     System.out.println("pitch" + pitchingSubsystem.getAbsolutePosition());
-    pitchingSubsystem.setPosition(angleDegrees);  
+    if (elevatorSubsystem.getElevatorHight() > eleveatorHight) {
+       pitchingSubsystem.setPosition(angleDegrees);  
+
+    }
   }
 
   // Called once the command ends or is interrupted.

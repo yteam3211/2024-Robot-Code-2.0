@@ -223,7 +223,7 @@ public class Swerve extends SuperSystem {
         for(SwerveModule mod : mSwerveMods){
             // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
             // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
-            getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);
+            // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);
         }
     }
 }

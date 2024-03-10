@@ -36,7 +36,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 3 pitch"
                 }
               },
               {
@@ -98,7 +98,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 1 pitch"
                 }
               },
               {

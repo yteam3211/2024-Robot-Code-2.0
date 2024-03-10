@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+    m_robotContainer.getSwerve().zeroGyro();
   }
 
   /**
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
     isAutonomous = true;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // Create a path following command using AutoBuilder. This will also trigger event markers.
-    // m_autonomousCommand = new PathPlannerAuto("3 M");
+    // m_autonomousCommand = new PathPlanner[]\Auto("3 M");
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -97,7 +98,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     isAutonomous = false;
-    m_robotContainer.getSwerve().zeroGyro();
     // new restShooting(m_robotContainer.getPitchingSubsystem());
     m_robotContainer.SetOutputToZero();
     // This makes sure that the autonomous stops running when

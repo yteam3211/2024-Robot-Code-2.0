@@ -43,7 +43,7 @@ public class TurnToShootingCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!limelight.isValid()){
+    if(!limelight.isValid() ){
       pid.setTargetPosition(ShootingMath.getEstematedSpeakerShootingAngle(swerve));
       output = pid.getOutput(Swerve.gyro.getYaw()) *-1 +0.2;
       // System.out.println("current " + Swerve.gyro.getYaw());

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
@@ -64,10 +65,13 @@ public class RobotContainer {
 
         //register commands for PathPlanner
         NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
-        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem));
+        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-4500,0.8));        
+        NamedCommands.registerCommand("Intake distance", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-1000,0.8));
         NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
         NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
         NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem, 40));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        NamedCommands.registerCommand("Close 3 pitch", new PitchPos(pitchingSubsystem, 38));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem, 38));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("distance shooting", new DistanceAutoShootingGroup(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem, kickerSubsystem));
         NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
         NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
@@ -77,10 +81,12 @@ public class RobotContainer {
            
         //add Autos to the auto chooser
         autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
-        autoChooser.addOption("Auto 1 - complition", new PathPlannerAuto("Auto 1 - complition"));
+        autoChooser.addOption("complition", new PathPlannerAuto("Auto 1 - complition"));
         autoChooser.addOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
-        autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
-        autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
+        autoChooser.addOption("NO AUTO", new WaitCommand(0));
+        autoChooser.setDefaultOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
+        // autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
+        // autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
 
         // Configure the button bindings
         configureButtonBindings();

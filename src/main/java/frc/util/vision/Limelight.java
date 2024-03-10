@@ -125,7 +125,7 @@ public class Limelight extends SubsystemBase {
    * 
    * @param pipeline pipeline number to use.
    */
-  public void setPipeline(int pipeline) {
+  public void setPipeline(double pipeline) {
     this.pipeline.setNumber(pipeline);
   }
 

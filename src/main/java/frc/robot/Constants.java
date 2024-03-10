@@ -14,7 +14,7 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
 
     // shooting constants
-    public static final double SHOOTING_ANGLE_TRESHOLD = 2; //TODO: set when the robot is build
+    public static final double SHOOTING_ANGLE_TRESHOLD = 5; //TODO: set when the robot is build
     public static final double SHOOTING_VELOCITY_TRESHOLD = 400; //TODO: set when the robot is build 
     public static final double SHOOTING_SPEAKER_VELCITY = 16500; //TODO: set when the robot is build
     public static final double SHOOTING_AMP_OUTPUT = 0.4; //TODO: set when the robot is build
@@ -22,12 +22,13 @@ public final class Constants {
     
     
     // pitching constants
-    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.008057); //in degrees
-    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -8.4305471033;
-    public static final double LIMELIGHT_TO_PIVOT = 381.76;
+    public static final double PITCHING_ENCODER_OFFSET = Units.rotationsToDegrees(0.684814 ); //in degrees
+    public static final double LIMELIGHT_OFFSET_ANGLE_FROM_PIVOT = -10.031;
+    public static final double LIMELIGHT_TO_PIVOT = 309.5;
+    public static final double ROBOT_CENTER_TO_PIVOT = 150;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2600;//2150; //in millimeters
-    public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152; //in millimeters
+    public static final double SPEAKER_HIGHT = 2530;//2150; //in millimeters
+    public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152;  //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = -45;  //TODO: set max and min ANGLE of eleavator
     public static final double MAX_PITCHING_ANGLE = 57;
@@ -40,7 +41,7 @@ public final class Constants {
 
 
     // elevator constnats
-    public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build
+    public static final double ELEAVATOR_TRESHOLD = 10; //TODO: set when the robot is build  
     public static final double ELEAVATOR_GEAR_RATIO = 15.31 / 1;
     private static final double ELEAVATOR_WINCH_DIAMETER = 50; //in millimeters
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
@@ -48,9 +49,9 @@ public final class Constants {
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
     public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETER = 375.713; // raw encoder units
     public static final double MIN_ELEAVATOR_POS = 0;  //TODO: set max and min pos of eleavator
-    public static final double MAX_ELEAVATOR_POS = 515;
+    public static final double MAX_ELEAVATOR_POS = 600;
     public static final double AMP_ELEVATOR_HIGHT = 625;
-    public static final double CLIMB_ELEVATOR_HIGHT = 510;
+    public static final double CLIMB_ELEVATOR_HIGHT = 560;
 
     // swerve constants
     public static final double TURN_SWERVE_TRESHOLD = 2;//TODO: set when the robot is build
@@ -59,7 +60,7 @@ public final class Constants {
     public static final double DRIVE_TO_TARGET_TRESHOLD = 0.05;
 
     // intake constants
-    public static final double INTAKE_OPEN_POSITION = 43; // in rotations
+    public static final double INTAKE_OPEN_POSITION = 38; // in rotations
     public static final double INTAKE_WHEELS_OUTPUT = 0; //TODO: set when the robot is build
     public static final double INTAKE_WHEELS_VELOCITY = 0; //TODO: set when the robot is build
 
@@ -68,7 +69,9 @@ public final class Constants {
     public static final Pose2d RED_SPEAKER_POS = new Pose2d(new Translation2d(0, 2.62), new Rotation2d());
     public static final Pose2d AMP_SHOOTING_POS = new Pose2d(new Translation2d(1.83, 8.10), new Rotation2d());
     public static final double RED_AMP_ANGLE = -90;
-    public static final double BLUE_AMP_ANGLE = 90; 
+    public static final double BLUE_AMP_ANGLE = 90;
+    public static final double BLUE_LL_PIPELINE_ID = 0; 
+    public static final double RED_LL_PIPELINE_ID = 1; 
     
 
 
@@ -190,7 +193,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.760986));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.748047));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -200,7 +203,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.774902));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.775146));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -210,7 +213,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.446289)); 
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.444092)); 
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -220,7 +223,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.668457));
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(Units.rotationsToDegrees(0.669434 ));
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

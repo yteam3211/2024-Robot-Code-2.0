@@ -7,6 +7,7 @@ package frc.robot.commands.SwereCommands;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.RobotButtons;
 import frc.robot.subsystems.Swerve;
 import frc.util.PID.Gains;
 import frc.util.PID.PIDController;
@@ -14,7 +15,7 @@ import frc.util.PID.PIDController;
 public class TurnSwerveCommand extends Command {
   /** Creates a new TurnSwerveCommand. */
   private Swerve swerve;
-  protected Gains gains = new Gains("turn gains", 0, 0, 0);           
+  protected Gains gains = new Gains("turn gains", 0.015, 0, 0);           
   protected PIDController pid = new PIDController(gains);
   private double targetPosition;
 
@@ -29,14 +30,15 @@ public class TurnSwerveCommand extends Command {
   public void initialize() {
     pid.setTargetPosition(targetPosition);
     pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.6);
-    System.out.println("******** inside TurnSwerveCommand");
+    // System.out.println("******** inside TurnSwerveCommand; Target: " + targetPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double Output = pid.getOutput(Swerve.gyro.getYaw());
-    Output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(Output);
+    Output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(Output) *-1;
+    System.out.println("output: " + Output);
     swerve.drive(new Translation2d(0.046, 0.046), Output, true);
   }
 
@@ -50,6 +52,6 @@ public class TurnSwerveCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(Swerve.gyro.getYaw() - targetPosition) < Constants.TURN_SWERVE_TRESHOLD); 
+    return (Math.abs(Swerve.gyro.getYaw() - targetPosition) < Constants.TURN_SWERVE_TRESHOLD) || RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean(); 
   }
 }

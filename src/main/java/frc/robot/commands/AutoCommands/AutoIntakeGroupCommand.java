@@ -25,14 +25,14 @@ import frc.robot.subsystems.TransferSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoIntakeGroupCommand extends SequentialCommandGroup {
   /** Creates a new IntakeAndTransferCommand. */
-  public AutoIntakeGroupCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,PitchingSubsystem pitchingSubsystem) {
+  public AutoIntakeGroupCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,PitchingSubsystem pitchingSubsystem,double intakeVelocity, double tranforOutput ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
       addCommands(
         new ParallelCommandGroup(
-          new IntakeBackwordsCommand(intakeSubsystem, -4500),
-          new TransferCommand(transferSubsystem, 0.8),
-          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.17)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
+          new IntakeBackwordsCommand(intakeSubsystem, intakeVelocity),
+          new TransferCommand(transferSubsystem,tranforOutput),
+          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.12)).onlyWhile(() -> !KickerSubsystem.isNoteIn())
         );
     }
 }

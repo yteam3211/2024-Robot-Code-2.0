@@ -9,11 +9,11 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem.gains;
 
-public class EleavatorUpCommand extends Command {
+public class climd5 extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
   private double eleavatorPosition;
   /** Creates a new Eleavator. */
-  public EleavatorUpCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  public climd5(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
     this.eleavatorSubsystem = eleavatorSubsystem;
     this.eleavatorPosition = eleavatorPosition;
     addRequirements(eleavatorSubsystem);
@@ -32,7 +32,8 @@ public class EleavatorUpCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    eleavatorSubsystem.setPosition(eleavatorPosition);
+    
+    eleavatorSubsystem.setPosition(eleavatorSubsystem.getElevatorHight() + 10);
     System.out.println("******** execute EleavatorCommand" + eleavatorSubsystem.getElevatorHight());
 
     
