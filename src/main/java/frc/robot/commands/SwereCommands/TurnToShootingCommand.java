@@ -77,6 +77,3 @@ public class TurnToShootingCommand extends Command {
     return Math.abs(Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)) < 1.2;
     };
   }
-
-  
-
