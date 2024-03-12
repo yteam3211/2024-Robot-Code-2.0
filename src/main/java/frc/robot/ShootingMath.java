@@ -114,7 +114,8 @@ public class ShootingMath extends SuperSystem {
     getTab().putInDashboard("shooting angle", getAngleToSpeaker(elevatorSubsystem, limelight), false);
     getTab().putInDashboard("get Vertical Limelight Hight From Pivot", getVerticalLimelightHightFromPivot(), false);
     getTab().putInDashboard("Swerve Angle", getEstematedSpeakerShootingAngle(swerve), false);
-    SmartDashboard.putNumber("target shooting Angle", getEstematedSpeakerShootingAngle(swerve));
+    SmartDashboard.putNumber("swerve shooting Angle", getEstematedSpeakerShootingAngle(swerve));
+    SmartDashboard.putNumber("pitching shooting Angle", angleToSpeakerDegrees);
     // getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
   }
 }

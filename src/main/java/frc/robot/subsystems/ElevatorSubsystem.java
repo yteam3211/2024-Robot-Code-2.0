@@ -42,11 +42,11 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.4, 0, 0.002);
+    eleavatorUpGains = new Gains("eleavator up Gains", 0.4, 0, 0.004);
     eleavatorDownGains = new Gains("eleavator climb up Gains", 0.1, 0, 0);
     eleavatorTestGains  = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 20000, 17000,100);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 35000, 30000,100);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
 

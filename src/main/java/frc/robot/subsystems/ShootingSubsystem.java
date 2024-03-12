@@ -36,6 +36,7 @@ public class ShootingSubsystem extends SuperSystem {
   
   public void setShooterVelocity(double velocity)
   {
+    System.out.println("set shooter velocity:" + velocity);
     masterShooterMotor.set(ControlMode.Velocity, velocity);
   }
   
@@ -51,6 +52,7 @@ public class ShootingSubsystem extends SuperSystem {
   
   public void setShooterOutput(double output)
   {
+    System.out.println("set shooter output:" + output);
     masterShooterMotor.set(ControlMode.PercentOutput, output);
   }
   
@@ -58,7 +60,7 @@ public class ShootingSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
+    getTab().putInDashboard("shooting velocity", masterShooterMotor.getVelocity(), false);
     SmartDashboard.putBoolean(getName(), ( Constants.SHOOTING_SPEAKER_VELCITY- masterShooterMotor.getVelocity()) < Constants.SHOOTING_VELOCITY_TRESHOLD);
   }
 }

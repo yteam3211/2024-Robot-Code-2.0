@@ -35,7 +35,7 @@ public class CompleteAMPShootingCommand extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ShootingOutput(shootingSubsystem, 0.2),
+      // new ShootingOutput(shootingSubsystem, 0.2),
       new PitchAMP(pitchingSubsystem, elevatorSubsystem, -40, 20),
        new EleavatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn())
       // new ParallelCommandGroup(
