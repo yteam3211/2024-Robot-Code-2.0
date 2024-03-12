@@ -27,7 +27,7 @@ public final class Constants {
     public static final double LIMELIGHT_TO_PIVOT = 309.5;
     public static final double ROBOT_CENTER_TO_PIVOT = 150;
     public static final double SPEAKER_APRILTAG_HIGHT = 1450; //in millimeters
-    public static final double SPEAKER_HIGHT = 2530;//2150; //in millimeters
+    public static final double SPEAKER_HIGHT = 2290;//2150; //in millimeters
     public static final double VERTICAL_LIMELIGHT_TO_CENTER_SHOOTER = 152;  //in millimeters
     public static final double HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER = 6; //in millimeters
     public static final double MIN_PITCHING_ANGLE = -45;  //TODO: set max and min ANGLE of eleavator
@@ -58,6 +58,8 @@ public final class Constants {
     public static final double ESTEMATED_ANGLE_TRESHOLD = 0;//TODO: set when the robot is build
     public static final double MAX_SHOOTING_RANGE = 3.5; // in meters
     public static final double DRIVE_TO_TARGET_TRESHOLD = 0.05;
+    public static final double CLIMB_RIGHT_SWERVE_ANGLE = 120;
+    public static final double CLIMB_LEFT_SWERVE_ANGLE = -120;
 
     // intake constants
     public static final double INTAKE_OPEN_POSITION = 38; // in rotations

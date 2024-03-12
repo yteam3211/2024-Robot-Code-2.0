@@ -55,11 +55,12 @@ public class RobotContainer {
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-    private final SendableChooser<Command> autoChooser = new SendableChooser<>();
     
     public AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
-
+    
+    private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+    public static SendableChooser<Double> climbSide = new SendableChooser<>();
     //auto commands register
     public RobotContainer() {
 
@@ -88,12 +89,27 @@ public class RobotContainer {
         // autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
         // autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
 
+        climbSide.addOption("Left", Constants.CLIMB_LEFT_SWERVE_ANGLE);
+        climbSide.addOption("Right", Constants.CLIMB_RIGHT_SWERVE_ANGLE);
+        switch (allianceSpecs.stationNumber) {
+            case 1:
+                climbSide.setDefaultOption("Left", Constants.CLIMB_LEFT_SWERVE_ANGLE);
+                break;
+            case 2:
+            case 3:
+                climbSide.setDefaultOption("Right", Constants.CLIMB_RIGHT_SWERVE_ANGLE);
+                break;
+            default:
+                break;
+        }
         // Configure the button bindings
         configureButtonBindings();
         
         // Build an auto chooser. This will use Commands.none() as the default option.
         // autoChooser = AutoBuilder.buildAutoChooser("3 MA");
         // Another option that allows you to specify the default auto by its name
+        
+        SmartDashboard.putData("Climb side", climbSide);
         SmartDashboard.putData("Auto Chooser", autoChooser);
     }
     
