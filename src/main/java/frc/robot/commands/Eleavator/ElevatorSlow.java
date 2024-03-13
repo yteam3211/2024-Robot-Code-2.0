@@ -9,13 +9,13 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem.gains;
 
-public class climd5 extends Command {
+public class ElevatorSlow extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
-  private double eleavatorPosition;
+  private Boolean up;
   /** Creates a new Eleavator. */
-  public climd5(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  public ElevatorSlow(ElevatorSubsystem eleavatorSubsystem, Boolean up) {
     this.eleavatorSubsystem = eleavatorSubsystem;
-    this.eleavatorPosition = eleavatorPosition;
+    this.up = up;
     addRequirements(eleavatorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,7 +24,7 @@ public class climd5 extends Command {
   @Override
   public void initialize() {
     eleavatorSubsystem.changeStation(gains.EleavatorUp);
-    System.out.println("******** inside EleavatorCommand; target: " + eleavatorPosition);
+    System.out.println("******** inside EleavatorSlow;");
 
     // eleavatorSubsystem.changeStation();
   }
@@ -32,23 +32,19 @@ public class climd5 extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    eleavatorSubsystem.setPosition(eleavatorSubsystem.getElevatorHight() + 10);
-    System.out.println("******** execute EleavatorCommand" + eleavatorSubsystem.getElevatorHight());
-
-    
+    eleavatorSubsystem.setPosition(up ? (eleavatorSubsystem.getElevatorHight() + 10) : (eleavatorSubsystem.getElevatorHight() - 10));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("********exit EleavatorCommand");
+    System.out.println("********exit EleavatorSlow");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(eleavatorPosition - eleavatorSubsystem.getElevatorHight()) < Constants.ELEAVATOR_TRESHOLD;
+    return false;
     
   }
 }

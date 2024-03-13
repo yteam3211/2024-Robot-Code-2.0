@@ -17,7 +17,7 @@ public class CenterToTrap extends Command {
   /** Creates a new TurnSwerveCommand. */
   private Swerve swerve;
   private Limelight limelight;
-  protected Gains gains = new Gains("turn gains", 0.025, 0, 0.006);           
+  protected Gains gains = new Gains("turn gains", 0.003, 0, 0.015);           
   protected PIDController pid = new PIDController(gains);
   private double output;
 
@@ -31,16 +31,16 @@ public class CenterToTrap extends Command {
   @Override
   public void initialize() {
     System.out.println("********inside CenterToTrap");
-    pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.8);
+    pid.setMaxOutput(Constants.SwerveConstant.maxSpeed * 0.4);
+    pid.setTargetPosition(0);
   }
   
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pid.setTargetPosition(0);
     output = pid.getOutput(limelight.getX()) *-1;
-    output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
-    swerve.drive(new Translation2d(output, 0), 0, true);
+    output += 0.06 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
+    swerve.drive(new Translation2d(0, output), 0, true);
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +54,6 @@ public class CenterToTrap extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(limelight.getX()) < 1; 
+    return Math.abs(limelight.getX()) < 0.6 || RobotButtons.forwardJoystick.getAsBoolean() || RobotButtons.sidesJoystick.getAsBoolean() || RobotButtons.rotationJoystick.getAsBoolean(); 
   }
 }

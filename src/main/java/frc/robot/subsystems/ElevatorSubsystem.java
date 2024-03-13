@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
     eleavatorUpGains = new Gains("eleavator up Gains", 0.4, 0, 0.004);
-    eleavatorDownGains = new Gains("eleavator climb up Gains", 0.1, 0, 0);
+    eleavatorDownGains = new Gains("eleavator climb up Gains", 0.12, 0, 0.004);
     eleavatorTestGains  = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
     masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 35000, 30000,100);
@@ -68,7 +68,7 @@ public class ElevatorSubsystem extends SuperSystem {
   
   public boolean isEleavatorDown()
   {    
-    return !EleavatorMicrowSwitch.get();
+    return EleavatorMicrowSwitch.get();
   }
   
   public void resetEncoder()
@@ -107,10 +107,11 @@ public class ElevatorSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
+    // getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
+    getTab().putInDashboard("elevator motor output", masterEleavatorMotor.getOutput(), false);
     SmartDashboard.putData("eleavator gains",pidController);
 
     if (this.isEleavatorDown())
@@ -119,10 +120,10 @@ public class ElevatorSubsystem extends SuperSystem {
       setPosition(0);
     }
     
-    if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)
-    {
-      System.out.println("max elevator position");
-      masterEleavatorMotor.set(ControlMode.Position, Constants.MAX_ELEAVATOR_POS);
-    }
+    // if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)
+    // {
+    //   System.out.println("max elevator position");
+    //   masterEleavatorMotor.set(ControlMode.Position, Constants.MAX_ELEAVATOR_POS);
+    // }
   }
 }

@@ -25,6 +25,8 @@ import frc.robot.commands.Eleavator.OpenElevatorCommanGroup;
 import frc.robot.commands.Eleavator.EleavatorDown;
 import frc.robot.commands.Eleavator.EleavatorOutput;
 import frc.robot.commands.Eleavator.PitchAndEleavator;
+import frc.robot.commands.Eleavator.TrapOpenElevator;
+import frc.robot.commands.Eleavator.ElevatorSlow;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
@@ -32,6 +34,7 @@ import frc.robot.commands.IntakeCommands.IntakeWheels;
 import frc.robot.commands.ShootingCommands.CompleteAMPShootingCommand;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.commands.ShootingCommands.PitchCommands.PitchSlow;
 import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingSpeedCommand;
@@ -75,18 +78,24 @@ public class RobotButtons {
     public static Trigger completeSpeakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
     public static Trigger apmShootingTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCross.value));
     public static Trigger pitchDown = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCircle.value)); 
-     public static Trigger pitch = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kSquare.value));
+    public static Trigger ElevatorSlowUp = new Trigger(() ->  systems.getRawAxis(PS5Controller.Axis.kLeftY.value) < -0.8);
+    public static Trigger ElevatorSlowDown = new Trigger(() ->  systems.getRawAxis(PS5Controller.Axis.kLeftY.value) > 0.8);
+    public static Trigger PitchSlowUp = new Trigger(() -> systems.getRawAxis(PS5Controller.Axis.kRightY.value) < -0.8);
+    public static Trigger PitchSlowDown = new Trigger(() -> systems.getRawAxis(PS5Controller.Axis.kRightY.value) > 0.8);
     public static Trigger climbUpTrigger = new Trigger(() ->  systems.getPOV() == 0);
     public static Trigger  elevstorDown = new Trigger(() ->  systems.getPOV() == 180);
     public static Trigger shoot = new Trigger(() ->  systems.getPOV() == 270); 
-    // public static Trigger shootTest = new Trigger(() ->  systems.getPOV() == 90);
-    public static Trigger defenseShooting = new Trigger(() ->  systems.getPOV() == 90);
+    public static Trigger ClimbTrigger = new Trigger(() ->  systems.getPOV() == 90);
+    // public static Trigger defenseShooting = new Trigger(() ->  systems.getPOV() == 90);
 
-    public static Trigger PitchTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
+    public static Trigger TrapElevator = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kOptions.value));
+    public static Trigger reverseShooting = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kCreate.value));
     public static Trigger shootingAMPkickeer = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL1.value));
     public static Trigger intakeReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
     
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
+
+    public static Trigger holdNote = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kPS.value));
 
     
 
@@ -116,30 +125,37 @@ public class RobotButtons {
         // systems joystick commands
         completeSpeakerShootingTrigger.onTrue(new CompleteSpeakerShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath)); 
         // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
-        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.4), new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)));
+        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.4), new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)));        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.28)));
+        
         shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 54),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.onTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem, elevatorSubsystem));
-        defenseShooting.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 30),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
+        // defenseShooting.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 30),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         // defenseShooting.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 30),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY), new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, -3000),new TransferCommand(transferSubsystem, 0.93), new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)));
-              
+        reverseShooting.whileTrue(new ShootingOutput(shootingSubsystem, -0.1));
         // shootTest.onTrue(new PitchPos(pitchingSubsystem, 32));
 
         intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 10));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));
+        
         intakeReverse.whileTrue(new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));
 
         kicker.whileTrue(new KickerOutput(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
 
+        ClimbTrigger.onTrue(new EleavatorClimbDown(elevatorSubsystem, -90));
         climbUpTrigger.onTrue(new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT));
         // climb.onTrue(new EleavatorClimbDown(elevatorSubsystem, -90));
         elevstorDown.onTrue(new EleavatorDown(elevatorSubsystem, -40));
+        ElevatorSlowUp.whileTrue(new ElevatorSlow(elevatorSubsystem, true));
+        ElevatorSlowDown.whileTrue(new ElevatorSlow(elevatorSubsystem, false));
+        TrapElevator.onTrue(new TrapOpenElevator(elevatorSubsystem, pitchingSubsystem, kickerSubsystem, shootingSubsystem));
 
-        PitchTrigger.onTrue(new SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
-        pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));//TODO: ANGLE = 0!!
-        pitch.onTrue(new PitchPos(pitchingSubsystem,30));
+        pitchDown.onTrue(new PitchPos(pitchingSubsystem, -35));//TODO: ANGLE = 0!!
+        PitchSlowDown.whileTrue(new PitchSlow(pitchingSubsystem, false));
+        PitchSlowUp.whileTrue(new PitchSlow(pitchingSubsystem, true));
 
         turnToShooting.onTrue(new TurnToShootingCommand(swerve, limelight, shootingMath));
 
+        holdNote.whileTrue(new ParallelCommandGroup(new KickerOutput(kickerSubsystem, shootingSubsystem, -0.15), new ShootingOutput(shootingSubsystem, 0.15)));
     }
 }
 

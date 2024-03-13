@@ -20,7 +20,7 @@ public class TrapGroupCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TurnSwerveCommand(swerve, RobotContainer.climbSide.getSelected()),
+      new TurnSwerveCommand(swerve, (Swerve.gyro.getYaw() < 0) ? -120 : 120),
       new InstantCommand(() -> swerve.zeroGyro()),
       new CenterToTrap(swerve, limelight)
     );
