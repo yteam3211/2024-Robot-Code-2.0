@@ -4,6 +4,8 @@
 
 package frc.robot.commands.ShootingCommands.ShootingWheelsCommands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShootingSubsystem;
@@ -21,6 +23,7 @@ public class ShootingOutput extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shootingSubsystem.setMode(NeutralMode.Coast);
     System.out.println("******** inside ShootingOutput");
   }
 

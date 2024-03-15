@@ -122,10 +122,10 @@ public class PitchingSubsystem extends SuperSystem {
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
-    {
-      masterPitchingMotor.set (ControlMode.PercentOutput, 0);
-    }
+    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
+    // {
+    //   masterPitchingMotor.set(ControlMode.PercentOutput, 0);
+    // }
     getTab().putInDashboard("CANcoder ", Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()), false);
     getTab().putInDashboard("integrated encoder ", masterPitchingMotor.getPosition(), false);
     getTab().putInDashboard("absolute position", getAbsolutePosition(), false);

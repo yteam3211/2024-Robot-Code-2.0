@@ -21,6 +21,7 @@ import frc.robot.commands.SwereCommands.TurnToShootingCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.Eleavator.EleavatorClimbDown;
 import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.Eleavator.ElevatorClimbUpGroupCommand;
 import frc.robot.commands.Eleavator.OpenElevatorCommanGroup;
 import frc.robot.commands.Eleavator.EleavatorDown;
 import frc.robot.commands.Eleavator.EleavatorOutput;
@@ -47,6 +48,7 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.TransferSubsystem;
 import frc.util.vision.Limelight;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.shootingHook;
 import frc.robot.commands.ShootingCommands.KickerCommands.KickerShootingCommand;
 import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
 import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
@@ -93,7 +95,9 @@ public class RobotButtons {
     public static Trigger shootingAMPkickeer = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL1.value));
     public static Trigger intakeReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
     
-    public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));
+    public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));    
+    public static Trigger hook = new Trigger(() -> systems.getRawButton(15));
+
 
     public static Trigger holdNote = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kPS.value));
 
@@ -125,7 +129,8 @@ public class RobotButtons {
         // systems joystick commands
         completeSpeakerShootingTrigger.onTrue(new CompleteSpeakerShootingCommand(swerve, limelight, shootingSubsystem, pitchingSubsystem, elevatorSubsystem, kickerSubsystem, shootingMath)); 
         // completeSpeakerShootingTrigger.onFalse(new InstantCommand(() -> shootingSubsystem.setShooterOutput(0)));
-        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.4), new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)));        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.28)));
+        shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.4), new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)));      
+        //  shootingAMPkickeer.whileTrue(new ParallelCommandGroup(new ShootingOutput(shootingSubsystem, 0.28)));
         
         shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 54),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.onTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem, elevatorSubsystem));
@@ -134,7 +139,7 @@ public class RobotButtons {
         reverseShooting.whileTrue(new ShootingOutput(shootingSubsystem, -0.1));
         // shootTest.onTrue(new PitchPos(pitchingSubsystem, 32));
 
-        intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 10));
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand( intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 50));
         // intakeTrigger.onFalse(new PitchPos(pitchingSubsystem, 0));
         
         intakeReverse.whileTrue(new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));
@@ -142,7 +147,7 @@ public class RobotButtons {
         kicker.whileTrue(new KickerOutput(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
 
         ClimbTrigger.onTrue(new EleavatorClimbDown(elevatorSubsystem, -90));
-        climbUpTrigger.onTrue(new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT));
+        climbUpTrigger.onTrue(new ElevatorClimbUpGroupCommand(elevatorSubsystem, shootingSubsystem, pitchingSubsystem)); //new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT)
         // climb.onTrue(new EleavatorClimbDown(elevatorSubsystem, -90));
         elevstorDown.onTrue(new EleavatorDown(elevatorSubsystem, -40));
         ElevatorSlowUp.whileTrue(new ElevatorSlow(elevatorSubsystem, true));
@@ -152,6 +157,7 @@ public class RobotButtons {
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, -35));//TODO: ANGLE = 0!!
         PitchSlowDown.whileTrue(new PitchSlow(pitchingSubsystem, false));
         PitchSlowUp.whileTrue(new PitchSlow(pitchingSubsystem, true));
+        hook.onTrue(new shootingHook(shootingSubsystem, -1900));
 
         turnToShooting.onTrue(new TurnToShootingCommand(swerve, limelight, shootingMath));
 

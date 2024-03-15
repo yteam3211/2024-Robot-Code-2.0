@@ -24,41 +24,51 @@ public class TrapOpenElevator extends SequentialCommandGroup {
   /** Creates a new TrapOpenElevator. */
   public TrapOpenElevator(ElevatorSubsystem elevatorSubsystem, PitchingSubsystem pitchingSubsystem, KickerSubsystem kickerSubsystem, ShootingSubsystem shootingSubsystem) {
     // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+    // addCommands(new FooCommand(), new BarCommand()); 474.5 45.5
     addCommands(
-      new ParallelCommandGroup(
-        new EleavatorUpCommand(elevatorSubsystem, 510),
-        new PitchPos(pitchingSubsystem, 24)),
-      new WaitCommand(4),
-      // new ParallelDeadlineGroup(
-      //   new WaitCommand(0.3), 
-      //   new ParallelCommandGroup(
-      //     new ShootingOutput(shootingSubsystem, 0.1), 
-      //     new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4))),
-      // new EleavatorUpCommand(elevatorSubsystem, 420),
-      // new ParallelCommandGroup(
-      //   new SequentialCommandGroup(
-      //     new WaitCommand(0.4),
-      //     new ParallelDeadlineGroup(
-      //       new WaitCommand(0.5), 
-      //       new ParallelCommandGroup(
-      //         new ShootingOutput(shootingSubsystem, 0.1), 
-      //         new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)))),
-      //     new PitchPos(pitchingSubsystem, 10)),
-      // new EleavatorUpCommand(elevatorSubsystem, 560),
-        new ParallelCommandGroup(
-          new ShootingOutput(shootingSubsystem, 0.07), 
-          new KickerOutput(kickerSubsystem, shootingSubsystem, 0.12)).onlyWhile(() -> KickerSubsystem.isNoteIn()),
-        new ShootingOutput(shootingSubsystem, -0.1).onlyWhile(() -> !KickerSubsystem.isNoteIn()),
-      new PitchPos(pitchingSubsystem, 5),
-      new EleavatorUpCommand(elevatorSubsystem, 450),
-      new WaitCommand(1),
-      new EleavatorUpCommand(elevatorSubsystem, 635),
+      new EleavatorUpCommand(elevatorSubsystem, 591),
+      new PitchPos(pitchingSubsystem, -8),
+      new WaitCommand(1.2),
       new ParallelDeadlineGroup(
-        new WaitCommand(0.3),
-        new ParallelCommandGroup(
-          new ShootingOutput(shootingSubsystem, 0.08), 
-          new KickerOutput(kickerSubsystem, shootingSubsystem, 0.2)))
+        new WaitCommand(0.4),       
+        new ShootingOutput(shootingSubsystem, 0.2)),
+      new WaitCommand(0.2),
+      new ParallelCommandGroup(
+        new KickerOutput(kickerSubsystem, shootingSubsystem, 0.6),
+        new SequentialCommandGroup(
+          new WaitCommand(0.6),
+          new ShootingOutput(shootingSubsystem, 0.2))).onlyWhile(() -> KickerSubsystem.isNoteIn())
+      //   
+      // new WaitCommand(4),
+      // // new ParallelDeadlineGroup(
+      // //   new WaitCommand(0.3), 
+      // //   new ParallelCommandGroup(
+      // //     new ShootingOutput(shootingSubsystem, 0.1), 
+      // //     new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4))),
+      // // new EleavatorUpCommand(elevatorSubsystem, 420),
+      // // new ParallelCommandGroup(
+      // //   new SequentialCommandGroup(
+      // //     new WaitCommand(0.4),
+      // //     new ParallelDeadlineGroup(
+      // //       new WaitCommand(0.5), 
+      // //       new ParallelCommandGroup(
+      // //         new ShootingOutput(shootingSubsystem, 0.1), 
+      // //         new KickerOutput(kickerSubsystem, shootingSubsystem, 0.4)))),
+      // //     new PitchPos(pitchingSubsystem, 10)),
+      // // new EleavatorUpCommand(elevatorSubsystem, 560),
+      //   new ParallelCommandGroup(
+      //     new ShootingOutput(shootingSubsystem, 0.07), 
+      //     new KickerOutput(kickerSubsystem, shootingSubsystem, 0.12)).onlyWhile(() -> KickerSubsystem.isNoteIn()),
+      //   new ShootingOutput(shootingSubsystem, -0.1).onlyWhile(() -> !KickerSubsystem.isNoteIn()),
+      // new PitchPos(pitchingSubsystem, 5),
+      // new EleavatorUpCommand(elevatorSubsystem, 450),
+      // new WaitCommand(1),
+      // new EleavatorUpCommand(elevatorSubsystem, 635),
+      // new ParallelDeadlineGroup(
+      //   new WaitCommand(0.3),
+      //   new ParallelCommandGroup(
+      //     new ShootingOutput(shootingSubsystem, 0.08), 
+      //     new KickerOutput(kickerSubsystem, shootingSubsystem, 0.2)))
       //   new ParallelDeadlineGroup(
       //     new WaitCommand(0.5), 
       //     new ParallelCommandGroup(

@@ -24,7 +24,7 @@ public class EleavatorUpCommand extends Command {
   @Override
   public void initialize() {
     eleavatorSubsystem.changeStation(gains.EleavatorUp);
-    System.out.println("******** inside EleavatorCommand; target: " + eleavatorPosition);
+    System.out.println("******** inside EleavatorUpCommand; target: " + eleavatorPosition);
 
     // eleavatorSubsystem.changeStation();
   }
@@ -33,7 +33,7 @@ public class EleavatorUpCommand extends Command {
   @Override
   public void execute() {
     eleavatorSubsystem.setPosition(eleavatorPosition);
-    System.out.println("******** execute EleavatorCommand" + eleavatorSubsystem.getElevatorHight());
+    System.out.println("******** execute EleavatorUpCommand" + eleavatorSubsystem.getElevatorHight());
 
     
   }
@@ -41,7 +41,7 @@ public class EleavatorUpCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("********exit EleavatorCommand");
+    System.out.println("********exit EleavatorUpCommand");
   }
 
   // Returns true when the command should end.

@@ -28,7 +28,7 @@ public class PitchSlow extends Command {
   @Override
   public void execute() {
     // System.out.println("pitch" + pitchingSubsystem.getAbsolutePosition());
-    pitchingSubsystem.setPosition(up ? (pitchingSubsystem.getAbsolutePosition() + 1) : pitchingSubsystem.getAbsolutePosition() - 1);  
+    pitchingSubsystem.setPosition(up ? (pitchingSubsystem.getAbsolutePosition() + 1) : pitchingSubsystem.getAbsolutePosition() - 2);  
   }
 
   // Called once the command ends or is interrupted.
