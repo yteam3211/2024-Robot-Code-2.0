@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 1.3535296301361848,
-        "y": 5.6
+        "y": 5.545221859674489
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7876751138117675,
-        "y": 5.086918973837948
+        "x": 1.8175856037874687,
+        "y": 5.070792224323394
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 4.333009521939157
       },
       "prevControl": {
-        "x": 2.1151892303784607,
-        "y": 4.826356662479593
+        "x": 2.086934844340443,
+        "y": 4.778021310678856
       },
       "nextControl": null,
       "isLocked": false,
@@ -38,8 +38,25 @@
   "constraintZones": [],
   "eventMarkers": [
     {
+      "name": "kicer",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Kicker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "open intake command",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "parallel",
         "data": {
@@ -56,7 +73,7 @@
     },
     {
       "name": "use intake command",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -73,8 +90,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 1.0,
-    "maxAcceleration": 1.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -87,7 +104,7 @@
   "folder": "shooting and collecting ring from first row",
   "previewStartingState": {
     "rotation": 0,
-    "velocity": 0
+    "velocity": 0.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
