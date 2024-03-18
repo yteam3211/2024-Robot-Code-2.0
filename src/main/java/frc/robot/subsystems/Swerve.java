@@ -205,12 +205,13 @@ public class Swerve extends SuperSystem {
         // getTab().putInDashboard("Cancoder position", SwerveModule.angleEncoder.getAbsolutePosition(), false);
         getTab().putInDashboard("yaw", gyro.getYaw(), false);
         getTab().putInDashboard("alliance", AllianceSpecs.isRed, false);
+        
         SmartDashboard.putNumber("gyro", gyro.getYaw());
         // getTab().putInDashboard("roll", gyro.getRol l(), false);
         // getTab().putInDashboard("pitch", gyro.getPitch(), false);
+
         // swerveOdometry.update(getYaw(), getModulePositions());
         poseEstimator.update(getYaw(), getModulePositions());
-        getTab().putInDashboard("is autonomus", !Robot.isAutonomous, false);
         if(limelight.isValid() && !Robot.isAutonomous){
             Pose2d camPose = new Pose2d(AllianceSpecs.poseX.getAsDouble(), AllianceSpecs.poseY.getAsDouble(), getYaw());
             

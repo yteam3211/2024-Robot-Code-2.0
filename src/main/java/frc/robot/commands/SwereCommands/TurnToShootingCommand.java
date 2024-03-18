@@ -74,6 +74,6 @@ public class TurnToShootingCommand extends Command {
     // System.out.println("limelight: " + limelight.getX() + "treshold: " + (Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD));
     // return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD && (limelight.getID() == 7 || limelight.getID() == 4);
     System.out.println("swerve angle: " + (Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)));
-    return Math.abs(Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)) < 1.2;
+    return Math.abs(Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)) < Constants.SHOOTING_ANGLE_TRESHOLD;
     };
   }

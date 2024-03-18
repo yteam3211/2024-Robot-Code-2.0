@@ -30,7 +30,7 @@ public class PitchingSubsystem extends SuperSystem {
   /** Creates a new PitchingSubsystem. */
   public SuperTalonFX masterPitchingMotor;
   public SuperTalonFX slavePitchingMotor;
-  public CANcoder angleEncoder;
+  public static CANcoder angleEncoder;
   public Gains pitchingGains;
   public double hightLimelightToApriltag;
   public double distanceFromLimelightToSpeaker;
@@ -82,7 +82,7 @@ public class PitchingSubsystem extends SuperSystem {
    *
    * @return the absolute angle of the Cancoder in degrees.
    */
-  public double getAbsolutePosition(){
+  public static double getAbsolutePosition(){
     double absolutePosition;
     if(Constants.PITCHING_ENCODER_OFFSET < 85 && Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) > 200){
       absolutePosition = Units.rotationsToDegrees(angleEncoder.getAbsolutePosition().getValue()) - (Constants.PITCHING_ENCODER_OFFSET + 360);
@@ -122,7 +122,7 @@ public class PitchingSubsystem extends SuperSystem {
   public void periodic() {
     // This method will be called once per scheduler run
     // getAngleToSpeaker(elevatorSubsystem, Robot.m_robotContainer.getLimelight());
-    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE)) //TODO: needs to be changed to the correct values in constants
+    // if((getAbsolutePosition() > Constants.MAX_PITCHING_ANGLE)) 
     // {
     //   masterPitchingMotor.set(ControlMode.PercentOutput, 0);
     // }

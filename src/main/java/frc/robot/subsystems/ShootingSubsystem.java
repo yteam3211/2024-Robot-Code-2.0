@@ -30,8 +30,8 @@ public class ShootingSubsystem extends SuperSystem {
 
   public ShootingSubsystem() {
     super("shooting subsystem");
-    shooterGains = new Gains("shooterGains", 0, 0, 2,0.00015,4,0,0); //TODO: need to add kf    
-    shooterGainsPos = new Gains("shooterGains", 0.08, 0, 0); //TODO: need to add kf
+    shooterGains = new Gains("shooterGains", 0, 0, 2,0.00015,4,0,0);     
+    shooterGainsPos = new Gains("shooterGains", 0.08, 0, 0); 
 
 
     masterShooterMotor = new SuperTalonFX(Constants.MASTER_SHOOTER_MOTOR_ID, Constants.CanBus.RIO, 40, true, false, NeutralMode.Brake, shooterGains, TalonFXControlMode.Velocity, 0, 0,0); 
