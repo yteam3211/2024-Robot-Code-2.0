@@ -5,6 +5,7 @@
 package frc.robot.commands.ShootingCommands.KickerCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
 
@@ -32,7 +33,8 @@ public class KickerShootingCommand extends Command {
   @Override
   public void execute() {
     System.out.println("shooting kicker in use");
-    kickerSubsystem.setKickerOutput(kickerOutput);
+    if(Math.abs(shootingSubsystem.getVelocity() - Constants.SHOOTING_SPEAKER_VELCITY) < Constants.SHOOTING_VELOCITY_TRESHOLD)
+      kickerSubsystem.setKickerOutput(kickerOutput);
   }
 
   // Called once the command ends or is interrupted.

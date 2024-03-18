@@ -32,7 +32,7 @@ public class SwerveForward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerve.drive(new Translation2d(0.3, 0), 0, true);
+    swerve.drive(new Translation2d(-1.2, 0), 0, true);
   }
 
   // Called once the command ends or is interrupted.

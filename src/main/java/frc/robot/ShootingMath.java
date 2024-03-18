@@ -96,6 +96,9 @@ public class ShootingMath extends SuperSystem {
       distanceFromShooterToSpeaker = (distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER);
       angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
       angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
+      if(distanceFromShooterToSpeaker > 2300){
+        angleToSpeakerDegrees += 0.5 * ((distanceFromShooterToSpeaker - 2300) / 150);
+      }
       return angleToSpeakerDegrees;
     } 
 
