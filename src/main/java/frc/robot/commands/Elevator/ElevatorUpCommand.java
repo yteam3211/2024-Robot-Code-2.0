@@ -2,18 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Eleavator;
+package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem.gains;
 
-public class EleavatorUpCommand extends Command {
+public class ElevatorUpCommand extends Command {
   private ElevatorSubsystem eleavatorSubsystem;
   private double eleavatorPosition;
-  /** Creates a new Eleavator. */
-  public EleavatorUpCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
+  /** Creates a new Elevator. */
+  public ElevatorUpCommand(ElevatorSubsystem eleavatorSubsystem ,double eleavatorPosition) {
     this.eleavatorSubsystem = eleavatorSubsystem;
     this.eleavatorPosition = eleavatorPosition;
     addRequirements(eleavatorSubsystem);

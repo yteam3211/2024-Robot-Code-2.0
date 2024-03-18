@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AllianceSpecs;
 import frc.robot.Constants;
 import frc.robot.ShootingMath;
-import frc.robot.commands.Eleavator.CloseElevatorCommandGroup;
-import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.Elevator.CloseElevatorCommandGroup;
+import frc.robot.commands.Elevator.ElevatorUpCommand;
 import frc.robot.commands.SwereCommands.DriveToTarget;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -37,7 +37,7 @@ public class CompleteAMPShootingCommand extends ParallelCommandGroup {
     addCommands(
       // new ShootingOutput(shootingSubsystem, 0.2),
       new PitchAMP(pitchingSubsystem, elevatorSubsystem, -40, 20),
-       new EleavatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn())
+       new ElevatorUpCommand(elevatorSubsystem, 500).onlyIf(() -> KickerSubsystem.isNoteIn())
       // new ParallelCommandGroup(
       //   // new PitchPos(pitchingSubsystem, Constants.AMP_PITCHING_ANGLE),
       //   // new ShootingOutput(shootingSubsystem, 0.2))

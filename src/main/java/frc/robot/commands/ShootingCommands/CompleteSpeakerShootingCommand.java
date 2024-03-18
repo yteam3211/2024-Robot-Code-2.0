@@ -38,7 +38,7 @@ public class CompleteSpeakerShootingCommand extends ParallelRaceGroup {
   public CompleteSpeakerShootingCommand(Swerve swerve, Limelight limelight, ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem,ElevatorSubsystem eleavatorSubsystem,KickerSubsystem kickerSubsystem, ShootingMath shootingMath) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(         //TODO: change the eleavator position and the kickers output
+    addCommands(         //TODO: change the elevator position and the kickers output
       // !limelight.isValid() ? Math.ab s(Constants.LIMELIGHT_lOOKING_ANGLE - pitchingSubsystem.getAbsolutePosition()) > Constants.LIMELIGHT_lOOKING_ANGLE_TRESHOLD ? new PitchPos(pitchingSubsystem, Constants.LIMELIGHT_lOOKING_ANGLE) : new WaitCommand(0) : new EleavatorCommand(eleavatorSubsystem, 0) ,
       // new ViewLimelightCommand(swerve, pitchingSubsystem).onlyWhile(() -> !limelight.isValid()),
         new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY),

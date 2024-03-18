@@ -7,7 +7,7 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Eleavator.EleavatorUpCommand;
+import frc.robot.commands.Elevator.ElevatorUpCommand;
 import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
