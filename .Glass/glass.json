@@ -13,7 +13,7 @@
         }
       },
       "SmartDashboard": {
-        "eleavator gains": {
+        "elevator gains": {
           "open": true
         },
         "open": true
@@ -28,7 +28,7 @@
       "/Shuffleboard/limelight/View Mode": "Command",
       "/Shuffleboard/limelight/Vision Mode": "Command",
       "/SmartDashboard/Auto choices": "String Chooser",
-      "/SmartDashboard/eleavator gains": "PIDController",
+      "/SmartDashboard/elevator gains": "PIDController",
       "/SmartDashboard/pid swerve": "PIDController"
     },
     "windows": {

@@ -18,12 +18,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "shooting, collecting and shooting thered ring from second spot"
@@ -73,7 +67,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 2 pitch"
                 }
               },
               {
@@ -141,7 +135,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 2 pitch"
                 }
               },
               {
@@ -178,7 +172,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "distance pitch"
+                  "name": "Close 2 pitch"
                 }
               },
               {
