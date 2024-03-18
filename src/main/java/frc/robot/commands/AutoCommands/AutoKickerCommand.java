@@ -49,7 +49,7 @@ public class AutoKickerCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("is note in: " + !kickerSubsystem.isNoteIn());
-    return !kickerSubsystem.isNoteIn(); //TODO: change this to return true when the sensor is false (when the note is out)
+    System.out.println("is note in: " + !KickerSubsystem.isNoteIn());
+    return !KickerSubsystem.isNoteIn(); 
   }
 }

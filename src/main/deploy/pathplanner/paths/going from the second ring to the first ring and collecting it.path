@@ -38,7 +38,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "use intake command",
+      "name": "use intake command & pitch 3",
       "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
@@ -48,6 +48,12 @@
               "type": "named",
               "data": {
                 "name": "Use Intake Command"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Close 3 pitch"
               }
             }
           ]

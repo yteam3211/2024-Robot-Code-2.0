@@ -159,7 +159,7 @@ public class SuperSolenoid {
      * 
      * @return is solenoid reverse.
      */
-    //TODO i change here something maybe ineed to return that to the basic 
+    //TODO i change here something maybe i need to return that to the basic 
     public boolean isReverse() {
         if (solenoid == null) {
             return doubleSolenoid.get() == Value.kReverse;

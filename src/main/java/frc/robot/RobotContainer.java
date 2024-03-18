@@ -67,8 +67,8 @@ public class RobotContainer {
 
         //register commands for PathPlanner
         NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
-        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-6000,0.8));        
-        NamedCommands.registerCommand("Intake distance", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-1000,0.8));
+        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem, -6000,0.9));        
+        NamedCommands.registerCommand("Intake distance", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem, -1000,0.8));
         NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
         NamedCommands.registerCommand("Close Intake Command", new InstantCommand(() -> intakeSubsystem.setIntakeOpenMotorOutput(-0.75)));
         NamedCommands.registerCommand("Close 2 pitch", new PitchPos(pitchingSubsystem, 40));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
@@ -76,14 +76,14 @@ public class RobotContainer {
         NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem, 38));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("distance shooting", new DistanceAutoShootingGroup(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem, kickerSubsystem));
         NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
-        NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
+        NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT).withTimeout(0.5));
         NamedCommands.registerCommand("elevator down", new ElevatorOutput(elevatorSubsystem, -0.2));
         NamedCommands.registerCommand("keep in Kicker", new DefaultKicker(kickerSubsystem, 0.1));
-        NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem, intakeSubsystem));
 
            
         //add Autos to the auto chooser
-        autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem, intakeSubsystem));
         autoChooser.addOption("complition", new PathPlannerAuto("Auto 1 - complition"));
         autoChooser.addOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
         autoChooser.addOption("NO AUTO", new WaitCommand(0));

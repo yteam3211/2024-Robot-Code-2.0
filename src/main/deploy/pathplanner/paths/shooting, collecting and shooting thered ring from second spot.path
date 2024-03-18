@@ -66,6 +66,12 @@
               "data": {
                 "name": "Use Intake Command"
               }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Close 1 pitch"
+              }
             }
           ]
         }
