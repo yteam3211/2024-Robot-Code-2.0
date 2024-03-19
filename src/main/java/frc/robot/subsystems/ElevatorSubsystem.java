@@ -38,7 +38,7 @@ public class ElevatorSubsystem extends SuperSystem {
   public gains mode;
   public PIDController pidController = new PIDController(0, 0, 0);
 
-  private DigitalInput EleavatorMicrowSwitch;
+  private static DigitalInput EleavatorMicrowSwitch;
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
@@ -66,7 +66,7 @@ public class ElevatorSubsystem extends SuperSystem {
     return masterEleavatorMotor.getPosition();
   }
   
-  public boolean isEleavatorDown()
+  public static boolean isEleavatorDown()
   {    
     return EleavatorMicrowSwitch.get();
   }

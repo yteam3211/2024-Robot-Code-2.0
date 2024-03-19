@@ -27,10 +27,12 @@ public class TrapOpenElevator extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ElevatorUpCommand(elevatorSubsystem, 620),
-      new PitchPos(pitchingSubsystem, -6),
       new shootingHook(shootingSubsystem, -400),
-      new WaitCommand(2.3),
+      new ElevatorUpCommand(elevatorSubsystem, 640),
+      new shootingHook(shootingSubsystem, -400),
+      new PitchPos(pitchingSubsystem, -6),
+      new shootingHook(shootingSubsystem, -200),
+      new WaitCommand(3),
       new ParallelDeadlineGroup(
         new WaitCommand(0.6),
         new ShootingOutput(shootingSubsystem, 0.2)),

@@ -132,18 +132,18 @@ public class RobotButtons {
         shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 54),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.onTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem, elevatorSubsystem));
 
-        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyWhile(()-> elevatorSubsystem.getElevatorHight() < 50));
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyIf(()-> elevatorSubsystem.getElevatorHight() < 50));
         
         intakeReverse.whileTrue(new IntakeBackwordsCommand(intakeSubsystem, 0.9));
         // (new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));
 
         kicker.whileTrue(new KickerOutput(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
 
-        ClimbTrigger.onTrue(new ElevatorClimbDown(elevatorSubsystem, -90));
+        ClimbTrigger.onTrue(new ElevatorClimbDown(elevatorSubsystem, -140));
         elevatorUpTrigger.onTrue(new ElevatorClimbUpGroupCommand(elevatorSubsystem, shootingSubsystem, pitchingSubsystem)); //new OpenElevatorCommanGroup(elevatorSubsystem, pitchingSubsystem, Constants.CLIMB_ELEVATOR_HIGHT)
         elevstorDown.onTrue(new ParallelCommandGroup(new ElevatorDown(elevatorSubsystem, -40), new PitchPos(pitchingSubsystem, 0)));
         ElevatorSlowUp.and(EnableElevator).whileTrue(new ElevatorSlow(elevatorSubsystem, true));
-        ElevatorSlowDown.and(EnableElevator).whileTrue(new ElevatorSlow(elevatorSubsystem, false));
+        ElevatorSlowDown.and(EnableElevator).whileTrue(new ElevatorSlow(elevatorSubsystem, false).unless(() -> ElevatorSubsystem.isEleavatorDown()));
         TrapElevator.onTrue(new TrapOpenElevator(elevatorSubsystem, pitchingSubsystem, kickerSubsystem, shootingSubsystem));
 
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));
