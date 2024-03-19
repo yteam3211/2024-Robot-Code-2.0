@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
-    // m_robotContainer.getSwerve().zeroGyro();
+    m_robotContainer.getSwerve().zeroGyro();
   }
 
   /**
