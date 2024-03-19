@@ -38,7 +38,7 @@
         {
           "type": "named",
           "data": {
-            "name": "distance pitch"
+            "name": "Close 2 pitch"
           }
         },
         {
@@ -68,7 +68,7 @@
         {
           "type": "named",
           "data": {
-            "name": "distance pitch"
+            "name": "Close 2 pitch"
           }
         },
         {
@@ -98,7 +98,7 @@
         {
           "type": "named",
           "data": {
-            "name": "distance pitch"
+            "name": "Close 2 pitch"
           }
         },
         {
@@ -110,6 +110,6 @@
       ]
     }
   },
-  "folder": "first row and second row",
+  "folder": null,
   "choreoAuto": false
 }

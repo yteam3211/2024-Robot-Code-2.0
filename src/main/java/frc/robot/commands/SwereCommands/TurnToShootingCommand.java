@@ -19,7 +19,7 @@ public class TurnToShootingCommand extends Command {
   private Limelight limelight;
   private ShootingMath shootingMath;
   double output;
-  protected Gains gains = new Gains("rotation gains", 0.065, 0, 0.007);
+  protected Gains gains = new Gains("rotation gains", 0.025, 0, 0.006);
 
   protected PIDController pid = new PIDController(gains);
 
@@ -43,16 +43,19 @@ public class TurnToShootingCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!limelight.isValid() ){
-      pid.setTargetPosition(ShootingMath.getEstematedSpeakerShootingAngle(swerve));
-      output = pid.getOutput(Swerve.gyro.getYaw()) *-1 +0.2;
-      // System.out.println("current " + Swerve.gyro.getYaw());
-    }
-    else{
-      pid.setTargetPosition(0);
-      output = pid.getOutput(limelight.getX());
+    // if(!limelight.isValid() ){
+    //   pid.setTargetPosition(ShootingMath.getEstematedSpeakerShootingAngle(swerve));
+    //   output = pid.getOutput(Swerve.gyro.getYaw()) *-1 +0.2;
+    //   // System.out.println("current " + Swerve.gyro.getYaw());
+    // }
+    // else{
+    //   pid.setTargetPosition(0);
+    //   output = pid.getOutput(limelight.getX());
+    //   System.out.println("limelight: " + limelight.getX());
 
-    }
+    // }
+    pid.setTargetPosition(ShootingMath.getEstematedSpeakerShootingAngle(swerve));
+    output = pid.getOutput(Swerve.gyro.getYaw()) *-1;
     output += 0.1 * Constants.SwerveConstant.maxAngularVelocity * Math.signum(output);
     swerve.drive(new Translation2d(0.046, 0.046), output, true);
   }
@@ -68,6 +71,9 @@ public class TurnToShootingCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD;
+    // System.out.println("limelight: " + limelight.getX() + "treshold: " + (Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD));
+    // return limelight.isValid() && Math.abs(limelight.getX()) < Constants.SHOOTING_ANGLE_TRESHOLD && (limelight.getID() == 7 || limelight.getID() == 4);
+    System.out.println("swerve angle: " + (Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)));
+    return Math.abs(Swerve.gyro.getYaw() - ShootingMath.getEstematedSpeakerShootingAngle(swerve)) < Constants.SHOOTING_ANGLE_TRESHOLD;
     };
   }

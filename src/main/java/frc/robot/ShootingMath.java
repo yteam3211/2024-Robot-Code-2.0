@@ -96,6 +96,9 @@ public class ShootingMath extends SuperSystem {
       distanceFromShooterToSpeaker = (distanceFromLimelightToSpeaker + Constants.HORIZONTAL_LIMELIGHT_TO_CENTER_SHOOTER);
       angleToSpeakerRadians = Math.atan(hightShootingToSpeaker / distanceFromShooterToSpeaker);
       angleToSpeakerDegrees = Math.toDegrees(angleToSpeakerRadians);
+      if(distanceFromShooterToSpeaker > 2300){
+        angleToSpeakerDegrees += 0.5 * ((distanceFromShooterToSpeaker - 2300) / 150);
+      }
       return angleToSpeakerDegrees;
     } 
 
@@ -114,7 +117,8 @@ public class ShootingMath extends SuperSystem {
     getTab().putInDashboard("shooting angle", getAngleToSpeaker(elevatorSubsystem, limelight), false);
     getTab().putInDashboard("get Vertical Limelight Hight From Pivot", getVerticalLimelightHightFromPivot(), false);
     getTab().putInDashboard("Swerve Angle", getEstematedSpeakerShootingAngle(swerve), false);
-    SmartDashboard.putNumber("target shooting Angle", getEstematedSpeakerShootingAngle(swerve));
+    SmartDashboard.putNumber("swerve shooting Angle", getEstematedSpeakerShootingAngle(swerve));
+    SmartDashboard.putNumber("pitching shooting Angle", angleToSpeakerDegrees);
     // getTab().putInDashboard("Limelight Vertical Hight", getVerticalLimelightHightFromfloor(elevatorSubsystem), false);
   }
 }

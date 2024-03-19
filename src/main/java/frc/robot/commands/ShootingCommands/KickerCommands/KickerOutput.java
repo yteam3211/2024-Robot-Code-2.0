@@ -26,7 +26,7 @@ public class KickerOutput extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setShooterOutput(0.2);
+    // shootingSubsystem.setShooterOutput(0.2);
     kickerSubsystem.setKickerOutput(output);
   }
 

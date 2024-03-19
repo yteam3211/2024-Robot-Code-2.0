@@ -13,6 +13,7 @@ public class AllianceSpecs {
     public static double AMPAngle;
     public static Pose2d SpeakerPose;
     public static double limelightID;
+    public static int stationNumber;
     
   
     public AllianceSpecs(Limelight limelight) {
@@ -33,5 +34,6 @@ public class AllianceSpecs {
             limelightID = Constants.BLUE_LL_PIPELINE_ID;
         }
         limelight.setPipeline(limelightID);
+        stationNumber = DriverStation.getLocation().getAsInt();
     }
 }

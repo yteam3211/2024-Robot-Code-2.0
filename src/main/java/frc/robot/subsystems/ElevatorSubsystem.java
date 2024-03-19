@@ -32,9 +32,9 @@ public class ElevatorSubsystem extends SuperSystem {
   private SuperTalonFX masterEleavatorMotor;
   private SuperTalonFX slave1EleavatorMotor;
   private SuperTalonFX slave2EleavatorMotor;
-  private Gains eleavatorUpGains;
-  private Gains eleavatorDownGains;    
-  private Gains eleavatorTestGains;
+  private Gains elevatorUpGains;
+  private Gains elevatorDownGains;    
+  private Gains elevatorTestGains;
   public gains mode;
   public PIDController pidController = new PIDController(0, 0, 0);
 
@@ -42,23 +42,23 @@ public class ElevatorSubsystem extends SuperSystem {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
     super("ElevatorSubsystem");
-    eleavatorUpGains = new Gains("eleavator up Gains", 0.4, 0, 0.002);
-    eleavatorDownGains = new Gains("eleavator climb up Gains", 0.1, 0, 0);
-    eleavatorTestGains  = new Gains("eleavator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
+    elevatorUpGains = new Gains("elevator up Gains", 0.4, 0, 0.004);
+    elevatorDownGains = new Gains("elevator climb up Gains", 0.12, 0, 0.004);
+    elevatorTestGains  = new Gains("elevator climb up Gains", pidController.getP(), pidController.getI(), pidController.getD());
 
-    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, eleavatorUpGains, TalonFXControlMode.MotionMagic, 20000, 17000,100);
+    masterEleavatorMotor = new SuperTalonFX(Constants.MASTER_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false, false, NeutralMode.Brake, elevatorUpGains, TalonFXControlMode.MotionMagic, 35000, 30000,100);
     slave2EleavatorMotor = new SuperTalonFX(masterEleavatorMotor, Constants.SLAVE_ELEAVATOR_MOTOR_ID, Constants.CanBus.CANivore, 40, false);
     EleavatorMicrowSwitch = new DigitalInput(Constants.MICROSWITCH_ELEAVATOR_ID);
 
-    masterEleavatorMotor.config_kP(2, eleavatorDownGains.kp);
-    masterEleavatorMotor.config_kI(2, eleavatorDownGains.ki);
-    masterEleavatorMotor.config_kD(2, eleavatorDownGains.kd);
+    masterEleavatorMotor.config_kP(2, elevatorDownGains.kp);
+    masterEleavatorMotor.config_kI(2, elevatorDownGains.ki);
+    masterEleavatorMotor.config_kD(2, elevatorDownGains.kd);
     
   }
 
   
   /**
-   * get the master motor of the eleavator
+   * get the master motor of the elevator
    * @return the SuperTalonFX master motor
    */
   public double getMasterPosition()
@@ -68,7 +68,7 @@ public class ElevatorSubsystem extends SuperSystem {
   
   public boolean isEleavatorDown()
   {    
-    return !EleavatorMicrowSwitch.get();
+    return EleavatorMicrowSwitch.get();
   }
   
   public void resetEncoder()
@@ -107,11 +107,12 @@ public class ElevatorSubsystem extends SuperSystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
+    // getTab().putInDashboard("motor output", masterEleavatorMotor.getOutput(), false);
     getTab().putInDashboard("elevator hight", getElevatorHight(), false);
     getTab().putInDashboard("elevator master integrated encoder", getMasterPosition(), false);
     getTab().putInDashboard("is elevator down", isEleavatorDown(), false);
-    SmartDashboard.putData("eleavator gains",pidController);
+    getTab().putInDashboard("elevator motor output", masterEleavatorMotor.getOutput(), false);
+    SmartDashboard.putData("elevator gains",pidController);
 
     if (this.isEleavatorDown())
     {
@@ -119,10 +120,10 @@ public class ElevatorSubsystem extends SuperSystem {
       setPosition(0);
     }
     
-    if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)
-    {
-      System.out.println("max elevator position");
-      masterEleavatorMotor.set(ControlMode.Position, Constants.MAX_ELEAVATOR_POS);
-    }
+    // if(getElevatorHight() > Constants.MAX_ELEAVATOR_POS)
+    // {
+    //   System.out.println("max elevator position");
+    //   masterEleavatorMotor.set(ControlMode.Position, Constants.MAX_ELEAVATOR_POS);
+    // }
   }
 }

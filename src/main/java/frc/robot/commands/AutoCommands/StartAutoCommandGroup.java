@@ -7,8 +7,10 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.KickerCommands.DefaultKicker;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
 import frc.robot.subsystems.ShootingSubsystem;
@@ -18,7 +20,7 @@ import frc.robot.subsystems.ShootingSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class StartAutoCommandGroup extends SequentialCommandGroup {
   /** Creates a new StartAutoCommandGroup. */
-  public StartAutoCommandGroup(ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, KickerSubsystem kickerSubsystem) {
+  public StartAutoCommandGroup(ShootingSubsystem shootingSubsystem, PitchingSubsystem pitchingSubsystem, KickerSubsystem kickerSubsystem, IntakeSubsystem intakeSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -26,6 +28,7 @@ public class StartAutoCommandGroup extends SequentialCommandGroup {
       new ParallelDeadlineGroup(
         new PitchPos(pitchingSubsystem, 54),
         new DefaultKicker(kickerSubsystem, 0.1)),
+        new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION),
       new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT)
     );
   }

@@ -28,12 +28,13 @@ public class IntakeCommand extends Command {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  @Override
+  @Override  
   public void execute() 
   {
     
-    intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
     intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
+    if(intakeSubsystem.getPosition() > 8)
+      intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
     // intakeSubsystem.setIntakeOpenMotorOutput(intakePosition);
   }
 

@@ -14,13 +14,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntakeGroupCommand;
 import frc.robot.commands.AutoCommands.AutoKickerCommand;
 import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
-import frc.robot.commands.Eleavator.EleavatorOutput;
+import frc.robot.commands.Elevator.ElevatorOutput;
 import frc.robot.commands.IntakeCommands.IntakeCommand;
 import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
@@ -55,32 +56,34 @@ public class RobotContainer {
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final TransferSubsystem transferSubsystem = new TransferSubsystem();
     private final KickerSubsystem kickerSubsystem = new KickerSubsystem();
-    private final SendableChooser<Command> autoChooser = new SendableChooser<>();
     
     public AllianceSpecs allianceSpecs = new AllianceSpecs(limelight);
     private final ShootingMath shootingMath = new ShootingMath(swerve, elevatorSubsystem, pitchingSubsystem, limelight);
-
+    
+    private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+    public static SendableChooser<Double> climbSide = new SendableChooser<>();
     //auto commands register
     public RobotContainer() {
 
         //register commands for PathPlanner
         NamedCommands.registerCommand("Shooting wheels", new AutoShooingWheels(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY));
-        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-4500,0.8));        
-        NamedCommands.registerCommand("Intake distance", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem,-1000,0.8));
+        NamedCommands.registerCommand("Use Intake Command", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem, -6000,0.9));        
+        NamedCommands.registerCommand("Intake distance", new AutoIntakeGroupCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem, pitchingSubsystem, -1000,0.8));
         NamedCommands.registerCommand("Open Intake Command", new IntakePos(intakeSubsystem, Constants.INTAKE_OPEN_POSITION));
-        NamedCommands.registerCommand("Close Intake Command", new IntakePos(intakeSubsystem, 0));
-        NamedCommands.registerCommand("distance pitch", new PitchPos(pitchingSubsystem, 40));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
+        NamedCommands.registerCommand("Close Intake Command", new InstantCommand(() -> intakeSubsystem.setIntakeOpenMotorOutput(-0.75)));
+        NamedCommands.registerCommand("Close 2 pitch", new PitchPos(pitchingSubsystem, 40));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("Close 3 pitch", new PitchPos(pitchingSubsystem, 38));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("Close 1 pitch", new PitchPos(pitchingSubsystem, 38));//SpeakerPitchCommand(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem));
         NamedCommands.registerCommand("distance shooting", new DistanceAutoShootingGroup(limelight, pitchingSubsystem, elevatorSubsystem, shootingMath, shootingSubsystem, kickerSubsystem));
         NamedCommands.registerCommand("Stage pitch", new PitchPos(pitchingSubsystem,  0));
-        NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT));
-        NamedCommands.registerCommand("elevator down", new EleavatorOutput(elevatorSubsystem, -0.2));
+        NamedCommands.registerCommand("Kicker", new AutoKickerCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT).withTimeout(0.5));
+        NamedCommands.registerCommand("elevator down", new ElevatorOutput(elevatorSubsystem, -0.2));
         NamedCommands.registerCommand("keep in Kicker", new DefaultKicker(kickerSubsystem, 0.1));
-        NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        NamedCommands.registerCommand("Start Shooting", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem, intakeSubsystem));
+
            
         //add Autos to the auto chooser
-        autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem));
+        autoChooser.addOption("just shoot", new StartAutoCommandGroup(shootingSubsystem, pitchingSubsystem, kickerSubsystem, intakeSubsystem));
         autoChooser.addOption("complition", new PathPlannerAuto("Auto 1 - complition"));
         autoChooser.addOption("6 object version 2", new PathPlannerAuto("6 object version 2"));
         autoChooser.addOption("NO AUTO", new WaitCommand(0));
@@ -88,12 +91,27 @@ public class RobotContainer {
         // autoChooser.addOption("3 MA", new PathPlannerAuto("3 MA"));
         // autoChooser.addOption("Copy of 6 object version 2", new PathPlannerAuto("Copy of 6 object version 2"));
 
+        climbSide.addOption("Left", Constants.CLIMB_LEFT_SWERVE_ANGLE);
+        climbSide.addOption("Right", Constants.CLIMB_RIGHT_SWERVE_ANGLE);
+        switch (allianceSpecs.stationNumber) {
+            case 1:
+                climbSide.setDefaultOption("Left", Constants.CLIMB_LEFT_SWERVE_ANGLE);
+                break;
+            case 2:
+            case 3:
+                climbSide.setDefaultOption("Right", Constants.CLIMB_RIGHT_SWERVE_ANGLE);
+                break;
+            default:
+                break;
+        }
         // Configure the button bindings
         configureButtonBindings();
         
         // Build an auto chooser. This will use Commands.none() as the default option.
         // autoChooser = AutoBuilder.buildAutoChooser("3 MA");
         // Another option that allows you to specify the default auto by its name
+        
+        SmartDashboard.putData("Climb side", climbSide);
         SmartDashboard.putData("Auto Chooser", autoChooser);
     }
     

@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 7.88,
-        "y": 0.69
+        "x": 7.895509771048071,
+        "y": 0.6
       },
       "prevControl": {
-        "x": 3.105777623823435,
-        "y": 0.6640718658384518
+        "x": 3.1212873948715063,
+        "y": 0.5740718658384518
       },
       "nextControl": null,
       "isLocked": false,
@@ -56,7 +56,7 @@
     },
     {
       "name": "Open intake",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -98,7 +98,7 @@
             {
               "type": "named",
               "data": {
-                "name": "distance pitch"
+                "name": "Close 2 pitch"
               }
             }
           ]

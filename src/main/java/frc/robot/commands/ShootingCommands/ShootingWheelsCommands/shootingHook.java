@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShootingSubsystem;
 
-public class ShootingOutput extends Command {
+public class shootingHook extends Command {
   private ShootingSubsystem shootingSubsystem;
-  private double output;
-  public ShootingOutput(ShootingSubsystem shootingSubsystem, double output) {
+  private double pos;
+  public shootingHook(ShootingSubsystem shootingSubsystem, double pos) {
     this.shootingSubsystem = shootingSubsystem;
-    this.output = output;
+    this.pos = pos;
     addRequirements(shootingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -23,26 +23,25 @@ public class ShootingOutput extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shootingSubsystem.setMode(NeutralMode.Coast);
+    shootingSubsystem.setMode(NeutralMode.Brake);
     System.out.println("******** inside ShootingOutput");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setShooterOutput(output);
+    shootingSubsystem.setShooterPos(shootingSubsystem.getPos() + pos);
+    System.out.println("*********** pos "+ shootingSubsystem.getPos() + pos + "*************");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("********exit ShootingOutput");
-    shootingSubsystem.setShooterOutput(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

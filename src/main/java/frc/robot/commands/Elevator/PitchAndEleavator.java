@@ -2,14 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Eleavator;
+package frc.robot.commands.Elevator;
 
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PitchingSubsystem;
-import frc.robot.commands.Eleavator.CloseElevatorCommandGroup;
+import frc.robot.commands.Elevator.CloseElevatorCommandGroup;
 
 
 
@@ -24,7 +24,7 @@ public class PitchAndEleavator extends ParallelCommandGroup{
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(  
       new PitchPos(pitchingSubsystem, angle),
-      new EleavatorUpCommand(eleavatorSubsystem, eleavatorPos)
+      new ElevatorUpCommand(eleavatorSubsystem, eleavatorPos)
     );
   }
 }
