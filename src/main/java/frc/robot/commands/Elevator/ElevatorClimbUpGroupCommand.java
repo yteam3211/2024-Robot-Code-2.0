@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Elevator;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -27,7 +28,7 @@ public class ElevatorClimbUpGroupCommand extends ParallelCommandGroup {
     addCommands(
     new ElevatorUpCommand(elevatorSubsystem, Constants.CLIMB_ELEVATOR_HIGHT),
     new PitchPos(pitchingSubsystem, 0),
-    new shootingHook(shootingSubsystem, -1800)
+    new shootingHook(shootingSubsystem, Constants.HOOK_OPEN_POSITION).beforeStarting(new InstantCommand(() -> shootingSubsystem.resetFalconEncoder()))
     );
   }
 }

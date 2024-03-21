@@ -2,25 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.72,
-      "y": 4.42
+      "x": 1.43,
+      "y": 1.6
     },
-    "rotation": -60.0
+    "rotation": 0.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Start Shooting"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "shooting ring and collecting fifth parallel ring"
+            "pathName": "start auto 2"
           }
         },
         {
@@ -63,18 +57,6 @@
           "type": "named",
           "data": {
             "name": "Kicker"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "from forth shooting spot to thered parallel ring"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "from third parallel ring to shooting spot"
           }
         },
         {

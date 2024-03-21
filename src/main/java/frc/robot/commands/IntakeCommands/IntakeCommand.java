@@ -33,7 +33,7 @@ public class IntakeCommand extends Command {
   {
     
     intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
-    if(intakeSubsystem.getPosition() > 8)
+    // if(intakeSubsystem.getPosition() > 8)
       intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
     // intakeSubsystem.setIntakeOpenMotorOutput(intakePosition);
   }

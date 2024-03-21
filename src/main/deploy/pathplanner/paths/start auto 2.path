@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.72,
-        "y": 4.42
+        "x": 1.43,
+        "y": 1.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9346939692452838,
-        "y": 1.4404328951311258
+        "x": 3.5217918758914424,
+        "y": 0.7613098610812599
       },
       "isLocked": false,
       "linkedName": null
@@ -120,7 +120,7 @@
   "reversed": false,
   "folder": "shooting and collecting ring from first row",
   "previewStartingState": {
-    "rotation": -60.0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": false

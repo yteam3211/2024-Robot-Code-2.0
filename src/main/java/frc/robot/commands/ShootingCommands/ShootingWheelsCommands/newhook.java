@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShootingSubsystem;
 
-public class shootingHook extends Command {
+public class newhook extends Command {
   private ShootingSubsystem shootingSubsystem;
   private double pos;
-  public shootingHook(ShootingSubsystem shootingSubsystem, double pos) {
+  public newhook(ShootingSubsystem shootingSubsystem, double pos) {
     this.shootingSubsystem = shootingSubsystem;
     this.pos = pos;
     addRequirements(shootingSubsystem);
@@ -30,7 +30,7 @@ public class shootingHook extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.setShooterPos(pos);
+    shootingSubsystem.setShooterPos(shootingSubsystem.getPosition() + pos);
     System.out.println("*********** pos " + shootingSubsystem.getPosition() + "*************");
   }
 

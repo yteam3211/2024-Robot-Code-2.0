@@ -32,13 +32,14 @@ public class IntakePos extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intakeSubsystem.setIntakeOpenMotorPosition(position);
     System.out.println("******* exit IntakePos");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // return intakeSubsystem.getPosition() > 10;
-    return true;
+    return intakeSubsystem.getPosition() > 10;
+    // return true;
   }
 }

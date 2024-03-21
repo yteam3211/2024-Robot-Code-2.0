@@ -47,11 +47,14 @@ public final class Constants {
     public static final double ELEAVATOR_WINCH_CIRCUMFERENCE = ELEAVATOR_WINCH_DIAMETER * Math.PI;
     public static final double FLOOR_TO_CLOSE_ELEAVATOR = 165; //in millimeters
     public static final double RIDER_BOTTOM_TO_PITCH_PIVOT_VERTICAL = 259.84; //in millimeters
-    public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETER = 203962 / 565; // x (raw encoder units) / y (Millimeters)
+    public static final double ELEVATOR_ENCODER_TICKS_PER_MILLIMETER = 203732 / 562; // x (raw encoder units) / y (Millimeters)
     public static final double MIN_ELEAVATOR_POS = 0;  
     public static final double MAX_ELEAVATOR_POS = 600;
     public static final double AMP_ELEVATOR_HIGHT = 625;
     public static final double CLIMB_ELEVATOR_HIGHT = 580;
+    public static final double HOOK_OPEN_POSITION = -1700;
+    public static final double HOOK_LOCK_POSITION = -300;
+
 
     // swerve constants
     public static final double TURN_SWERVE_TRESHOLD = 2;

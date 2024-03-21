@@ -49,7 +49,7 @@ public class CompleteSpeakerShootingCommand extends ParallelRaceGroup {
             new LockWheelsCommand(swerve),
             new SequentialCommandGroup(
               new ParallelRaceGroup(
-                // new WaitCommand(0.5),
+                new WaitCommand(0.5),
                 new SpeakerPitchCommand(limelight, pitchingSubsystem, eleavatorSubsystem, shootingMath, shootingSubsystem)).andThen(() -> shootingMath.setShootingCondition(true)),
               new KickerShootingCommand(kickerSubsystem, shootingSubsystem, Constants.KICKER_OUTPUT).onlyWhile(() -> !RobotButtons.kicker.getAsBoolean()))))
     );

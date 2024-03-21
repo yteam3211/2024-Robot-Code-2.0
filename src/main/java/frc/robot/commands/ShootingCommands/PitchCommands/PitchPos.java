@@ -43,7 +43,6 @@ public class PitchPos extends Command {
 
     // return false;
      return Math.abs(pitchingSubsystem.getAbsolutePosition() - angleDegrees) < 2;
-    
     // return true;
   }
 }

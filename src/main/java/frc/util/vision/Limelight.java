@@ -311,7 +311,7 @@ public class Limelight extends SubsystemBase {
    * put limelight data in Dashboard.
    */
   public void putLimlightValuesInDashboard() {
-    System.out.println();
+    // System.out.println();
     updateValues();
     putInDashboard("Is Valid", isValid(), 0, 0);
     putInDashboard("Tx", tx_, 0, 1);

@@ -23,7 +23,7 @@ public class AllianceSpecs {
             poseY = () -> limelight.getRedBotpose()[1];
             AMPAngle = Constants.RED_AMP_ANGLE;
             SpeakerPose = Constants.RED_SPEAKER_POS;
-            limelightID = Constants.RED_LL_PIPELINE_ID;
+            limelightID = Constants.BLUE_LL_PIPELINE_ID;
         }
         else{
             isRed = false;

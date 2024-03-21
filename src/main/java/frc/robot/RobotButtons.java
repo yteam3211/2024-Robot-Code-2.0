@@ -78,7 +78,8 @@ public class RobotButtons {
     public static Trigger intakeTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kR2.value)); 
     public static Trigger completeSpeakerShootingTrigger = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kTriangle.value));
     public static Trigger apmShootingTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCross.value));
-    public static Trigger pitchDown = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCircle.value)); 
+    public static Trigger pitchDown = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kCircle.value));     
+    public static Trigger hoohup = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kSquare.value)); 
     public static Trigger ElevatorSlowUp = new Trigger(() ->  systems.getRawAxis(PS5Controller.Axis.kLeftY.value) < -0.8);
     public static Trigger ElevatorSlowDown = new Trigger(() ->  systems.getRawAxis(PS5Controller.Axis.kLeftY.value) > 0.8);
     public static Trigger EnableElevator = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL3.value));
@@ -96,7 +97,7 @@ public class RobotButtons {
     public static Trigger intakeReverse = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kR1.value));
     
     public static Trigger kicker = new Trigger(() -> systems.getRawButton(PS5Controller.Button.kL2.value));    
-    public static Trigger hook = new Trigger(() -> systems.getRawButton(15));
+    public static Trigger hook = new Trigger(() -> systems.getRawButton(13));
 
 
 
@@ -132,7 +133,7 @@ public class RobotButtons {
         shoot.whileTrue(new ParallelCommandGroup(new PitchPos(pitchingSubsystem, 54),new ShootingVelocity(shootingSubsystem, Constants.SHOOTING_SPEAKER_VELCITY)));
         apmShootingTrigger.onTrue(new CompleteAMPShootingCommand(shootingSubsystem, pitchingSubsystem, elevatorSubsystem));
 
-        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem).onlyIf(()-> elevatorSubsystem.getElevatorHight() < 50));
+        intakeTrigger.whileTrue(new IntakeAndTransferCommand(intakeSubsystem, transferSubsystem, shootingSubsystem, kickerSubsystem,pitchingSubsystem));
         
         intakeReverse.whileTrue(new IntakeBackwordsCommand(intakeSubsystem, 0.9));
         // (new ParallelCommandGroup( new IntakeBackwordsCommand(intakeSubsystem, 0.4), new TransferCommand(transferSubsystem, -0.5),new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, -0.3)));
@@ -145,11 +146,11 @@ public class RobotButtons {
         ElevatorSlowUp.and(EnableElevator).whileTrue(new ElevatorSlow(elevatorSubsystem, true));
         ElevatorSlowDown.and(EnableElevator).whileTrue(new ElevatorSlow(elevatorSubsystem, false).unless(() -> ElevatorSubsystem.isEleavatorDown()));
         TrapElevator.onTrue(new TrapOpenElevator(elevatorSubsystem, pitchingSubsystem, kickerSubsystem, shootingSubsystem));
-
+        hoohup.whileTrue(new ShootingOutput(shootingSubsystem, -0.1));
         pitchDown.onTrue(new PitchPos(pitchingSubsystem, 0));
         PitchSlowDown.and(EnablePitch).whileTrue(new PitchSlow(pitchingSubsystem, false));
         PitchSlowUp.and(EnablePitch).whileTrue(new PitchSlow(pitchingSubsystem, true));
-        hook.onTrue(new shootingHook(shootingSubsystem, -1900));
+        // hook.onTrue(new PitchPos(pitchingSubsystem, -20));
 
     }
 }

@@ -54,7 +54,7 @@ public class ShootingSubsystem extends SuperSystem {
   {
     return masterShooterMotor.getVelocity();
   }
-    public double getPos()
+    public double getPosition()
   {
     return masterShooterMotor.getPosition();
   }
@@ -73,6 +73,10 @@ public class ShootingSubsystem extends SuperSystem {
   {
     masterShooterMotor.selectProfileSlot(1, 0);
     masterShooterMotor.set(ControlMode.Position, pos);
+  }
+
+  public void resetFalconEncoder(){
+    masterShooterMotor.reset(0);
   }
 
   public void setMode(NeutralMode mode){

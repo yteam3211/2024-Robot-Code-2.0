@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.commands.ShootingCommands.KickerCommands.KickerOutput;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
+import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.newhook;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.shootingHook;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -27,12 +29,12 @@ public class TrapOpenElevator extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new shootingHook(shootingSubsystem, -400),
+      new shootingHook(shootingSubsystem, Constants.HOOK_OPEN_POSITION),
       new ElevatorUpCommand(elevatorSubsystem, 640),
-      new shootingHook(shootingSubsystem, -400),
+      new shootingHook(shootingSubsystem, Constants.HOOK_OPEN_POSITION),
       new PitchPos(pitchingSubsystem, -6),
-      new shootingHook(shootingSubsystem, -200),
-      new WaitCommand(3),
+      new shootingHook(shootingSubsystem, Constants.HOOK_OPEN_POSITION),
+      new WaitCommand(1),
       new ParallelDeadlineGroup(
         new WaitCommand(0.6),
         new ShootingOutput(shootingSubsystem, 0.2)),
@@ -41,7 +43,11 @@ public class TrapOpenElevator extends SequentialCommandGroup {
         new KickerOutput(kickerSubsystem, shootingSubsystem, 0.6),
         new SequentialCommandGroup(
           new WaitCommand(0.6),
-          new ShootingOutput(shootingSubsystem, 0.3))).onlyWhile(() -> KickerSubsystem.isNoteIn())
+          new ShootingOutput(shootingSubsystem, 0.3))).onlyWhile(() -> KickerSubsystem.isNoteIn()),
+        new SequentialCommandGroup( 
+          new WaitCommand(0.5),
+          new newhook(shootingSubsystem, -1250))
+        
       //   
       // new WaitCommand(4),
       // // new ParallelDeadlineGroup(
