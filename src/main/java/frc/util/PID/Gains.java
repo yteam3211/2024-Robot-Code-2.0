@@ -6,6 +6,9 @@ package frc.util.PID;
 public class Gains {
 	public double kv, ka; // MP values
 
+	public double kg = 0; // talonFX gravity value
+	public double ks = 0; // talonFX static value
+
 	public double kp, ki, kd, KiThreshold; // PID values
 
 	public double Kf = 0;
@@ -94,6 +97,22 @@ public class Gains {
 
 		kv = kv_;
 		ka = ka_;
+
+		KiThreshold = 0;
+		nameGains = _nameGains;
+
+	}
+
+	public Gains(String _nameGains, double kv_, double ka_, double kp_, double ki_, double kd_, double kg_, double ks_) {
+		kp = kp_;
+		ki = ki_;
+		kd = kd_;
+
+		kv = kv_;
+		ka = ka_;
+
+		ks = ks_;
+		kg = kg_;
 
 		KiThreshold = 0;
 		nameGains = _nameGains;
