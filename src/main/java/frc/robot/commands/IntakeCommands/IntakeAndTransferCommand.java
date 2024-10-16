@@ -24,16 +24,16 @@ import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
 public class IntakeAndTransferCommand extends SequentialCommandGroup {
   /** Creates a new IntakeAndTransferCommand. */
   public IntakeAndTransferCommand(IntakeSubsystem intakeSubsystem, TransferSubsystem transferSubsystem,ShootingSubsystem shootingSubsystem,KickerSubsystem kickerSubsystem,PitchingSubsystem pitchingSubsystem) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand(\][]));
       addCommands(
         new ParallelCommandGroup(
          new IntakeCommand(intakeSubsystem, Constants.INTAKE_OPEN_POSITION, Constants.INTAKE_WHEELS_VELOCITY),
           new TransferCommand(transferSubsystem, 0.93),
-          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.14),
-          new PitchPos(pitchingSubsystem, 20).onlyIf(() -> (pitchingSubsystem.getAbsolutePosition() < 10))
-        ),
-        new PitchPos(pitchingSubsystem, 0)
+          new KickerIntakeCommand(kickerSubsystem, shootingSubsystem, 0.14)
+          // ,
+          // new PitchPos(pitchingSubsystem, 20).onlyIf(() -> (pitchingSubsystem.getAbsolutePosition() < 10))
+        )
+        // ,
+        // new PitchPos(pitchingSubsystem, 0)
 
 
 

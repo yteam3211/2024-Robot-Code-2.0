@@ -33,8 +33,10 @@ public class IntakeCommand extends Command {
   {
     
     intakeSubsystem.setIntakeOpenMotorPosition(intakePosition);
-    // if(intakeSubsystem.getPosition() > 8)
+    if(intakeSubsystem.getPosition() > 8){
+      
       intakeSubsystem.setWheelsMotorVelocity(intakeWheelsVelocity);
+    }
     // intakeSubsystem.setIntakeOpenMotorOutput(intakePosition);
   }
 
@@ -43,7 +45,13 @@ public class IntakeCommand extends Command {
   public void end(boolean interrupted) 
   {
     intakeSubsystem.setWheelsMotorOutput(0);
-    intakeSubsystem.setIntakeOpenMotorOutput(-0.75);
+    // intakeSubsystem.setIntakeOpenMotorOutput(-0.75);
+    if (!intakeSubsystem.isIntakeClose()) {
+      intakeSubsystem.setIntakeOpenMotorOutput(-0.75);
+    }
+    else{
+      intakeSubsystem.setIntakeOpenMotorPosition(0);
+    }
     System.out.println("********exit IntakeCommand");
   }
 

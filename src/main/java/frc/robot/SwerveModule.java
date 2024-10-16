@@ -67,7 +67,12 @@ public class SwerveModule {
         /* This is a custom optimize function, since default WPILib optimize assumes continuous controller which CTRE and Rev onboard is not */
         desiredState = CTREModuleState.optimize(desiredState, getState().angle); 
         setAngle(desiredState);
+
         setSpeed(desiredState, isOpenLoop);
+    }
+
+    public void testSpeed(boolean isOpenLoop, double percentOutput){
+        mDriveMotor.set(ControlMode.PercentOutput, percentOutput);
     }
 
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop){

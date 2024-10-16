@@ -1,44 +1,28 @@
 package frc.robot;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.SwereCommands.DriveToTarget;
 import frc.robot.commands.SwereCommands.SwerveForward;
 import frc.robot.commands.SwereCommands.TeleopSwerve;
 import frc.robot.commands.SwereCommands.TrapGroupCommand;
 import frc.robot.commands.SwereCommands.TurnSwerveCommand;
-import frc.robot.commands.SwereCommands.TurnToShootingCommand;
-import frc.robot.commands.AutoCommands.AutoShooingWheels;
 import frc.robot.commands.Elevator.ElevatorClimbDown;
-import frc.robot.commands.Elevator.ElevatorUpCommand;
 import frc.robot.commands.Elevator.ElevatorClimbUpGroupCommand;
-import frc.robot.commands.Elevator.OpenElevatorCommanGroup;
 import frc.robot.commands.Elevator.ElevatorDown;
-import frc.robot.commands.Elevator.ElevatorOutput;
-import frc.robot.commands.Elevator.PitchAndEleavator;
 import frc.robot.commands.Elevator.TrapOpenElevator;
 import frc.robot.commands.Elevator.ElevatorSlow;
 import frc.robot.commands.IntakeCommands.IntakeAndTransferCommand;
 import frc.robot.commands.IntakeCommands.IntakeBackwordsCommand;
-import frc.robot.commands.IntakeCommands.IntakeCommand;
-import frc.robot.commands.IntakeCommands.IntakePos;
 import frc.robot.commands.ShootingCommands.CompleteAMPShootingCommand;
 import frc.robot.commands.ShootingCommands.CompleteSpeakerShootingCommand;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchPos;
 import frc.robot.commands.ShootingCommands.PitchCommands.PitchSlow;
-import frc.robot.commands.ShootingCommands.PitchCommands.SpeakerPitchCommand;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingOutput;
-import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingSpeedCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
@@ -48,10 +32,6 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.TransferSubsystem;
 import frc.util.vision.Limelight;
 import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.ShootingVelocity;
-import frc.robot.commands.ShootingCommands.ShootingWheelsCommands.shootingHook;
-import frc.robot.commands.ShootingCommands.KickerCommands.KickerShootingCommand;
-import frc.robot.commands.ShootingCommands.KickerCommands.KickerIntakeCommand;
-import frc.robot.commands.IntakeCommands.TransferCommands.TransferCommand;
 import frc.robot.commands.ShootingCommands.KickerCommands.KickerOutput;
 // import frc.robot.commands.Balance;
 
@@ -72,7 +52,9 @@ public class RobotButtons {
     public static Trigger TurnBackward = new Trigger(() ->  driver.getPOV() == 180);
     public static Trigger TurnLeft = new Trigger(() ->  driver.getPOV() == 270);
     public static Trigger CenterToTrap = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kCross.value));
-    public static Trigger SlowForward = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kTriangle.value));
+    public static Trigger SlowForward = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kTriangle.value));    
+    public static Trigger test = new Trigger(() -> driver.getRawButton(PS5Controller.Button.kCircle.value));
+
     
     // systems joystick buttons
     public static Trigger intakeTrigger = new Trigger(() ->  systems.getRawButton(PS5Controller.Button.kR2.value)); 
@@ -118,7 +100,8 @@ public class RobotButtons {
                     () -> -driver.getRawAxis(PS5Controller.Axis.kLeftX.value),
                     () -> -driver.getRawAxis(PS5Controller.Axis.kRightX.value)
                     ));
-        resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));
+        resetGyro.onTrue(new InstantCommand(() -> swerve.zeroGyro()));        
+        test.whileTrue(new SwerveForward(swerve));
         TurnForward.onTrue(new TurnSwerveCommand(swerve, 0));
         TurnRight.onTrue(new TurnSwerveCommand(swerve, -90));
         TurnBackward.onTrue(new TurnSwerveCommand(swerve, 180));

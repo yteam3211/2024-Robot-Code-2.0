@@ -118,6 +118,9 @@ public class Swerve extends SuperSystem {
 
     }    
 
+    public void testSpeed(boolean isOpenLoop, double output){
+        mSwerveMods[1].testSpeed(isOpenLoop, output);
+    }
     public void driveRobotRelative(ChassisSpeeds chassisSpeeds) {
         SwerveModuleState[] swerveModuleStates = 
             Constants.SwerveConstant.swerveKinematics.toSwerveModuleStates(chassisSpeeds);
@@ -222,7 +225,7 @@ public class Swerve extends SuperSystem {
             getTab().putInDashboard("LL y pos", AllianceSpecs.poseY.getAsDouble(), false);
         }
         for(SwerveModule mod : mSwerveMods){
-            // getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getDegrees(), false);
+            getTab().putInDashboard("Mod " + mod.moduleNumber + " CANcoder", mod.getCanCoder().getRotations(), false);
             // getTab().putInDashboard("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees(), false);
             // getTab().putInDashboard("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond, false);
         }
